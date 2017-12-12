@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="activity.hihi"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/activity/activityinfo.jsp"></property>
+	</bean>
+
+	<bean id="showActivity.success"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/activity/showactivity.jsp"></property>
+	</bean>
+	<bean id="showActivity.failed"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/activity.controller?nowPage=0"></property>
+	</bean>
+	
+<!-- 	<bean id="showCoupon.success" -->
+<!-- 		class="org.springframework.web.servlet.view.InternalResourceView"> -->
+<!-- 		<property name="url" value="/coupon/showcoupon.jsp"></property> -->
+<!-- 	</bean> -->
+	
+</beans>

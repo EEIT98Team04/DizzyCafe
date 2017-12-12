@@ -40,7 +40,12 @@ public class ActivityListService {
 	}
 
 	public int calculateTotalPage() {
-		return (activityListDAO.itemsCount()) / (getItemsInPage());
+		int result = (activityListDAO.itemsCount()) / (getItemsInPage());
+		int temp = (activityListDAO.itemsCount()) % (getItemsInPage());
+		if(temp!=0) {
+			result++;
+		}
+		return result;
 	}
 
 	public int getItemsInPage() {

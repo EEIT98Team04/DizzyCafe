@@ -17,10 +17,30 @@
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/activity.controller?nowPage=0"></property>
 	</bean>
-	
-<!-- 	<bean id="showCoupon.success" -->
-<!-- 		class="org.springframework.web.servlet.view.InternalResourceView"> -->
-<!-- 		<property name="url" value="/coupon/showcoupon.jsp"></property> -->
-<!-- 	</bean> -->
-	
+	<bean id="courseList"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/course/course.jsp"></property>
+	</bean>
+
+
+	<bean id="courseList.return"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/course/course.controller?page=1"></property>
+	</bean>
+
+	<bean id="showCourseSuccess"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/course/courseInfo.jsp"></property>
+	</bean>
+
+	<bean id="showCourseDateTimeSuccess"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/course/testCourseDateTime.jsp"></property>
+	</bean>
+
+	<!-- <bean id="showCoupon.success" -->
+	<!-- class="org.springframework.web.servlet.view.InternalResourceView"> -->
+	<!-- <property name="url" value="/coupon/showcoupon.jsp"></property> -->
+	<!-- </bean> -->
+
 </beans>

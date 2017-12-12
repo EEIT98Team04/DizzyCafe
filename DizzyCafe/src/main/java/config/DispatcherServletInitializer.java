@@ -1,8 +1,9 @@
-package tingweiSpringJavaConfig;
+package config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		return null;
@@ -10,15 +11,12 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		// TODO Auto-generated method stub
-		System.out.println("getServletConfigClasses");
-		return new Class[] {tingweiSpringJavaConfig.SpringMvcJavaConfig.class};
+		return new Class[] {config.SpringMvcJavaConfig.class};
 	}
 
 	@Override
 	protected String[] getServletMappings() {
-		System.out.println("getServletMappings");
-		return new String[] {"*.controller"};
+		return new String[] {"*.controller","/activities","/coupons"};
 	}
 
 }

@@ -28,8 +28,8 @@
 				<tr>
 					<td></td>
 					<td>
-					<c:forEach begin="0" end="${totalPage }" var="pages">
-							<a href="${pageContext.request.contextPath}/activity.controller?nowPage=${pages}">${pages+1 }</a>
+					<c:forEach begin="1" end="${totalPage }" var="pages">
+							<a href="${pageContext.request.contextPath}/activity.controller?nowPage=${pages-1}">${pages }</a>
 					</c:forEach>
 					</td>
 				</tr>

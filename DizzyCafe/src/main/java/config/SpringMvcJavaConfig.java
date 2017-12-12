@@ -1,4 +1,4 @@
-package applehead.config;
+package config;
 
 import javax.servlet.ServletContext;
 
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.XmlViewResolver;
 import misc.DemoInterceptor;
 
 @Configuration
-@ComponentScan(basePackages="applehead.controller")
+@ComponentScan(basePackages= {"applehead.controller","tingwei.controller"})
 @EnableWebMvc
 public class SpringMvcJavaConfig implements WebMvcConfigurer{
 	@Override
@@ -31,6 +31,7 @@ public class SpringMvcJavaConfig implements WebMvcConfigurer{
 	
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
+		System.out.println("configureViewResolvers");
 		Resource resource = new ServletContextResource(application, "/WEB-INF/views.xml");
 		XmlViewResolver xvr = new XmlViewResolver();
 		xvr.setLocation(resource);

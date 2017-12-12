@@ -1,4 +1,4 @@
-package tingweiSpringJavaConfig;
+package config;
 
 import java.util.Properties;
 
@@ -13,53 +13,53 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import applehead.model.ActivityListBean;
+import applehead.model.CouponBean;
 import tingwei.model.CourseBean;
 import tingwei.model.CourseDateTimeBean;
 
-
 @Configuration
-@ComponentScan(basePackages= {"tingwei.model"})
+@ComponentScan(basePackages= {"applehead.model","tingwei.model"})
 @EnableTransactionManagement
-public class SpringJavaConfig {
-	
+public class SpringJavaConfig{
 	@Bean
 	public DataSource dataSource() {
-		System.out.println("dataSource");
 		try {
 			Context ctx = new InitialContext();
-			return (DataSource) ctx.lookup("java:comp/env/jdbc/DizzyCafe");
+			return (DataSource) ctx.lookup("java:comp/env/jdbc/xxx");
 		} catch (NamingException e) {
 			e.printStackTrace();
-			throw new ExceptionInInitializerError(e);
+			throw new ExceptionInInitializerError(e);		
 		}
 	}
-	
 	@Bean
 	public SessionFactory sessionFactory() {
+		System.out.println("sessionFactory");
 		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
-		Properties properties = new Properties();
+		Properties properties = new Properties();		
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLServerDialect");
 //		properties.setProperty("hibernate.current_session_context_class", "thread");
 		properties.setProperty("hibernate.show_sql", "true");
 		builder.addProperties(properties);
-		builder.addAnnotatedClasses(CourseBean.class,CourseDateTimeBean.class);
+		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class);
 		return builder.buildSessionFactory();
 	}
-	
 	@Bean
-	public HibernateTransactionManager transactionManager() {
-		return new HibernateTransactionManager(sessionFactory());	
+	public PlatformTransactionManager txManager() {
+		return new HibernateTransactionManager(sessionFactory());
 	}
+//	@Bean
+//	public SimpleUrlHandlerMapping urlHandlerMapping() {
+//		SimpleUrlHandlerMapping simpleUrlHandlerMapping = new SimpleUrlHandlerMapping();
+//		simpleUrlHandlerMapping.setInterceptors(demoInterceptor());
+//		return simpleUrlHandlerMapping;
+//	}
+//	@Bean
+//	public DemoInterceptor demoInterceptor() {
+//		DemoInterceptor demoInterceptor = new DemoInterceptor();
+//		return demoInterceptor;
+//	}
 }
-
-/*
-<bean id="sessionFactory"
-class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-
-<property name="dataSource" ref="dataSource"></property>
-<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
-
-</bean>
-*/

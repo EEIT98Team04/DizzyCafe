@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebFilter(
 		urlPatterns= {"/*"}
 )
+
 public class EncodingFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,

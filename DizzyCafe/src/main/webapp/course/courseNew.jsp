@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="/HTML/Navbar.jsp" />
+	<div style="height:100px"></div>
 	<form action="${pageContext.request.contextPath}/course/courseNew.controller">
 		<fieldset>
 			<div>

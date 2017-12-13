@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -9,12 +9,14 @@
 
 <script src="js/jquery-1.12.3.min.js"></script>
 <script>
-	$(document).ready(function(){
-		
+	$(document).ready(function() {
+
 	});
 </script>
 
 </head>
+<jsp:include page="/HTML/Navbar.jsp" />
+<div style="height: 100px"></div>
 <body>
 	<c:forEach var="courseDateTime" items="${courseDateTime}">
 		<h3>${courseDateTime.num}</h3>

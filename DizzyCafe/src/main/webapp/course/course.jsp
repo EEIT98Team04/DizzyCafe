@@ -15,6 +15,8 @@
 </style>
 </head>
 <body>
+	<jsp:include page="/HTML/Navbar.jsp" />
+	<div style="height:100px"></div>
 	<h3>test</h3>
 	<div style="height: 200px">
 		<table>

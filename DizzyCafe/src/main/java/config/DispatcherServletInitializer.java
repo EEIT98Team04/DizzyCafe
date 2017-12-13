@@ -11,12 +11,12 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {config.SpringMvcJavaConfig.class};
+		return new Class[] {config.SpringMvcJavaConfig.class,};
 	}
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] {"*.controller","/activities","/coupons"};
+		return new String[] {"*.controller","/activities","/coupons","*.hongwen"};
 	}
 
 }

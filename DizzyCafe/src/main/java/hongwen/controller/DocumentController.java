@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import hongwen.model.bean.ProductBean;
-import hongwen.model.service.ProductService;
+import hongwen.model.ProductBean;
+import hongwen.model.ProductService;
 import hongwen.model.spring.PrimitiveNumberEditor;
 
 @Controller
-@RequestMapping("/pages/d.controller")
+@RequestMapping("/Document.hongwen")
 public class DocumentController {
 	
 	@Autowired

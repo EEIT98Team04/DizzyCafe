@@ -11,13 +11,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.view.XmlViewResolver;
 
-import misc.DemoInterceptor;
-
 @Configuration
-@ComponentScan(basePackages= {"applehead.controller","tingwei.controller"})
+@ComponentScan(basePackages= {"applehead.controller","tingwei.controller","hongwen.controller"})
 @EnableWebMvc
 public class SpringMvcJavaConfig implements WebMvcConfigurer{
 	@Override

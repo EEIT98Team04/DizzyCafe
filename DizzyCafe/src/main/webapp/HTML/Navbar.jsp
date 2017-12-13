@@ -12,6 +12,7 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <style>
 	.asd{
 		border-color: black; 
@@ -41,6 +42,7 @@
 				<li class="nav-item active"><a class="nav-link"
 					href="${pageContext.request.contextPath}/index.jsp">HOME </a></li>
 				<li class="nav-item"><a class="nav-link" href="#">COFFEE</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/merchandise.controller ">商品</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/hongwen/board.jsp">FORUM</a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"

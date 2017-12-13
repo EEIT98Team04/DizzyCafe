@@ -28,7 +28,7 @@ public class MerchandiseController{
 		System.out.println(result);
 		model.addAttribute("beans", result);
 		
-		return "/merchandise.jsp";
+		return "merchandise";
 	}
 	
 		

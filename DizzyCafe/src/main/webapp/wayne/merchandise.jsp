@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/DizzyCafe/css/merchandise.css">
+<link rel="stylesheet" href="/DizzyCafe/wayne/css/merchandise.css">
 <title>Merchandise</title>
 </head>
 <body>
@@ -66,24 +66,7 @@
 			</c:choose>
 		</c:forEach>
 
-		<!-- 				<div class="col"> -->
-		<!-- 					<div class="col1">放圖+超連結</div> -->
-		<!-- 					<div class="col2"> -->
-		<!-- 						<p class="p1"> -->
-		<%-- 							${bean.merchandiseName}<br /> ${bean.merchandisePrice}<br /> --%>
-		<!-- 						</p> -->
-		<!-- 						<span class="span1">我要購買</span> -->
-		<!-- 					</div> -->
-		<!-- 				</div> -->
-		<!-- 				<div class="col"> -->
-		<!-- 					<div class="col1">放圖+超連結</div> -->
-		<!-- 					<div class="col2"> -->
-		<!-- 						<p class="p1"> -->
-		<%-- 							${bean.merchandiseName}<br /> ${bean.merchandisePrice}<br /> --%>
-		<!-- 						</p> -->
-		<!-- 						<span class="span1">我要購買</span> -->
-		<!-- 					</div> -->
-		<!-- 				</div> -->
+		
 	</div>
 
 	<footer></footer>

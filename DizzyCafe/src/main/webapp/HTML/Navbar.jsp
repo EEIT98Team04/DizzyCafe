@@ -41,6 +41,7 @@
 				<li class="nav-item active"><a class="nav-link"
 					href="${pageContext.request.contextPath}/index.jsp">HOME </a></li>
 				<li class="nav-item"><a class="nav-link" href="#">COFFEE</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/hongwen/board.jsp">FORUM</a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"

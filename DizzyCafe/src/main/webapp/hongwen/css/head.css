@@ -23,9 +23,11 @@ div h2{
     font-size:40px;     /*字體大小*/
     letter-spacing:40px; /*字體水平間距*/
 }
-div p{
-    text-align:left;
-    font-family:DFKai-SB;/*標楷體*/
-    font-size:20px;     /*字體大小*/
-    letter-spacing:3px; /*字體水平間距*/
+td{
+	border: 2px solid white;
+    background-color:#dff0d8;
+}
+th{
+	border: 2px solid white;
+    background-color:#f2dede;
 }

@@ -4,12 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>dizzy</title>
     <meta charset="utf-8" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/board.css" />
-    <!-- <script src="js/index.js"></script> -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/hongwen/css/head.css" />
+    <script src="js/search.js"></script>
 </head>
-<body>
+<body style="background-color: #fff1cc;">
     <div class="title_field">
         title
     </div>
@@ -51,17 +49,16 @@
             </tbody>
         </table>
     </div>
-                    <!--<c:forEach var="array" items="${select}">
-                        <c:url value="/pages/product.jsp" var="path" scope="page">
-                            <c:param name="id" value="${array[0]}" />
-                            <c:param name="name" value="${array[1]}" />
-                        </c:url>
-                        <tr>
-                            <td><a href="${path}">${array[0]}</a></td>
-                            <td>${array[1]}</td>
-                        </tr>
-                    </c:forEach>-->
- 
+    <!--<c:forEach var="array" items="${select}">
+        <c:url value="/pages/product.jsp" var="path" scope="page">
+            <c:param name="id" value="${array[0]}" />
+            <c:param name="name" value="${array[1]}" />
+        </c:url>
+        <tr>
+            <td><a href="${path}">${array[0]}</a></td>
+            <td>${array[1]}</td>
+        </tr>
+    </c:forEach>-->
     <!--<script type="text/javascript">
         $(function(){
             console.log("Get into js");

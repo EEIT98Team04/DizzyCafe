@@ -4,14 +4,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>dizzy</title>
     <meta charset="utf-8" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/board.css" />
-    <!-- <script src="js/index.js"></script> -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/hongwen/css/head.css" />
 </head>
-<body>
+<body style="background-color: #fff1cc;">
     <div class="title_field">
-        title
+        <jsp:include page="/HTML/Navbar.jsp" />
     </div>
     <div class="container">
         <!--<p>Type something in the input field to search the list for specific items:</p>-->
@@ -31,541 +28,541 @@
             </thead>
             <tbody id="list">
                 <tr class="success">
-                    <td><a href="reply.html">薇拉莎奇</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">薇拉莎奇</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">帕卡斯</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">帕卡斯</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">卡杜拉</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">卡杜拉</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">肯尼亞</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">肯尼亞</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">藝妓/瑰夏(Geisha)</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">藝妓/瑰夏(Geisha)</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">鐵皮卡</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">鐵皮卡</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">埃塞爾薩種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">埃塞爾薩種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">利比里亞種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">利比里亞種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">羅布斯塔種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">羅布斯塔種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">阿拉比卡種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">阿拉比卡種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">薇拉莎奇</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">薇拉莎奇</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">帕卡斯</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">帕卡斯</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">卡杜拉</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">卡杜拉</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">肯尼亞</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">肯尼亞</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">藝妓/瑰夏(Geisha)</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">藝妓/瑰夏(Geisha)</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">鐵皮卡</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">鐵皮卡</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">埃塞爾薩種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">埃塞爾薩種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">利比里亞種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">利比里亞種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">羅布斯塔種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">羅布斯塔種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">阿拉比卡種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">阿拉比卡種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">薇拉莎奇</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">薇拉莎奇</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">帕卡斯</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">帕卡斯</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">卡杜拉</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">卡杜拉</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">肯尼亞</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">肯尼亞</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">藝妓/瑰夏(Geisha)</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">藝妓/瑰夏(Geisha)</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">鐵皮卡</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">鐵皮卡</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">埃塞爾薩種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">埃塞爾薩種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">利比里亞種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">利比里亞種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">羅布斯塔種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">羅布斯塔種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">阿拉比卡種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">阿拉比卡種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">薇拉莎奇</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">薇拉莎奇</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">帕卡斯</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">帕卡斯</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">卡杜拉</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">卡杜拉</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">肯尼亞</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">肯尼亞</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">藝妓/瑰夏(Geisha)</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">藝妓/瑰夏(Geisha)</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">鐵皮卡</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">鐵皮卡</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">埃塞爾薩種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">埃塞爾薩種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">利比里亞種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">利比里亞種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">羅布斯塔種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">羅布斯塔種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">阿拉比卡種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">阿拉比卡種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">薇拉莎奇</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">薇拉莎奇</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">帕卡斯</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">帕卡斯</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">卡杜拉</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">卡杜拉</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">肯尼亞</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">肯尼亞</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">藝妓/瑰夏(Geisha)</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">藝妓/瑰夏(Geisha)</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">鐵皮卡</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">鐵皮卡</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">埃塞爾薩種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">埃塞爾薩種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">利比里亞種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">利比里亞種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">羅布斯塔種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">羅布斯塔種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">阿拉比卡種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">阿拉比卡種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">薇拉莎奇</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">薇拉莎奇</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">帕卡斯</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">帕卡斯</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">卡杜拉</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">卡杜拉</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">肯尼亞</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">肯尼亞</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">藝妓/瑰夏(Geisha)</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">藝妓/瑰夏(Geisha)</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">鐵皮卡</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">鐵皮卡</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">埃塞爾薩種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">埃塞爾薩種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">利比里亞種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">利比里亞種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">羅布斯塔種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">羅布斯塔種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">阿拉比卡種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">阿拉比卡種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">薇拉莎奇</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">薇拉莎奇</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">帕卡斯</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">帕卡斯</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">卡杜拉</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">卡杜拉</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">肯尼亞</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">肯尼亞</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">藝妓/瑰夏(Geisha)</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">藝妓/瑰夏(Geisha)</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">鐵皮卡</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">鐵皮卡</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">埃塞爾薩種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">埃塞爾薩種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">利比里亞種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">利比里亞種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">羅布斯塔種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">羅布斯塔種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">阿拉比卡種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">阿拉比卡種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">薇拉莎奇</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">薇拉莎奇</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">帕卡斯</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">帕卡斯</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">卡杜拉</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">卡杜拉</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">肯尼亞</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">肯尼亞</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">藝妓/瑰夏(Geisha)</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">藝妓/瑰夏(Geisha)</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">鐵皮卡</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">鐵皮卡</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">埃塞爾薩種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">埃塞爾薩種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">利比里亞種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">利比里亞種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">羅布斯塔種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">羅布斯塔種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">阿拉比卡種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">阿拉比卡種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">薇拉莎奇</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">薇拉莎奇</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">帕卡斯</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">帕卡斯</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">卡杜拉</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">卡杜拉</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">肯尼亞</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">肯尼亞</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">藝妓/瑰夏(Geisha)</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">藝妓/瑰夏(Geisha)</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">鐵皮卡</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">鐵皮卡</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">埃塞爾薩種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">埃塞爾薩種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">利比里亞種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">利比里亞種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">羅布斯塔種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">羅布斯塔種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
                 </tr>
                 <tr class="success">
-                    <td><a href="reply.html">阿拉比卡種</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hongwen/reply.jsp">阿拉比卡種</a></td>
                     <td>發文者/發文時間</td>
                     <td>最後回文者</td>
                     <td>人氣</td>
@@ -577,11 +574,12 @@
         $(document).ready(function () {
             $("#myInput").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
-                $("#list tr td").filter(function () {
+                $("#list tr").filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
         });
     </script>
+    <script src="js/search.js"></script>
 </body>
 </html>

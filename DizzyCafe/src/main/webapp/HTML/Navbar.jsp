@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>DizzyCafe</title>
+<!-- <!DOCTYPE html> -->
+<!-- <html> -->
+<!-- <head> -->
+<!-- <title>DizzyCafe</title> -->
 
 <link rel="icon" type="image/png" sizes="16x16"
 	href="${pageContext.request.contextPath}/image/favicon-16x16.png">
@@ -22,8 +22,8 @@
 		background-color:#ADADAD;
 	}
 </style>
-</head>
-<body>
+<!-- </head> -->
+<!-- <body> -->
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="border-bottom: 1px solid #DDDDDD;">
 		<a class="navbar-brand"
 			href="${pageContext.request.contextPath}/index.jsp"> <img
@@ -59,5 +59,5 @@
 			<button class="btn asd" style="margin-left: 1%; ">註冊</button>
 		</div>
 	</nav>
-</body>
-</html>
+<!-- </body> -->
+<!-- </html> -->

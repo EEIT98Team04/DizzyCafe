@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>${course.courseName}</title>
+</head>
+<body>
+	<jsp:include page="/HTML/Navbar.jsp" />
+	<div style="height:100px"></div>
+	<h3>${course.courseImg}</h3>
+	<h3>${course.courseName}</h3>
+	<h3>${course.courseIntro}</h3>
+	<h3>${course.courseContent}</h3>
+	<h3>${course.courseCost}</h3>
+	<h3>${course.courseTeacher}</h3>
+	<h3>${course.courseBegin}</h3>
+	<h3>${course.courseEnd}</h3>
+	<h3>${course.courseSignupBegin}</h3>
+	<h3>${course.courseSignupEnd}</h3>
+</body>
+</html>

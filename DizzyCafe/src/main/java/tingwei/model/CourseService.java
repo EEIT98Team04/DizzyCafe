@@ -13,7 +13,7 @@ public class CourseService {
 	private CourseDAO courseDAO;
 	
 	
-	private int rows_perPage = 2;
+	private int rows_perPage = 4;
 
 
 	

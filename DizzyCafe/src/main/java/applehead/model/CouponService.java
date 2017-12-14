@@ -48,7 +48,6 @@ public class CouponService {
 				}
 			}
 		}
-		System.out.println("result = "+list);
 		return list;
 	}
 }

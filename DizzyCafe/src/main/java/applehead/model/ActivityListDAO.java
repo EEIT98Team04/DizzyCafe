@@ -18,13 +18,7 @@ public class ActivityListDAO {
 	private SessionFactory sessionFactory;
 
 	public Session getSession() {
-		Session session;
-		try {
-		    session = sessionFactory.getCurrentSession();
-		} catch (HibernateException e) {
-		    session = sessionFactory.openSession();
-		}
-		return session;
+		return sessionFactory.getCurrentSession();
 	}
 
 	public ActivityListBean select(int activityNo) {

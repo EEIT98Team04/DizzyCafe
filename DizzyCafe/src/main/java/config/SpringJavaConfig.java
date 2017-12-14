@@ -53,15 +53,4 @@ public class SpringJavaConfig{
 	public PlatformTransactionManager txManager() {
 		return new HibernateTransactionManager(sessionFactory());
 	}
-//	@Bean
-//	public SimpleUrlHandlerMapping urlHandlerMapping() {
-//		SimpleUrlHandlerMapping simpleUrlHandlerMapping = new SimpleUrlHandlerMapping();
-//		simpleUrlHandlerMapping.setInterceptors(demoInterceptor());
-//		return simpleUrlHandlerMapping;
-//	}
-//	@Bean
-//	public DemoInterceptor demoInterceptor() {
-//		DemoInterceptor demoInterceptor = new DemoInterceptor();
-//		return demoInterceptor;
-//	}
 }

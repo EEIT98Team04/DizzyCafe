@@ -14,26 +14,29 @@ public class ActivityListService {
 	@Autowired
 	ActivityListDAO activityListDAO;
 
-	private final int itemsInPage = 2;
+	private final int itemsInPage = 3;
 
 	public List<ActivityListBean> showPageItems(int nowPage) {
 		// int totalItems = activityListDAO.itemsCount();
 		List<ActivityListBean> showPage = new ArrayList<>();
-//		 Query<ActivityListBean> query = activityListDAO.selectQuery();
-//		 query.setFirstResult(nowPage*getItemsInPage());
-//		 query.setMaxResults(getItemsInPage());
-//		 showPage = query.list();
+		// Query<ActivityListBean> query = activityListDAO.selectQuery();
+		// query.setFirstResult(nowPage*getItemsInPage());
+		// query.setMaxResults(getItemsInPage());
+		// showPage = query.list();
 		List<ActivityListBean> temp = activityListDAO.selectList();
-		showPage.add(temp.get(nowPage * getItemsInPage()));
-		if (temp.size() >= (nowPage+1) * getItemsInPage()) {
-			showPage.add(temp.get(nowPage * getItemsInPage() + 1));
+		for (int i = nowPage * getItemsInPage(); (nowPage * getItemsInPage()+getItemsInPage()) > i; i++) {
+			if(temp.size()<i) {
+				break;
+			}
+			showPage.add(temp.get(i));
 		}
 		return showPage;
 	}
+
 	public ActivityListBean getBean(int activityNo) {
 		ActivityListBean bean = null;
 		bean = activityListDAO.select(activityNo);
-		if(bean!=null) {
+		if (bean != null) {
 			return bean;
 		}
 		return null;
@@ -42,7 +45,7 @@ public class ActivityListService {
 	public int calculateTotalPage() {
 		int result = (activityListDAO.itemsCount()) / (getItemsInPage());
 		int temp = (activityListDAO.itemsCount()) % (getItemsInPage());
-		if(temp!=0) {
+		if (temp != 0) {
 			result++;
 		}
 		return result;

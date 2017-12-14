@@ -43,6 +43,7 @@ public class SpringJavaConfig{
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLServerDialect");
 //		properties.setProperty("hibernate.current_session_context_class", "thread");
 		properties.setProperty("hibernate.show_sql", "true");
+		properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
 		builder.addProperties(properties);
 		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class);
 		return builder.buildSessionFactory();

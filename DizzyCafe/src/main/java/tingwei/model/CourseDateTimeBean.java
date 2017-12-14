@@ -1,9 +1,13 @@
 package tingwei.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,12 +17,29 @@ public class CourseDateTimeBean {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int num;
 	private int courseId;
-	private java.sql.Timestamp courseDateTime;
-	private int courseLength;
+	private java.sql.Timestamp courseStartTime;
+	private java.sql.Timestamp courseEndTime;
+	
+	@ManyToOne
+//	@JoinTable(
+//			name="course",
+//			joinColumns=@JoinColumn(name="courseName",insertable=false,updatable=false)
+//	)
+	@JoinColumn(name="courseId",insertable=false,updatable=false)
+	private CourseBean courseBean;
+	
+	
+	public CourseBean getCourseBean() {
+		return courseBean;
+	}
+	public void setCourseBean(CourseBean courseBean) {
+		this.courseBean = courseBean;
+	}
+	
 	@Override
 	public String toString() {
-		return "CourseDateTimeBean [num=" + num + ", courseId=" + courseId + ", courseDateTime=" + courseDateTime
-				+ ", courseLength=" + courseLength + "]";
+		return "CourseDateTimeBean [num=" + num + ", courseId=" + courseId + ", courseStartTime=" + courseStartTime
+				+ ", courseEndTime=" + courseEndTime + ", courseBean=" + courseBean + "]";
 	}
 	public int getNum() {
 		return num;
@@ -32,16 +53,17 @@ public class CourseDateTimeBean {
 	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
-	public java.sql.Timestamp getCourseDateTime() {
-		return courseDateTime;
+	public java.sql.Timestamp getCourseStartTime() {
+		return courseStartTime;
 	}
-	public void setCourseDateTime(java.sql.Timestamp courseDateTime) {
-		this.courseDateTime = courseDateTime;
+	public void setCourseStartTime(java.sql.Timestamp courseStartTime) {
+		this.courseStartTime = courseStartTime;
 	}
-	public int getCourseLength() {
-		return courseLength;
+	public java.sql.Timestamp getCourseEndTime() {
+		return courseEndTime;
 	}
-	public void setCourseLength(int courseLength) {
-		this.courseLength = courseLength;
+	public void setCourseEndTime(java.sql.Timestamp courseEndTime) {
+		this.courseEndTime = courseEndTime;
 	}
+
 }

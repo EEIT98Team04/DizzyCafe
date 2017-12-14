@@ -1,10 +1,8 @@
-package hongwen.model.dao;
+package hongwen.model;
 
 import java.util.List;
 
-import hongwen.model.bean.*;
-
-public interface ProductDAO {
+public interface DocumentDAO {
 
 	ProductBean select(int id);
 

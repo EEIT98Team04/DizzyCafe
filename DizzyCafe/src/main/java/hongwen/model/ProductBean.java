@@ -1,12 +1,12 @@
-package hongwen.model.bean;
+package hongwen.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Board")
-public class BoardBean {
+@Table(name="PRODUCT")
+public class ProductBean {
 	@Id
 	private int id;
 	private String name;

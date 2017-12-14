@@ -18,12 +18,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import applehead.model.ActivityListBean;
 import applehead.model.CouponBean;
+import hongwen.model.BoardBean;
 import tingwei.model.CourseBean;
 import tingwei.model.CourseDateTimeBean;
 import wayne.model.MerchandiseBean;
 
 @Configuration
-@ComponentScan(basePackages= {"applehead.model","tingwei.model","wayne.model"})
+@ComponentScan(basePackages= {"applehead.model","tingwei.model","wayne.model","hongwen.model"})
 @EnableTransactionManagement
 public class SpringJavaConfig{
 	@Bean
@@ -45,7 +46,7 @@ public class SpringJavaConfig{
 //		properties.setProperty("hibernate.current_session_context_class", "thread");
 		properties.setProperty("hibernate.show_sql", "true");
 		builder.addProperties(properties);
-		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,MerchandiseBean.class);
+		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,MerchandiseBean.class,BoardBean.class);
 		return builder.buildSessionFactory();
 	}
 	@Bean

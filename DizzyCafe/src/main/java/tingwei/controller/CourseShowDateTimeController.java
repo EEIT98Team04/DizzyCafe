@@ -22,7 +22,7 @@ public class CourseShowDateTimeController {
 	//Show 課程時間
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
 	public String method(Model model) {
-		List<CourseDateTimeBean> beans = courseDateTimeService.showCourseDateTime();
+		List<CourseDateTimeBean> beans = courseDateTimeService.select();
 		
 		System.out.println("CourseShowDateTimeController beans:"+beans);
 		

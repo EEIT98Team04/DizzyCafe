@@ -3,7 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
+	
+	
+	<bean id="showActivity.failed"
+		class="org.springframework.web.servlet.view.RedirectView">
+		<property name="url" value="/activity.controller?nowPage=0"></property>
+		<property name="contextRelative" value="true"></property>
+	</bean>
+	
 	<bean id="activity.hihi"
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/activity/activityinfo.jsp"></property>
@@ -13,10 +20,12 @@
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/activity/showactivity.jsp"></property>
 	</bean>
-	<bean id="showActivity.failed"
-		class="org.springframework.web.servlet.view.InternalResourceView">
-		<property name="url" value="/activity.controller?nowPage=0"></property>
-	</bean>
+	
+<!-- 	<bean id="showActivity.failed" -->
+<!-- 		class="org.springframework.web.servlet.view.InternalResourceView"> -->
+<!-- 		<property name="url" value="/activity.controller?nowPage=0"></property> -->
+<!-- 	</bean> -->
+
 	<bean id="courseList"
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/course/course.jsp"></property>

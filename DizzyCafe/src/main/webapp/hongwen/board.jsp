@@ -32,6 +32,7 @@
 	<script>
 	var temp;
 		$(document).ready(function() {
+			var tmp="";
 			$('#test').DataTable({
 				ajax : {
 					url : '/DizzyCafe/Board.hongwen',
@@ -45,15 +46,15 @@
 				"ordering": false,
 				"info":     false,
 				language : {
-		            "zeroRecords": "查無此資料",
+		            "zeroRecords": "查無資料",
 				},
 				columns : [{
 					data : 'name',
 					"render": function(data, type, row, meta){
 			            if(type === 'display'){
-			                data = '<a href="${pageContext.request.contextPath}/hongwen/reply.jsp">' + data + '</a>';
+			            	var hyperlink = "${pageContext.request.contextPath}/hongwen/reply.jsp?";
+			                data = '<a href="'+hyperlink+'boardId='+row.boardId+'">' + data + '</a>';
 			            }
-
 			            return data;
 			         }
 				}, {
@@ -63,7 +64,6 @@
 				}],
 			});
 		});
-		console.log(temp);
 	</script>
 </body>
 </html>

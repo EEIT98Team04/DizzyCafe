@@ -1,6 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -52,8 +52,9 @@
 					data : 'name',
 					"render": function(data, type, row, meta){
 			            if(type === 'display'){
-			            	var hyperlink = "${pageContext.request.contextPath}/hongwen/reply.jsp?";
-			                data = '<a href="'+hyperlink+'boardId='+row.boardId+'">' + data + '</a>';
+			            	var hyperlink = "${pageContext.request.contextPath}/hongwen/document.jsp?";
+			            	var get = 'boardId='+row.boardId+'&name='+row.name;
+			                data = '<a href="' + hyperlink + get +'">' + data + '</a>';
 			            }
 			            return data;
 			         }

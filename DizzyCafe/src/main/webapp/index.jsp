@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
-	<div style="height:100px"></div>
+	<div style="height: 100px"></div>
 	<div>
 		<a
 			href="${pageContext.request.contextPath}/course/course.controller?page=1">課程</a>
@@ -22,5 +22,6 @@
 		</form>
 		<a href="${pageContext.request.contextPath}/coupon/showcoupon.jsp">coupon</a>
 	</div>
+
 </body>
 </html>

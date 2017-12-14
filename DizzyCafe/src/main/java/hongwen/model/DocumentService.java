@@ -1,17 +1,15 @@
-package hongwen.model.service;
+package hongwen.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import hongwen.model.bean.*;
-import hongwen.model.dao.*;
-
 @Service
 @Transactional
-public class ProductService {
+public class DocumentService {
 	
 	@Autowired
 	private ProductDAO productDao;

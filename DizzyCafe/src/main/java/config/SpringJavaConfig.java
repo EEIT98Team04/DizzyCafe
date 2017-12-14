@@ -18,11 +18,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import applehead.model.ActivityListBean;
 import applehead.model.CouponBean;
+import hongwen.model.BoardBean;
 import tingwei.model.CourseBean;
 import tingwei.model.CourseDateTimeBean;
+import wayne.model.MerchandiseBean;
 
 @Configuration
-@ComponentScan(basePackages= {"applehead.model","tingwei.model"})
+@ComponentScan(basePackages= {"applehead.model","tingwei.model","wayne.model","hongwen.model"})
 @EnableTransactionManagement
 public class SpringJavaConfig{
 	@Bean
@@ -43,24 +45,12 @@ public class SpringJavaConfig{
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLServerDialect");
 //		properties.setProperty("hibernate.current_session_context_class", "thread");
 		properties.setProperty("hibernate.show_sql", "true");
-		properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
 		builder.addProperties(properties);
-		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class);
+		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,MerchandiseBean.class,BoardBean.class);
 		return builder.buildSessionFactory();
 	}
 	@Bean
 	public PlatformTransactionManager txManager() {
 		return new HibernateTransactionManager(sessionFactory());
 	}
-//	@Bean
-//	public SimpleUrlHandlerMapping urlHandlerMapping() {
-//		SimpleUrlHandlerMapping simpleUrlHandlerMapping = new SimpleUrlHandlerMapping();
-//		simpleUrlHandlerMapping.setInterceptors(demoInterceptor());
-//		return simpleUrlHandlerMapping;
-//	}
-//	@Bean
-//	public DemoInterceptor demoInterceptor() {
-//		DemoInterceptor demoInterceptor = new DemoInterceptor();
-//		return demoInterceptor;
-//	}
 }

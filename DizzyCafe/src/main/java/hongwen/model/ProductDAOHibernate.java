@@ -1,4 +1,4 @@
-package hongwen.model.dao;
+package hongwen.model;
 
 import java.util.Date;
 import java.util.List;
@@ -8,8 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import hongwen.model.bean.*;
 @Repository
 public class ProductDAOHibernate implements ProductDAO {
 	

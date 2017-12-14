@@ -8,35 +8,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.XmlViewResolver;
 
 @Configuration
-@ComponentScan(basePackages= {"applehead.controller","tingwei.controller","hongwen.controller"})
+@ComponentScan(basePackages= {"wayne.controller"})
 @EnableWebMvc
-public class SpringMvcJavaConfig implements WebMvcConfigurer{
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-//		DemoInterceptor demoInterceptor = new DemoInterceptor();
-//		registry.addInterceptor(demoInterceptor).addPathPatterns("/coupons");
-	}
-
+public class WayneSpringMvcJavaConfig implements WebMvcConfigurer {
+	
 	@Autowired
 	private ServletContext application;
-	
+
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
-		System.out.println("configureViewResolvers");
-		Resource resource = new ServletContextResource(application, "/WEB-INF/views.xml");
+		Resource resource = new ServletContextResource(application, "/WEB-INF/wayneviews.xml");
 		XmlViewResolver xvr = new XmlViewResolver();
 		xvr.setLocation(resource);
 		registry.viewResolver(xvr);
-		
-//		ResourceBundleViewResolver rbvr = new ResourceBundleViewResolver();
-//		rbvr.setBasename("view.viewNames");
-//		registry.viewResolver(rbvr);
 	}
-
+		
 }

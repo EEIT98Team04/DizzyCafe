@@ -1,3 +1,8 @@
+*{
+	margin:0px;
+	padding:0px;
+}
+
 body {
     background-color: #fff1cc;
     width:100%;
@@ -8,15 +13,15 @@ body {
 	width:100%;
 	height:100px;
 }
+table{
+    font-size:20px;     /*字體大小*/
+    height: 50px;
+}
 div h2{
     text-align:center;
     font-family:DFKai-SB;/*標楷體*/
     font-size:40px;     /*字體大小*/
     letter-spacing:40px; /*字體水平間距*/
-}
-table{
-    font-size:20px;     /*字體大小*/
-    height: 50px;
 }
 td{
 	border: 2px solid white;

@@ -29,10 +29,7 @@ public class CourseDateTimeService {
 	}
 	
 	public JSONArray selectJoinCourse(){
-		JSONArray select = courseDateTimeDAO.selectJoinCourse();
-
-//		json.add(index, value);
-		return select;
+		return courseDateTimeDAO.selectJoinCourse();
 	}
 
 }

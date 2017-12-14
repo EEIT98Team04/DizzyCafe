@@ -8,6 +8,8 @@
 <title>${course.courseName}</title>
 </head>
 <body>
+	<jsp:include page="/HTML/Navbar.jsp" />
+	<div style="height:100px"></div>
 	<h3>${course.courseImg}</h3>
 	<h3>${course.courseName}</h3>
 	<h3>${course.courseIntro}</h3>

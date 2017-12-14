@@ -7,8 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>DizzyCafe</title>
 </head>
-<body><jsp:include page="/HTML/Navbar.jsp" />
-	<div style="height:100px"></div>
+<body>
+	<jsp:include page="/HTML/Navbar.jsp" />
+	<div style="height: 100px"></div>
 	<div>
 		<a
 			href="${pageContext.request.contextPath}/course/course.controller?page=1">課程</a>
@@ -21,5 +22,6 @@
 		</form>
 		<a href="${pageContext.request.contextPath}/coupon/showcoupon.jsp">coupon</a>
 	</div>
+
 </body>
 </html>

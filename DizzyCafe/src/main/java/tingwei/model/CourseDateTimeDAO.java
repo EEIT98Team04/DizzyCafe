@@ -47,18 +47,7 @@ public class CourseDateTimeDAO {
 	}
 	
 	public JSONArray selectJoinCourse() {
-//		Query<CourseDateTimeBean> selectJoinCourse = this.getSession().createNativeQuery(
-//				"SELECT course.courseName as 'title', courseDateTime.courseStartTime as 'start',courseDateTime.courseEndTime as 'end'"+ 
-//				" FROM courseDateTime JOIN course"+ 
-//				" ON courseDateTime.courseId = course.courseId",CourseDateTimeBean.class);
-//		List<CourseDateTimeBean> temp = selectJoinCourse.getResultList();
-//		for(Object[] data : temp) {
-//			data[0]="courseName\":\""+data[0];
-//			data[1]="courseStartTime\":\""+data[1];
-//			data[2]=String.valueOf("courseEndTime"+"\""+":"+"\""+data[2]);
-//			System.out.println(String.valueOf("courseEndTime"+"\""+":"+"\""+data[2]));
-//		}
-//		System.out.println("sss"+temp.get(0)[0]);
+
 		Query<Object[]> select = this.getSession().createNativeQuery("select course.courseName, courseDateTime.courseStartTime, courseDateTime.courseEndTime "
 				+ "from course join courseDateTime on course.courseId = courseDateTime.courseId");
 		List<Object[]> temp = select.getResultList();

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import tingwei.model.CourseMemberService;
 import tingwei.model.CourseService;
 
 @Controller
@@ -15,12 +16,23 @@ public class CourseController {
 	@Autowired
 	private CourseService courseService;
 	
+	@Autowired
+	private CourseMemberService courseMemberService;
+	
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
 	public String method(
 			Model model, int page
 	) {
-		model.addAttribute("TotalPages" ,courseService.countTotalPages());
-		model.addAttribute("courseList" ,courseService.showCourseInPage(page));
+		int courseBaseId = 1001;
+		int rows_perPage = 4;
+		
+		
+		int courseIdStart = (courseBaseId + (page - 1) * rows_perPage);
+		int courseIdEnd = (courseBaseId + page * rows_perPage);
+		
+		model.addAttribute("TotalPages" ,courseService.countTotalPages(rows_perPage));
+		model.addAttribute("courseList" ,courseService.showCourseInPage(courseIdStart, courseIdEnd));
+		model.addAttribute("courseNowPeople" ,courseMemberService.countNowPeople(courseIdStart, courseIdEnd,rows_perPage));
 		
 		return "courseList";
 	}

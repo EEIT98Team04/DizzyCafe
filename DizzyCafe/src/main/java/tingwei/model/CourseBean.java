@@ -1,15 +1,9 @@
 package tingwei.model;
 
-import java.util.List;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,17 +22,14 @@ public class CourseBean {
 	private java.sql.Date courseEnd;
 	private java.sql.Date courseSignupBegin;
 	private java.sql.Date courseSignupEnd;
+	private int courseLimit;
 	
-	@OneToMany(mappedBy="courseBean")
-	private List<CourseDateTimeBean> courseDateTimeBean;
-	
-	public List<CourseDateTimeBean> getCourseDateTimeBean() {
-		return courseDateTimeBean;
+	public int getCourseLimit() {
+		return courseLimit;
 	}
-	public void setCourseDateTimeBean(List<CourseDateTimeBean> courseDateTimeBean) {
-		this.courseDateTimeBean = courseDateTimeBean;
+	public void setCourseLimit(int courseLimit) {
+		this.courseLimit = courseLimit;
 	}
-	
 	public int getCourseId() {
 		return courseId;
 	}

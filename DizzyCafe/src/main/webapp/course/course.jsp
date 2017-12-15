@@ -12,9 +12,16 @@
 		height: 60px;
 		width: 60px;
 	}
-	div{
+	.list{
 		margin: 20px auto;
 		width: 70%;
+	}
+	.page{
+		margin: 20px auto;
+		width: 50%;
+	}
+	.list td{
+		padding:0 20px;
 	}
 </style>
 
@@ -23,21 +30,22 @@
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height:100px"></div>
 	<h3>test</h3>
-	<div>
-		<table>
+	<div class="list">
+		<table style="text-align: center">
 
 			<thead>
 				<tr>
-					<th>courseImg</th>
-					<th>courseName</th>
-					<th>courseIntro</th>
-					<th>courseCost</th>
-					<th>courseBegin</th>
-					<th>courseEnd</th>
+					<th>圖片</th>
+					<th>課程名稱</th>
+					<th>課程簡介</th>
+					<th>課程價格</th>
+					<th>開始時間</th>
+					<th>結束時間</th>
+					<th>現在人數</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="course" items="${courseList}">
+				<c:forEach var="course" items="${courseList}" varStatus="status">
 					<tr>
 
 						<td><a
@@ -49,27 +57,35 @@
 						<td>${course.courseCost}</td>
 						<td>${course.courseBegin}</td>
 						<td>${course.courseEnd}</td>
+						<td>${courseNowPeople[status.count-1]} / ${course.courseLimit}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		<div>
+			<ul class="pagination page">
+				<c:forEach var="pages" begin="1" end="${TotalPages}">
+					<li class="page-item"><a class="page-link"
+						href="${pageContext.request.contextPath}/course/course.controller?page=${pages}">${pages}</a></li>
+				</c:forEach>
+			</ul>
+		</div>
 	</div>
 	
-	<div>
-		<ul class="pagination">
-			<c:forEach var="pages" begin="1" end="${TotalPages}">
-				<li class="page-item"><a  class="page-link" href="${pageContext.request.contextPath}/course/course.controller?page=${pages}">${pages}</a></li>
-			</c:forEach>
-		</ul>
-	</div>
 	
 	
 	<div>
 		<a href="${pageContext.request.contextPath}/course/courseNew.jsp"><button>新增</button></a>
 	</div>
+	
 	<div>
 		<a href="${pageContext.request.contextPath}/course/CourseCalendar.jsp"><button>test
 				show course date time</button></a>
+	</div>
+	
+	<div>
+		<a href="${pageContext.request.contextPath}/course/myCourse.controller?page=1">
+			<button>我的課程</button></a>
 	</div>
 </body>
 </html>

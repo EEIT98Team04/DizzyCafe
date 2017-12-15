@@ -34,6 +34,9 @@
 				<label>授課教師</label> <input type="text" name="courseTeacher" required>
 			</div>
 			<div>
+				<label>人數上限</label> <input type="text" name="courseLimit" required>
+			</div>
+			<div>
 				<label>每周幾上課</label> 
 				<input type="checkbox" name="whichDay"value="2" />星期一
 				<input type="checkbox" name="whichDay" value="3" />星期二

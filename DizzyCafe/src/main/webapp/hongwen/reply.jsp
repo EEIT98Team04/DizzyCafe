@@ -1,101 +1,65 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>dizzy</title>
-    <meta charset="utf-8" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/hongwen/css/head.css" />
-    <script src="js/search.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>咖啡論壇</title>
+<link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/hongwen/css/board.css" />
 </head>
-<body style="background-color: #fff1cc;">
-    <div class="title_field">
-        title
-    </div>
-    <div class="container">
-        <h2>歡迎光臨咖啡論壇</h2>
-        <!--<p>Contextual classes can be used to color table rows or table cells. The classes that can be used are: .active, .success, .info, .warning, and .danger.</p>-->
-        <table class="table">
-            <thead>
+<body>
+	<jsp:include page="/HTML/Navbar.jsp" />
+	<div style="margin-top: 80px; text-align: center;">
+		<h2>歡迎光臨咖啡論壇</h2>
+	</div>
+	<div style="background-color: #fff1cc;">
+		<table id="test">
+			<thead>
                 <tr class="danger">
-                    <th>留言板</th>
+                    <th>文章名稱</th>
+                    <th>發文者/發文時間</th>
+                    <th>最後回文者</th>
                     <th>人氣</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr class="success">
-                    <td><a href="document.html">咖啡品種產地版</a></td>
-                    <td>76543</td>
-                </tr>
-                <tr class="success">
-                    <td><a href="document.html">咖啡烘焙版</a></td>
-                    <td>6543</td>
-                </tr>
-                <tr class="success">
-                    <td><a href="document.html">咖啡沖泡方式版</a></td>
-                    <td>7654</td>
-                </tr>
-                <tr class="success">
-                    <td><a href="document.html">咖啡烘培器具版</a></td>
-                    <td>87654</td>
-                </tr>
-                <tr class="success">
-                    <td><a href="document.html">咖啡沖泡器具版</a></td>
-                    <td>87654</td>
-                </tr>
-                <tr class="success">
-                    <td><a href="document.html">咖啡閒聊版</a></td>
-                    <td>65432</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!--<c:forEach var="array" items="${select}">
-        <c:url value="/pages/product.jsp" var="path" scope="page">
-            <c:param name="id" value="${array[0]}" />
-            <c:param name="name" value="${array[1]}" />
-        </c:url>
-        <tr>
-            <td><a href="${path}">${array[0]}</a></td>
-            <td>${array[1]}</td>
-        </tr>
-    </c:forEach>-->
-    <!--<script type="text/javascript">
-        $(function(){
-            console.log("Get into js");
-
-            $('a').on('submit',function(){
-                // console.log('submit');
-                event.preventDefault();
-                var that = $(this),
-                            url='',
-                            method='',
-                            data={};
-
-                that.find('[name]').each(function(index,value){
-                    // console.log(value);
-                    var that = $(this),
-                                name=that.attr('name'),
-                                value=that.val();
-
-                    data[name] = value;
-                });
-
-                var tt = JSON.stringify(data);
-                console.log(tt);
-
-                $.ajax({
-                    url:url,
-                    type:method,
-                    data:data,
-                    success:function(response){
-                        console.log("ajax response")
-                    }
-                })
-
-
-                return false;
-            })
-        });
-    </script>-->
+		</table>
+	</div>
+	<!-- jQuery庫 -->
+	<script type="text/javascript"
+		src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#test').DataTable({
+				ajax : {
+					url : '/DizzyCafe/Board.hongwen',
+					type : 'POST',
+					dataSrc : function(json) {
+						return json;
+					}
+				},
+				columns : [ {
+					data : 'name'
+				}, {
+					data : 'popularity'
+				}, {
+					data : 'announcement'
+				}, {
+					data : 'Bstatus'
+				} ],
+				language : {
+					paginate : {
+						next : "下一頁",
+						previous : "上一頁"
+					},
+					lengthMenu : '一頁顯示 _MENU_ 筆資料'
+				},
+				info : false,
+				order : [ 3, 'desc' ]
+			});
+		});
+	</script>
 </body>
 </html>

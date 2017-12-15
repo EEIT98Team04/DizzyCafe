@@ -16,7 +16,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] {"*.controller","/activities","/coupons","/merchandise"};
+		return new String[] {"*.controller","/activities","/coupons","/merchandise","*.hongwen"};
 	}
 
 }

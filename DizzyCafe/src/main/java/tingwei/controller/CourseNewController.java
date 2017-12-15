@@ -25,7 +25,9 @@ public class CourseNewController {
 	
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
 	public String method(Model model, CourseBean couresBean, 
-			CourseDateTimeBean courseDateTimeBean,String[] whichDay,String time) {
+			String[] whichDay,String time ,int courseLength) {
+		
+		CourseDateTimeBean courseDateTimeBean = new CourseDateTimeBean();
 		
 		courseService.insert(couresBean);
 		
@@ -46,8 +48,11 @@ public class CourseNewController {
 			//day_in_week等於選擇的上課時間的話
 			for(String var : whichDay) {
 				if(cal1.get(Calendar.DAY_OF_WEEK)==Integer.valueOf(var)) {
-					courseDateTimeBean.setCourseDateTime(new java.sql.Timestamp(cal1.getTimeInMillis()
+					courseDateTimeBean.setCourseStartTime(new java.sql.Timestamp(cal1.getTimeInMillis()
 							+Integer.valueOf(time)*3600000));
+					courseDateTimeBean.setCourseEndTime(new java.sql.Timestamp(cal1.getTimeInMillis()
+							+(Integer.valueOf(time)+courseLength)*3600000));
+					System.out.println(courseDateTimeBean);
 					courseDateTimeService.insert(courseDateTimeBean);
 				}
 			}

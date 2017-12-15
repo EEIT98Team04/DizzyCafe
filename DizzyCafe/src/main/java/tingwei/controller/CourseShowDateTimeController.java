@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import tingwei.model.CourseBean;
 import tingwei.model.CourseDateTimeBean;
 import tingwei.model.CourseDateTimeService;
 
@@ -22,8 +20,8 @@ public class CourseShowDateTimeController {
 	//Show 課程時間
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
 	public String method(Model model) {
-		List<CourseDateTimeBean> beans = courseDateTimeService.showCourseDateTime();
-		
+		List<CourseDateTimeBean> beans = courseDateTimeService.select();
+
 		System.out.println("CourseShowDateTimeController beans:"+beans);
 		
 		if(beans!=null) {

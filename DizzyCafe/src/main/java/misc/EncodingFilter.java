@@ -12,7 +12,10 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns= {"/*"})
+@WebFilter(
+		urlPatterns= {"/*"}
+)
+
 public class EncodingFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,
@@ -22,6 +25,7 @@ public class EncodingFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) resp;
 		request.setCharacterEncoding("UTF-8");
 		chain.doFilter(request, response);
+		
 	}
 	private FilterConfig filterConfig;
 	@Override

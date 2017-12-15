@@ -1,14 +1,15 @@
 package tingwei.model;
 
 import java.util.List;
-
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Repository
 @Transactional
@@ -44,4 +45,25 @@ public class CourseDateTimeDAO {
 		return select.getResultList();
 	}
 	
+	public JSONArray selectJoinCourse() {
+
+		Query<Object[]> select = this.getSession().createNativeQuery("select course.courseName, courseDateTime.courseStartTime, courseDateTime.courseEndTime "
+				+ "from course join courseDateTime on course.courseId = courseDateTime.courseId");
+		List<Object[]> temp = select.getResultList();
+
+		JSONArray result = new JSONArray();
+		
+		for(Object[] var : temp) {
+			JSONObject tt = new JSONObject();
+			tt.put("title", var[0]);
+			tt.put("start", var[1].toString());
+			tt.put("end", var[2].toString());
+			result.add(tt);
+		}
+		
+		System.out.println(result);
+		return result;
+	}
+	
 }
+

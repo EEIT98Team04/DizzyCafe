@@ -16,18 +16,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.XmlViewResolver;
 
 @Configuration
-@ComponentScan(basePackages = { "applehead.controller", "tingwei.controller", "minghui.controller"})
+@ComponentScan(basePackages= {"applehead.controller","tingwei.controller","hongwen.controller","minghui.controller"})
 @EnableWebMvc
-public class SpringMvcJavaConfig implements WebMvcConfigurer {
+public class SpringMvcJavaConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		// DemoInterceptor demoInterceptor = new DemoInterceptor();
-		// registry.addInterceptor(demoInterceptor).addPathPatterns("/coupons");
+//		DemoInterceptor demoInterceptor = new DemoInterceptor();
+//		registry.addInterceptor(demoInterceptor).addPathPatterns("/coupons");
 	}
 
 	@Autowired
 	private ServletContext application;
-
+	
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		System.out.println("configureViewResolvers");
@@ -38,8 +38,7 @@ public class SpringMvcJavaConfig implements WebMvcConfigurer {
 		
 //		ResourceBundleViewResolver rbvr = new ResourceBundleViewResolver();
 //		rbvr.setBasename("view.viewNames");
-//		registry.viewResolver(rbvr);		
-		
+//		registry.viewResolver(rbvr);
 	}
 	
 	@Bean

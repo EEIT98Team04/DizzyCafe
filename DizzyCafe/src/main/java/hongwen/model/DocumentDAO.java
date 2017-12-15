@@ -2,16 +2,62 @@ package hongwen.model;
 
 import java.util.List;
 
-public interface DocumentDAO {
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-	ProductBean select(int id);
+@Repository
+@Transactional
+public class DocumentDAO {
+	@Autowired
+	private SessionFactory sessionFactory;
 
-	List<ProductBean> select();
+	public Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
 
-	ProductBean insert(ProductBean bean);
+	// public BoardBean select(int boardId) {
+	// BoardBean bean = this.getSession().get(BoardBean.class, boardId);
+	// return bean;
+	// }
 
-	ProductBean update(String name, double price, java.util.Date make, int expire, int id);
+	public List<DocumentBean> select(int boardId) {
+		List<DocumentBean> result = null;
+		Query<DocumentBean> query = this.getSession().createQuery("from BoardBean", DocumentBean.class);
+		result = query.getResultList();
+		return result;
+	}
 
-	boolean delete(int id);
+	// public List<BoardBean> selectFromMemberId(int memberId) {
+	// List<BoardBean> result = null;
+	// Query<BoardBean> query = this.getSession().createQuery("from BoardBean where
+	// memberId = " + memberId, BoardBean.class);
+	// result = query.getResultList();
+	// return result;
+	// }
 
+	// public BoardBean updateCouponStatus(int CouponStatus,int couponId) {
+	// BoardBean update = null;
+	// try {
+	// update = this.getSession().get(BoardBean.class,couponId);
+	// update.setCouponStatus(CouponStatus);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// return update;
+	// }
+	// return update;
+	// }
+
+	// public boolean insert(BoardBean bean) {
+	// try {
+	// this.getSession().save(bean);
+	// return true;
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// return false;
+	// }
+	// }
 }

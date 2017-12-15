@@ -2,6 +2,7 @@ package tingwei.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,26 +21,11 @@ public class CourseDateTimeBean {
 	private java.sql.Timestamp courseStartTime;
 	private java.sql.Timestamp courseEndTime;
 	
-	@ManyToOne
-//	@JoinTable(
-//			name="course",
-//			joinColumns=@JoinColumn(name="courseName",insertable=false,updatable=false)
-//	)
-	@JoinColumn(name="courseId",insertable=false,updatable=false)
-	private CourseBean courseBean;
-	
-	
-	public CourseBean getCourseBean() {
-		return courseBean;
-	}
-	public void setCourseBean(CourseBean courseBean) {
-		this.courseBean = courseBean;
-	}
-	
 	@Override
 	public String toString() {
 		return "CourseDateTimeBean [num=" + num + ", courseId=" + courseId + ", courseStartTime=" + courseStartTime
-				+ ", courseEndTime=" + courseEndTime + ", courseBean=" + courseBean + "]";
+				+ ", courseEndTime=" + courseEndTime + "]";
+
 	}
 	public int getNum() {
 		return num;

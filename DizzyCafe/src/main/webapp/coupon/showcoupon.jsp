@@ -9,8 +9,6 @@
 	rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="/HTML/Navbar.jsp" />
-	<div style="height:100px"></div>
 	<div style="width: 70%;">
 		<table id="test"></table>
 	</div>
@@ -40,7 +38,6 @@
 	        						json[i].couponStatus = '已過期';
 	        					}
 	      					}
-	      					console.log(json);
 	      				return json;
 	    				}
 				},

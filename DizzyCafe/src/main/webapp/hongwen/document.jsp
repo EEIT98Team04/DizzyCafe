@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,7 +19,6 @@
 		<table id="test">
 			<thead>
                 <tr class="danger">
-                    <th>文章編號</th>
                     <th>文章名稱</th>
                     <th>發文者/發文時間</th>
                     <th>最後回文者</th>
@@ -32,27 +31,23 @@
 	<script type="text/javascript"
 		src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script>
-	var search= document.location.search;//?xx=xx
 		$(document).ready(function() {
 			$('#test').DataTable({
 				ajax : {
-					url : '/DizzyCafe/Documentget.hongwen'+search,
-					type : 'GET',
+					url : '/DizzyCafe/Board.hongwen',
+					type : 'POST',
 					dataSrc : function(json) {
-						console.log(pagePathName+search);
 						return json;
 					}
 				},
 				columns : [ {
-					data : 'documentId'
-				}, {
 					data : 'name'
 				}, {
-					data : 'memberId'
-				}, {
-					data : 'times'
-				} , {
 					data : 'popularity'
+				}, {
+					data : 'announcement'
+				}, {
+					data : 'Bstatus'
 				} ],
 				language : {
 					paginate : {

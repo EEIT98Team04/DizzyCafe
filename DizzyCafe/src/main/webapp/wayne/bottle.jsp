@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,23 +8,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+		<div>
 		<header></header>
 		<aside class="aside">
 		<h3>coffee</h3>
 		<ul>
-			<li><a
-				href="${pageContext.request.contextPath}/wayne/merchandise.jsp">咖啡豆
-					Whole Beans</a></li>
+			<li><a href="${pageContext.request.contextPath}/wayne/merchandise.jsp">咖啡豆 Whole Beans</a></li>
 			<li><a href="">濾掛式咖啡 Drip Coffee</a></li>
 		</ul>
 		<h3>Merchandise</h3>
 		<ul>
 			<li><a href="">手沖濾杯 Drip Coffee Set</a></li>
 			<li><a href="">咖啡沖煮相關器具 Accessories</a></li>
-			<li><a
-				href="${pageContext.request.contextPath}/wayne/bottle.jsp"">咖啡杯瓶及保溫罐
-					Bottle</a></li>
+			<li><a href="">咖啡杯瓶及保溫罐 Bottle</a></li>
 		</ul>
 
 		</aside>
@@ -54,7 +49,7 @@
 			</c:choose>
 		</c:forEach>
 
-
+		
 	</div>
 
 	<footer></footer>

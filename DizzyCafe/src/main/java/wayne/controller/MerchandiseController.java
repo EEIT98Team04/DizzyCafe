@@ -1,5 +1,7 @@
 package wayne.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +20,13 @@ public class MerchandiseController{
 	private MerchandiseService merchandiseService;
 	
 	@RequestMapping(method= {RequestMethod.POST,RequestMethod.GET})
-	public String method(MerchandiseBean bean, Model model, BindingResult bindingresult , int page) {
-
-		model.addAttribute("totalPages" ,merchandiseService.countTotalPages());
-		model.addAttribute("beans" ,merchandiseService.showMerchandiseInPage(page));
+	public String method(MerchandiseBean bean, Model model, BindingResult bindingresult) {
+		
+		
+		
+		List<MerchandiseBean> result = merchandiseService.select();
+		System.out.println(result);
+		model.addAttribute("beans", result);
 		
 		return "merchandise";
 	}

@@ -20,6 +20,7 @@ public class BoardController {
 	public @ResponseBody JSONArray postJSON(HttpSession session) {
 		System.out.println("BoardController");
 		JSONArray json = boardService.selectToJSON();
+
 		System.out.println(json);
 		return json;
 	}

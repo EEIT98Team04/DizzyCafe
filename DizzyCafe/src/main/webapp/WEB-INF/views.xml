@@ -7,7 +7,7 @@
 	
 	<bean id="showActivity.failed"
 		class="org.springframework.web.servlet.view.RedirectView">
-		<property name="url" value="/activity.controller?nowPage=0"></property>
+		<property name="url" value="/activity.controller?page=1"></property>
 		<property name="contextRelative" value="true"></property>
 	</bean>
 	

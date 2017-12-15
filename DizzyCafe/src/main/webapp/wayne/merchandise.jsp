@@ -21,8 +21,7 @@
 		<ul>
 			<li><a href="">手沖濾杯 Drip Coffee Set</a></li>
 			<li><a href="">咖啡沖煮相關器具 Accessories</a></li>
-			<li><a
-				href="${pageContext.request.contextPath}/wayne/bottle.jsp">咖啡杯瓶及保溫罐 Bottle</a></li>
+			<li><a href="${pageContext.request.contextPath}/wayne/bottle.jsp">咖啡杯瓶及保溫罐 Bottle</a></li>
 		</ul>
 
 		</aside>

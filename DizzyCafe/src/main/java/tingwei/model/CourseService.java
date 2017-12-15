@@ -12,7 +12,6 @@ public class CourseService {
 	@Autowired
 	private CourseDAO courseDAO;
 
-
 	
 
 //	public List<CourseBean> showCourse() {

@@ -9,13 +9,12 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import tingwei.model.CourseBean;
 import wayne.model.MerchandiseBean;
-import wayne.model.MerchandiseDAO;
 
 @Repository
-public class MerchandiseDAOHibernate implements MerchandiseDAO {
+public class MerchandiseDAOHibernate {
 
-	static String file = "C:\\DizzyCafe\\coffee1.jpg";
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -24,16 +23,40 @@ public class MerchandiseDAOHibernate implements MerchandiseDAO {
 	}
 
 	
-	@Override
+	public List<MerchandiseBean> selectPageNow(int pageNow, int rows_perPage) {
+		int base = 1;
+		Query<MerchandiseBean> select = this.getsession().createQuery("FROM MerchandiseBean WHERE merchandiseId >="
+				+ (base + (pageNow - 1) * rows_perPage) + " AND merchandiseId <" + (base + pageNow * rows_perPage),
+				MerchandiseBean.class);
+		return select.getResultList();
+	}
+	
+	
+	public int countTotalPage(int row_perPage) {
+		Long temp = (long) this.getsession().createQuery("Select COUNT(*) FROM MerchandiseBean").uniqueResult();
+		if (temp.intValue() % row_perPage == 0) {
+			return temp.intValue() / row_perPage;
+		}else {
+			return temp.intValue() / row_perPage + 1;
+		}
+	}
+	
+	
+	
 	public MerchandiseBean select(int merchandiseId) {
 		return this.getsession().get(MerchandiseBean.class, merchandiseId);
 	}
-	@Override
+	
+	
 	public List<MerchandiseBean> select() {
 		Query<MerchandiseBean> query = this.getsession().createQuery("FROM MerchandiseBean", MerchandiseBean.class);
 		return query.getResultList();
 	}
-	@Override
+	
+	public MerchandiseBean select(String merchandiseTag) {
+		return this.getsession().get(MerchandiseBean.class, merchandiseTag);
+	}
+	
 	public MerchandiseBean insert(MerchandiseBean bean) {
 		if (bean != null) {
 			MerchandiseBean select = this.select(bean.getMerchandiseId());
@@ -44,7 +67,6 @@ public class MerchandiseDAOHibernate implements MerchandiseDAO {
 		}
 		return null;
 	}
-	@Override
 	public MerchandiseBean update(String merchandiseName, String merchandiseContent, Blob merchandisePicture,
 			String merchandiseTag, int merchandisePrice, int merchandiseQuantity, String merchandiseStatus,
 			int merchandiseId) {
@@ -60,7 +82,6 @@ public class MerchandiseDAOHibernate implements MerchandiseDAO {
 		}
 		return null;
 	}
-	@Override
 	public boolean delete(int merchandiseId) {
 		MerchandiseBean select = this.select(merchandiseId);
 		if (select != null) {
@@ -69,5 +90,6 @@ public class MerchandiseDAOHibernate implements MerchandiseDAO {
 		}
 		return false;
 	}
+	
 
 }

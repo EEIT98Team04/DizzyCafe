@@ -20,8 +20,12 @@ public class ActivityController {
 				path="/activity.controller",
 				method= {RequestMethod.GET,RequestMethod.POST}
 			)
-	public String haha(Model model,int nowPage) {
-		List<ActivityListBean> result = activityListService.showPageItems(nowPage);
+	public String haha(Model model,String page) {
+		if(page==null || page.equals("")) {
+			return "showActivity.failed";
+		}
+		List<ActivityListBean> result = activityListService.showPageItems(Integer.valueOf(page)-1);
+		System.out.println(result);
 		model.addAttribute("items", result);
 		model.addAttribute("totalPage", activityListService.calculateTotalPage());
 //		bean.setActivityName("New year");

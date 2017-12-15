@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>DizzyCafe課程</title>
-
 <style type="text/css">
 	.img{
 		height: 60px;
@@ -79,8 +78,8 @@
 	</div>
 	
 	<div>
-		<a href="${pageContext.request.contextPath}/course/CourseCalendar.jsp"><button>test
-				show course date time</button></a>
+		<a href="${pageContext.request.contextPath}/course/CourseCalendar.jsp">
+		<button>test show course date time</button></a>
 	</div>
 	
 	<div>

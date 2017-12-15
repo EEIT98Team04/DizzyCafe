@@ -101,7 +101,8 @@ public class CourseBean {
 		return "CourseBean [courseId=" + courseId + ", courseName=" + courseName + ", courseImg=" + courseImg
 				+ ", courseIntro=" + courseIntro + ", courseContent=" + courseContent + ", courseCost=" + courseCost
 				+ ", courseTeacher=" + courseTeacher + ", courseBegin=" + courseBegin + ", courseEnd=" + courseEnd
-				+ ", courseSignupBegin=" + courseSignupBegin + ", courseSignupEnd=" + courseSignupEnd+ "]";
+				+ ", courseSignupBegin=" + courseSignupBegin + ", courseSignupEnd=" + courseSignupEnd + ", courseLimit="
+				+ courseLimit + "]";
 	}
 
 }

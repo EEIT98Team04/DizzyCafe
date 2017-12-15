@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import applehead.model.CouponService;
+import minghui.model.MemberBean;
 import net.sf.json.JSONArray;
 
 @Controller
@@ -22,12 +22,11 @@ public class CouponController {
 			)
 	public @ResponseBody JSONArray postJSON(HttpSession session) {
 		//memberId
-		session.getAttribute("user");
+		MemberBean bean = (MemberBean) session.getAttribute("user");
 		
-		couponService.updateDeadline(102);
-		JSONArray json = couponService.selectToJSON(102);
+		couponService.updateDeadline(bean.getMemberId());
+		JSONArray json = couponService.selectToJSON(bean.getMemberId());
 		
-		System.out.println(json);
 		return json;
 	}
 }

@@ -148,10 +148,11 @@ body{
 					$("#here").html($(".imm:nth-child(8)").html());
 				}
 			},parseInt(Math.random()*2000+3000));
-		    $.ajax('',,function(){
+// 		    $.ajax('',,function(){
 		    	
-		    });
+// 		    });
 		});	
+
 	</script>
 </body>
 </html>

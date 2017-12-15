@@ -11,8 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CourseService {
 	@Autowired
 	private CourseDAO courseDAO;
-	
-	
+
 	private int rows_perPage = 4;
 
 

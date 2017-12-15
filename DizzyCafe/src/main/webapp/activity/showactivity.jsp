@@ -27,6 +27,7 @@
 			<br>
 			<p>${activityBean.activityStart }~ ${activityBean.activityEnd }</p>
 		</div>
+
 	</div>
 </body>
 </html>

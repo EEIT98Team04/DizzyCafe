@@ -1,6 +1,6 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,6 +32,7 @@
 	<script>
 	var temp;
 		$(document).ready(function() {
+			var tmp="";
 			$('#test').DataTable({
 				ajax : {
 					url : '/DizzyCafe/Board.hongwen',
@@ -45,15 +46,16 @@
 				"ordering": false,
 				"info":     false,
 				language : {
-		            "zeroRecords": "查無此資料",
+		            "zeroRecords": "查無資料",
 				},
 				columns : [{
 					data : 'name',
 					"render": function(data, type, row, meta){
 			            if(type === 'display'){
-			                data = '<a href="${pageContext.request.contextPath}/hongwen/reply.jsp">' + data + '</a>';
+			            	var hyperlink = "${pageContext.request.contextPath}/hongwen/document.jsp?";
+			            	var get = 'boardId='+row.boardId+'&name='+row.name;
+			                data = '<a href="' + hyperlink + get +'">' + data + '</a>';
 			            }
-
 			            return data;
 			         }
 				}, {
@@ -63,7 +65,6 @@
 				}],
 			});
 		});
-		console.log(temp);
 	</script>
 </body>
 </html>

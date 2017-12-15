@@ -25,7 +25,7 @@ public class ActivityListService {
 		// showPage = query.list();
 		List<ActivityListBean> temp = activityListDAO.selectList();
 		for (int i = nowPage * getItemsInPage(); (nowPage * getItemsInPage()+getItemsInPage()) > i; i++) {
-			if(temp.size()<i) {
+			if(temp.size()<=i) {
 				break;
 			}
 			showPage.add(temp.get(i));

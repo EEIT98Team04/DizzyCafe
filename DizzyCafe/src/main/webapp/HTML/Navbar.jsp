@@ -84,7 +84,7 @@
 					<img class="login_dropbtn" title="${user.memberName}"
 						src='<c:url value="${user.memberPhoto}" />'>
 					<div class="login_dropdown-content">
-						<a href="#">a</a>
+						<a href="${pageContext.request.contextPath }/coupon/showcoupon.jsp">折價卷</a>
 						<a href="#">b</a>
 						<a href="#">c</a>
 						<a href="#">d</a>

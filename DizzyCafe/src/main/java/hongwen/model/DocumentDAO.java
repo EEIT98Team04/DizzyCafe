@@ -25,9 +25,11 @@ public class DocumentDAO {
 	// }
 
 	public List<DocumentBean> select(int boardId) {
-		List<DocumentBean> result = null;
-		Query<DocumentBean> query = this.getSession().createQuery("from BoardBean", DocumentBean.class);
-		result = query.getResultList();
+		String search = "from DocumentBean";
+		Query<DocumentBean> query = this.getSession().createQuery("from DocumentBean", DocumentBean.class);
+		System.out.println("---");
+		List<DocumentBean> result = query.getResultList();
+		System.out.println(result);
 		return result;
 	}
 

@@ -31,10 +31,9 @@ public class CourseDAO {
 		return select.getResultList();
 	}
 
-	public List<CourseBean> selectPageNow(int pageNow, int rows_perPage) {
-		int base = 1001;
+	public List<CourseBean> selectPageNow(int courseIdStart, int courseIdEnd) {
 		Query<CourseBean> select = this.getSession().createQuery("FROM CourseBean WHERE courseId >="
-				+ (base + (pageNow - 1) * rows_perPage) + " AND courseId <" + (base + pageNow * rows_perPage),
+				+ courseIdStart + " AND courseId <" + courseIdEnd,
 				CourseBean.class);
 		return select.getResultList();
 	}
@@ -83,7 +82,8 @@ public class CourseDAO {
 
 	public CourseBean update(int courseId, String courseName, String courseImg, String courseIntro,
 			String courseContent, int courseCost, String courseTeacher, java.sql.Date courseBegin,
-			java.sql.Date courseEnd, java.sql.Date courseSignupBegin, java.sql.Date courseSignupEnd) {
+			java.sql.Date courseEnd, java.sql.Date courseSignupBegin, java.sql.Date courseSignupEnd,
+			int courseLimit) {
 		CourseBean select = this.select(courseId);
 		if (select != null) {
 			select.setCourseName(courseName);
@@ -96,7 +96,7 @@ public class CourseDAO {
 			select.setCourseEnd(courseEnd);
 			select.setCourseSignupBegin(courseSignupBegin);
 			select.setCourseSignupEnd(courseSignupEnd);
-
+			select.setCourseLimit(courseLimit);
 		}
 		return null;
 	}

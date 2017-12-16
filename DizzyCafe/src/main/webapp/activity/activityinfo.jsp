@@ -17,22 +17,19 @@
 	padding: 0 20px 0 0;
 	cursor: pointer;
 	color: #9c3f0d;
-}
-/* .more:hover{ */
-/* 	color:#BC5B27; */
-/* 	text-decoration: none; */
-/* } */
-a:hover{
-	color:#BC5B27;
 	text-decoration: none;
 }
+.more:hover{ 
+ 	color:#BC5B27; 
+ 	text-decoration: none; 
+} 
 </style>
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height:100px;"></div>
+	<p class="alert alert-warning" style="padding-left:30%;padding-bottom:0px"><strong style="font-size:24px">活動專區</strong></p>
 	<div id="showItems">
-		<p class="alert alert-warning" style="padding-left:30%;padding-bottom:0px"><strong style="font-size:24px">活動專區</strong></p>
 		<c:if test="${not empty items}">
 			<div class="card-group" style="width:500px;margin:auto;">
 			<c:forEach items="${items }" var="showBean">
@@ -49,20 +46,19 @@ a:hover{
 			</c:forEach>
 			</div>
 		</c:if>
-		<div style="margin:auto;width:100px">
+		<div style="margin:5px 50%;width:500px;">
 			<ul class="pagination">
-				<c:forEach begin="1" end="${totalPage }" var="pages" varStatus="haha">
-					<c:if test="${haha.first }">
-						<c:if test="${(param.nowPage-1)>=0 }">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/activity.controller?nowPage=${param.nowPage-1}">Previous</a></li>				
-						</c:if>
+				<c:forEach begin="0" end="3" var="pages" varStatus="haha">
+					<c:if test="${haha.first && (param.page-1)>0}">
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/activity.controller?page=${param.page-1}">
+						Previous</a></li>				
 					</c:if>
-				
-  					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/activity.controller?nowPage=${pages-1}">${pages }</a></li>
-  					<c:if test="${haha.last }">
-						<c:if test="${(param.nowPage+1)<totalPage }">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/activity.controller?nowPage=${param.nowPage+1}">Previous</a></li>				
-						</c:if>
+					<c:if test="${param.page+1*pages <= totalPage }">
+  						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/activity.controller?page=${param.page+1*pages}">${param.page+1*pages }</a></li>
+  					</c:if>					
+  					<c:if test="${haha.last && param.page < totalPage }">
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/activity.controller?page=${param.page+1}">
+						Next</a></li>				
 					</c:if>					
 				</c:forEach>
 			</ul>

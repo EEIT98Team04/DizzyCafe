@@ -19,14 +19,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import applehead.model.ActivityListBean;
 import applehead.model.CouponBean;
 import hongwen.model.BoardBean;
-import hongwen.model.DocumentBean;
-import hongwen.model.ReplyBean;
+import minghui.model.MemberBean;
 import tingwei.model.CourseBean;
 import tingwei.model.CourseDateTimeBean;
 import wayne.model.MerchandiseBean;
 
 @Configuration
-@ComponentScan(basePackages= {"applehead.model","tingwei.model","wayne.model","hongwen.model"})
+@ComponentScan(basePackages= {"applehead.model","tingwei.model","wayne.model","hongwen.model","minghui.model"})
 @EnableTransactionManagement
 public class SpringJavaConfig{
 	@Bean
@@ -47,11 +46,8 @@ public class SpringJavaConfig{
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLServerDialect");
 //		properties.setProperty("hibernate.current_session_context_class", "thread");
 		properties.setProperty("hibernate.show_sql", "true");
-		properties.setProperty("hibernate.use_sql_comments", "true");
-//		properties.setProperty("hibernate.format_sql", "true");
 		builder.addProperties(properties);
-		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,MerchandiseBean.class);
-		builder.addAnnotatedClasses(BoardBean.class,DocumentBean.class,ReplyBean.class);
+		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,MerchandiseBean.class,BoardBean.class,MemberBean.class);
 		return builder.buildSessionFactory();
 	}
 	@Bean

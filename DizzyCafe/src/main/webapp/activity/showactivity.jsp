@@ -6,21 +6,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${activityBean.activityName }</title>
+<style>
+.info{
+	width:500px;
+	margin:auto;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height: 100px"></div>
-	<h2>${activityBean.activityName }</h2>
-	<div>
-		<!-- 	private int activityNo; -->
-		<!-- 	private String activityName; -->
-		<!-- 	private java.sql.Date activityStart; -->
-		<!-- 	private java.sql.Date activityEnd; -->
-		<!-- 	private String activityContent; -->
-		<!-- 	private byte[] activityPicture; -->
-		<p>${activityBean.activityContent }</p>
-		<br>
-		<p>${activityBean.activityStart }~ ${activityBean.activityEnd }</p>
+	<p class="alert alert-warning" style="padding-left:30%;padding-bottom:0px"><strong style="font-size:24px">活動專區</strong></p>
+	<div class="info">
+		<div>
+			<img src="${pageContext.request.contextPath }/activity/${activityBean.activityNo }.jpg">
+		</div>
+		<h2>${activityBean.activityName }</h2>
+		<div>
+			<p>${activityBean.activityContent }</p>
+			<br>
+			<p>${activityBean.activityStart }~ ${activityBean.activityEnd }</p>
+		</div>
+
 	</div>
 </body>
 </html>

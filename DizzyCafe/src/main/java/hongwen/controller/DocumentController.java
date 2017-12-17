@@ -20,9 +20,7 @@ public class DocumentController {
 
 	@RequestMapping(path = "/Documentget.hongwen", method = { RequestMethod.GET})
 	public @ResponseBody JSONArray getJSON(@RequestParam Map<?,?> param) {
-		System.out.println("Documentpost:"+param);
 		JSONArray json = documentService.selectToJSON(Integer.parseInt((String)param.get("boardId")));
-		System.out.println(json);
 		return json;
 	}
 	

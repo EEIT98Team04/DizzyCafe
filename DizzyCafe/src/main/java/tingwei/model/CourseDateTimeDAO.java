@@ -46,7 +46,7 @@ public class CourseDateTimeDAO {
 	}
 	
 	public JSONArray selectJoinCourse() {
-
+		@SuppressWarnings("unchecked")
 		Query<Object[]> select = this.getSession().createNativeQuery("select course.courseName, courseDateTime.courseStartTime, courseDateTime.courseEndTime "
 				+ "from course join courseDateTime on course.courseId = courseDateTime.courseId");
 		List<Object[]> temp = select.getResultList();

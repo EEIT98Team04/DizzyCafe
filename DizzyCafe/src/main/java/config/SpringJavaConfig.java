@@ -24,6 +24,7 @@ import hongwen.model.ReplyBean;
 import minghui.model.MemberBean;
 import tingwei.model.CourseBean;
 import tingwei.model.CourseDateTimeBean;
+import tingwei.model.CourseMemberBean;
 import wayne.model.MerchandiseBean;
 
 @Configuration
@@ -49,8 +50,8 @@ public class SpringJavaConfig{
 //		properties.setProperty("hibernate.current_session_context_class", "thread");
 		properties.setProperty("hibernate.show_sql", "true");
 		builder.addProperties(properties);
-		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,MerchandiseBean.class,MemberBean.class);
-		builder.addAnnotatedClasses(BoardBean.class,DocumentBean.class,ReplyBean.class);//Hongwen
+		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,CourseMemberBean.class,MerchandiseBean.class,BoardBean.class,MemberBean.class);
+
 		return builder.buildSessionFactory();
 	}
 	@Bean

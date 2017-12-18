@@ -11,6 +11,7 @@ public class DailyEventBean {
 	private int eventId;
 	private double probability;
 	private int merchandiseId;
+	private double discount;
 	public int getEventId() {
 		return eventId;
 	}
@@ -29,10 +30,17 @@ public class DailyEventBean {
 	public void setMerchandiseId(int merchandiseId) {
 		this.merchandiseId = merchandiseId;
 	}
+	public double getDiscount() {
+		return discount;
+	}
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
 	@Override
 	public String toString() {
 		return "DailyEventBean [eventId=" + eventId + ", probability=" + probability + ", merchandiseId="
-				+ merchandiseId + "]";
+				+ merchandiseId + ", discount=" + discount + "]";
 	}
+
 	
 }

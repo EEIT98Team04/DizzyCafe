@@ -3,9 +3,12 @@ package minghui.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -21,10 +24,11 @@ public class LoginController {
 	private LoginService service;
 
 	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
-	public String method(String memberName, String memberPassword, Model model) {
+	public String method(@RequestHeader(value = "referer", required = false) final String referer,
+								HttpServletRequest request, String memberName, String memberPassword, Model model) {
+		String[] str_array = referer.split(request.getContextPath());
 		Map<String, String> errors = new HashMap<>();
 		model.addAttribute("errors", errors);
-
 		MemberBean bean = service.login(memberName, memberPassword);
 
 		// 依照執行結果挑選適當的View元件
@@ -33,7 +37,7 @@ public class LoginController {
 			return "login.error";
 		} else {
 			model.addAttribute("user", bean);
-			return "login.success";
+			return "redirect:" + str_array[1];
 		}
 	}
 

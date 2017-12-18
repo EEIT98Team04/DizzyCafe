@@ -21,6 +21,7 @@
 			<input type="submit" value="press">
 		</form>
 		<a href="${pageContext.request.contextPath}/coupon/showcoupon.jsp">coupon</a>
+		<a href="${pageContext.request.contextPath }/event/dailyevent.jsp">每日活動</a>
 	</div>
 
 </body>

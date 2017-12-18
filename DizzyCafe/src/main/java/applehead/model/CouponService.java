@@ -18,10 +18,12 @@ public class CouponService {
 	CouponDAO couponDAO;
 	
 	//insert coupon
-	public void insertCoupon(CouponBean bean) {
+	public boolean insertCoupon(CouponBean bean) {
 		if(bean!=null) {
 			couponDAO.insert(bean);	
+			return true;
 		}
+		return false;
 	}
 	
 	//ajax用，selectById傳回GSON格式
@@ -36,8 +38,7 @@ public class CouponService {
 	public List<CouponBean> updateDeadline(int memberId){
 		List<CouponBean> result = null;
 		List<CouponBean> list = new ArrayList<>();
-		//還要更新memberId
-		result = couponDAO.selectFromMemberId(102);
+		result = couponDAO.selectFromMemberId(memberId);
 		if(result!=null) {
 			for(CouponBean bean : result) {
 				if(bean.getCouponStatus()==0) {

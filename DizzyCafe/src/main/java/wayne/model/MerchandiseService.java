@@ -24,6 +24,10 @@ public class MerchandiseService {
 		return merchandiseDao.selectPageNow(nowPage,rows_perPage);
 	}
 	
+	public List<MerchandiseBean> showMerchandiseInPageTag(int nowPage, String tag){
+		return merchandiseDao.selectPageNowTag(nowPage, rows_perPage, tag);
+	}
+	
 	public int countTotalPages() {
 		return merchandiseDao.countTotalPage(this.getRows_perPage());
 	}
@@ -44,7 +48,7 @@ public class MerchandiseService {
 	
 	public List<MerchandiseBean> select(String merchandiseTag){
 			
-			return merchandiseDao.select();
+			return merchandiseDao.select(merchandiseTag);
 	}
 	
 	public MerchandiseBean insert(MerchandiseBean bean) {

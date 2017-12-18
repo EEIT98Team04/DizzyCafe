@@ -86,11 +86,11 @@ body{
 		<img src="${pageContext.request.contextPath }/event/circle123.png" width="650px" id="circleImg"/>  
 <!-- 		<img src="/DizzyCafe/event/event.png" width="500px" id="firstImg" /> -->
 		<span id="firstImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>firstImg</span>
-		<span id="secondImg" class="imm"><input type="hidden" value="87"/>はずれ</span>
+		<span id="secondImg" class="imm"><input type="hidden" value="87"/>ハズレ</span>
 		<span id="thirdImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>thirdImg</span>
-		<span id="fourthImg" class="imm"><input type="hidden" value="87"/>はずれ</span>
+		<span id="fourthImg" class="imm"><input type="hidden" value="87"/>ハズレ</span>
 		<span id="fifthImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>fifthImg</span>
-		<span id="sixthImg" class="imm"><input type="hidden" value="87"/>はずれ</span>
+		<span id="sixthImg" class="imm"><input type="hidden" value="87"/>ハズレ</span>
 <!-- 		<form action="/gimedacoupon.controller" method="POST" id="forForm"> -->
 <!-- 		</form> -->
 	</div>
@@ -149,9 +149,13 @@ body{
 				}else if(parseInt(temp/60)==5){
 					$("#here").html($(".imm:nth-child(8)").html());
 				}
-				prize = 'prize=' + $("#here input:first").val();
-				dis = 'discount=' + $("#here input:last").val();
-				res = prize+'&'+dis;
+// 				prize = 'prize=' + $("#here input:first").val();
+// 				dis = 'discount=' + $("#here input:last").val();
+// 				res = prize+'&'+dis;
+				res = {};
+				res.prize = $("#here input:first").val();
+				res.discount = $("#here input:last").val();
+				
 		    	$.post('/DizzyCafe/dailyEvent.controller',res);
 				
 			},parseInt(Math.random()*2000+3000));

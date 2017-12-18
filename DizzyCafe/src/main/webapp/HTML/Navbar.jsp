@@ -80,20 +80,17 @@
 					onclick="document.getElementById('signUp').style.display='block'">註冊</button>
 			</c:when>
 			<c:when test="${not empty user}">
-				<div class="login_dropdown" style="float: right;">
-					<img class="login_dropbtn" title="${user.memberName}"
-						src='<c:url value="${user.memberPhoto}" />'>
-					<div class="login_dropdown-content">
-						<a href="${pageContext.request.contextPath }/coupon/showcoupon.jsp">折價卷</a>
-						<a href="${pageContext.request.contextPath }/event/dailyevent.jsp">每日活動</a>
-						<a href="#">c</a>
-						<a href="#">d</a>
-						<a href="<c:url value='/logout.controller?option=logout' />">登出</a>
-					</div>
+				<div style="float: right;">
+					<a href="${pageContext.request.contextPath}/minghui/member/member_center.jsp">
+						<img title="${user.memberName}" style="width:36px;height:36px"
+							src='<c:url value="${user.memberPhoto}" />'>
+					</a>
+					<a href="${pageContext.request.contextPath}/logout.controller?option=logout">登出</a>
 				</div>
 
 			</c:when>
 		</c:choose>
+		
 	</div>
 
 	<div id="login" class="modal">
@@ -104,7 +101,7 @@
 				<span
 					onclick="document.getElementById('login').style.display='none'"
 					class="close" title="關閉視窗">&times;</span> <img
-					src='<c:url value="minghui/res/img/coffee.jpg" />' alt="Avatar"
+					src="${pageContext.request.contextPath }/minghui/res/img/coffee.jpg" alt="Avatar"
 					class="avatar">
 			</div>
 
@@ -136,7 +133,7 @@
 				<span
 					onclick="document.getElementById('signUp').style.display='none'"
 					class="close" title="關閉視窗">&times;</span> <img id="showMemberPhoto"
-					src="minghui/res/img/member_default_photo.jpg"
+					src="${pageContext.request.contextPath }/minghui/res/img/member_default_photo.jpg"
 					style="width: 100px; height: 100px" class="avatar"><br>
 				<input type="file" id="memberPhoto" name="memberPhoto"
 					accept="image/*" required>

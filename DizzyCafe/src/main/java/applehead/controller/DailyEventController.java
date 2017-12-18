@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import applehead.model.CouponBean;
 import applehead.model.CouponService;
 import applehead.model.DailyEventService;
+import minghui.model.LoginService;
 import minghui.model.MemberBean;
 import net.sf.json.JSONArray;
 
@@ -21,6 +22,8 @@ public class DailyEventController {
 	DailyEventService dailyEventService;
 	@Autowired
 	CouponService couponService;
+	@Autowired
+	LoginService memberService;
 	@RequestMapping(path="/getItem.controller",method= {RequestMethod.GET})
 	public @ResponseBody JSONArray gogoArray() {
 		JSONArray result = null;
@@ -29,15 +32,26 @@ public class DailyEventController {
 	}
 	@RequestMapping(path="/dailyEvent.controller",method= {RequestMethod.POST})
 	public @ResponseBody void selectEventItems(String prize,String discount,HttpSession session) {
-		if(prize!="87") {			
-			MemberBean bean = (MemberBean)session.getAttribute("user");
-			CouponBean insert = new CouponBean();
-			insert.setMemberId(bean.getMemberId());
-			insert.setCouponStatus(0);
-			insert.setEventDiscount(Double.parseDouble(discount));
-			insert.setMerchandiseId(Integer.valueOf(prize));
-			insert.setCouponDeadline(new java.sql.Date(System.currentTimeMillis()+86400000*30));		
-			couponService.insertCoupon(insert);
+		MemberBean bean = (MemberBean)session.getAttribute("user");
+		if(!"87".equals(prize)) {	
+			if(bean!=null) {
+				CouponBean insert = new CouponBean();
+				insert.setMemberId(bean.getMemberId());
+				insert.setCouponStatus(0);
+				insert.setEventDiscount(Double.parseDouble(discount));
+				insert.setMerchandiseId(Integer.valueOf(prize));
+				insert.setCouponDeadline(new java.sql.Date(System.currentTimeMillis()+86400000*30));
+				couponService.insertCoupon(insert);
+				memberService.updateDailyEvent(bean);
+				bean.setMemberPlay(new java.sql.Date(System.currentTimeMillis()));
+				session.setAttribute("user", bean);				
+			}
+		}else {
+			if(bean!=null) {
+			memberService.updateDailyEvent(bean);
+			bean.setMemberPlay(new java.sql.Date(System.currentTimeMillis()));
+			session.setAttribute("user", bean);
+			}
 		}
 	}
 }

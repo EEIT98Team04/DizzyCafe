@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -23,42 +24,42 @@ body{
 }
 #circleImg{
 	POSITION: absolute;
-	TOP: 20px; LEFT : 45px;
+	TOP: 30px; LEFT : 260px;
 	Z-INDEX: 1; 
 } 
 #playImg { 
 	POSITION: absolute; 
-	TOP: 104px; LEFT : 222px; 
+	TOP: 114px; LEFT : 435px; 
 	Z-INDEX: 2; 
 } 
 #firstImg { 
  	position: absolute; 
- 	top: 290px; left : 445px;
+ 	top: 310px; left : 650px;
  	Z-INDEX: 3;
 }
 #secondImg { 
  	position: absolute; 
- 	top: 365px; left : 315px;
+ 	top: 410px; left : 560px;
  	Z-INDEX: 3;
 } 
 #thirdImg { 
  	position: absolute; 
- 	top: 290px; left : 190px;
+ 	top: 310px; left : 395px;
  	Z-INDEX: 3;
 } 
 #fourthImg { 
  	position: absolute; 
- 	top: 190px; left : 190px;
+ 	top: 190px; left : 430px;
  	Z-INDEX: 3;
 } 
 #fifthImg { 
  	position: absolute; 
- 	top: 115px; left : 315px;
+ 	top: 120px; left : 530px;
  	Z-INDEX: 3;
 } 
 #sixthImg { 
  	position: absolute; 
- 	top: 190px; left : 445px;
+ 	top: 190px; left : 695px;
  	Z-INDEX: 3;
 }  
 
@@ -72,7 +73,7 @@ body{
 }
 .hoho{
 	width:100px;
-	margin-left:80%;
+	margin-left:60%;
 	Z-INDEX: 5;
 }
 </style>
@@ -95,8 +96,30 @@ body{
 <!-- 		</form> -->
 	</div>
 	<div style="padding-bottom:10px">
-		<span id="here" style="line-height:80px;margin-left: 64%;font-size: 32px;font-weight: bold;">&nbsp;</span>
-		<p class="hoho"><input type="button" value="抽獎" class="btn" id="pressOne"></p>					
+			<%@ page import="java.util.Date"%>
+			<jsp:useBean id="now" class="java.util.Date" />
+			<fmt:formatDate value="${user.memberPlay }" var="temp"/>
+			<fmt:parseDate value="${temp}" pattern="yyyy/MM/dd" var="submitDate"/>
+			<c:choose>
+				<c:when test="${empty user}">
+					<span id="here" style="line-height:80px;margin-left: 64%;font-size: 32px;font-weight: bold;">請先登入</span>
+					<p class="hoho">
+						<input type="button" value="抽獎" class="btn btn-lg" id="pressOne" disabled="disabled">
+					</p>
+				</c:when>
+				<c:when test="${submitDate lt now}">
+					<span id="here" style="line-height:80px;margin-left: 64%;font-size: 32px;font-weight: bold;">&nbsp;</span>
+					<p class="hoho">
+						<input type="button" value="抽獎" class="btn btn-lg" id="pressOne">
+					</p>
+				</c:when>
+				<c:otherwise>
+					<span id="here" style="line-height:80px;margin-left: 64%;font-size: 32px;font-weight: bold;">今天已經玩過囉~</span>
+					<p class="hoho">
+						<input type="button" value="抽獎" class="btn btn-lg" id="pressOne" disabled="disabled">
+					</p>
+				</c:otherwise>
+			</c:choose>					
 	</div>
 </div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

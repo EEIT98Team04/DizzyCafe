@@ -36,6 +36,7 @@ public class DailyEventDAO {
 			if(update!=null) {
 				update.setProbability(bean.getProbability());
 				update.setMerchandiseId(bean.getMerchandiseId());
+				update.setDiscount(bean.getDiscount());
 				return true;			
 			}
 		} catch (Exception e) {
@@ -43,10 +44,17 @@ public class DailyEventDAO {
 		}
 		return false;
 	}
-	public List<Object[]> selectJoinMember(){
+	public List<Object[]> selectJoinMerchandise(){
 		List<Object[]> result = null;
-		this.getSession().createNativeQuery("");
-		
+		try {
+			Query<Object[]> query = this.getSession().createNativeQuery(
+					"  select de.probability,de.discount,m.merchandiseName,m.merchandisePicture,de.merchandiseId" + 
+					"  from dailyevent de join merchandise m" + 
+					"  on de.merchandiseId=m.merchandiseId");
+			result = query.getResultList();
+		} catch (Exception e) {
+			return result;
+		}
 		return result;
 	}
 }

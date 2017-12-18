@@ -25,7 +25,7 @@ public class ReplyDAO {
 	// }
 
 	public List<ReplyBean> select(int documentId) {
-		String search = "from ReplyBean where documentId = '"+documentId;
+		String search = "from ReplyBean where documentId = '"+documentId+"'";
 		Query<ReplyBean> query = this.getSession().createQuery(search, ReplyBean.class);
 		List<ReplyBean> result = query.getResultList();
 		return result;

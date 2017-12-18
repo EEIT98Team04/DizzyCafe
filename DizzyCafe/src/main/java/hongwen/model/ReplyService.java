@@ -15,10 +15,16 @@ import net.sf.json.JSONArray;
 public class ReplyService {
 	
 	@Autowired
+	private ReplyDAO replyDAO;
+	
+	@Autowired
 	private DocumentDAO documentDAO;
 
 	public JSONArray selectToJSON(int documentId) {
-		List<DocumentBean> select = documentDAO.select(documentId);
+		List<ReplyBean> select = replyDAO.select(documentId);
+		DocumentBean d = documentDAO.get(documentId);
+		ReplyBean r = new ReplyBean(0,d.getMemberId(),d.getDocumentId(),d.getContent(),d.getTimes());
+		select.add(0, r);
 		String temp = new Gson().toJson(select);				//轉JSON檔案
 		JSONArray json = JSONArray.fromObject(temp);
 		return json;

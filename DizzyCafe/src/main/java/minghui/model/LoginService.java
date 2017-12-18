@@ -50,4 +50,9 @@ public class LoginService {
 			memberDAO.update(bean);	
 		}
 	}
+	
+	@Transactional
+	public MemberBean update_member_info(MemberBean bean) {
+		return memberDAO.update(bean);
+	}
 }

@@ -22,7 +22,14 @@ public class CourseBean {
 	private java.sql.Date courseEnd;
 	private java.sql.Date courseSignupBegin;
 	private java.sql.Date courseSignupEnd;
+	private int courseLimit;
 	
+	public int getCourseLimit() {
+		return courseLimit;
+	}
+	public void setCourseLimit(int courseLimit) {
+		this.courseLimit = courseLimit;
+	}
 	public int getCourseId() {
 		return courseId;
 	}
@@ -94,7 +101,8 @@ public class CourseBean {
 		return "CourseBean [courseId=" + courseId + ", courseName=" + courseName + ", courseImg=" + courseImg
 				+ ", courseIntro=" + courseIntro + ", courseContent=" + courseContent + ", courseCost=" + courseCost
 				+ ", courseTeacher=" + courseTeacher + ", courseBegin=" + courseBegin + ", courseEnd=" + courseEnd
-				+ ", courseSignupBegin=" + courseSignupBegin + ", courseSignupEnd=" + courseSignupEnd+ "]";
+				+ ", courseSignupBegin=" + courseSignupBegin + ", courseSignupEnd=" + courseSignupEnd + ", courseLimit="
+				+ courseLimit + "]";
 	}
 
 }

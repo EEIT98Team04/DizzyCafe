@@ -12,9 +12,6 @@ public class CourseService {
 	@Autowired
 	private CourseDAO courseDAO;
 
-	private int rows_perPage = 4;
-
-
 	
 
 //	public List<CourseBean> showCourse() {
@@ -29,12 +26,12 @@ public class CourseService {
 		return courseDAO.selectByName(coruseName);
 	}
 	
-	public List<CourseBean> showCourseInPage(int nowPage){
-		return courseDAO.selectPageNow(nowPage,rows_perPage);
+	public List<CourseBean> showCourseInPage(int courseIdStart, int courseIdEnd){
+		return courseDAO.selectPageNow(courseIdStart,courseIdEnd);
 	}
 	
-	public int countTotalPages() {
-		return courseDAO.countTotalPage(this.getRows_perPage());
+	public int countTotalPages(int rows_perPage) {
+		return courseDAO.countTotalPage(rows_perPage);
 	}
 
 	public CourseBean insert(CourseBean bean) {
@@ -44,15 +41,4 @@ public class CourseService {
 		else
 			return bean;
 	}
-	
-	
-	
-	public int getRows_perPage() {
-		return rows_perPage;
-	}
-
-	public void setRows_perPage(int rows_perPage) {
-		this.rows_perPage = rows_perPage;
-	}
-	
 }

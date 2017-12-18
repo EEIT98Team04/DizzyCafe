@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>xxx留言板</title>
+<title>DizzyCafe</title>
 <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"
 	rel="stylesheet">
 <link rel="stylesheet"
@@ -19,9 +19,8 @@
 		<table id="test">
 			<thead>
                 <tr class="danger">
-                    <th>文章編號</th>
                     <th>文章名稱</th>
-                    <th>發文者/發文時間</th>
+                    <th>發文時間/發文者</th>
                     <th>最後回文者</th>
                     <th>人氣</th>
                 </tr>
@@ -32,25 +31,38 @@
 	<script type="text/javascript"
 		src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script>
-	var search= document.location.search;//?xx=xx
+	var search= document.location.search;//取得?後面的參數
+	var hyperlink = "${pageContext.request.contextPath}/hongwen/reply.jsp?";
 		$(document).ready(function() {
 			$('#test').DataTable({
 				ajax : {
 					url : '/DizzyCafe/Documentget.hongwen'+search,
 					type : 'GET',
 					dataSrc : function(json) {
-						console.log(pagePathName+search);
 						return json;
 					}
 				},
-				columns : [ {
-					data : 'documentId'
+				columns : [{
+					data : 'name',
+					"render": function(data, type, row, meta){
+			            if(type === 'display'){
+			            	var get = 'documentId='+row.documentId+'&name='+row.name;
+			                data = '<a href="' + hyperlink + get +'">' + data + '</a>';
+			            }
+			            return data;
+			         }
 				}, {
-					data : 'name'
+					data : 'memberId',
+					"render": function(data, type, row, meta){
+			            if(type === 'display'){
+			            	var get = 'memberId='+row.memberId+'&name='+row.name;
+// 			                data = '<a href="' + hyperlink + get +'">' + data + '</a>';
+							data = row.times+'/'+row.memberId;
+			            }
+			            return data;
+			         }
 				}, {
 					data : 'memberId'
-				}, {
-					data : 'times'
 				} , {
 					data : 'popularity'
 				} ],
@@ -62,7 +74,7 @@
 					lengthMenu : '一頁顯示 _MENU_ 筆資料'
 				},
 				info : false,
-				order : [ 3, 'desc' ]
+				order : [ 1, 'desc' ]
 			});
 		});
 	</script>

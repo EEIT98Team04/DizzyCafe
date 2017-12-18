@@ -25,9 +25,9 @@ public class DocumentDAO {
 	// }
 
 	public List<DocumentBean> select(int boardId) {
-		List<DocumentBean> result = null;
-		Query<DocumentBean> query = this.getSession().createQuery("from BoardBean", DocumentBean.class);
-		result = query.getResultList();
+		String search = "from DocumentBean where boardId = '"+boardId+"' and Dstatus = '1'";//Dstatus(0:disable,1:able)
+		Query<DocumentBean> query = this.getSession().createQuery(search, DocumentBean.class);
+		List<DocumentBean> result = query.getResultList();
 		return result;
 	}
 

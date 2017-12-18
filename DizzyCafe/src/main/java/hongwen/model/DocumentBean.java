@@ -2,6 +2,8 @@ package hongwen.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +31,11 @@ public class DocumentBean {
 	private String content;
 	private int popularity;
 	private int memberId;
+//	@ManyToOne
+//	@JoinColumn(
+//			name="DEPTID",
+//			referencedColumnName="DEPTID"
+//	)
 	private int boardId;
 	private boolean Dstatus;
 	@Override

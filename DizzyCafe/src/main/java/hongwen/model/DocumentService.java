@@ -18,9 +18,8 @@ public class DocumentService {
 	private DocumentDAO documentDAO;
 
 	public JSONArray selectToJSON(int boardId) {
-		System.out.println(boardId);
 		List<DocumentBean> select = documentDAO.select(boardId);
-		String temp = new Gson().toJson(select );
+		String temp = new Gson().toJson(select);				//轉JSON檔案
 		JSONArray json = JSONArray.fromObject(temp);
 		return json;
 	}

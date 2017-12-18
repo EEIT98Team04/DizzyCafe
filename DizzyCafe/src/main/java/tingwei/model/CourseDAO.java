@@ -74,7 +74,7 @@ public class CourseDAO {
 
 	public int countTotalPage(int row_perPage) {
 		Long temp = (long) this.getSession().createQuery("Select COUNT(*) FROM CourseBean").uniqueResult();
-		if (temp.intValue() % row_perPage == 0)
+		if (temp.intValue()>0 && temp.intValue() % row_perPage == 0)
 			return temp.intValue() / row_perPage;
 		else
 			return temp.intValue() / row_perPage + 1;

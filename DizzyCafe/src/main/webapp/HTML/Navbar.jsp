@@ -90,6 +90,7 @@
 
 			</c:when>
 		</c:choose>
+		
 	</div>
 
 	<div id="login" class="modal">

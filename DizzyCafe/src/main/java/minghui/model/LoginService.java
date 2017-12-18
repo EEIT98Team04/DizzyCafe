@@ -42,4 +42,12 @@ public class LoginService {
 		
 		return false;
 	}
+	@Transactional
+	public void updateDailyEvent(MemberBean bean) {
+		java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+		if(bean.getMemberPlay().before(date)) {
+			bean.setMemberPlay(date);
+			memberDAO.update(bean);	
+		}
+	}
 }

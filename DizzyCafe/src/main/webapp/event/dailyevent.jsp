@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>每日活動</title>
 <style type="text/css">
@@ -24,12 +23,12 @@ body{
 }
 #circleImg{
 	POSITION: absolute;
-	TOP: -140px; LEFT : 0px;
+	TOP: 20px; LEFT : 45px;
 	Z-INDEX: 1; 
 } 
 #playImg { 
 	POSITION: absolute; 
-	TOP: 103px; LEFT : 225px; 
+	TOP: 104px; LEFT : 222px; 
 	Z-INDEX: 2; 
 } 
 #firstImg { 
@@ -62,26 +61,10 @@ body{
  	top: 190px; left : 445px;
  	Z-INDEX: 3;
 }  
-/* #forForm{ */
-/* 	top: 80%; left : 30%; */
-/* 	text-align: center; */
-/* } */
+
 #haha{
 	margin: auto; 
 }
-/* .btn { */
-/*   -webkit-border-radius: 28px; */
-/*   -moz-border-radius: 28px; */
-/*   border-radius: 28px; */
-/*   font-family: Arial; */
-/*   color: #ffffff; */
-/*   font-size: 30px; */
-/*   background: #3ec953; */
-/*   padding: 10px 20px 10px 20px; */
-/*   text-decoration: none; */
-/*   margin-left: 80%; */
-/*   z-index:10; */
-/* } */
 
 .btn:hover {
   background: #2aa83d;
@@ -95,28 +78,47 @@ body{
 </style>
 </head>
 <body>
+	<jsp:include page="/HTML/Navbar.jsp" />
+	<div style="height:100px"></div>
 <div class="BIG">
 	<div class="forDiv">
 		<img src="${pageContext.request.contextPath }/event/arrow123.png" width="300px" id="playImg" />
-		<img src="${pageContext.request.contextPath }/event/circle123.png" width="750px" id="circleImg"/>  
+		<img src="${pageContext.request.contextPath }/event/circle123.png" width="650px" id="circleImg"/>  
 <!-- 		<img src="/DizzyCafe/event/event.png" width="500px" id="firstImg" /> -->
 		<span id="firstImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>firstImg</span>
-		<span id="secondImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>secondImg</span>
+		<span id="secondImg" class="imm"><input type="hidden" value="87"/>ハズレ</span>
 		<span id="thirdImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>thirdImg</span>
-		<span id="fourthImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>fourthImg</span>
+		<span id="fourthImg" class="imm"><input type="hidden" value="87"/>ハズレ</span>
 		<span id="fifthImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>fifthImg</span>
-		<span id="sixthImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>sixthImg</span>
+		<span id="sixthImg" class="imm"><input type="hidden" value="87"/>ハズレ</span>
 <!-- 		<form action="/gimedacoupon.controller" method="POST" id="forForm"> -->
 <!-- 		</form> -->
 	</div>
 	<div style="padding-bottom:10px">
 		<span id="here" style="line-height:80px;margin-left: 64%;font-size: 32px;font-weight: bold;">&nbsp;</span>
-		<p class="hoho"><input type="button" value="抽獎" class="btn"></p>					
+		<p class="hoho"><input type="button" value="抽獎" class="btn" id="pressOne"></p>					
 	</div>
 </div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
-// 	$(document).ready(function() {
+	$(document).ready(function() {
+		$.getJSON('/DizzyCafe/getItem.controller',function(showItems){
+			console.log(showItems);
+			$('#firstImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>">' 
+					+ showItems[0].merchandiseName + '<input type="hidden" value="'
+					+ showItems[0].merchandiseId+'"/>'+ '<input type="hidden" value="'
+					+ showItems[0].discount+'"/>');
+			$('#thirdImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>">' 
+					+ showItems[1].merchandiseName + '<input type="hidden" value="'
+					+ showItems[1].merchandiseId+'"/>'+ '<input type="hidden" value="'
+					+ showItems[1].discount+'"/>');
+			$('#fifthImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>">' 
+					+ showItems[2].merchandiseName + '<input type="hidden" value="'
+					+ showItems[2].merchandiseId+'"/>'+ '<input type="hidden" value="'
+					+ showItems[2].discount+'"/>');
+		});
+		
+	});
 		var $elie = $("#playImg"), degree = 0, timer,stop,count = 0;
 // 	   	 rotate();
 		function rotate() {
@@ -127,7 +129,7 @@ body{
 // 		            count++;
 		      },5);
 		}
-		$(".btn").one('click',function() {
+		$("#pressOne").one('click',function() {
 			rotate();
 // 		    clearTimeout(timer);
 		    stop = setTimeout(function(){
@@ -147,10 +149,16 @@ body{
 				}else if(parseInt(temp/60)==5){
 					$("#here").html($(".imm:nth-child(8)").html());
 				}
+// 				prize = 'prize=' + $("#here input:first").val();
+// 				dis = 'discount=' + $("#here input:last").val();
+// 				res = prize+'&'+dis;
+				res = {};
+				res.prize = $("#here input:first").val();
+				res.discount = $("#here input:last").val();
+				
+		    	$.post('/DizzyCafe/dailyEvent.controller',res);
+				
 			},parseInt(Math.random()*2000+3000));
-// 		    $.ajax('',,function(){
-		    	
-// 		    });
 		});	
 
 	</script>

@@ -85,7 +85,7 @@
 						src='<c:url value="${user.memberPhoto}" />'>
 					<div class="login_dropdown-content">
 						<a href="${pageContext.request.contextPath }/coupon/showcoupon.jsp">折價卷</a>
-						<a href="#">b</a>
+						<a href="${pageContext.request.contextPath }/event/dailyevent.jsp">每日活動</a>
 						<a href="#">c</a>
 						<a href="#">d</a>
 						<a href="<c:url value='/logout.controller?option=logout' />">登出</a>

@@ -27,7 +27,7 @@ public class MemberBean {
 	private java.util.Date memberBirth;
 	private String memberAddress;
 	private int memberStatus; // 狀態預留欄位(0 : 黑名單 1 : 正常狀態)(留言板)
-	private int memberPlay; // 每日活動狀態碼
+	private java.sql.Date memberPlay; // 每日活動狀態碼
 	private String memberPhoto;
 
 	@Override
@@ -102,11 +102,11 @@ public class MemberBean {
 		this.memberStatus = memberStatus;
 	}
 
-	public int getMemberPlay() {
+	public java.sql.Date getMemberPlay() {
 		return memberPlay;
 	}
 
-	public void setMemberPlay(int memberPlay) {
+	public void setMemberPlay(java.sql.Date memberPlay) {
 		this.memberPlay = memberPlay;
 	}
 

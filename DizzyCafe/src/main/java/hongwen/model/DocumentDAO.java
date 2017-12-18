@@ -24,8 +24,15 @@ public class DocumentDAO {
 	// return bean;
 	// }
 
-	public List<DocumentBean> select(int boardId) {
-		String search = "from DocumentBean where boardId = '"+boardId+"' and Dstatus = '1'";//Dstatus(0:disable,1:able)
+	public List<DocumentBean> selectboardId(int boardId) {
+		String search = "from DocumentBean where boardId = '" + boardId + "' and Dstatus = '1'";// Dstatus(0:disable,1:able)
+		Query<DocumentBean> query = this.getSession().createQuery(search, DocumentBean.class);
+		List<DocumentBean> result = query.getResultList();
+		return result;
+	}
+
+	public List<DocumentBean> selectdocumentId(int documentId) {
+		String search = "from DocumentBean where documentId = '" + documentId + "'";// Dstatus(0:disable,1:able)
 		Query<DocumentBean> query = this.getSession().createQuery(search, DocumentBean.class);
 		List<DocumentBean> result = query.getResultList();
 		return result;
@@ -39,17 +46,15 @@ public class DocumentDAO {
 	// return result;
 	// }
 
-	// public BoardBean updateCouponStatus(int CouponStatus,int couponId) {
-	// BoardBean update = null;
-	// try {
-	// update = this.getSession().get(BoardBean.class,couponId);
-	// update.setCouponStatus(CouponStatus);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// return update;
-	// }
-	// return update;
-	// }
+	public DocumentBean get(int documentId) {
+		DocumentBean get = null;
+		try {
+			get = this.getSession().get(DocumentBean.class, documentId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return get;
+	}
 
 	// public boolean insert(BoardBean bean) {
 	// try {

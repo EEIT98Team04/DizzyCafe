@@ -14,14 +14,18 @@
 		<aside class="aside">
 		<h3>coffee</h3>
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/wayne/merchandise.jsp">咖啡豆 Whole Beans</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=bean">咖啡豆
+					Whole Beans</a></li>
 			<li><a href="">濾掛式咖啡 Drip Coffee</a></li>
 		</ul>
 		<h3>Merchandise</h3>
 		<ul>
 			<li><a href="">手沖濾杯 Drip Coffee Set</a></li>
 			<li><a href="">咖啡沖煮相關器具 Accessories</a></li>
-			<li><a href="${pageContext.request.contextPath}/wayne/bottle.jsp">咖啡杯瓶及保溫罐 Bottle</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=bottle">咖啡杯瓶及保溫罐
+					Bottle</a></li>
 		</ul>
 
 		</aside>
@@ -35,7 +39,10 @@
 					</c:when>
 				</c:choose>
 				<div class="col">
-					<div class="col1">放圖+超連結</div>
+					<div class="col1">
+					<a href="${pageContext.request.contextPath}/merchandisedetails.controller?merchandiseId=${bean.merchandiseId}">
+					<img class="img" src="${pageContext.request.contextPath}/${bean.merchandisePicture}"></a>
+					</div>
 					<div class="col2">
 						<p class="p1">
 							${bean.merchandiseName}<br /> ${bean.merchandisePrice}<br />
@@ -53,12 +60,20 @@
 
 		</c:if>
 	</div>
-		<div style="margin-left:700px;">
+
+	
+	<div style="margin-left: 700px;">
+		<c:if test="${not empty tag}">
+			<c:forEach var="pages" begin="1" end="${totalPages}">
+				<a href="${pageContext.request.contextPath}/merchandisetag.controller?tag=${tag}&page=${pages}">${pages}</a>
+			</c:forEach>
+		</c:if>
+		<c:if test="${empty tag}">
 			<c:forEach var="pages" begin="1" end="${totalPages}">
 				<a href="${pageContext.request.contextPath}/merchandise.controller?page=${pages}">${pages}</a>
 			</c:forEach>
-		</div>
-
+		</c:if>
+	</div>
 
 	<footer></footer>
 </body>

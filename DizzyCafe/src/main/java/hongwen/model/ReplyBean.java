@@ -1,5 +1,7 @@
 package hongwen.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -31,6 +33,18 @@ public class ReplyBean {
 		return "ReplyBean [replyId=" + replyId + ", memberId=" + memberId + ", documentId=" + documentId + ", content="
 				+ content + ", times=" + times + "]";
 	}
+	
+	public ReplyBean() {
+	}
+
+	public ReplyBean(int replyId, int memberId, int documentId, String content, Date times) {
+		this.replyId = replyId;
+		this.memberId = memberId;
+		this.documentId = documentId;
+		this.content = content;
+		this.times = times;
+	}
+
 	public int getReplyId() {
 		return replyId;
 	}

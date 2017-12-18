@@ -53,7 +53,7 @@
 				href="${pageContext.request.contextPath}/index.jsp">HOME </a></li>
 			<li class="nav-item"><a class="nav-link" href="#">COFFEE</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="${pageContext.request.contextPath}/merchandise.controller ">商品</a></li>
+				href="${pageContext.request.contextPath}/merchandise.controller?page=1">商品</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="${pageContext.request.contextPath}/hongwen/board.jsp">FORUM</a></li>
 			<li class="nav-item dropdown"><a

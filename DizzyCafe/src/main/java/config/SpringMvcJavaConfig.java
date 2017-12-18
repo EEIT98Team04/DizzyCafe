@@ -13,16 +13,24 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.XmlViewResolver;
 
 @Configuration
-@ComponentScan(basePackages= {"applehead.controller","tingwei.controller","hongwen.controller","minghui.controller"})
+@ComponentScan(basePackages= {"applehead.controller","tingwei.controller","hongwen.controller","minghui.controller","wayne.controller"})
 @EnableWebMvc
 public class SpringMvcJavaConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 //		DemoInterceptor demoInterceptor = new DemoInterceptor();
-//		registry.addInterceptor(demoInterceptor).addPathPatterns("/coupons");
+		
+		//禁止使用者登入登出後回上一頁
+//		SecurityInterceptor securityInterceptor = new SecurityInterceptor(); 
+//		registry.addInterceptor(securityInterceptor).addPathPatterns("/*");
+		
+		//檢查是否登入
+//		LoginInterceptor loginInterceptor = new LoginInterceptor();
+//		registry.addInterceptor(loginInterceptor).addPathPatterns("/member");
 	}
 
 	@Autowired
@@ -30,16 +38,24 @@ public class SpringMvcJavaConfig implements WebMvcConfigurer{
 	
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
-		System.out.println("configureViewResolvers");
+		
 		Resource resource = new ServletContextResource(application, "/WEB-INF/views.xml");
 		XmlViewResolver xvr = new XmlViewResolver();
+		xvr.setOrder(5);
 		xvr.setLocation(resource);
 		registry.viewResolver(xvr);
 		
+		InternalResourceViewResolver irvr = new InternalResourceViewResolver();
+		irvr.setOrder(10);
+		irvr.setPrefix("/");
+		irvr.setSuffix(".jsp");
+		registry.viewResolver(irvr);
 //		ResourceBundleViewResolver rbvr = new ResourceBundleViewResolver();
 //		rbvr.setBasename("view.viewNames");
 //		registry.viewResolver(rbvr);
 	}
+	
+	
 	
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {

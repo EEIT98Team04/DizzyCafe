@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="/DizzyCafe/wayne/css/merchandise.css">
-<title>Insert title here</title>
+<title>Bottle</title>
 </head>
 <body>
 	<div>
@@ -53,8 +53,6 @@
 				</c:when>
 			</c:choose>
 		</c:forEach>
-
-
 	</div>
 
 	<footer></footer>

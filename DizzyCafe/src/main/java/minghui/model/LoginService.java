@@ -30,6 +30,11 @@ public class LoginService {
 	public boolean register(MemberBean bean) {
 		String memberPassword = bean.getMemberPassword();
 		bean.setMemberPassword(Encryption.md5(memberPassword));
+		
+		//將每日活動狀態預設成前一天
+		long now_time = System.currentTimeMillis();
+		bean.setMemberPlay(new java.sql.Date(now_time - 86400000));
+		
 		MemberBean result = memberDAO.insert(bean);
 		if(result != null) {
 			return true;
@@ -48,5 +53,10 @@ public class LoginService {
 			return result;
 		}
 		return result;
+	}
+	
+	@Transactional
+	public MemberBean update_member_info(MemberBean bean) {
+		return memberDAO.update(bean);
 	}
 }

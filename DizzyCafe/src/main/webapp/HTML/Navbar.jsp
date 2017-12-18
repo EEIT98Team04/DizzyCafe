@@ -52,7 +52,7 @@
 				href="${pageContext.request.contextPath}/index.jsp">HOME </a></li>
 			<li class="nav-item"><a class="nav-link" href="#">COFFEE</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="${pageContext.request.contextPath}/merchandise.controller ">商品</a></li>
+				href="${pageContext.request.contextPath}/merchandise.controller?page=1">商品</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="${pageContext.request.contextPath}/hongwen/board.jsp">FORUM</a></li>
 			<li class="nav-item dropdown"><a
@@ -82,7 +82,7 @@
 				<div style="float: right;">
 					<a href="${pageContext.request.contextPath}/minghui/member/member_center.jsp">
 						<img title="${user.memberName}" style="width:36px;height:36px"
-							src='<c:url value="${user.memberPhoto}" />'>
+							src='${pageContext.request.contextPath}/${user.memberPhoto}'>
 					</a>
 					<a href="${pageContext.request.contextPath}/logout.controller?option=logout">登出</a>
 				</div>

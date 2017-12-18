@@ -11,7 +11,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {config.SpringMvcJavaConfig.class,config.WayneSpringMvcJavaConfig.class};
+		return new Class[] {config.SpringMvcJavaConfig.class};
 	}
 
 	@Override

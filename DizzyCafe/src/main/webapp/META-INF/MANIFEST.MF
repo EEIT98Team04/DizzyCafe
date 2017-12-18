@@ -1,13 +1,6 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Class-Path: 
-=======
-<<<<<<< HEAD
 Built-By: Student
 Build-Jdk: 1.8.0_111
 Created-By: Maven Integration for Eclipse
-=======
-Class-Path: 
->>>>>>> branch 'master' of https://github.com/EEIT98Team04/DizzyCafe.git
->>>>>>> branch 'master' of https://github.com/EEIT98Team04/DizzyCafe.git
 

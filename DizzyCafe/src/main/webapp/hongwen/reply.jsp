@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>咖啡論壇</title>
+<title>DizzyCafe</title>
 <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"
 	rel="stylesheet">
 <link rel="stylesheet"
@@ -13,7 +13,7 @@
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="margin-top: 80px; text-align: center;">
-		<h2>歡迎光臨咖啡論壇</h2>
+		<h2>xxx文章</h2>
 	</div>
 	<div style="background-color: #fff1cc;">
 		<table id="test">

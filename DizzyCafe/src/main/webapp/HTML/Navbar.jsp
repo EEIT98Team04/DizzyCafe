@@ -9,9 +9,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link rel="icon" type="image/png" sizes="16x16"
-	href="${pageContext.request.contextPath}/image/favicon-16x16.png">
-n.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js">
+<link rel="icon" type="image/png" sizes="16x16"	href="${pageContext.request.contextPath}/image/favicon-16x16.png">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 <script
@@ -47,6 +45,7 @@ n.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js">
 		aria-label="Toggle navigation" style="">
 		<span class="navbar-toggler-icon"></span>
 	</button>
+
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
@@ -85,7 +84,7 @@ n.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js">
 					<img class="login_dropbtn" title="${user.memberName}"
 						src='<c:url value="${user.memberPhoto}" />'>
 					<div class="login_dropdown-content">
-						<a href="#">a</a>
+						<a href="${pageContext.request.contextPath }/coupon/showcoupon.jsp">折價卷</a>
 						<a href="#">b</a>
 						<a href="#">c</a>
 						<a href="#">d</a>

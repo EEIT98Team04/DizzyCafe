@@ -19,6 +19,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import applehead.model.ActivityListBean;
 import applehead.model.CouponBean;
 import hongwen.model.BoardBean;
+import hongwen.model.DocumentBean;
+import hongwen.model.ReplyBean;
 import minghui.model.MemberBean;
 import tingwei.model.CourseBean;
 import tingwei.model.CourseDateTimeBean;
@@ -47,7 +49,8 @@ public class SpringJavaConfig{
 //		properties.setProperty("hibernate.current_session_context_class", "thread");
 		properties.setProperty("hibernate.show_sql", "true");
 		builder.addProperties(properties);
-		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,MerchandiseBean.class,BoardBean.class,MemberBean.class);
+		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,MerchandiseBean.class,MemberBean.class);
+		builder.addAnnotatedClasses(BoardBean.class,DocumentBean.class,ReplyBean.class);//Hongwen
 		return builder.buildSessionFactory();
 	}
 	@Bean

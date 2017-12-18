@@ -18,9 +18,7 @@ public class BoardController {
 
 	@RequestMapping(path = "/Board.hongwen", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody JSONArray postJSON(HttpSession session) {
-		System.out.println("BoardController");
 		JSONArray json = boardService.selectToJSON();
-		System.out.println(json);
 		return json;
 	}
 }

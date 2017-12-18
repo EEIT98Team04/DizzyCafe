@@ -11,7 +11,7 @@ import tingwei.model.CourseDateTimeService;
 
 @Controller
 @RequestMapping("/courseCalendar.controller")
-public class courseCalendarController {
+public class CourseCalendarController {
 	
 	@Autowired
 	private CourseDateTimeService courseDateTimeService;

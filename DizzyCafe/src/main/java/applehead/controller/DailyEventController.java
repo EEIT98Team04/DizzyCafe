@@ -33,6 +33,7 @@ public class DailyEventController {
 	@RequestMapping(path="/dailyEvent.controller",method= {RequestMethod.POST})
 	public @ResponseBody void selectEventItems(String prize,String discount,HttpSession session) {
 		MemberBean bean = (MemberBean)session.getAttribute("user");
+		MemberBean temp = null;
 		if(!"87".equals(prize)) {	
 			if(bean!=null) {
 				CouponBean insert = new CouponBean();
@@ -42,15 +43,13 @@ public class DailyEventController {
 				insert.setMerchandiseId(Integer.valueOf(prize));
 				insert.setCouponDeadline(new java.sql.Date(System.currentTimeMillis()+86400000*30));
 				couponService.insertCoupon(insert);
-				memberService.updateDailyEvent(bean);
-				bean.setMemberPlay(new java.sql.Date(System.currentTimeMillis()));
-				session.setAttribute("user", bean);				
+				temp = memberService.updateDailyEvent(bean);
+				session.setAttribute("user", temp);				
 			}
 		}else {
 			if(bean!=null) {
-			memberService.updateDailyEvent(bean);
-			bean.setMemberPlay(new java.sql.Date(System.currentTimeMillis()));
-			session.setAttribute("user", bean);
+			temp = memberService.updateDailyEvent(bean);
+			session.setAttribute("user", temp);
 			}
 		}
 	}

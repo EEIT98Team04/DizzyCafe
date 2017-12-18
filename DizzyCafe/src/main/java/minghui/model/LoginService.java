@@ -38,11 +38,15 @@ public class LoginService {
 		return false;
 	}
 	@Transactional
-	public void updateDailyEvent(MemberBean bean) {
-		java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+	public MemberBean updateDailyEvent(MemberBean bean) {
+		MemberBean result = null;
+		java.sql.Date date = new java.sql.Date(System.currentTimeMillis()+86400000);
 		if(bean.getMemberPlay().before(date)) {
 			bean.setMemberPlay(date);
-			memberDAO.update(bean);	
+			memberDAO.update(bean);
+			result = bean;
+			return result;
 		}
+		return result;
 	}
 }

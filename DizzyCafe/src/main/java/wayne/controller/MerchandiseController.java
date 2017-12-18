@@ -19,9 +19,13 @@ public class MerchandiseController{
 	
 	@RequestMapping(method= {RequestMethod.POST,RequestMethod.GET})
 	public String method(MerchandiseBean bean, Model model, BindingResult bindingresult ,int page) {
-
+		
 		model.addAttribute("totalPages" ,merchandiseService.countTotalPages());
 		model.addAttribute("beans" ,merchandiseService.showMerchandiseInPage(page));
+		
+		
+		
+
 		
 		return "merchandise";
 	}

@@ -1,6 +1,5 @@
 package wayne.model.dao;
 
-import java.sql.Blob;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import tingwei.model.CourseBean;
 import wayne.model.MerchandiseBean;
 
 @Repository
@@ -23,7 +21,7 @@ public class MerchandiseDAOHibernate {
 	public Session getsession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	public List<MerchandiseBean> selectPageNow(int pageNow, int rows_perPage) {
 		int base = 1;
 		Query<MerchandiseBean> select = this.getsession().createQuery("FROM MerchandiseBean WHERE merchandiseId >="
@@ -107,7 +105,7 @@ public class MerchandiseDAOHibernate {
 		return null;
 	}
 
-	public MerchandiseBean update(String merchandiseName, String merchandiseContent, Blob merchandisePicture,
+	public MerchandiseBean update(String merchandiseName, String merchandiseContent, String merchandisePicture,
 			String merchandiseTag, int merchandisePrice, int merchandiseQuantity, String merchandiseStatus,
 			int merchandiseId) {
 		MerchandiseBean select = this.select(merchandiseId);

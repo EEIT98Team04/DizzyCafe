@@ -39,7 +39,10 @@
 					</c:when>
 				</c:choose>
 				<div class="col">
-					<div class="col1">放圖+超連結</div>
+					<div class="col1">
+					<a href="${pageContext.request.contextPath}/merchandisedetails.controller?merchandiseId=${bean.merchandiseId}">
+					<img class="img" src="${pageContext.request.contextPath}/${bean.merchandisePicture}"></a>
+					</div>
 					<div class="col2">
 						<p class="p1">
 							${bean.merchandiseName}<br /> ${bean.merchandisePrice}<br />

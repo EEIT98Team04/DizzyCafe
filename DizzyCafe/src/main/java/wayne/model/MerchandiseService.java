@@ -1,13 +1,11 @@
 package wayne.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tingwei.model.CourseBean;
 import wayne.model.dao.MerchandiseDAOHibernate;
 
 
@@ -44,6 +42,10 @@ public class MerchandiseService {
 	public List<MerchandiseBean> select(){
 		
 			return merchandiseDao.select();
+	}
+	
+	public MerchandiseBean select(int merchandiseId) {
+		return merchandiseDao.select(merchandiseId);
 	}
 	
 	public List<MerchandiseBean> select(String merchandiseTag){

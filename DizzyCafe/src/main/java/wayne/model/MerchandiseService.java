@@ -1,13 +1,11 @@
 package wayne.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tingwei.model.CourseBean;
 import wayne.model.dao.MerchandiseDAOHibernate;
 
 
@@ -22,6 +20,10 @@ public class MerchandiseService {
 
 	public List<MerchandiseBean> showMerchandiseInPage(int nowPage){
 		return merchandiseDao.selectPageNow(nowPage,rows_perPage);
+	}
+	
+	public List<MerchandiseBean> showMerchandiseInPageTag(int nowPage, String tag){
+		return merchandiseDao.selectPageNowTag(nowPage, rows_perPage, tag);
 	}
 	
 	public int countTotalPages() {
@@ -42,9 +44,13 @@ public class MerchandiseService {
 			return merchandiseDao.select();
 	}
 	
+	public MerchandiseBean select(int merchandiseId) {
+		return merchandiseDao.select(merchandiseId);
+	}
+	
 	public List<MerchandiseBean> select(String merchandiseTag){
 			
-			return merchandiseDao.select();
+			return merchandiseDao.select(merchandiseTag);
 	}
 	
 	public MerchandiseBean insert(MerchandiseBean bean) {

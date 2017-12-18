@@ -59,8 +59,14 @@
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/course/myCourse.jsp"></property>
 	</bean>
-	<!-- <bean id="showCoupon.success" -->
-	<!-- class="org.springframework.web.servlet.view.InternalResourceView"> -->
-	<!-- <property name="url" value="/coupon/showcoupon.jsp"></property> -->
-	<!-- </bean> -->
+
+	<bean id="merchandise" class="org.springframework.web.servlet.view.InternalResourceView">
+	<property name="url" value="/wayne/merchandise.jsp"></property>
+	</bean>
+	
+	<bean id="merchandiseDetails" class="org.springframework.web.servlet.view.InternalResourceView">
+	<property name="url" value="/wayne/merchandiseDetails.jsp"></property>
+	</bean>
+	
+	
 </beans>

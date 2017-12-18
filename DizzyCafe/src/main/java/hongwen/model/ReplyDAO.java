@@ -24,10 +24,10 @@ public class ReplyDAO {
 	// return bean;
 	// }
 
-	public List<BoardBean> select() {
-		List<BoardBean> result = null;
-		Query<BoardBean> query = this.getSession().createQuery("from BoardBean", BoardBean.class);
-		result = query.getResultList();
+	public List<ReplyBean> select(int documentId) {
+		String search = "from ReplyBean where documentId = '"+documentId+"'";
+		Query<ReplyBean> query = this.getSession().createQuery(search, ReplyBean.class);
+		List<ReplyBean> result = query.getResultList();
 		return result;
 	}
 

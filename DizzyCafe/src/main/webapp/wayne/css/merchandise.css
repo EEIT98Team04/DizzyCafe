@@ -16,7 +16,7 @@
 .aside{
     float:left;
     margin-top:200px;
-    margin-left:20px;
+    margin-left:100px;
 }
 .col1{
     height:65%;
@@ -29,5 +29,8 @@
     line-height:100px;
 }
 .p1{
-    font-family:arial
+    font-family:arial;
+}
+.img{
+	width:70%;
 }

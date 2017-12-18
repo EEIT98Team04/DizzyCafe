@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>咖啡論壇</title>
+<title>DizzyCafe</title>
 <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"
 	rel="stylesheet">
 <link rel="stylesheet"

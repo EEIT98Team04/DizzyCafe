@@ -1,4 +1,4 @@
-package controller;
+package dragon.controller;
 
 import java.io.IOException;
 

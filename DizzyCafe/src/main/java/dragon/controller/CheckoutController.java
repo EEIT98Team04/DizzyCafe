@@ -1,4 +1,4 @@
-package controller;
+package dragon.controller;
 
 import java.util.HashMap;
 import java.util.Map;

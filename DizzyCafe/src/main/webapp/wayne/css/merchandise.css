@@ -1,0 +1,36 @@
+.rowlist{
+    margin:auto;
+    width:1000px;
+    height:500px;
+    border:3px solid red;
+}
+.col{
+    width:30%; 
+    height:450px;
+    border:3px solid green;
+    float:left;
+    margin-top:25px;
+    margin-left:2%;
+
+}
+.aside{
+    float:left;
+    margin-top:200px;
+    margin-left:100px;
+}
+.col1{
+    height:65%;
+}
+.col2{
+    height:30%;
+}
+.span1{
+    margin-left:35%;
+    line-height:100px;
+}
+.p1{
+    font-family:arial;
+}
+.img{
+	width:70%;
+}

@@ -1,0 +1,79 @@
+.aside{
+    float:left;
+    margin-top:200px;
+    font-size:20px;
+    
+}
+.article{
+	font-family:Verdana;
+	color:#4D0000;
+}
+.section{
+	margin:auto;
+/* 	border:3px solid yellow; */
+	width:80%;
+	
+}
+.col2{
+	width:70%;
+	margin-left:25%;
+/* 	border:3px solid green; */
+}
+.img{
+	width:70%;
+}
+.col3{
+	margin-top:100px;
+	width:30%;
+	margin-left:100px;
+/* 	border:3px solid blue; */
+	text-align:center;
+	float:left;
+}
+.col4{
+	margin-top:100px;
+	margin-left:100px;
+	width:20%;
+/* 	border:3px solid red; */
+	float:left;
+}
+.col5{
+	font-size:30px;
+}
+.col6{
+	margin-top:30px;
+}
+.col7{
+/* 	border:3px solid blue; */
+	margin-left:100px;
+	width:70%;
+	font-size:20px;
+	clear:both;
+}
+.button1 {
+  font-size: 24px;
+  text-align:center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color:#FF8040;
+  border: none;
+  width:200px;
+  height:50px;
+}
+.button1:hover {background-color:#FF8040}
+
+.button1:active {
+  background-color:#d0d0d0;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.select{
+	margin-left:50px;
+	width:50px;
+	height:20px;
+}
+.asideTitle{
+	background-color:#d0d0d0;
+	text-align:center;
+}

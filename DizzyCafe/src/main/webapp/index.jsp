@@ -1,12 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>DizzyCafe</title>
 </head>
 <body>
-<a href="/DizzyCafe/shopping/shopping.jsp">aaaa</a>
+	<jsp:include page="/HTML/Navbar.jsp" />
+	<div style="height: 100px"></div>
+	<div>
+		<a
+			href="${pageContext.request.contextPath}/course/course.controller?page=1">課程</a>
+
+		<a
+			href="${pageContext.request.contextPath}/activity.controller?nowPage=0">haha</a>
+
+		<form action="<c:url value="/activity.controller" />" method="get">
+			<input type="submit" value="press">
+		</form>
+		<a href="${pageContext.request.contextPath}/coupon/showcoupon.jsp">coupon</a>
+		<a href="${pageContext.request.contextPath }/event/dailyevent.jsp">每日活動</a>
+	</div>
+
 </body>
 </html>

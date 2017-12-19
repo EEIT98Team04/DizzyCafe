@@ -1,4 +1,4 @@
-package dragon;
+package dragon.model;
 
 import java.io.Serializable;
 

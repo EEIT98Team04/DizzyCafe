@@ -1,11 +1,11 @@
-package dragon;
+package dragon.model;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dragon.DAO.OrdersDetailsHibernateDAO;
+import dragon.model.dao.OrdersDetailsHibernateDAO;
 
 @Service
 public class OrdersDetailsService {

@@ -1,4 +1,4 @@
-package dragon.DAO;
+package dragon.model.dao;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import dragon.OrdersDetailsBean;
-import dragon.OrdersDetailsDAO;
-import dragon.ShoppingBean;
-import dragon.ShoppingDAO;
+import dragon.model.OrdersDetailsBean;
+import dragon.model.OrdersDetailsDAO;
+import dragon.model.ShoppingBean;
+import dragon.model.ShoppingDAO;
 
 @Repository
 public class OrdersDetailsHibernateDAO implements OrdersDetailsDAO {

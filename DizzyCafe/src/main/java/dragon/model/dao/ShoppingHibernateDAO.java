@@ -1,4 +1,4 @@
-package dragon.DAO;
+package dragon.model.dao;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import dragon.ShoppingBean;
-import dragon.ShoppingDAO;
+import dragon.model.ShoppingBean;
+import dragon.model.ShoppingDAO;
 
 
 @Repository

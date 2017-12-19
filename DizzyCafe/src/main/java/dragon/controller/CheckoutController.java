@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import dragon.OrdersBean;
+import dragon.model.OrdersBean;
 
 @Controller
 @RequestMapping("/Checkout/Checkout.controller")

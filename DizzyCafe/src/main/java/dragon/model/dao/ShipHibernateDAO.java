@@ -1,4 +1,4 @@
-package dragon.DAO;
+package dragon.model.dao;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import dragon.ShipBean;
-import dragon.ShipDAO;
+import dragon.model.ShipBean;
+import dragon.model.ShipDAO;
 
 public class ShipHibernateDAO implements ShipDAO {
 

@@ -10,10 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import dragon.MerchandiseBean;
-import dragon.MerchandiseService;
-import dragon.ShoppingBean;
-import dragon.ShoppingService;
+import dragon.model.ShoppingBean;
+import dragon.model.ShoppingService;
+import wayne.model.MerchandiseBean;
+import wayne.model.MerchandiseService;
 
 @Controller
 @RequestMapping("/shopping/shoppingCart.controller")

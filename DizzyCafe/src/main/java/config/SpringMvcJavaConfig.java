@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.XmlViewResolver;
 
 @Configuration
-@ComponentScan(basePackages= {"applehead.controller","tingwei.controller","hongwen.controller","minghui.controller","wayne.controller"})
+@ComponentScan(basePackages= {"applehead.controller","tingwei.controller","hongwen.controller","minghui.controller","wayne.controller","dragon.controller"})
 @EnableWebMvc
 public class SpringMvcJavaConfig implements WebMvcConfigurer{
 	@Override

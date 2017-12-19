@@ -1,4 +1,4 @@
-package dragon.DAO;
+package dragon.model.dao;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import dragon.PaymentBean;
-import dragon.PaymentDAO;
+import dragon.model.PaymentBean;
+import dragon.model.PaymentDAO;
 
 public class PaymentHibernateDAO implements PaymentDAO {
 

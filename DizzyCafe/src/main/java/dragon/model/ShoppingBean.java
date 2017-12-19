@@ -1,4 +1,4 @@
-package dragon;
+package dragon.model;
 
 import java.io.Serializable;
 
@@ -49,33 +49,30 @@ public class ShoppingBean implements Serializable{
 	public void setBuyCount(int buyCount) {
 		this.buyCount = buyCount;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + getMemberId();
-		result = prime * result + getMerchandiseId();
+		result = prime * result + memberId;
+		result = prime * result + merchandiseId;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
-
-		if(obj instanceof ShoppingBean)
-		{
-			ShoppingBean pk = (ShoppingBean) obj;
-			if(this.memberId == pk.getMemberId() && this.merchandiseId == pk.getMerchandiseId())
-			{
-				return true;
-			}
-		}
-//		if(this == obj)
-//		{
-//			return true;
-//		}
-		
-		return false;
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShoppingBean other = (ShoppingBean) obj;
+		if (memberId != other.memberId)
+			return false;
+		if (merchandiseId != other.merchandiseId)
+			return false;
+		return true;
 	}
-
 	
 }

@@ -1,4 +1,4 @@
-package dragon.DAO;
+package dragon.model.dao;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,8 +10,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import dragon.OrdersBean;
-import dragon.OrdersDAO;
+import dragon.model.OrdersBean;
+import dragon.model.OrdersDAO;
 
 @Repository
 public class OrdersHibernateDAO implements OrdersDAO {

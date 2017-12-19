@@ -1,4 +1,4 @@
-package dragon;
+package dragon.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

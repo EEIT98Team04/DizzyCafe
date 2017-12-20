@@ -2,6 +2,7 @@ package hongwen.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,12 +39,7 @@ public class DocumentBean {
 	private int boardId;
 	private boolean dstatus;
 	private String content;
-	// @ManyToOne
-	// @JoinColumn(
-	// name="DEPTID",
-	// referencedColumnName="DEPTID"
-	// )
-
+	
 	public DocumentBean() {
 		super();
 	}
@@ -117,11 +113,11 @@ public class DocumentBean {
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
-
 	public boolean getDstatus() {
 		return dstatus;
 	}
 
+	@Column(name = "Dstatus")
 	public void setDstatus(boolean dstatus) {
 		this.dstatus = dstatus;
 	}

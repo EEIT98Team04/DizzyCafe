@@ -34,6 +34,8 @@ public class ShoppingCartController {
 		
 		model.addAttribute("count", result.size()-1);
 //		System.out.println(result.size());
+		
+		List<Integer> merchandiseId = new ArrayList<>();
 		List<String> merchandiseName = new ArrayList<>();
 		List<Integer> merchandisePrice = new ArrayList<>();
 		List<Integer> buyCount = new ArrayList<>();
@@ -42,6 +44,7 @@ public class ShoppingCartController {
 		List<Object> ordersDetail2 = ordersDetail;
 		if (result != null) {
 			for (ShoppingBean bean : result) {
+				merchandiseId.add(bean.getMerchandiseId());
 				MerchandiseBean select = merchandiseService.select(bean.getMerchandiseId());
 				// 商品名稱
 				merchandiseName.add(select.getMerchandiseName());
@@ -62,11 +65,12 @@ public class ShoppingCartController {
 //				System.out.println(select.getMerchandisePrice() * bean.getBuyCount());
 				
 			}
+			model.addAttribute("merchandiseId", merchandiseId);
 			model.addAttribute("merchandiseName", merchandiseName);
 			model.addAttribute("merchandisePrice", merchandisePrice);
 			model.addAttribute("buyCount", buyCount);
 			model.addAttribute("subtotal", subtotal);
 		}
-		return "checkout";
+		return "shopping.cart";
 	}
 }

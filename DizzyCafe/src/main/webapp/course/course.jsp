@@ -28,7 +28,6 @@
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height:100px"></div>
-	<h3>test</h3>
 	<div class="list">
 		<table style="text-align: center">
 
@@ -83,7 +82,7 @@
 	</div>
 	
 	<div>
-		<a href="${pageContext.request.contextPath}/course/myCourse.controller?page=1">
+		<a href="${pageContext.request.contextPath}/course/courseOfMemberController.controller?page=1">
 			<button>我的課程</button></a>
 	</div>
 </body>

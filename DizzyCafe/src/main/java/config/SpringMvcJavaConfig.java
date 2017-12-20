@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.XmlViewResolver;
 
 @Configuration
-@ComponentScan(basePackages= {"applehead.controller","tingwei.controller","hongwen.controller","minghui.controller"})
+@ComponentScan(basePackages= {"applehead.controller","tingwei.controller","hongwen.controller","minghui.controller","wayne.controller","dragon.controller"})
 @EnableWebMvc
 public class SpringMvcJavaConfig implements WebMvcConfigurer{
 	@Override
@@ -38,7 +38,7 @@ public class SpringMvcJavaConfig implements WebMvcConfigurer{
 	
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
-		System.out.println("configureViewResolvers");
+		
 		Resource resource = new ServletContextResource(application, "/WEB-INF/views.xml");
 		XmlViewResolver xvr = new XmlViewResolver();
 		xvr.setOrder(5);

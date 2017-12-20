@@ -18,7 +18,7 @@ public class MerchandiseBean {
 		private int merchandiseId;	                        //--商品編號
 		private String merchandiseName;                     //--商品名稱
 		private String merchandiseContent;        		    //--商品內容
-		private Blob merchandisePicture;    			    //--商品圖片
+		private String merchandisePicture;    			    //--商品圖片
 		private String merchandiseTag;			            //--商品種類
 		private int	merchandisePrice;           			//--商品金額
 		private int	merchandiseQuantity;					//--商品庫存
@@ -49,10 +49,10 @@ public class MerchandiseBean {
 		public void setMerchandiseContent(String merchandiseContent) {
 			this.merchandiseContent = merchandiseContent;
 		}
-		public Blob getMerchandisePicture() {
+		public String getMerchandisePicture() {
 			return merchandisePicture;
 		}
-		public void setMerchandisePicture(Blob merchandisePicture) {
+		public void setMerchandisePicture(String merchandisePicture) {
 			this.merchandisePicture = merchandisePicture;
 		}
 		public String getMerchandiseTag() {

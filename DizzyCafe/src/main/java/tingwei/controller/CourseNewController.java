@@ -58,7 +58,7 @@ public class CourseNewController {
 			}
 		}
 		
-		return "courseList";
+		return "courseList.return";
 	}
 
 }

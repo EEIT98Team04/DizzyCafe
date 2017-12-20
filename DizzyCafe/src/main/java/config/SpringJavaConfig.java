@@ -53,7 +53,9 @@ public class SpringJavaConfig{
 //		properties.setProperty("hibernate.current_session_context_class", "thread");
 		properties.setProperty("hibernate.show_sql", "true");
 		builder.addProperties(properties);
-		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,CourseMemberBean.class,MerchandiseBean.class,BoardBean.class,MemberBean.class,OrdersBean.class,OrdersDetailsBean.class,ShoppingBean.class);
+		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,CourseMemberBean.class,MerchandiseBean.class,MemberBean.class,OrdersBean.class,OrdersDetailsBean.class,ShoppingBean.class);
+		builder.addAnnotatedClasses(BoardBean.class,DocumentBean.class,ReplyBean.class);
+		
 
 		return builder.buildSessionFactory();
 	}

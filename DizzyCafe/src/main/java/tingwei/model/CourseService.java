@@ -41,4 +41,8 @@ public class CourseService {
 		else
 			return bean;
 	}
+	
+	public int lastCoruesId() {
+		return courseDAO.lastCoruesId();
+	}
 }

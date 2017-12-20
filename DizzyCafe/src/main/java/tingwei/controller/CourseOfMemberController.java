@@ -33,7 +33,7 @@ public class CourseOfMemberController {
 		int memberId = user.getMemberId();
 
 		model.addAttribute("TotalPages" ,courseMemberService.countTotalPagesWithId(rows_perPage,memberId));
-		model.addAttribute("myCourse" ,courseMemberService.showMyCourseInPage(row_numStart, row_numEnd,memberId));
+		model.addAttribute("myCourse" ,courseMemberService.showMyCourseInPage(page,rows_perPage,memberId));
 		model.addAttribute("courseNowPeople" ,courseMemberService.countMyNowPeople(memberId, row_numStart, row_numEnd,rows_perPage));
 		
 		return "myCourse";

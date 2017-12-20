@@ -32,8 +32,8 @@ public class CourseDAO {
 	}
 
 	public List<CourseBean> selectPageNow(int courseIdStart, int courseIdEnd) {
-		Query<CourseBean> select = this.getSession().createQuery("FROM CourseBean WHERE courseId >="
-				+ courseIdStart + " AND courseId <" + courseIdEnd,
+		Query<CourseBean> select = this.getSession().createQuery("FROM CourseBean WHERE courseId >"
+				+ courseIdStart + " AND courseId <=" + courseIdEnd +" ORDER BY courseId DESC",
 				CourseBean.class);
 		return select.getResultList();
 	}
@@ -101,11 +101,8 @@ public class CourseDAO {
 		return null;
 	}
 
-	// public boolean delete(int id) {
-	// CourseBean select = this.select(id);
-	// if(select!=null) {
-	// this.getSession().delete(select);
-	// }
-	// return false;
-	// }
+	public int lastCoruesId() {
+		int result = (int)this.getSession().createNativeQuery("SELECT TOP 1 courseId FROM course ORDER BY courseId DESC").uniqueResult();
+		return result;
+	}
 }

@@ -6,11 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
-	<div style="height:100px"></div>
-	<form action="${pageContext.request.contextPath}/course/courseNew.controller">
+	<div style="height: 100px"></div>
+	<form
+		action="${pageContext.request.contextPath}/course/courseNew.controller">
 		<fieldset>
 			<div>
 				<label>課程名稱</label> <input type="text" name="courseName" required>
@@ -38,13 +41,13 @@
 			</div>
 			<div>
 				<label>每周幾上課</label> 
-				<input type="checkbox" name="whichDay"value="2" />星期一
-				<input type="checkbox" name="whichDay" value="3" />星期二
-				<input type="checkbox" name="whichDay" value="4" />星期三 
-				<input type="checkbox" name="whichDay" value="5" />星期四 
-				<input type="checkbox" name="whichDay" value="6" />星期五 
-				<input type="checkbox" name="whichDay" value="7" />星期六 
-				<input type="checkbox" name="whichDay" value="1" />星期日
+				<label for="monday"><input id="monday" type="checkbox" name="whichDay" value="2" />星期一</label> 
+				<label for="tuesday"><input id="tuesday" type="checkbox" name="whichDay" value="3" />星期二</label>
+				<label for="wednesday"><input id="wednesday" type="checkbox" name="whichDay" value="4" />星期三 </label>
+				<label for="thursday"><input id="thursday" type="checkbox" name="whichDay" value="5" />星期四 </label>
+				<label for="friday"><input id="friday" type="checkbox" name="whichDay" value="6" />星期五 </label>
+				<label for="saturday"><input id="saturday" type="checkbox" name="whichDay" value="7" />星期六 </label>
+				<label for="sunday"><input id="sunday" type="checkbox" name="whichDay" value="1" />星期日</label>
 			</div>
 			<div>
 				<label>上課時間</label> <select name="time">
@@ -61,36 +64,95 @@
 				</select>
 			</div>
 			<div>
-				<label>上課時數</label> 
-				<select name="courseLength">
+				<label>上課時數</label> <select name="courseLength">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
 					<option value="5">5</option>
 					<option value="6">6</option>
-				</select>
-				<span>小時</span>
+				</select> <span>小時</span>
 			</div>
+			
 			<div>
-				<label>課程開始日期</label> <input type="date" name="courseBegin" required>
+				<label for="courseSignupBegin">報名開始日期</label> <input type="text" id="courseSignupBegin"
+					name="courseSignupBegin" readonly> 
+				<label for="courseSignupEnd">報名結束日期</label> <input type="text" id="courseSignupEnd" 
+					name="courseSignupEnd" readonly>
 			</div>
+			
 			<div>
-				<label>課程結束日期</label> <input type="date" name="courseEnd" required>
+				<label for="courseBegin">課程開始日期</label> <input type="text" id="courseBegin"
+					name="courseBegin" readonly> 
+				<label for="courseEnd">課程結束日期</label> <input type="text" id="courseEnd" 
+					name="courseEnd" readonly>
 			</div>
+
+
+
 			<div>
-				<label>報名開始日期</label> <input type="date" name="courseSignupBegin"
-					required>
-			</div>
-			<div>
-				<label>報名結束日期</label> <input type="date" name="courseSignupEnd"
-					required>
-			</div>
-			<div>
-				<input type="submit" value="送出"> 
-				<input type="reset"	value="取消" />
+				<input type="submit" value="送出"> <input type="reset"
+					value="取消" />
 			</div>
 		</fieldset>
 	</form>
+
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$(function() {
+			var dateFormat = "mm/dd/yy", from = $("#courseBegin").datepicker({
+				defaultDate : "+1w",
+				changeMonth : true,
+				numberOfMonths : 1
+			}).on("change", function() {
+				to.datepicker("option", "minDate", getDate(this));
+			}), to = $("#courseEnd").datepicker({
+				defaultDate : "+1w",
+				changeMonth : true,
+				numberOfMonths : 1
+			}).on("change", function() {
+				from.datepicker("option", "maxDate", getDate(this));
+			});
+
+			function getDate(element) {
+				var date;
+				try {
+					date = $.datepicker.parseDate(dateFormat, element.value);
+				} catch (error) {
+					date = null;
+				}
+
+				return date;
+			}
+		});
+	</script>
+	<script>
+		$(function() {
+			var dateFormat = "mm/dd/yy", from = $("#courseSignupBegin").datepicker({
+				defaultDate : "+1w",
+				changeMonth : true,
+				numberOfMonths : 1
+			}).on("change", function() {
+				to.datepicker("option", "minDate", getDate(this));
+			}), to = $("#courseSignupEnd").datepicker({
+				defaultDate : "+1w",
+				changeMonth : true,
+				numberOfMonths : 1
+			}).on("change", function() {
+				from.datepicker("option", "maxDate", getDate(this));
+			});
+
+			function getDate(element) {
+				var date;
+				try {
+					date = $.datepicker.parseDate(dateFormat, element.value);
+				} catch (error) {
+					date = null;
+				}
+
+				return date;
+			}
+		});
+	</script>
 </body>
 </html>

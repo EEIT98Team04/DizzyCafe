@@ -28,7 +28,6 @@ public class CourseNewController {
 			String[] whichDay,String time ,int courseLength) {
 		
 		CourseDateTimeBean courseDateTimeBean = new CourseDateTimeBean();
-		
 		courseService.insert(couresBean);
 		
 		for(String var : whichDay) {

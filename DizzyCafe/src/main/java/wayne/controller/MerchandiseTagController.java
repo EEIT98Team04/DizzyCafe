@@ -19,9 +19,11 @@ public class MerchandiseTagController {
     @RequestMapping(method= {RequestMethod.POST, RequestMethod.GET})
 	public String method(Model model, int page, String tag) {
     	
-		model.addAttribute("totalPages" ,merchandiseService.countTotalPages());
-		model.addAttribute("beans" ,merchandiseService.showMerchandiseInPageTag(page, tag));
+    	model.addAttribute("beansTag", merchandiseService.showMerchandiseInPageTag(page, tag));
+    	model.addAttribute("totalPagesTag", merchandiseService.countTotalPagesTag(tag));
+    	
+
+		return "merchandiseTag";
 		
-		return "merchandise";
 	}
 }

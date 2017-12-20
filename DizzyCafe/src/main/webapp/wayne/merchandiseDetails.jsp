@@ -44,27 +44,47 @@
 						<li>國際認證</li>
 					</ul>
 					<div class="col5">${bean.merchandisePrice}元
-						<select class="select"><option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-							<option>9</option>
-							<option>10</option></select>
+						<select class="select" id="select">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option></select>
 					</div>
 					<div class="col6">
-						<input class="button1" type="button" value="加入購物車">
+						<input class="button1" id="button1" type="submit" 
+						onclick="location.href='${pageContext.request.contextPath}/addcart.controller'" value="加入購物車">
 					</div>
 
 				</div>
 				<div class="col7">${bean.merchandiseContent }</div>
-
 			</div>
 		</section>
 	</article>
-
+<script type="text/javascript">
+	alert('${bean.merchandiseContent }');
+	var btnAddCart = document.getElementById("button1");
+	btnAddCart.onclick = function(){
+		var xhr = new XMLHttpRequest();
+		var select = document.getElementById("select");
+		var getQuantity = select.value;
+		
+		alert(getQuantity);
+		if(xhr!=null){
+			xhr.open("GET","/addcart.controller","false");
+			xhr.send();
+			xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+// 			merchandiseId = ${bean.merchandiseId}&merchandiseName = ${bean.merchandiseName}&merchandiseContent = ${bean.merchandiseContent}&merchandisePicture = ${bean.merchandisePicture}&merchandiseTag = ${bean.merchandiseTag}&merchandisePrice = ${bean.merchandisePrice}&merchandiseQuantity = ${merchandiseQuantity}&merchandiseStatus = ${merchandiseStatus}
+		}
+	}
+	
+	
+	
+</script>
 </body>
 </html>

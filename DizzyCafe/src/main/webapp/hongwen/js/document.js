@@ -1,11 +1,11 @@
 $(function() {	
 	var search = document.location.search;// 取得?後面的參數
 	var hyperlink = "/DizzyCafe/hongwen/reply.jsp?";
-	$('#post').on('click', function() {
+	$('#post').on('submit', function() {		
 		alert('2');
 		
 		var that = $(this),
-		url='',
+		url='fghjkl',
 		method='POST',
 		data={};
 		

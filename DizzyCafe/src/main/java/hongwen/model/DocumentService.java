@@ -17,13 +17,29 @@ public class DocumentService {
 	@Autowired
 	private DocumentDAO documentDAO;
 
-	public JSONArray selectToJSON(int boardId) {
-		List<DocumentBean> select = documentDAO.selectboardId(boardId);
+	public JSONArray selectToJSON(int id) {
+		List<DocumentBean> select = documentDAO.selectboardId(id);
 		String temp = new Gson().toJson(select);				//轉JSON檔案
 		JSONArray json = JSONArray.fromObject(temp);
 		return json;
 	}
 	
+	public JSONArray insert(DocumentBean bean) {
+		String temp = null;				//轉JSON檔案
+		JSONArray json = null;
+		boolean dao = false;
+		if(bean != null) {
+			dao = documentDAO.insert(bean);
+			if(dao == true) {
+				temp = "[{\"status\":\""+bean.getDstatus()+"\"}]";
+				json = JSONArray.fromObject(temp);				
+			}
+		}			
+		return json;
+	}
+//	"DocumentBean [documentId=" + documentId + ", name=" + name + ", times=" + times + ", membername="
+//	+ membername + ", popularity=" + popularity + ", memberId=" + memberId + ", boardId=" + boardId
+//	+ ", dstatus=" + dstatus + ", content=" + content + "]"
 //	@Transactional(readOnly=true)
 //	public List<Object[]> select(ProductBean bean) {
 //		List<Object[]> result = null;

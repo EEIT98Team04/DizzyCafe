@@ -3,6 +3,8 @@ package hongwen.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -23,6 +25,7 @@ public class ReplyBean {
 //		unique (replyId)
 //	);
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int replyId;
 	private int memberId;
 	private int documentId;

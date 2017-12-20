@@ -7,7 +7,7 @@
 		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/index.jsp"></property>
 	</bean>
-	
+
 	<bean id="login.error"
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/index.jsp" />
@@ -17,13 +17,12 @@
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/minghui/changePassword.jsp" />		
 	</bean>	
-	
-	<bean id="showActivity.failed"
-		class="org.springframework.web.servlet.view.RedirectView">
+
+	<bean id="showActivity.failed" class="org.springframework.web.servlet.view.RedirectView">
 		<property name="url" value="/activity.controller?page=1"></property>
 		<property name="contextRelative" value="true"></property>
 	</bean>
-	
+
 	<bean id="activity.hihi"
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/activity/activityinfo.jsp"></property>
@@ -33,11 +32,11 @@
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/activity/showactivity.jsp"></property>
 	</bean>
-	
-<!-- 	<bean id="showActivity.failed" -->
-<!-- 		class="org.springframework.web.servlet.view.InternalResourceView"> -->
-<!-- 		<property name="url" value="/activity.controller?nowPage=0"></property> -->
-<!-- 	</bean> -->
+
+	<!-- <bean id="showActivity.failed" -->
+	<!-- class="org.springframework.web.servlet.view.InternalResourceView"> -->
+	<!-- <property name="url" value="/activity.controller?nowPage=0"></property> -->
+	<!-- </bean> -->
 
 	<bean id="courseList"
 		class="org.springframework.web.servlet.view.InternalResourceView">
@@ -59,19 +58,30 @@
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/course/testCourseDateTime.jsp"></property>
 	</bean>
-	
+
 	<bean id="myCourse"
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/course/myCourse.jsp"></property>
 	</bean>
 
-	<bean id="merchandise" class="org.springframework.web.servlet.view.InternalResourceView">
-	<property name="url" value="/wayne/merchandise.jsp"></property>
+	<bean id="merchandise"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/wayne/merchandise.jsp"></property>
 	</bean>
-	
-	<bean id="merchandiseDetails" class="org.springframework.web.servlet.view.InternalResourceView">
-	<property name="url" value="/wayne/merchandiseDetails.jsp"></property>
+
+	<bean id="merchandiseDetails"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/wayne/merchandiseDetails.jsp"></property>
 	</bean>
-	
-	
+
+
+	<bean id="shopping.cart"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/dragon/shopping/shopping.jsp"></property>
+	</bean>
+
+	<bean id="checkout"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/dragon/Checkout/Checkout.jsp"></property>
+	</bean>
 </beans>

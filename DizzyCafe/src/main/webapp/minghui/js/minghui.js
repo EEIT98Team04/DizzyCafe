@@ -13,7 +13,11 @@ window.onclick = function(event) {
 
 var error = document.getElementById('error_login');
 var errorStr = error.innerText;
-if (errorStr.charCodeAt(0)) {
+
+var member_exist = document.getElementById('minghui_store_memberName').value? false:true;
+
+
+if (errorStr.charCodeAt(0) && member_exist) {
 	document.getElementById('minghui_member_login').style.display = 'block'
 }
 

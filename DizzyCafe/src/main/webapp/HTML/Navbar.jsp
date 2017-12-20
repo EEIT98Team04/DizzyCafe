@@ -95,7 +95,8 @@
 	<div id="minghui_member_login" class="minghui_modal">
 
 		<form class="minghui_modal-content animate"
-			action="<c:url value="/login.controller" />" method="post">
+			action="<c:url value="/login.controller" />" method="post">			
+			<input type="hidden" id="minghui_store_memberName" value="${user.memberName}">
 			<div class="imgcontainer">
 				<span
 					onclick="document.getElementById('minghui_member_login').style.display='none'"

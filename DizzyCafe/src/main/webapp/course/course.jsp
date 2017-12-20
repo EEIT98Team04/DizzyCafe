@@ -40,6 +40,7 @@
 					<th>開始時間</th>
 					<th>結束時間</th>
 					<th>現在人數</th>
+					<th>管理</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -56,6 +57,7 @@
 						<td>${course.courseBegin}</td>
 						<td>${course.courseEnd}</td>
 						<td>${courseNowPeople[status.count-1]} / ${course.courseLimit}</td>
+						<td><button class="btn btn-danger"><span class="oi oi-x"></span></button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

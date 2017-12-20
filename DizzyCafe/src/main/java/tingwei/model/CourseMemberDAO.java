@@ -45,7 +45,8 @@ public class CourseMemberDAO {
 		
 		return result;
 	}
-
+	
+	//顯示所有課程現在人數(分頁)
 	public int[] countNowPeople(int courseIdStart, int  courseIdEnd, int rows_perPage) {
 		int[] count = new int[rows_perPage];
 		for(int i = 0 ; courseIdStart<courseIdEnd ; courseIdStart++ , i++) {
@@ -56,6 +57,8 @@ public class CourseMemberDAO {
 		 return count;
 	}
 	
+	
+	//顯示會員課程現在人數(分頁)
 	public int[] countMyNowPeople(int memberId, int row_numStart, int row_numEnd, int rows_perPage) {
 			int[] count = new int[rows_perPage];
 			@SuppressWarnings("unchecked")
@@ -78,6 +81,8 @@ public class CourseMemberDAO {
 		this.getSession().save(bean);
 	}
 	
+	
+	//所有課程總頁數
 	public int countTotalPage(int row_perPage, int memberId) {
 		Long temp = (long) this.getSession().createQuery("Select COUNT(*) FROM CourseMemberBean").uniqueResult();
 		if (temp.intValue()>0 && temp.intValue() % row_perPage == 0)
@@ -86,6 +91,8 @@ public class CourseMemberDAO {
 			return temp.intValue() / row_perPage + 1;
 	}
 	
+	
+	//會員課程總頁數
 	public int countTotalPageWithId(int row_perPage, int memberId) {
 		Long temp = (long) this.getSession().createQuery("Select COUNT(*) FROM CourseMemberBean WHERE memberId =" + memberId).uniqueResult();
 		if (temp.intValue()>0 && temp.intValue() % row_perPage == 0)
@@ -94,6 +101,8 @@ public class CourseMemberDAO {
 			return temp.intValue() / row_perPage + 1;
 	}
 	
+	
+	//顯示所有課程(分頁)
 	public List<CourseBean> selectPageNow(int courseIdStart, int courseIdEnd) {
 		Query<CourseBean> select = this.getSession().createNativeQuery("FROM CourseMemberBean WHERE "
 				+ "courseId >="
@@ -102,9 +111,11 @@ public class CourseMemberDAO {
 		return select.getResultList();
 	}
 	
+	
+	//會員顯示自己已參加的課程(分頁)
 	public JSONArray selectMyPageNow(int row_numStart, int row_numEnd, int memberId) {
 		@SuppressWarnings("unchecked")
-		Query<Object[]> select = this.getSession().createNativeQuery("select  courseImg, courseName, courseBegin, courseEnd, courseLimit from (select ROW_NUMBER() OVER(ORDER BY courseId ASC) AS row_num," + 
+		Query<Object[]> select = this.getSession().createNativeQuery("select  courseImg, courseName, courseBegin, courseEnd, courseLimit, course.courseId from (select ROW_NUMBER() OVER(ORDER BY courseId ASC) AS row_num," + 
 				"* from courseMemberForm where memberId = "+ memberId +
 				") as newTable  JOIN course  ON newTable.courseId = course.courseId"+""
 				+ " where row_num >="+ row_numStart +" and row_num <"+row_numEnd);
@@ -117,11 +128,15 @@ public class CourseMemberDAO {
 			tt.put("courseBegin", var[2].toString());
 			tt.put("courseEnd", var[3].toString());
 			tt.put("courseLimit", var[4]);
+			tt.put("courseId",var[5]);
 			result.add(tt);
 		}
-		System.out.println("-------------------------");
-		System.out.println(result);
-		System.out.println("-------------------------");
 		return result;
+	}
+	
+	//會員退出課程
+	public void quitCourse(int memberId, int courseId) {
+		this.getSession().createNativeQuery(
+				"DELETE FROM coursememberForm WHERE memberId = "+memberId+" AND courseId = "+courseId).executeUpdate();
 	}
 }

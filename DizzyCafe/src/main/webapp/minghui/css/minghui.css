@@ -1,5 +1,5 @@
 /* Full-width input fields */
-input[type=text], input[type=password]{
+.minghui_input_type_text_password{
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
@@ -45,7 +45,7 @@ span.psw {
 }
 
 /* The Modal (background) */
-.modal {
+.minghui_modal {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
 	z-index: 1; /* Sit on top */
@@ -60,7 +60,7 @@ span.psw {
 }
 
 /* Modal Content/Box */
-.modal-content {
+.minghui_modal-content {
 	background-color: #fefefe;
 	margin: 0 auto 15% auto;
 	/* 5% from the top, 15% from the bottom and centered */

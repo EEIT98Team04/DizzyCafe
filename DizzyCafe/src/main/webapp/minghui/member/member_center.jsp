@@ -53,8 +53,6 @@
 					</div>
 					<!-- 每頁不同的內容從這裡開始 -->
 					<img src="${pageContext.request.contextPath}/${user.memberPhoto}">
-					<jsp:include page="/minghui/member/UploadFile.jsp" />
-
 
 
 					<!-- 每頁不同的內容到這裡結束 -->

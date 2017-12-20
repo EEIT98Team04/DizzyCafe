@@ -12,12 +12,13 @@ import dragon.model.ShoppingService;
 import minghui.model.MemberBean;
 
 @Controller
-@RequestMapping(path="/merchandiseDelete.controller", method= {RequestMethod.GET, RequestMethod.POST})
 public class merchandiseDeleteController {
 	@Autowired
 	private ShoppingService shoppingService;
 	
+	@RequestMapping(path="/merchandiseDelete.controller", method= {RequestMethod.GET, RequestMethod.POST})
 	public void merchandiseDelete(HttpSession session, String MerchandiseId) {
+		System.out.println(MerchandiseId);
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		int memberId = bean.getMemberId();
 		int merchandiseId = Integer.valueOf(MerchandiseId);

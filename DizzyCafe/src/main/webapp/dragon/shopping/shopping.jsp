@@ -65,7 +65,6 @@
 	<script>
 	$(document).ready(function(){
 		
-		
 		/*點擊後抓取當前商品ID後將ID傳給controler*/
 		$('input[name="delete"]').click(function(){
 <%-- 			var memberId = "<%=session.getAttribute("user")%>"; --%>
@@ -73,12 +72,13 @@
 // 			var merchandiseId = ${merchandiseId};
 // 			var merchandiseName = $(this).parents('tr').find('td:nth-child(2)').text();
 			alert(merchandiseId);
-			$.post('/merchandiseDelete.controller', {
-				MerchandiseId: merchandiseId
+			$.post('/DizzyCafe/merchandiseDelete.controller', {
+				'MerchandiseId': merchandiseId
 				}, function(data){
 					alert("yes");
 			});
 		});
+		
 	});
 	</script>
 </body>

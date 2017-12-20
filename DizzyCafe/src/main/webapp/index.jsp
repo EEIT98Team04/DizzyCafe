@@ -22,6 +22,7 @@
 		</form>
 		<a href="${pageContext.request.contextPath}/coupon/showcoupon.jsp">coupon</a>
 		<a href="${pageContext.request.contextPath }/event/dailyevent.jsp">每日活動</a>
+		<a href="${pageContext.request.contextPath}/shopping/shoppingCart.controller">購物車</a>
 	</div>
 
 </body>

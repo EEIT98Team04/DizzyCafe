@@ -95,7 +95,8 @@
 	<div id="minghui_member_login" class="minghui_modal">
 
 		<form class="minghui_modal-content animate"
-			action="<c:url value="/login.controller" />" method="post">
+			action="<c:url value="/login.controller" />" method="post">			
+			<input type="hidden" id="minghui_store_memberName" value="${user.memberName}">
 			<div class="imgcontainer">
 				<span
 					onclick="document.getElementById('minghui_member_login').style.display='none'"
@@ -117,7 +118,9 @@
 			<div class="container" style="background-color: #f1f1f1">
 				<i class="fa fa-facebook-official"
 					style="font-size: 48px; color: blue" title="facebook 登入"></i> <span
-					class="psw">Forgot <a href="#">password?</a>
+					class="psw">Forgot <a href="#" onclick=
+					"window.open(' http://127.0.0.1:8080/${pageContext.request.contextPath}/minghui/forgotPassword.jsp', '', config='height=300,width=500');">password</a>
+					?
 				</span>
 			</div>
 		</form>

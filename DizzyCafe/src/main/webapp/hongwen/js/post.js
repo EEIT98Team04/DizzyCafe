@@ -1,35 +1,58 @@
-tinyMCE.init({
-        // General options
-        mode : "textareas",
-        theme : "advanced",
-        plugins : "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+$(function() {
+  tinymce.init({
+			selector : "#textarea",
+			language : 'zh_TW',
+			height : 500,
+			images_upload_credentials : false,
+			menubar : false,
+			statusbar : false,
+			image_advtab: true,
+    paste_data_images: true,
+    setup: function (editor) {
+        editor.on('change', function () {
+            tinymce.triggerSave();
+        });
+    },
+    plugins: [
+      "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+      "searchreplace wordcount visualblocks visualchars code fullscreen",
+      "insertdatetime media nonbreaking save table contextmenu directionality",
+      "emoticons template paste textcolor colorpicker textpattern"
+    ],
+    toolbar1 : "code image | cut copy paste | searchreplace | bullist numlist | outdent indent | insertdatetime preview",
+	toolbar2 : "undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify",
+	toolbar3 : "fontselect fontsizeselect forecolor charmap emoticons",
 
-        // Theme options
-        theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
-        theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
-        theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
-        theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_toolbar_align : "left",
-        theme_advanced_statusbar_location : "bottom",
-        theme_advanced_resizing : true,
+	images_upload_url: 'postAcceptor.php',
+	  
+	  // we override default upload handler to simulate successful upload
+	  images_upload_handler: function (blobInfo, success, failure) {
+		    var xhr, formData;
+		    xhr = new XMLHttpRequest();
+		    xhr.withCredentials = false;
+		    xhr.open('POST', 'postAcceptor.php');
+		    xhr.onload = function() {
+		      var json;
 
-        // Skin options
-        skin : "o2k7",
-        skin_variant : "silver",
+		      if (xhr.status != 200) {
+		        failure('HTTP Error: ' + xhr.status);
+		        return;
+		      }
+		      json = JSON.parse(xhr.responseText);
 
-        // Example content CSS (should be your site CSS)
-        content_css : "css/example.css",
-
-        // Drop lists for link/image/media/template dialogs
-        template_external_list_url : "js/template_list.js",
-        external_link_list_url : "js/link_list.js",
-        external_image_list_url : "js/image_list.js",
-        media_external_list_url : "js/media_list.js",
-
-        // Replace values for the template plugin
-        template_replace_values : {
-                username : "Some User",
-                staffid : "991234"
-        }
+		      if (!json || typeof json.location != 'string') {
+		        failure('Invalid JSON: ' + xhr.responseText);
+		        return;
+		      }
+		      success(json.location);
+		    };
+		    formData = new FormData();
+		    formData.append('file', blobInfo.blob(), fileName(blobInfo));
+		    xhr.send(formData);
+	  },
+	
+  });
+  tinymce.activeEditor.uploadImages(function(success) {
+	   document.forms[0].submit();
+  });
 });

@@ -41,7 +41,7 @@
 			<div class="col-md-3">
 				<div class="list-group">
 					<a
-						href="${pageContext.request.contextPath}//minghui/member/member_center.jsp"
+						href="${pageContext.request.contextPath}/minghui/member/member_center.jsp"
 						class="list-group-item">首頁</a> <a href="#" class="list-group-item">課程</a>
 					<a href="#" class="list-group-item">訂單</a>
 				</div>
@@ -52,16 +52,8 @@
 						<h3>Welcome, ${user.memberName }</h3>
 					</div>
 					<!-- 每頁不同的內容從這裡開始 -->
-					<div>
-						<img alt="${user.memberName}" style="width: 200px; height: 200px"
-							src="${pageContext.request.contextPath}/${user.memberPhoto}">
-						<form action="#" method="post">
-								<input style="width:150px" type="file" accept="image/*"
-								name="member_change_photo" required> 
-								<input type="submit" value="修改">
-						</form>
-					</div>
-
+					<img src="${pageContext.request.contextPath}/${user.memberPhoto}">
+					<jsp:include page="/minghui/member/UploadFile.jsp" />
 
 
 

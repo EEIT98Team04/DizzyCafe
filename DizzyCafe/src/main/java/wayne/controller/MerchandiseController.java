@@ -18,14 +18,12 @@ public class MerchandiseController{
 	private MerchandiseService merchandiseService;
 	
 	@RequestMapping(method= {RequestMethod.POST,RequestMethod.GET})
-	public String method(MerchandiseBean bean, Model model, BindingResult bindingresult ,int page) {
+	public String method(MerchandiseBean bean, Model model, BindingResult bindingresult ,int page, String tag) {
 		System.out.println("MerchandiseController");
-		model.addAttribute("totalPages" ,merchandiseService.countTotalPages());
+		model.addAttribute("totalPages" ,merchandiseService.countTotalPages());	
 		model.addAttribute("beans" ,merchandiseService.showMerchandiseInPage(page));
 		
 		
-		
-
 		
 		return "merchandise";
 	}

@@ -21,6 +21,7 @@ public class MemberBean {
 	private int memberStatus; // 狀態預留欄位(0 : 黑名單 1 : 正常狀態)(留言板)
 	private java.sql.Date memberPlay; // 每日活動狀態碼
 	private String memberPhoto;
+	private String memberTempPassword;
 
 	@Override
 	public String toString() {
@@ -110,4 +111,11 @@ public class MemberBean {
 		this.memberPhoto = memberPhoto;
 	}
 
+	public String getMemberTempPassword() {
+		return memberTempPassword;
+	}
+
+	public void setMemberTempPassword(String memberTempPassword) {
+		this.memberTempPassword = memberTempPassword;
+	}	
 }

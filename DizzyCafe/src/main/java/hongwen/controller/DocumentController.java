@@ -2,6 +2,8 @@ package hongwen.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import hongwen.model.DocumentBean;
 import hongwen.model.DocumentService;
+import minghui.model.MemberBean;
 import net.sf.json.JSONArray;
 
 @Controller
@@ -25,10 +29,30 @@ public class DocumentController {
 	}
 	
 	@RequestMapping(path = "/Documentpost.hongwen", method = {RequestMethod.POST })
-	public @ResponseBody JSONArray postJSON(@RequestParam Map<?,?> param) {
-		System.out.println("Documentpost:"+param);
-		for(Object s : param.values())
-            System.out.println(s);
-		return null;
+	public @ResponseBody JSONArray postJSON(HttpSession session,@RequestParam Map<?,?> param) {
+//		直接抓Session全部內容	
+//		@SuppressWarnings("rawtypes")
+//		Enumeration e = session.getAttributeNames();
+//		String tmp;
+//		Object o;
+//		while(e.hasMoreElements()) {
+//			 tmp = (String)e.nextElement();
+//	         System.out.println("Value is: "+tmp);
+//			 o = session.getAttribute(tmp);
+//			 System.out.println(tmp+":"+o);
+//	    }
+
+//不知道Key，取得全部的值
+//		for (Object key : param.keySet()) {
+//			System.out.println(key + " : " + param.get(key));
+//		}
+
+		JSONArray json = null;
+		MemberBean bean = (MemberBean) session.getAttribute("user");
+		DocumentBean documentbean = new DocumentBean(1,(String)param.get("title"),
+				new java.util.Date(),bean.getMemberName(),1,bean.getMemberId(),
+				Integer.parseInt((String)param.get("grid")),true,(String)param.get("textarea"));
+		json = documentService.insert(documentbean);
+		return json;
 	}
 }

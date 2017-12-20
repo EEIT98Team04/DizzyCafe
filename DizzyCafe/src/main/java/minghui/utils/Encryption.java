@@ -1,4 +1,4 @@
-package minghui.model;
+package minghui.utils;
 
 import java.security.MessageDigest;
 

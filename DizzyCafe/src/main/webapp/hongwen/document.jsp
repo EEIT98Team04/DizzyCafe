@@ -31,7 +31,7 @@
 		<div>
 			<span>主題 : </span>
 			<select id="grid" name="grid">				
-				<option value="0">請選擇主題</option>
+				<option value="0" disabled>請選擇主題</option>
 				<option value="1">咖啡品種產地版</option>
 				<option value="2">咖啡烘焙版</option>
 				<option value="3">咖啡沖泡方式版</option>
@@ -39,7 +39,7 @@
 				<option value="5">咖啡沖泡器具版</option>
 				<option value="6">咖啡閒聊版</option>
 			</select> 
-			<span>文章標題 : <input id="d_article" name="title" type="text" style="width:200px; height:10px;"/></span>		
+			<span>文章標題 : <input id="d_article" name="title" type="text" style="width:200px; height:px;"/></span>		
 			<textarea></textarea>
 			<input type="submit" value="發文" />	
 		</div>
@@ -125,7 +125,8 @@
 // 			console.log(data);			
 
 			//資料檢查
-			var string = ['grid','title','textarea'];//檢查資料的key	
+			var string = ['grid','title','textarea'];//檢查資料的key
+			
 			
 			//初始化所有發文設定
 			tinyMCE.activeEditor.getBody().innerHTML='';//初始化內容

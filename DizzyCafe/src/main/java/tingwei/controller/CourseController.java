@@ -25,13 +25,10 @@ public class CourseController {
 	) {
 		int lastCourseId = courseService.lastCoruesId();
 		int rows_perPage = 4;
-		System.out.println(lastCourseId);
 		
 		int courseIdEnd = (lastCourseId - (page - 1) * rows_perPage);
 		int courseIdStart = (lastCourseId - page * rows_perPage);
 		
-		System.out.println(courseIdStart);
-		System.out.println(courseIdEnd);
 		
 		model.addAttribute("TotalPages" ,courseService.countTotalPages(rows_perPage));
 		model.addAttribute("courseList" ,courseService.showCourseInPage(courseIdStart, courseIdEnd));

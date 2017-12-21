@@ -10,7 +10,7 @@
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height: 100px"></div>
-	<h3>${course.courseImg}</h3>
+	<h3>${pageContext.request.contextPath}${course.courseImg}</h3>
 	<h3>${course.courseName}</h3>
 	<h3>${course.courseIntro}</h3>
 	<h3>${course.courseContent}</h3>

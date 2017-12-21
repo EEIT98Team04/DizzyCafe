@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns= {"/minghui/member/*","/addcart.controller"})
+@WebFilter(urlPatterns= {"/minghui/member/*","/addcart.controller","/course/courseOfMemberController.controller"})
 public class LoginFilter implements Filter {
 
 	@Override

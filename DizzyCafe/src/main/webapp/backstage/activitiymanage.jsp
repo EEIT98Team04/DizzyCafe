@@ -40,6 +40,9 @@
 		background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 		padding-top: 60px;
   	}
+  	i:hover{
+  		color:white;
+  	}
   </style>
 </head>
 
@@ -64,7 +67,7 @@
         	
         </div>
       </div>
-		<div style="width:800px;margin:auto;">
+		<div style="width:1000px;margin:auto;">
 			<table id="test"></table>
 		</div>
         
@@ -85,8 +88,8 @@
 
 			<div class="container">
 				<label><b>活動名稱</b></label><input type="text" name="activityName" required class="forText"> <br> 
-				<label for="from"><b>活動開始時間</b></label><input type="text" id="from" name="activityStart" class="forText" required> <br> 
-				<label for="to"><b>活動結束時間</b></label><input type="text" id="to" name="activityEnd" class="forText" required> <br> 
+				<label for="from"><b>活動開始時間</b></label><input type="text" id="from" name="activityStart" class="forText" required readonly> <br> 
+				<label for="to"><b>活動結束時間</b></label><input type="text" id="to" name="activityEnd" class="forText" required readonly> <br> 
 				<label><b>活動內容</b></label><input type="text" name="activityContent" class="forText" required id="editor1"> <br>
 				<label><b>活動圖片</b></label><input type="file" name="activityPicture" class="forText" accept="image/*" required id="uploadImage">
 				<img id="showImg" width="240px"/>
@@ -121,18 +124,100 @@
 	</div>
 	   
   </div>
-      
+  <jsp:include page="/backstage/footer.jsp"></jsp:include>
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!--     <script src="vendor/jquery/jquery.min.js"></script> -->
+<!--     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!--     <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
     <!-- Custom scripts for all pages-->
-    <script src="ckeditor/ckeditor.js"></script>
-    <script src="js/sb-admin.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    
+    
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="ckeditor/ckeditor.js"></script>
+<!--     <script src="js/sb-admin.min.js"></script> -->
     <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+//     	選日期
+	  $( function() {
+	    var dateFormat = "mm/dd/yy",
+	      from = $( "#from" )
+	        .datepicker({
+	          defaultDate: "+1w",
+	          changeMonth: true,
+	          numberOfMonths: 1
+	        })
+	        .on( "change", function() {
+	          to.datepicker( "option", "minDate", getDate( this ) );
+	        }),
+	      to = $( "#to" ).datepicker({
+	        defaultDate: "+1w",
+	        changeMonth: true,
+	        numberOfMonths: 1
+	      })
+	      .on( "change", function() {
+	        from.datepicker( "option", "maxDate", getDate( this ) );
+	      });
+	    function getDate( element ) {
+	      var date;
+	      try {
+	        date = $.datepicker.parseDate( dateFormat, element.value );
+	      } catch( error ) {
+	        date = null;
+	      }
+	      return date;
+	    }
+	  });
+  </script>
+  <script>
+//   顯示資料表
+  	$('#test').DataTable({
+		ajax : {
+			url : '/DizzyCafe/showyou.controller',
+			type : 'POST',
+			dataSrc : ''
+		},
+		columns : [ {
+			data : 'activityNo',
+			title : '活動編號',
+			width : '100px'
+		}, {
+			data : 'activityName',
+			title : '活動名稱',
+			width : '100px'
+		}, {
+			data : 'activityStart',
+			title : '起始日期',
+			width : '200px'
+		}, {
+			data : 'activityEnd',
+			title : '結束日期',
+			width : '200px'
+		},{
+			width : '100px'
+		}],
+		"columnDefs" : [{
+			"targets" : 4,
+			"data" : null,
+			"render" : function(data,type,row) {
+			var html = "<a href='#' class='btn btn-success' id='edit'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
+			return html;
+			}
+		}],
+		language : {
+			paginate : {
+				next : "下一頁",
+				previous : "上一頁"
+			},
+			lengthMenu : '一頁顯示 _MENU_ 筆資料'
+		},
+		info : false,
+		order : [3,'desc']
+	});
+  </script>
     <script>
 //     文字編輯器
     	CKEDITOR.replace( 'editor1' );
@@ -159,6 +244,9 @@
     			$('#myModal').css('display','block');
     			data = CKEDITOR.instances.editor1.getData();
     			$('input[name=activityContent]').val(data);
+    		});
+    		$('#edit').click(function(){
+    			
     		});
     		
     		
@@ -194,74 +282,5 @@
        	    }
     	});
     </script>
-    <script>
-//     	選日期
-	  $( function() {
-	    var dateFormat = "mm/dd/yy",
-	      from = $( "#from" )
-	        .datepicker({
-	          defaultDate: "+1w",
-	          changeMonth: true,
-	          numberOfMonths: 1
-	        })
-	        .on( "change", function() {
-	          to.datepicker( "option", "minDate", getDate( this ) );
-	        }),
-	      to = $( "#to" ).datepicker({
-	        defaultDate: "+1w",
-	        changeMonth: true,
-	        numberOfMonths: 1
-	      })
-	      .on( "change", function() {
-	        from.datepicker( "option", "maxDate", getDate( this ) );
-	      });
-	    function getDate( element ) {
-	      var date;
-	      try {
-	        date = $.datepicker.parseDate( dateFormat, element.value );
-	      } catch( error ) {
-	        date = null;
-	      }
-	      return date;
-	    }
-	  });
-  </script>
-  <script>
-//   顯示資料表
-  $('#test').DataTable({
-		ajax : {
-			url : '/DizzyCafe/showyou.controller',
-			type : 'POST',
-			dataSrc : ''
-		},
-		columns : [ {
-			data : 'activityNo',
-			title : '活動編號',
-			width : '15%'
-		}, {
-			data : 'activityName',
-			title : '活動名稱',
-			width : '20%'
-		}, {
-			data : 'activityStart',
-			title : '起始日期',
-			width : '30%'
-		}, {
-			data : 'activityEnd',
-			title : '結束日期',
-			width : '30%'
-		}],
-		language : {
-			paginate : {
-				next : "下一頁",
-				previous : "上一頁"
-			},
-			lengthMenu : '一頁顯示 _MENU_ 筆資料'
-		},
-		info : false,
-		order : [3,'desc']
-	});
-  </script>
-	<jsp:include page="/backstage/footer.jsp"></jsp:include>
 </body>
 </html>

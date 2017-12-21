@@ -1,9 +1,11 @@
 package tingwei.model;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -63,7 +65,7 @@ public class CourseMemberDAO {
 			int[] count = new int[rows_perPage];
 			@SuppressWarnings("unchecked")
 			Query<Object[]> temp = this.getSession().createNativeQuery("select courseId from (select ROW_NUMBER() OVER(ORDER BY courseId ASC) AS row_num,\r\n" + 
-				"* from courseMemberForm where memberId = "+memberId+") as newTable where row_num >= "+row_numStart+" and row_num < "+row_numEnd);
+				"* from courseMemberForm where memberId = "+memberId+") as newTable where row_num > "+row_numStart+" and row_num <= "+row_numEnd);
 			List<Object[]> obj = temp.getResultList();
 			System.out.println(obj.toString());
 			for(int i = 0,j=obj.size()-1;i<obj.size();i++,j--) {
@@ -118,11 +120,12 @@ public class CourseMemberDAO {
 		@SuppressWarnings("unchecked")
 		Query<Object[]> select = this.getSession().createNativeQuery("select  courseImg, courseName, courseBegin, courseEnd, courseLimit, course.courseId from (select ROW_NUMBER() OVER(ORDER BY courseId ASC) AS row_num," + 
 				"* from courseMemberForm where memberId = ?) as newTable  JOIN course  ON newTable.courseId = course.courseId"+
-				" where row_num >=? and row_num <? ORDER BY courseId DESC");
+				" where row_num >? and row_num <=? ORDER BY courseId DESC");
 		select.setParameter(1, memberId);
 		select.setParameter(2, row_numStart);
 		select.setParameter(3, row_numEnd);
 		List<Object[]> temp = select.getResultList();
+		System.out.println("list"+temp.size());
 		JSONArray result = new JSONArray();
 		for(Object[] var : temp) {
 			JSONObject tt = new JSONObject();
@@ -132,8 +135,10 @@ public class CourseMemberDAO {
 			tt.put("courseEnd", var[3].toString());
 			tt.put("courseLimit", var[4]);
 			tt.put("courseId",var[5]);
+			System.out.println("tt:"+tt);
 			result.add(tt);
 		}
+		System.out.println("result:"+result);
 		return result;
 	}
 	
@@ -141,5 +146,18 @@ public class CourseMemberDAO {
 	public void quitCourse(int memberId, int courseId) {
 		this.getSession().createNativeQuery(
 				"DELETE FROM coursememberForm WHERE memberId = "+memberId+" AND courseId = "+courseId).executeUpdate();
+	}
+	
+	public int getLastRowNum(int memberId) {
+		 @SuppressWarnings("unchecked")
+		Query<Object> select = this.getSession().createNativeQuery(
+				"SELECT TOP 1 row_num FROM (select ROW_NUMBER() OVER(ORDER BY courseId ASC) AS row_num,"+ 
+				" * from courseMemberForm where memberId = ?) as newTable ORDER BY courseId DESC");
+		select.setParameter(1, memberId);
+		
+		BigInteger temp = (java.math.BigInteger)select.uniqueResult();
+		int result = temp.intValue();
+		System.out.println(result);
+		return result;
 	}
 }

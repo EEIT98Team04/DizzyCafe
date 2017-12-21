@@ -6,12 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import wayne.model.MerchandiseBean;
 import wayne.model.MerchandiseService;
 
 @Controller
 @RequestMapping(path= {"/merchandise.controller"})
+@SessionAttributes(value= {"beans"})
 public class MerchandiseController{
 	
 	@Autowired

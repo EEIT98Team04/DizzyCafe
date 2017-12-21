@@ -12,8 +12,11 @@
 /* 	border:3px solid yellow; */
 	width:80%;
 	height:1100px;
-	
 }
+ul li{
+list-style-type:none;
+}
+
 .title{
 	margin-left:400px;
 }

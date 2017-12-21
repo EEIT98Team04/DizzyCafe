@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.Gson;
+
+import net.sf.json.JSONArray;
+
 @Service
 @Transactional
 public class ActivityListService {
@@ -53,6 +57,25 @@ public class ActivityListService {
 
 	public int getItemsInPage() {
 		return itemsInPage;
+	}
+	
+	public ActivityListBean createActivity(ActivityListBean bean) {
+		ActivityListBean result = null;
+		try {
+			result = activityListDAO.insert(bean);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+	}
+	
+	public JSONArray showActivityInBackstage(){
+		List<ActivityListBean> result = null;
+		result = activityListDAO.selectList();
+		String temp = new Gson().toJson(result);
+		JSONArray json = JSONArray.fromObject(temp);
+		return json;
 	}
 
 }

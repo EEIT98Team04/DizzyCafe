@@ -26,32 +26,31 @@
 		onclick="document.getElementById('signup').style.display='block'">我要報名</button>
 
 	<!-- The Modal -->
-	<div id="signup" class="modal">
+	<div id="signup" class="minghui_modal">
 		<span onclick="document.getElementById('signup').style.display='none'"
 			class="close" title="Close Modal">&times;</span>
 
 		<!-- Modal Content -->
-		<form class="modal-content animate" action="${pageContext.request.contextPath}/course/courseSignUpController.controller">
+		<form class="minghui_modal-content animate" action="${pageContext.request.contextPath}/course/courseSignUpController.controller" >
 <!-- 			<div class="imgcontainer"> -->
 <!-- 				<img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
 <!-- 			</div> -->
 
 			<p>${user.memberName } 你好</p>
-				<input name="memberId" type="hidden" value="${user.memberId }">
+				<input id="memberName" name="memberName" type="hidden" value="${user.memberName }">
 			<p>你要報名 ${course.courseName }</p>
-				<input name="courseId" type="hidden" value="${course.courseId }">
+				<input id="courseId" name="courseId" type="hidden" value="${course.courseId }">
 			<div class="container">
 				<label><b>電話</b></label> 
-				<input type="text" placeholder="Phone number" name="phone" required> 
+				<input class="minghui_input_type_text_password" type="text" placeholder="Phone number" name="phone" required> 
 				
 				<label><b>E-mail</b></label>
-				<input type="text" placeholder="E-mail" name="email" required>
-
-				<label for="same" name="sameAsMemberData"><input type="checkbox" name="same"> 同會員資料
+				<input class="minghui_input_type_text_password" type="text" placeholder="E-mail" name="email" required>
+				<label for="same" id="sameAsMemberData"><input type="checkbox" id="same"> 同會員資料
 				</label>
 			</div>
 			
-			<button name="go" type="submit">報名</button>
+			<button type="submit">報名</button>
 
 			<div class="container" style="background-color: #f1f1f1">
 				<button type="button"
@@ -73,18 +72,17 @@
 			}
 		}
 		
-// 		$('sameAsMemberData').onclick(function(){
-// 			res={};
-// 			res.memberId = $('#memberId').val();
-// 			res.courseId = $('#courseId').val();
-// 			res.phone = $('#phone').val();
-// 			res.email = $('#email').val();
-// 				$.post({
-// 					url:"/sameAsMemberDataController.controller",
-// 					date:res
-// 				})			
-// 			}
-// 		);
+		
+		$('#same').change(function(){
+			if($('#same').prop('checked')==true){
+				$('input[name="phone"]').val("${user.memberPhone}").prop("readonly",true).css('background-color',"#FFF8D7");
+				$('input[name="email"]').val("${user.memberEmail}").prop("readonly",true).css('background-color',"#FFF8D7");	
+			}
+			else{
+				$('input[name="phone"]').val('').prop("readonly",false).css('background-color',"");
+				$('input[name="email"]').val('').prop("readonly",false).css('background-color',"");
+			}
+		});
 	</script>
 	
 </body>

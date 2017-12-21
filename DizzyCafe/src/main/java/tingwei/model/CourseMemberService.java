@@ -47,4 +47,8 @@ public class CourseMemberService {
 	public List<CourseBean> showCourseInPage(int courseIdStart, int courseIdEnd){
 		return courseMemberDAO.selectPageNow(courseIdStart,courseIdEnd);
 	}
+	
+	public void quitCourse(int memberId, int courseId) {
+		courseMemberDAO.quitCourse(memberId,courseId);
+	}
 }

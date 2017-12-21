@@ -17,17 +17,23 @@ public class MerchandiseService {
 	
 	@Autowired
 	MerchandiseDAOHibernate merchandiseDao;
-
+	
+	// merchandise.controller
 	public List<MerchandiseBean> showMerchandiseInPage(int nowPage){
 		return merchandiseDao.selectPageNow(nowPage,rows_perPage);
 	}
 	
+	// merchandisetag.controller
 	public List<MerchandiseBean> showMerchandiseInPageTag(int nowPage, String tag){
 		return merchandiseDao.selectPageNowTag(nowPage, rows_perPage, tag);
 	}
-	
+	// merchandise.controller
 	public int countTotalPages() {
 		return merchandiseDao.countTotalPage(this.getRows_perPage());
+	}
+	// merchandisetag.controller
+	public int countTotalPagesTag(String tag) {
+		return merchandiseDao.countTotalPageTag(this.getRows_perPage(), tag);
 	}
 	
 	public int getRows_perPage() {

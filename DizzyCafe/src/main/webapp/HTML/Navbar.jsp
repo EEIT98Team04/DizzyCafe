@@ -74,9 +74,9 @@
 		<c:choose>
 			<c:when test="${empty user}">
 				<button class="btn asd"
-					onclick="document.getElementById('login').style.display='block'">登入</button>
+					onclick="document.getElementById('minghui_member_login').style.display='block'">登入</button>
 				<button class="btn asd" style="margin-left: 1%"
-					onclick="document.getElementById('signUp').style.display='block'">註冊</button>
+					onclick="document.getElementById('minghui_member_signUp').style.display='block'">註冊</button>
 			</c:when>
 			<c:when test="${not empty user}">
 				<div style="float: right;">
@@ -92,22 +92,23 @@
 		
 	</div>
 
-	<div id="login" class="modal">
+	<div id="minghui_member_login" class="minghui_modal">
 
-		<form class="modal-content animate"
-			action="<c:url value="/login.controller" />" method="post">
+		<form class="minghui_modal-content animate"
+			action="<c:url value="/login.controller" />" method="post">			
+			<input type="hidden" id="minghui_store_memberName" value="${user.memberName}">
 			<div class="imgcontainer">
 				<span
-					onclick="document.getElementById('login').style.display='none'"
+					onclick="document.getElementById('minghui_member_login').style.display='none'"
 					class="close" title="關閉視窗">&times;</span> <img
 					src="${pageContext.request.contextPath }/minghui/res/img/coffee.jpg" alt="Avatar"
 					class="avatar">
 			</div>
 
 			<div class="container">
-				<label><b>Username</b></label> <input type="text"
+				<label><b>Username</b></label> <input type="text" class="minghui_input_type_text_password"
 					placeholder="Enter Username" name="memberName" required> <br>
-				<label><b>Password</b></label> <input type="password"
+				<label><b>Password</b></label> <input type="password" class="minghui_input_type_text_password"
 					placeholder="Enter Password" name="memberPassword" required>
 
 				<button class="loginBut" type="submit">Login</button>
@@ -117,20 +118,22 @@
 			<div class="container" style="background-color: #f1f1f1">
 				<i class="fa fa-facebook-official"
 					style="font-size: 48px; color: blue" title="facebook 登入"></i> <span
-					class="psw">Forgot <a href="#">password?</a>
+					class="psw">Forgot <a href="#" onclick=
+					"window.open(' http://127.0.0.1:8080/${pageContext.request.contextPath}/minghui/forgotPassword.jsp', '', config='height=300,width=500');">password</a>
+					?
 				</span>
 			</div>
 		</form>
 	</div>
 
-	<div id="signUp" class="modal">
+	<div id="minghui_member_signUp" class="minghui_modal">
 
-		<form class="modal-content animate" enctype="multipart/form-data"
+		<form class="minghui_modal-content animate" enctype="multipart/form-data"
 			action='<c:url value="/uploadFile.controller" />' method="post">
 			<%-- 			action="<c:url value="/TestImg.do" />" method="post"> --%>
 			<div class="imgcontainer">
 				<span
-					onclick="document.getElementById('signUp').style.display='none'"
+					onclick="document.getElementById('minghui_member_signUp').style.display='none'"
 					class="close" title="關閉視窗">&times;</span> <img id="showMemberPhoto"
 					src="${pageContext.request.contextPath }/minghui/res/img/member_default_photo.jpg"
 					style="width: 100px; height: 100px" class="avatar"><br>
@@ -139,15 +142,15 @@
 			</div>
 
 			<div class="container">
-				<label><b>帳號</b></label> <input type="text" placeholder="輸入帳號"
+				<label><b>帳號</b></label> <input type="text" placeholder="輸入帳號" class="minghui_input_type_text_password"
 					name="memberName" required> <br> <label><b>密碼</b></label>
-				<input type="password" placeholder="輸入密碼" name="memberPassword"
-					required> <br> <label><b>再次輸入密碼</b></label> <input
+				<input type="password" placeholder="輸入密碼" name="memberPassword" class="minghui_input_type_text_password"
+					required> <br> <label><b>再次輸入密碼</b></label> <input class="minghui_input_type_text_password"
 					type="password" placeholder="輸入密碼" name="memberPassword1" required>
-				<br> <label><b>手機</b></label> <input type="text"
+				<br> <label><b>手機</b></label> <input type="text" class="minghui_input_type_text_password"
 					placeholder="輸入手機" name="memberPhone" required> <br> <label><b>信箱</b></label>
-				<input type="text" placeholder="輸入信箱" name="memberEmail" required>
-				<br> <label><b>地址</b></label> <input type="text"
+				<input type="text" placeholder="輸入信箱" name="memberEmail" class="minghui_input_type_text_password" required>
+				<br> <label><b>地址</b></label> <input type="text" class="minghui_input_type_text_password"
 					placeholder="輸入地址" name="memberAddress" required> <br>
 				<label><b>生日</b></label> <input type="date"
 					style="margin-bottom: 10px" name="memberBirth" required> <br>

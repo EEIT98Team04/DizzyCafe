@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,8 +31,8 @@
 		</ul>
 
 		</aside>
-
-		<div class="title"><h1>咖啡豆 Whole Beans</h1></div>
+		
+		<div class="title"><h1>所有商品</h1></div>
 		<c:if test="${not empty beans}">
 			<c:forEach var="bean" items="${beans}" varStatus="b">
 				<c:choose>
@@ -72,11 +72,6 @@
 
 
 	<div style="margin-left: 1000px;">
-		<c:if test="${not empty tag}">
-			<c:forEach var="pages" begin="1" end="${totalPages}">
-				<a class="aone" href="${pageContext.request.contextPath}/merchandisetag.controller?tag=${tag}&page=${pages}">${pages}</a>
-			</c:forEach>
-		</c:if>
 		<c:if test="${empty tag}">
 			<c:forEach var="pages" begin="1" end="${totalPages}">
 				<a class="aone" href="${pageContext.request.contextPath}/merchandise.controller?page=${pages}">${pages}</a>

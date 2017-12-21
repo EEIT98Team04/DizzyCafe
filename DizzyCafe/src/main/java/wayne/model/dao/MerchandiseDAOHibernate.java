@@ -22,6 +22,7 @@ public class MerchandiseDAOHibernate {
 		return sessionFactory.getCurrentSession();
 	}
 	
+	//分頁展示商品 merchandise.controller做
 	public List<MerchandiseBean> selectPageNow(int pageNow, int rows_perPage) {
 		int base = 1;
 		Query<MerchandiseBean> select = this.getsession().createQuery("FROM MerchandiseBean WHERE merchandiseId >="
@@ -29,16 +30,18 @@ public class MerchandiseDAOHibernate {
 				MerchandiseBean.class);
 		return select.getResultList();
 	}
-
+	//分頁展示商品 merchandisetag.controller做
 	public JSONArray selectPageNowTag(int pageNow, int rows_perPage, String tag) {
 		JSONArray result = new JSONArray();
 		int base = 1;
+		
 		Query<Object[]> select = this.getsession().createNativeQuery(
 				"select * from (select ROW_NUMBER() OVER(ORDER BY merchandiseId ASC) AS row_num,* "
-				+ "from merchandise where merchandiseTag = :merchandiseTag) as newTable where row_num >= " +
+				+ "from merchandise where merchandiseTag = ?) as newTable where row_num >= " +
 						(base + (pageNow - 1) * rows_perPage)+" and row_num < " +
-						(base + pageNow * rows_perPage));
-		select.setParameter("merchandiseTag", tag);
+						(base + pageNow * rows_perPage)
+				);
+		select.setParameter(1, tag);
 		List<Object[]> list = select.getResultList();
 		
 		for(Object[] var: list) {
@@ -56,7 +59,7 @@ public class MerchandiseDAOHibernate {
 		}
 		return result;
 	}
-
+	//計算總共分頁頁數 merchandise.controller做
 	public int countTotalPage(int row_perPage) {
 		Long temp = (long) this.getsession().createQuery("Select COUNT(*) FROM MerchandiseBean").uniqueResult();
 		if (temp.intValue() % row_perPage == 0) {
@@ -65,10 +68,10 @@ public class MerchandiseDAOHibernate {
 			return temp.intValue() / row_perPage + 1;
 		}
 	}
-
-	public int countTotalPage(int row_perPage, String tag) {
+	//計算總共分頁頁數 merchandisetag.controller做
+	public int countTotalPageTag(int row_perPage, String tag) {
 		Long temp = (long) this.getsession()
-				.createQuery("Select COUNT(*) FROM MerchandiseBean where merchandiseTag = :merchandiseTag")
+				.createQuery("Select COUNT(*) FROM MerchandiseBean where merchandiseTag = '" + tag +"'")
 				.uniqueResult();
 		if (temp.intValue() % row_perPage == 0) {
 			return temp.intValue() / row_perPage;
@@ -76,11 +79,11 @@ public class MerchandiseDAOHibernate {
 			return temp.intValue() / row_perPage + 1;
 		}
 	}
-
+	
 	public MerchandiseBean select(int merchandiseId) {
 		return this.getsession().get(MerchandiseBean.class, merchandiseId);
 	}
-
+	
 	public List<MerchandiseBean> select() {
 		Query<MerchandiseBean> query = this.getsession().createQuery("FROM MerchandiseBean", MerchandiseBean.class);
 		return query.getResultList();

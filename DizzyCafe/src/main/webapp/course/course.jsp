@@ -40,6 +40,7 @@
 					<th>開始時間</th>
 					<th>結束時間</th>
 					<th>現在人數</th>
+					<th>管理</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -56,6 +57,8 @@
 						<td>${course.courseBegin}</td>
 						<td>${course.courseEnd}</td>
 						<td>${courseNowPeople[status.count-1]} / ${course.courseLimit}</td>
+						<td><button name="delete" class="btn btn-danger"><i class="fa fa-times"></i></button>
+							<button name="update" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

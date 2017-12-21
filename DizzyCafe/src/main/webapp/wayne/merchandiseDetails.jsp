@@ -7,7 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="/DizzyCafe/wayne/css/merchandiseDetails.css">
-<title>Insert title here</title>
+<link href="/DizzyCafe/wayne/css/lightbox.css" rel="stylesheet">
+<title>${bean.merchandiseName }</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="<c:url value="wayne/js/lightbox.js"/>"></script>
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
@@ -33,8 +36,11 @@
 			</aside>
 			<div class="col2">
 				<div class="col3">
-					<img class="img"
-						src="${pageContext.request.contextPath}/${bean.merchandisePicture}">
+					<a href="${pageContext.request.contextPath}/${bean.merchandisePicture}"  
+					data-lightbox="example-1" data-title="${bean.merchandiseName}">
+					<img class="img" id="myimage" 
+						src="${pageContext.request.contextPath}/${bean.merchandisePicture}" >
+					</a>
 				</div>
 				<div class="col4">
 					<h2>${bean.merchandiseName}</h2>
@@ -54,35 +60,57 @@
 							<option value="7">7</option>
 							<option value="8">8</option>
 							<option value="9">9</option>
-							<option value="10">10</option></select>
+							<option value="10">10</option>
+						</select>
 					</div>
 					<div class="col6">
-						<input class="button1" id="button1" type="submit" 
-						onclick="location.href='${pageContext.request.contextPath}/addcart.controller'" value="加入購物車">
+						<input class="button1" id="button1" type="submit"
+							onclick="openNav()" value="加入購物車">
 					</div>
 
 				</div>
-				<div class="col7">${bean.merchandiseContent }</div>
+				<div class="col7">
+					${bean.merchandiseContent}
+				</div>
 			</div>
 		</section>
 	</article>
-<script type="text/javascript">
-	alert('${bean.merchandiseContent }');
-	var btnAddCart = document.getElementById("button1");
-	btnAddCart.onclick = function(){
-		var xhr = new XMLHttpRequest();
-		var select = document.getElementById("select");
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div>
+			<img class="sideimg"
+				src="${pageContext.request.contextPath}/${bean.merchandisePicture }" />
+		</div>
+		<div id="sidePrice">${bean.merchandiseName}x</div>
+	</div>
+
+<%-- 	<script src="<c:url value="wayne/js/imgZoom.js"/>"></script> --%>
+	<script> 
+
+
+function openNav() {
+   	    document.getElementById("mySidenav").style.width = "300px";
+    	var select = document.getElementById("select");
 		var getQuantity = select.value;
-		
-		alert(getQuantity);
-		if(xhr!=null){
-			xhr.open("GET","/addcart.controller","false");
-			xhr.send();
-			xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-// 			merchandiseId = ${bean.merchandiseId}&merchandiseName = ${bean.merchandiseName}&merchandiseContent = ${bean.merchandiseContent}&merchandisePicture = ${bean.merchandisePicture}&merchandiseTag = ${bean.merchandiseTag}&merchandisePrice = ${bean.merchandisePrice}&merchandiseQuantity = ${merchandiseQuantity}&merchandiseStatus = ${merchandiseStatus}
-		}
-	}
+		var sidePrice = document.getElementById("sidePrice");
+		sidePrice.insertAdjacentText("beforeEnd", getQuantity);
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+ /*Execute the magnify function:*/
+//  magnify("myimage", 3);
+ /*Specify the id of the image, and the strength of the magnifier glass:*/ 
+
 	
+//  		var xhr = new XMLHttpRequest();
+//  		if(xhr!=null){
+//  			xhr.open("GET","/addcart.controller","false");
+//  			xhr.send();
+//  			xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+// 		}
+//  	}
 	
 	
 </script>

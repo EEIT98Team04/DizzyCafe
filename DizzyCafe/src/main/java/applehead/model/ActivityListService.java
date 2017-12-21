@@ -75,6 +75,7 @@ public class ActivityListService {
 		result = activityListDAO.selectList();
 		String temp = new Gson().toJson(result);
 		JSONArray json = JSONArray.fromObject(temp);
+		System.out.println("json:"+json);
 		return json;
 	}
 

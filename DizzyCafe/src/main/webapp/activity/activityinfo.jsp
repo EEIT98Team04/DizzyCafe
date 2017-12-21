@@ -31,8 +31,8 @@
 	<p class="alert alert-warning" style="padding-left:30%;padding-bottom:0px"><strong style="font-size:24px">活動專區</strong></p>
 	<div id="showItems">
 		<c:if test="${not empty items}">
-			<div class="card-group" style="width:500px;margin:auto;">
-			<c:forEach items="${items }" var="showBean">
+			<div class="card-group" style="width:800px;margin:50px auto;">
+			<c:forEach items="${items }" var="showBean" varStatus="sta">
 				<div class="card">
     				<a href="${pageContext.request.contextPath}/activities?No=${showBean.activityNo-1000}">
 						<img class="card-img-top" width="240px" src="<c:url value="/activity/${showBean.activityNo }.jpg"/>"/>
@@ -43,6 +43,9 @@
      					 <p class="card-text"><small class="text-muted"><a class="more" href="${pageContext.request.contextPath}/activities?No=${showBean.activityNo-1000}">看更多</a></small></p>
    					</div>
   				</div>
+  				<c:if test="${sta.last && sta.count==2 }">
+  					<div class="card"></div>
+  				</c:if>
 			</c:forEach>
 			</div>
 		</c:if>
@@ -64,5 +67,13 @@
 			</ul>
 		</div>
 	</div>
+	
+<!-- 	<button type="button" id="newEvent">新增</button> -->
+<!-- 	<script> -->
+<!--  		$(function(){ -->
+<!--  			$('#newEvent').click(function(){ -->			
+<!--  			}); -->
+<!--  		}); -->
+<!-- 	</script> -->
 </body>
 </html>

@@ -74,12 +74,6 @@ public class ActivityListDAO {
 		return count;
 	}
 	
-//	public List<ActivityListBean> selectItemsWithCondition() {
-//		List<ActivityListBean> result = null;
-//		Query<ActivityListBean> query = this.getSession()
-//				.createQuery("select * from ActivityList where ", ActivityListBean.class);
-//		return result;
-//	}
 	
 	
 }

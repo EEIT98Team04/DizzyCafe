@@ -1,8 +1,8 @@
 package applehead.model;
 
-import java.util.Arrays;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,29 +10,31 @@ import javax.persistence.Table;
 @Table(name="ActivityList")
 public class ActivityListBean {
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int activityNo;
 	private String activityName;
 	private java.sql.Date activityStart;
 	private java.sql.Date activityEnd;
 	private String activityContent;
-	private byte[] activityPicture;
+	private String activityPicture;
+
+	
 	@Override
 	public String toString() {
 		return "ActivityListBean [activityNo=" + activityNo + ", activityName=" + activityName + ", activityStart="
 				+ activityStart + ", activityEnd=" + activityEnd + ", activityContent=" + activityContent
-				+ ", activityPicture=" + Arrays.toString(activityPicture) + "]";
+				+ ", activityPicture=" + activityPicture + "]";
 	}
-	
 	public String getActivityContent() {
 		return activityContent;
 	}
 	public void setActivityContent(String activityContent) {
 		this.activityContent = activityContent;
 	}
-	public byte[] getActivityPicture() {
+	public String getActivityPicture() {
 		return activityPicture;
 	}
-	public void setActivityPicture(byte[] activityPicture) {
+	public void setActivityPicture(String activityPicture) {
 		this.activityPicture = activityPicture;
 	}
 	public int getActivityNo() {

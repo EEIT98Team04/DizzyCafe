@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<input id="file_test" name="test[]" type="file" multiple  />
+	
+	<script>
+	$('#file_test').change(function(event){
+		//Filelist Object
+		var filelist = event.target.files;
+		//建立FormData Object
+		var formData = new window.FormData();
+		
+		for(var i = 0; i < filelist.length ; i++ ) {
+			var file = filelist[i]
+			//將檔案加進FormData
+			formData.append( 'test_file' + i, file );
+		}
+		
+		//利用ajax傳送到伺服器
+		$.ajax({
+			url: '/DizzyCafe/imageupload.hongwen',
+			data: formData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			type: 'POST',
+			success: function(data){
+				alert(data);
+			}
+		});
+	});
+	</script>
+</body>
+</html>

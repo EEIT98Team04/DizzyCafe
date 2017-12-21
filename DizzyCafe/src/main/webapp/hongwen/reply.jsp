@@ -15,7 +15,9 @@
 	<div style="margin-top: 80px; text-align: center;">
 		<h2>xxx文章</h2>
 	</div>
-	<div></div>
+	<div>
+	
+	</div>
 	<div style="background-color: #fff1cc;">
 		<table id="test">
 			<thead>

@@ -57,8 +57,7 @@
 						<td>${course.courseBegin}</td>
 						<td>${course.courseEnd}</td>
 						<td>${courseNowPeople[status.count-1]} / ${course.courseLimit}</td>
-						<td><button name="delete" class="btn btn-danger"><i class="fa fa-times"></i></button>
-							<button name="update" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+						<td><button name="update" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -45,7 +45,8 @@
 
 
 	<bean id="courseList.return"
-		class="org.springframework.web.servlet.view.InternalResourceView">
+		class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/course/course.controller?page=1"></property>
 	</bean>
 

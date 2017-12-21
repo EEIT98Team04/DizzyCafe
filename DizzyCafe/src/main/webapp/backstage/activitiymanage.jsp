@@ -11,13 +11,15 @@
   <meta name="author" content="">
   <title>Dizzy Cafe</title>
   <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!--   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
   <!-- Custom fonts for this template-->
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
+<!--   <link href="css/sb-admin.css" rel="stylesheet"> -->
   <link rel="stylesheet" href='${pageContext.request.contextPath }/minghui/css/minghui.css'>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+<!--   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css"/> -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
   <style>
   	.forText{
   		margin:10px auto;
@@ -42,6 +44,7 @@
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<jsp:include page="/backstage/index.jsp"></jsp:include>
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">DizzyCafe Backstage</a>
@@ -140,7 +143,7 @@
         	
         </div>
       </div>
-		<div style="width: 70%;">
+		<div style="width:70%">
 			<table id="test"></table>
 		</div>
         
@@ -232,6 +235,7 @@
 	</div>
 	   
   </div>
+  <jsp:include page="/backstage/footer.jsp"></jsp:include>
       
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -242,8 +246,8 @@
     <script src="js/sb-admin.min.js"></script>
     <script src="ckeditor/ckeditor.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript"
-		src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <script>
 //     文字編輯器
     	CKEDITOR.replace( 'editor1' );
@@ -344,30 +348,20 @@
 			url : '/DizzyCafe/showyou.controller',
 			type : 'POST',
 			dataSrc : ''
-// 			dataSrc : 
-// 				function ( json ) {
-// 					for ( var i=0, ien=json.length ; i<ien ; i++ ) {
-//   					if(json[i].couponStatus == 0){
-//   						json[i].couponStatus = '未使用';
-//   					}else if(json[i].couponStatus == 1){
-//   						json[i].couponStatus = '已使用';
-//   					}else if(json[i].couponStatus == 2){
-//   						json[i].couponStatus = '已過期';
-//   					}
-// 					}
-// 					console.log(json);
-// 				return json;
-// 				}
 		},
 		columns : [ {
-			data : 'activityNo'
+			data : 'activityNo',
+			title : '活動編號'
 		}, {
-			data : 'activityName'
+			data : 'activityName',
+			title : '活動名稱'
 		}, {
-			data : 'activityStart'
+			data : 'activityStart',
+			title : '起始日期'
 		}, {
-			data : 'activityEnd'
-		} ],
+			data : 'activityEnd',
+			title : '結束日期'
+		}],
 		language : {
 			paginate : {
 				next : "下一頁",

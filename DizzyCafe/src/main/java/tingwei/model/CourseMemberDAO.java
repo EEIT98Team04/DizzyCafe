@@ -67,7 +67,6 @@ public class CourseMemberDAO {
 			Query<Object[]> temp = this.getSession().createNativeQuery("select courseId from (select ROW_NUMBER() OVER(ORDER BY courseId ASC) AS row_num,\r\n" + 
 				"* from courseMemberForm where memberId = "+memberId+") as newTable where row_num > "+row_numStart+" and row_num <= "+row_numEnd);
 			List<Object[]> obj = temp.getResultList();
-			System.out.println(obj.toString());
 			for(int i = 0,j=obj.size()-1;i<obj.size();i++,j--) {
 				count[i] = (Integer)this.getSession().createNativeQuery
 					("SELECT COUNT(*) FROM coursememberForm WHERE courseId = "+ obj.get(j)).uniqueResult();
@@ -125,7 +124,6 @@ public class CourseMemberDAO {
 		select.setParameter(2, row_numStart);
 		select.setParameter(3, row_numEnd);
 		List<Object[]> temp = select.getResultList();
-		System.out.println("list"+temp.size());
 		JSONArray result = new JSONArray();
 		for(Object[] var : temp) {
 			JSONObject tt = new JSONObject();
@@ -135,10 +133,8 @@ public class CourseMemberDAO {
 			tt.put("courseEnd", var[3].toString());
 			tt.put("courseLimit", var[4]);
 			tt.put("courseId",var[5]);
-			System.out.println("tt:"+tt);
 			result.add(tt);
 		}
-		System.out.println("result:"+result);
 		return result;
 	}
 	
@@ -157,7 +153,28 @@ public class CourseMemberDAO {
 		
 		BigInteger temp = (java.math.BigInteger)select.uniqueResult();
 		int result = temp.intValue();
-		System.out.println(result);
 		return result;
+	}
+	
+	public CourseMemberBean checkSignedUp(int memberId, int courseId) {
+		Query<CourseMemberBean> select = this.getSession().createNativeQuery("SELECT * FROM coursememberForm WHERE memberId = ? AND courseId = ?",CourseMemberBean.class);
+		select.setParameter(1, String.valueOf(memberId));
+		select.setParameter(2, String.valueOf(courseId));
+		CourseMemberBean result = select.uniqueResult();
+		return result;
+	}
+	
+	public boolean checkSignedUpTime(int courseId) {
+		Query<CourseBean> select = this.getSession().createNativeQuery(
+				"SELECT * FROM course WHERE courseId = ?",CourseBean.class);
+		select.setParameter(1, courseId);
+		CourseBean temp = select.uniqueResult();
+		long begin = temp.getCourseSignupBegin().getTime();
+		long end = temp.getCourseSignupEnd().getTime();
+		long now = System.currentTimeMillis();
+		if(now>begin && now<end) {
+			return true;
+		}else
+			return false; 
 	}
 }

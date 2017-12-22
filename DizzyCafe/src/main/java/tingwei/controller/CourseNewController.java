@@ -84,13 +84,13 @@ public class CourseNewController {
 				courseService.insert(courseBean);
 				courseDateTimeService.insertAll(courseBean, whichDay, time, courseLength);
 				
-				return "courseList.return";
+				return "courseManage";
 			} catch (Exception e) {
 				System.out.println(e.getMessage());				
-				return "courseList.return";
+				return "courseManage";
 			}
 		} else {
-			return "courseList.return";
+			return "courseManage";
 		}
 	}
 

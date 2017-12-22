@@ -36,6 +36,12 @@
             <span class="nav-link-text">Merchandise</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="${pageContext.request.contextPath }/backstage/courseManage.jsp">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">課程管理</span>
+          </a>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-sitemap"></i>

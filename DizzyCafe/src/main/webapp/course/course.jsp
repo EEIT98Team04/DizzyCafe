@@ -57,7 +57,6 @@
 						<td>${course.courseBegin}</td>
 						<td>${course.courseEnd}</td>
 						<td>${courseNowPeople[status.count-1]} / ${course.courseLimit}</td>
-<!-- 						<td><button name="update" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></button></td> -->
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -70,12 +69,6 @@
 				</c:forEach>
 			</ul>
 		</div>
-	</div>
-	
-	
-	
-	<div>
-		<a href="${pageContext.request.contextPath}/course/courseNew.jsp"><button>新增</button></a>
 	</div>
 	
 	<div>

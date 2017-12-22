@@ -51,4 +51,16 @@ public class CourseMemberService {
 	public int lastRowNum(int memberId) {
 		return courseMemberDAO.getLastRowNum(memberId);
 	}
+	
+	public boolean checkSignedUp(int memberId, int courseId) {
+		CourseMemberBean temp = courseMemberDAO.checkSignedUp(memberId, courseId);
+		if(temp!=null) {
+			return true;
+		}else
+			return false;
+	}
+	
+	public boolean checkSignedUpTime(int courseId) {
+		return courseMemberDAO.checkSignedUpTime(courseId);
+	}
 }

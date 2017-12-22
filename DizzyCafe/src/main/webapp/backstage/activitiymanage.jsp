@@ -44,7 +44,7 @@
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-	<jsp:include page="/backstage/index.jsp"></jsp:include>
+	<jsp:include page="/backstage/header.jsp"></jsp:include>
   <div class="content-wrapper">
     <div class="container-fluid">
     
@@ -64,7 +64,7 @@
         	
         </div>
       </div>
-		<div style="width:70%">
+		<div style="width:800px;margin:auto;">
 			<table id="test"></table>
 		</div>
         
@@ -72,9 +72,6 @@
 		<button class="btn btn-primary" id="createEvent">create</button>
     </div>
     
-    
-    
-  <jsp:include page="/backstage/footer.jsp"></jsp:include>
     <!-- InsertForm Modal-->
     <div id="insertEvent" class="minghui_modal" >
 
@@ -131,8 +128,8 @@
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
     <script src="ckeditor/ckeditor.js"></script>
+    <script src="js/sb-admin.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
@@ -239,16 +236,20 @@
 		},
 		columns : [ {
 			data : 'activityNo',
-			title : '活動編號'
+			title : '活動編號',
+			width : '15%'
 		}, {
 			data : 'activityName',
-			title : '活動名稱'
+			title : '活動名稱',
+			width : '20%'
 		}, {
 			data : 'activityStart',
-			title : '起始日期'
+			title : '起始日期',
+			width : '30%'
 		}, {
 			data : 'activityEnd',
-			title : '結束日期'
+			title : '結束日期',
+			width : '30%'
 		}],
 		language : {
 			paginate : {
@@ -261,6 +262,6 @@
 		order : [3,'desc']
 	});
   </script>
-
+	<jsp:include page="/backstage/footer.jsp"></jsp:include>
 </body>
 </html>

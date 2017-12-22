@@ -26,8 +26,7 @@
 			</thead>
 		</table>
 	</div>
-	<input id="d_cleck" type="button" value="清除"/>	
-	<form id="post" method="POST">
+	<form id="post">
 		<div>
 			<span>主題 : </span>
 			<select id="grid" name="grid">				
@@ -39,7 +38,8 @@
 				<option value="5">咖啡沖泡器具版</option>
 				<option value="6">咖啡閒聊版</option>
 			</select> 
-			<span>文章標題 : <input id="d_article" name="title" type="text" style="width:200px; height:px;"/></span>		
+			<span>文章標題 : <input id="d_article" name="title" type="text" style="width:200px; height:25px;"/></span>		
+
 			<textarea></textarea>
 			<input type="submit" value="發文" />	
 		</div>
@@ -51,8 +51,9 @@
 		src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script src="/DizzyCafe/hongwen/js/tinymce/tinymce.min.js"></script>
 	<script src="/DizzyCafe/hongwen/js/post.js"></script>
-<!-- 	<script src="/DizzyCafe/hongwen/js/document.js"></script> -->
+	<script src="/DizzyCafe/hongwen/js/document.js"></script>
 	<script>
+<<<<<<< HEAD
 	$(function() {
 		var search = document.location.search;// 取得?後面的參數
 		var hyperlink = "/DizzyCafe/hongwen/reply.jsp?";
@@ -151,6 +152,9 @@
 			})
 			return false;
 		});
+=======
+	
+>>>>>>> branch 'master' of https://github.com/EEIT98Team04/DizzyCafe.git
 	</script>
 </body>
 </html>

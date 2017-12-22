@@ -112,7 +112,7 @@
 					placeholder="Enter Password" name="memberPassword" required>
 
 				<button class="loginBut" type="submit">Login</button>
-				<p id="error_login">${errors.xxx2}</p>
+				<p id="error_login">${errors.xxx2 }</p>
 			</div>
 
 			<div class="container" style="background-color: #f1f1f1">
@@ -129,7 +129,7 @@
 	<div id="minghui_member_signUp" class="minghui_modal">
 
 		<form class="minghui_modal-content animate" enctype="multipart/form-data"
-			action='<c:url value="/uploadFile.controller" />' method="post">
+			action='<c:url value="/register.controller" />' method="post">
 			<%-- 			action="<c:url value="/TestImg.do" />" method="post"> --%>
 			<div class="imgcontainer">
 				<span
@@ -162,7 +162,9 @@
 		</form>
 	</div>
 </nav>
-
+<footer class="fixed-bottom text-center">
+          <p>Copyright © DizzyCafe 2017</p>
+    </footer>
 <script src='<c:url value="/minghui/js/minghui.js" />'></script>
 <!-- </body> -->
 <!-- </html> -->

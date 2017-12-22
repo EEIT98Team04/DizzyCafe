@@ -1,11 +1,16 @@
 package minghui.model;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import minghui.model.dao.MemberDAO;
 import minghui.utils.Encryption;
@@ -13,6 +18,7 @@ import minghui.utils.MailUtils;
 
 @Service
 public class LoginService {
+	private static final String server_path = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
 	@Autowired
 	private MemberDAO memberDAO;
 
@@ -77,7 +83,8 @@ public class LoginService {
 				String random_URL = String.valueOf(System.currentTimeMillis()) + bean.getMemberName();
 					
 				String html = "<p>親愛的" + bean.getMemberName() + "您好，請點擊下方連結重新設置密碼</p>"
-						+ "<a href='http://127.0.0.1:8080/DizzyCafe/forgotPassword.controller?vc=" + random_URL + "'>重設密碼</a> ";
+//						+ "<a href='http://127.0.0.1:8080/DizzyCafe/forgotPassword.controller?vc=" + random_URL + "'>重設密碼</a> ";
+				+ "<a href='http://127.0.0.1:8080/DizzyCafe/forgotPassword.controller?vc=" + random_URL + "'>重設密碼</a> ";
 
 				MailUtils.generateAndSendEmail(memberEmail, subject, html);
 				bean.setMemberTempPassword(random_URL);
@@ -111,5 +118,26 @@ public class LoginService {
 		MemberBean bean = memberDAO.select(memberName);
 		bean.setMemberPassword(Encryption.md5(newPwd));				
 		return bean;
+	}
+	
+	public boolean uploadServerFile(MultipartFile memberPhoto, MemberBean bean) {
+		if (!memberPhoto.isEmpty()) {
+			try {
+				byte[] bytes = memberPhoto.getBytes();
+
+				String[] strs = memberPhoto.getContentType().split("/");
+				String path = "/minghui/res/member_photo/" + bean.getMemberName() + "." + strs[1];
+				bean.setMemberPhoto(path);
+				File serverFile = new File(server_path + path);
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+				return true;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());				
+				return false;
+			}
+		}
+		return false;
 	}
 }

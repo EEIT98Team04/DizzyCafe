@@ -38,7 +38,6 @@ public class CreateActivity {
 			endDate = new java.sql.Date(new SimpleDateFormat("MM/dd/yyyy").parse(activityEnd).getTime());
 		} catch (ParseException e1) {
 			e1.printStackTrace();
-			model.addAttribute("createError", "日期有誤");
 			return "createActivity.success";
 		}
 

@@ -58,7 +58,7 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">Dashboard</a>
+          <a href="${pageContext.request.contextPath}/backstage/index.jsp">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Blank Page</li>
       </ol>
@@ -72,7 +72,7 @@
 		</div>
         
         
-		<button class="btn btn-primary" id="createEvent">create</button>
+		<button class="btn btn-primary btn-lg" style='margin-left:300px' id="createEvent">新增活動</button>
     </div>
     
     <!-- InsertForm Modal-->
@@ -94,7 +94,7 @@
 				<label><b>活動圖片</b></label><input type="file" name="activityPicture" class="forText" accept="image/*" required id="uploadImage">
 				<img id="showImg" width="240px"/>
 				<br>
-				<p style="margin:auto;width:300px;text-align: center;" class="forText"><button class="btn btn-primary" type="button" id="forSubmit">create</button></p>
+				<p style="margin:auto;width:300px;text-align: center;" class="forText"><button class="btn btn-primary" type="button" id="forSubmit">執行</button></p>
 			</div>
 
 		</form>
@@ -122,7 +122,53 @@
 	    	</div>
   		</div>
 	</div>
-	   
+	<div id="updateEvent" class="minghui_modal" >
+
+		<form class="minghui_modal-content animate" id="submitForm2">
+			<%-- 			action="<c:url value="/TestImg.do" />" method="post"> --%>
+			<div class="imgcontainer">
+				<span
+					onclick="document.getElementById('updateEvent').style.display='none'"
+					class="close" title="關閉視窗">&times;</span> <br>
+			</div>
+
+			<div class="container">
+				<input type="hidden" name="activityNo">
+				<label><b>活動名稱</b></label><input type="text" name="activityName" class="forText"> <br> 
+				<label for="from"><b>活動開始時間</b></label><input type="text" id="from2" name="activityStart" class="forText" readonly> <br> 
+				<label for="to"><b>活動結束時間</b></label><input type="text" id="to2" name="activityEnd" class="forText" readonly> <br> 
+				<label><b>活動內容</b></label><input type="text" name="activityContent" class="forText" id="editor2"> <br>
+				<label><b>活動圖片</b></label><input type="file" name="activityPicture" class="forText" accept="image/*" id="uploadImage2">
+				<img width="240px"/>
+				<br>
+				<p style="margin:auto;width:300px;text-align: center;" class="forText"><button class="btn btn-primary" type="button" id="forSubmit2">執行</button></p>
+			</div>
+
+		</form>
+	</div>
+	
+	<div class="modal" id="myModal2" style="display:none;">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		    	<!-- Modal Header -->
+			    <div class="modal-header">
+			        <h4 class="modal-title">提示</h4>
+			        <button type="button" class="close" onclick="document.getElementById('myModal2').style.display='none'">&times;</button>
+			    </div>
+			
+			    <!-- Modal body -->
+			    <div class="modal-body">
+			        <p>確定要修改?</p>
+			    </div>
+		
+		      	<!-- Modal footer -->
+		    	<div class="modal-footer">
+		    		<button type="submit" class="btn btn-primary" id="gogo2">確定</button>
+		        	<button type="button" class="btn btn-secondary" >取消</button>
+		    	</div>
+	    	</div>
+  		</div>
+	</div>		   
   </div>
   <jsp:include page="/backstage/footer.jsp"></jsp:include>
     <!-- Bootstrap core JavaScript-->
@@ -161,6 +207,23 @@
 	      .on( "change", function() {
 	        from.datepicker( "option", "maxDate", getDate( this ) );
 	      });
+	    var from2 = $( "#from2" )
+        .datepicker({
+	          defaultDate: "+1w",
+	          changeMonth: true,
+	          numberOfMonths: 1
+	        })
+	        .on( "change", function() {
+	          to.datepicker( "option", "minDate", getDate( this ) );
+	        }),
+	        to = $( "#to2" ).datepicker({
+		        defaultDate: "+1w",
+		        changeMonth: true,
+		        numberOfMonths: 1
+		      })
+		      .on( "change", function() {
+		        from.datepicker( "option", "maxDate", getDate( this ) );
+		      });
 	    function getDate( element ) {
 	      var date;
 	      try {
@@ -174,11 +237,45 @@
   </script>
   <script>
 //   顯示資料表
-  	$('#test').DataTable({
+	var count = 0;
+  	var table = $('#test').DataTable({
 		ajax : {
 			url : '/DizzyCafe/showyou.controller',
 			type : 'POST',
 			dataSrc : ''
+		},
+		initComplete : function(data,row){ 
+			CKEDITOR.replace( 'editor2' );
+// 			for(i=0;i<row.length;i++){ 
+// 				var datas = row[i];
+// 				$('#edit'+row[i].activityNo).click(function(e){
+// 					$('#updateEvent').css('display','block');
+// 					$('#updateEvent input[name=activityName]').val(datas.activityName);
+// 					$('#updateEvent input[name=activityStart]').val(datas.activityStart);
+// 					$('#updateEvent input[name=activityEnd]').val(datas.activityEnd);
+// 					CKEDITOR.instances.editor2.setData(datas.activityContent);
+// 					$('#updateEvent input[name=activityNo]').val(datas.activityNo);
+// 					$('#updateEvent img').attr('src','/DizzyCafe/'+datas.activityPicture);
+// 		    	});				
+// 			}
+		},
+		drawCallback : function(row){
+			if(count===0){
+				count++;
+			}else{
+				for(var i=0;i<row.aoData.length;i++){
+					temp = row.aoData[i]._aData;
+					$('#edit'+temp.activityNo).click(function(e){
+						$('#updateEvent').css('display','block');
+						$('#updateEvent input[name=activityName]').val(temp.activityName);
+						$('#updateEvent input[name=activityStart]').val(temp.activityStart);
+						$('#updateEvent input[name=activityEnd]').val(temp.activityEnd);
+						CKEDITOR.instances.editor2.setData(temp.activityContent);
+						$('#updateEvent input[name=activityNo]').val(temp.activityNo);
+						$('#updateEvent img').attr('src','/DizzyCafe/'+temp.activityPicture);
+			    	});			
+				}
+			}  
 		},
 		columns : [ {
 			data : 'activityNo',
@@ -202,9 +299,9 @@
 		"columnDefs" : [{
 			"targets" : 4,
 			"data" : null,
-			"render" : function(data,type,row) {
-			var html = "<a href='#' class='btn btn-success' id='edit'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
-			return html;
+			"render" : function(data,row) {
+				var html = "<a href='#' class='btn btn-success' id='edit"+data.activityNo+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
+				return html;
 			}
 		}],
 		language : {
@@ -215,7 +312,8 @@
 			lengthMenu : '一頁顯示 _MENU_ 筆資料'
 		},
 		info : false,
-		order : [3,'desc']
+		order : [0,'asc'],
+		rowId : 'activityNo'
 	});
   </script>
     <script>
@@ -224,9 +322,14 @@
 //     視窗彈起來
     	var insertEvent = document.getElementById('insertEvent');
     	var boom = document.getElementById('myModal');
+    	var updateEvent = document.getElementById('updateEvent');
+    	var boom2 = document.getElementById('myModal2');
     	var data;
     	$(function(){
     		$('#createEvent').click(function(){
+    			$('#submitForm')[0].reset();
+    			CKEDITOR.instances.editor1.setData("");
+    			$('#submitForm img').removeAttr('src');
     			$('#insertEvent').css('display','block');
     		});
     		window.onclick = function(event) {
@@ -236,25 +339,35 @@
     			if(event.target == boom){
     				boom.style.display = "none";
     			}
+    			if (event.target == updateEvent) {
+    				updateEvent.style.display = "none";
+    			}
+    			if(event.target == boom2){
+    				boom2.style.display = "none";
+    			}
     		}
     		$("#uploadImage").change(function(){
        	      	readImage( this );
        	    });
+    		$("#uploadImage2").change(function(){
+       	      	readImage2( this );
+       	    });
     		$('#forSubmit').click(function(){
     			$('#myModal').css('display','block');
     			data = CKEDITOR.instances.editor1.getData();
-    			$('input[name=activityContent]').val(data);
+    			$('#insertEvent input[name=activityContent]').val(data);
     		});
-    		$('#edit').click(function(){
-    			
+    		$('#forSubmit2').click(function(){
+    			$('#myModal2').css('display','block');
+    			data = CKEDITOR.instances.editor2.getData();
+    			$('#updateEvent input[name=activityContent]').val(data);
     		});
-    		
     		
     		$('#gogo').on('click',(function(e){
     			e.preventDefault();
     			var form = $('#submitForm')[0];
     			var formData = new FormData(form);
-    			$("#gogo").prop("disabled", true);
+//     			$("#gogo").prop("disabled", true);
     			console.log(formData);
     			$.ajax({
     				url: '/DizzyCafe/createEvent.controller',
@@ -265,21 +378,55 @@
     				cache: false,
     				processData: false,
     				success: function(){
+    					alert('新增成功');
     					insertEvent.style.display = "none";
     					$('#myModal').css('display','none');
+    					table.ajax.reload();
     				}
     			});
+    			$('#gogo2').on('click',(function(e){
+        			e.preventDefault();
+        			var form = $('#submitForm2')[0];
+        			var formData = new FormData(form);
+//         			$("#gogo2").prop("disabled", true);
+        			console.log(formData);
+        			$.ajax({
+        				url: '/DizzyCafe/updateEvent.controller',
+        				type: 'post',
+        				data: formData,
+        				enctype: 'multipart/form-data',
+        				contentType: false,
+        				cache: false,
+        				processData: false,
+        				success: function(){
+        					alert('修改成功');
+        					updateEvent.style.display = "none";
+        					$('#myModal2').css('display','none');
+        					table.ajax.reload();
+        				}
+        			});
+        		}));
     		}));
        	    function readImage(input) {
        	      if ( input.files && input.files[0] ) {
        	        var FR= new FileReader();
        	        FR.onload = function(e) {
        	          //e.target.result = base64 format picture
-       	          $('#showImg').attr( "src", e.target.result );
+       	          $('#insertEvent img').attr( "src", e.target.result );
        	        };       
        	        FR.readAsDataURL( input.files[0] );
        	      }
        	    }
+       	 	function readImage2(input) {
+      	      if ( input.files && input.files[0] ) {
+      	        var FR= new FileReader();
+      	        FR.onload = function(e) {
+      	          //e.target.result = base64 format picture
+      	          $('#updateEvent img').attr( "src", e.target.result );
+      	        };       
+      	        FR.readAsDataURL( input.files[0] );
+      	      }
+      	    }
     	});
     </script>
 </body>

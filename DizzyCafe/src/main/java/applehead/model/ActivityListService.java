@@ -70,6 +70,16 @@ public class ActivityListService {
 		}
 	}
 	
+	public boolean updateActivity(ActivityListBean bean) {
+		if(bean!=null) {
+			activityListDAO.update(bean);
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
 	public JSONArray showActivityInBackstage(){
 		List<ActivityListBean> result = null;
 		result = activityListDAO.selectList();

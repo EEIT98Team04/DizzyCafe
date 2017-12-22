@@ -23,17 +23,17 @@ public class CourseOfMemberController {
 	
 	@RequestMapping(path="/course/courseOfMemberController.controller", method= {RequestMethod.GET,RequestMethod.POST})
 	public String showMemberCourse(Model model, int page, HttpSession session) {
-		int row_num = 1;
-		int rows_perPage = 4;
-		
-		int row_numStart = (row_num + (page - 1) * rows_perPage);
-		int row_numEnd = (row_num + page * rows_perPage);		
-		
 		MemberBean user = (MemberBean) session.getAttribute("user");
 		int memberId = user.getMemberId();
-
+		
+		int lastRow_num = courseMemberService.lastRowNum(memberId);
+		int rows_perPage = 4;
+		
+		int row_numEnd = (lastRow_num - (page - 1) * rows_perPage);
+		int row_numStart = (lastRow_num - page * rows_perPage);		
+		
 		model.addAttribute("TotalPages" ,courseMemberService.countTotalPagesWithId(rows_perPage,memberId));
-		model.addAttribute("myCourse" ,courseMemberService.showMyCourseInPage(row_numStart, row_numEnd,memberId));
+		model.addAttribute("myCourse" ,courseMemberService.showMyCourseInPage(row_numStart, row_numEnd,rows_perPage,memberId));
 		model.addAttribute("courseNowPeople" ,courseMemberService.countMyNowPeople(memberId, row_numStart, row_numEnd,rows_perPage));
 		
 		return "myCourse";

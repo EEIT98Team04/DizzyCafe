@@ -47,8 +47,8 @@
 				<c:forEach var="course" items="${myCourse}" varStatus="status">
 					<tr>
 						<td><a href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">
-							<img class="img" src="${pageContext.request.contextPath}/image/course/${course.courseImg}" />
-							</a></td>
+							<img class="img" src="${pageContext.request.contextPath}${course.courseImg}" /></a>
+							</td>
 						<td><a href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">${course.courseName}
 							<input name="courseIdinRow" type="hidden" value="${course.courseId }"/>
 							<input name="memberIdinRow" type="hidden" value="${user.memberId }"/>

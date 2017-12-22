@@ -10,7 +10,7 @@
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height: 100px"></div>
-	<h3>${course.courseImg}</h3>
+	<img src="${pageContext.request.contextPath}${course.courseImg}" />
 	<h3>${course.courseName}</h3>
 	<h3>${course.courseIntro}</h3>
 	<h3>${course.courseContent}</h3>
@@ -22,8 +22,7 @@
 	<h3>${course.courseSignupEnd}</h3>
 
 	<!-- Button to open the modal login form -->
-	<button
-		onclick="document.getElementById('signup').style.display='block'">我要報名</button>
+	<button id="iwannasignup">我要報名</button>
 
 	<!-- The Modal -->
 	<div id="signup" class="minghui_modal">
@@ -71,6 +70,39 @@
 				modal.style.display = "none";
 			}
 		}
+		
+		$('#iwannasignup').click(function(){
+			if('${not empty user}' == "true"){
+				document.getElementById('signup').style.display='block';
+			}else{
+				//要求登入
+				
+			}
+		});
+		
+		$(function(){
+			$.post(
+				"/DizzyCafe//course/CheckTimeController.controller",
+				{"courseId":'${course.courseId }'},
+				function(data){
+					if(data == "TimeError"){
+						$('#iwannasignup').text("不是報名時間").prop("disabled",true);
+					}
+			});
+			
+			if('${not empty user}' == "true"){
+				alert("do user check")
+				$.post(
+					"/DizzyCafe//course/CheckSignedController.controller",
+					{"courseId":'${course.courseId }',
+					 "memberId":'${user.memberId }'},
+					function(data){
+						if(data == "alreadySignedUp"){
+					    	$('#iwannasignup').text("已報名").prop("disabled",true);						
+						}
+				});
+			}
+		});
 		
 		
 		$('#same').change(function(){

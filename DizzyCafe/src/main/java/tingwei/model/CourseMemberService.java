@@ -24,10 +24,6 @@ public class CourseMemberService {
 		return courseMemberDAO.selectByMemberId(memberId);
 	}
 	
-	public int countTotalPages(int rows_perPage, int memberId) {
-		return courseMemberDAO.countTotalPage(rows_perPage,memberId);
-	}
-	
 	public int countTotalPagesWithId(int rows_perPage, int memberId) {
 		return courseMemberDAO.countTotalPageWithId(rows_perPage,memberId);
 	}
@@ -40,15 +36,31 @@ public class CourseMemberService {
 		return courseMemberDAO.countMyNowPeople(memberId, Start, End,rows_perPage);
 	}
 	
-	public JSONArray showMyCourseInPage(int courseIdStart, int courseIdEnd, int memberId){
-		return courseMemberDAO.selectMyPageNow(courseIdStart,courseIdEnd,memberId);
+	public JSONArray showMyCourseInPage(int row_numStart, int row_numEnd ,int rows_perPage, int memberId){
+		return courseMemberDAO.selectMyPageNow(row_numStart,row_numEnd,memberId);
 	}
 	
-	public List<CourseBean> showCourseInPage(int courseIdStart, int courseIdEnd){
-		return courseMemberDAO.selectPageNow(courseIdStart,courseIdEnd);
-	}
+//	public List<CourseBean> showCourseInPage(int courseIdStart, int courseIdEnd){
+//		return courseMemberDAO.selectPageNow(courseIdStart,courseIdEnd);
+//	}
 	
 	public void quitCourse(int memberId, int courseId) {
 		courseMemberDAO.quitCourse(memberId,courseId);
+	}
+	
+	public int lastRowNum(int memberId) {
+		return courseMemberDAO.getLastRowNum(memberId);
+	}
+	
+	public boolean checkSignedUp(int memberId, int courseId) {
+		CourseMemberBean temp = courseMemberDAO.checkSignedUp(memberId, courseId);
+		if(temp!=null) {
+			return true;
+		}else
+			return false;
+	}
+	
+	public boolean checkSignedUpTime(int courseId) {
+		return courseMemberDAO.checkSignedUpTime(courseId);
 	}
 }

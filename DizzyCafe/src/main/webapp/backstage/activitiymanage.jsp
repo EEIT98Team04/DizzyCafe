@@ -47,7 +47,7 @@
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-	<jsp:include page="/backstage/index.jsp"></jsp:include>
+	<jsp:include page="/backstage/header.jsp"></jsp:include>
   <div class="content-wrapper">
     <div class="container-fluid">
     

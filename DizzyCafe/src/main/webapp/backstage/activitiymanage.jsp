@@ -84,8 +84,8 @@
 			</div>
 
 			<div class="container">
-				<label><b>活動名稱</b></label><input type="text" name="activityName" required class="forText"> <br> 
-				<label for="from"><b>活動開始時間</b></label><input type="text" id="from" name="activityStart" class="forText" required> <br> 
+				<label><b>活動名稱</b></label><input type="text" name="activityName" class="forText" required> <br> 
+				<label for="from"><b>活動開始時間</b></label><input type="text" id="from"  name="activityStart" class="forText" required> <br> 
 				<label for="to"><b>活動結束時間</b></label><input type="text" id="to" name="activityEnd" class="forText" required> <br> 
 				<label><b>活動內容</b></label><input type="text" name="activityContent" class="forText" required id="editor1"> <br>
 				<label><b>活動圖片</b></label><input type="file" name="activityPicture" class="forText" accept="image/*" required id="uploadImage">

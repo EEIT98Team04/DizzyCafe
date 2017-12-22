@@ -40,7 +40,7 @@
 					<th>開始時間</th>
 					<th>結束時間</th>
 					<th>現在人數</th>
-					<th>管理</th>
+<!-- 					<th>管理</th> -->
 				</tr>
 			</thead>
 			<tbody>
@@ -49,7 +49,7 @@
 
 						<td><a
 							href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">
-							<img class="img" src="${pageContext.request.contextPath}/image/course/${course.courseImg}" /></a></td>
+							<img class="img" src="${pageContext.request.contextPath}${course.courseImg}" /></a></td>
 						<td><a
 							href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">${course.courseName}</a></td>
 						<td>${course.courseIntro}</td>
@@ -57,7 +57,7 @@
 						<td>${course.courseBegin}</td>
 						<td>${course.courseEnd}</td>
 						<td>${courseNowPeople[status.count-1]} / ${course.courseLimit}</td>
-						<td><button name="update" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+<!-- 						<td><button name="update" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></button></td> -->
 					</tr>
 				</c:forEach>
 			</tbody>

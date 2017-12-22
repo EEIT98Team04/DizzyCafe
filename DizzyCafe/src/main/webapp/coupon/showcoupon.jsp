@@ -22,17 +22,17 @@
 	<!-- jQuery庫 -->
 	<script type="text/javascript"
 		src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<!-- 	<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script> -->
+	<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
 	<script>
 		$(document).ready(function() {
-			$('#test').DataTable({
+			var myTable = $('#test').DataTable({
 				ajax : {
 					url : '/DizzyCafe/coupons.controller',
 					type : 'POST',
 // 					dataSrc : ''
 					dataSrc : 
 						function ( json ) {
-							var result = {};
 	      					for ( var i=0, ien=json.length ; i<ien ; i++ ) {
 	        					if(json[i].couponStatus == 0){
 	        						json[i].couponStatus = '未使用';
@@ -41,7 +41,6 @@
 	        					}else if(json[i].couponStatus == 2){
 	        						json[i].couponStatus = '已過期';
 	        					}
-	        					result
 	      					}
 	      					console.log(json);
 	      				return json;
@@ -59,7 +58,7 @@
 				}, {
 					data : 'couponStatus',
 					title : 'Status'
-				} ],
+				}],
 				language : {
 					paginate : {
 						next : "下一頁",

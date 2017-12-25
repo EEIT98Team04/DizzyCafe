@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.sf.json.JSONArray;
+
 @Service
 @Transactional
 public class CourseService {
@@ -40,5 +42,13 @@ public class CourseService {
 			return null;
 		else
 			return bean;
+	}
+	
+	public int lastCoruesId() {
+		return courseDAO.lastCoruesId();
+	}
+	
+	public JSONArray showCoruseInBackstage() {
+		return courseDAO.showCoruseInBackstage();
 	}
 }

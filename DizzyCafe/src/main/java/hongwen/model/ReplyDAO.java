@@ -30,6 +30,15 @@ public class ReplyDAO {
 		List<ReplyBean> result = query.getResultList();
 		return result;
 	}
+	
+	public boolean insert(ReplyBean bean) {
+		try {
+			this.getSession().save(bean);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
 	// public List<BoardBean> selectFromMemberId(int memberId) {
 	// List<BoardBean> result = null;

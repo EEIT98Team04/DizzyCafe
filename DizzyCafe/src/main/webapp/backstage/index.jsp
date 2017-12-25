@@ -8,7 +8,6 @@
 </head>
 <body>
 <jsp:include page="/backstage/header.jsp"></jsp:include>
-
 <jsp:include page="/backstage/footer.jsp"></jsp:include>
 </body>
 </html>

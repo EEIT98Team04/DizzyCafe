@@ -2,12 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<button class="btn asd" style="margin-left: 1%"
+<div>
+<img class="position-relative" title="${user.memberName}" style="width:300px; height:300px" src="${pageContext.request.contextPath}/${user.memberPhoto}">
+<button class="btn asd position-absolute" style="margin-left: 1%"
 					onclick="document.getElementById('change_photo').style.display='block'">變更照片</button>
+</div>
+<div id="change_photo" class="minghui_modal">
 
-<div id="change_photo" class="modal">
-
-		<form class="modal-content animate" action="#" method="post">
+		<form class="minghui_modal-content animate" enctype="multipart/form-data" 
+			action="${pageContext.request.contextPath}/member/changePhoto.controller" method="post">
 				<div class="imgcontainer">
 					<span onclick="document.getElementById('change_photo').style.display='none'"
 						class="close" title="關閉視窗">&times;</span>

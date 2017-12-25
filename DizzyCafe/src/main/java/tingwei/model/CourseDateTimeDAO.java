@@ -60,8 +60,7 @@ public class CourseDateTimeDAO {
 			tt.put("end", var[2].toString());
 			result.add(tt);
 		}
-		
-		System.out.println(result);
+
 		return result;
 	}
 	

@@ -49,11 +49,10 @@
 			<div class="col-md-9">
 				<div class="jumbotron">
 					<div class="page-header">
-						<h3>Welcome, ${user.memberName }</h3>
+						<h3>Welcome, ${user.memberName}</h3>
 					</div>
-					<!-- 每頁不同的內容從這裡開始 -->
-					<img src="${pageContext.request.contextPath}/${user.memberPhoto}">
-					<jsp:include page="/minghui/member/UploadFile.jsp" />
+					<!-- 每頁不同的內容從這裡開始 -->					
+					<jsp:include page="/minghui/member/updateMemberPhoto.jsp" />
 
 
 

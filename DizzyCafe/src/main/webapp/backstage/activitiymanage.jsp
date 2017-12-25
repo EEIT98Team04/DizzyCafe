@@ -353,9 +353,19 @@
        	      	readImage2( this );
        	    });
     		$('#forSubmit').click(function(){
-    			$('#myModal').css('display','block');
     			data = CKEDITOR.instances.editor1.getData();
     			$('#insertEvent input[name=activityContent]').val(data);
+    			if($('#insertEvent input[name=activityName]').val()==""){
+    				alert('請填活動名稱');
+    			}else if($('#insertEvent input[name=activityStart]').val()==""){
+    				alert('請填開始時間');
+    			}else if($('#insertEvent input[name=activityEnd]').val()==""){
+    				alert('請填結束時間');
+    			}else if($('#insertEvent input[name=activityContent]').val()==""){
+    				alert('請填內容');
+    			}else{
+	    			$('#myModal').css('display','block');				
+    			}
     		});
     		$('#forSubmit2').click(function(){
     			$('#myModal2').css('display','block');
@@ -366,6 +376,7 @@
     		$('#gogo').on('click',(function(e){
     			e.preventDefault();
     			var form = $('#submitForm')[0];
+    			console.log(form);
     			var formData = new FormData(form);
 //     			$("#gogo").prop("disabled", true);
     			console.log(formData);

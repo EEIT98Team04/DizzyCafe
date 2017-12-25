@@ -216,7 +216,7 @@
 	        .on( "change", function() {
 	          to.datepicker( "option", "minDate", getDate( this ) );
 	        }),
-	        to = $( "#to2" ).datepicker({
+	        to2 = $( "#to2" ).datepicker({
 		        defaultDate: "+1w",
 		        changeMonth: true,
 		        numberOfMonths: 1

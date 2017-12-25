@@ -28,8 +28,8 @@ public class ActivityController {
 		System.out.println(result);
 		model.addAttribute("items", result);
 		model.addAttribute("totalPage", activityListService.calculateTotalPage());
-//		bean.setActivityName("New year");
-//		activityListDAO.insert(bean);
+
 		return "activity.hihi";
 	}
+	
 }

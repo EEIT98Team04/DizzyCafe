@@ -22,13 +22,14 @@ public class DocumentController {
 	@Autowired
 	DocumentService documentService;
 
-	@RequestMapping(path = "/Documentget.hongwen", method = { RequestMethod.GET})
+	@RequestMapping(path = "/Document.hongwen", method = { RequestMethod.GET})
 	public @ResponseBody JSONArray getJSON(@RequestParam Map<?,?> param) {
+		System.out.println("documentget");
 		JSONArray json = documentService.selectToJSON(Integer.parseInt((String)param.get("boardId")));
 		return json;
 	}
 	
-	@RequestMapping(path = "/Documentpost.hongwen", method = {RequestMethod.POST })
+	@RequestMapping(path = "/Document.hongwen", method = {RequestMethod.POST })
 	public @ResponseBody JSONArray postJSON(HttpSession session,@RequestParam Map<?,?> param) {
 //		直接抓Session全部內容	
 //		@SuppressWarnings("rawtypes")
@@ -46,12 +47,18 @@ public class DocumentController {
 //		for (Object key : param.keySet()) {
 //			System.out.println(key + " : " + param.get(key));
 //		}
-
+		System.out.println("documentpost");
+		String[] key = {"title","grid","textarea"};
 		JSONArray json = null;
 		MemberBean bean = (MemberBean) session.getAttribute("user");
-		DocumentBean documentbean = new DocumentBean(1,(String)param.get("title"),
+		if(bean == null || "".equals(String.valueOf(bean.getMemberId())) || "".equals(bean.getMemberName())) {
+			String temp = "[{\"status\":\"false\"}]";//回傳一個json陣列物件，內容為status:false，與下面insert回傳值的key相同
+			json = JSONArray.fromObject(temp);
+			return json;
+		}
+		DocumentBean documentbean = new DocumentBean(1,(String)param.get(key[0]),
 				new java.util.Date(),bean.getMemberName(),1,bean.getMemberId(),
-				Integer.parseInt((String)param.get("grid")),true,(String)param.get("textarea"));
+				Integer.parseInt((String)param.get(key[1])),true,(String)param.get(key[2]));
 		json = documentService.insert(documentbean);
 		return json;
 	}

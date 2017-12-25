@@ -29,7 +29,7 @@ body{
 } 
 #playImg { 
 	POSITION: absolute; 
-	TOP: 114px; LEFT : 435px; 
+	TOP: 125px; LEFT : 435px; 
 	Z-INDEX: 2; 
 } 
 #firstImg { 
@@ -83,7 +83,7 @@ body{
 	<div style="height:100px"></div>
 <div class="BIG">
 	<div class="forDiv">
-		<img src="${pageContext.request.contextPath }/event/arrow123.png" width="300px" id="playImg" />
+		<img src="${pageContext.request.contextPath }/event/arrow.png" width="300px" id="playImg" />
 		<img src="${pageContext.request.contextPath }/event/circle123.png" width="650px" id="circleImg"/>  
 <!-- 		<img src="/DizzyCafe/event/event.png" width="500px" id="firstImg" /> -->
 		<span id="firstImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>firstImg</span>

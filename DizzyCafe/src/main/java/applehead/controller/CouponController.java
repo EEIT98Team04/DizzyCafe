@@ -17,7 +17,7 @@ public class CouponController {
 	@Autowired
 	CouponService couponService;
 	@RequestMapping(
-				path="/coupons",
+				path="/coupons.controller",
 				method= {RequestMethod.GET,RequestMethod.POST}
 			)
 	public @ResponseBody JSONArray postJSON(HttpSession session) {

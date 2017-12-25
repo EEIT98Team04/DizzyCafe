@@ -14,6 +14,7 @@ window.onclick = function(event) {
 var error = document.getElementById('error_login');
 var errorStr = error.innerText;
 
+
 var member_exist = document.getElementById('minghui_store_memberName').value? false:true;
 
 

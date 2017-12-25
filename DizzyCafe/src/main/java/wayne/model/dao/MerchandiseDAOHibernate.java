@@ -85,8 +85,10 @@ public class MerchandiseDAOHibernate {
 	}
 	
 	public List<MerchandiseBean> select() {
+		List<MerchandiseBean> result = null;
 		Query<MerchandiseBean> query = this.getsession().createQuery("FROM MerchandiseBean", MerchandiseBean.class);
-		return query.getResultList();
+		result = query.getResultList();
+		return result;
 	}
 
 	public List<MerchandiseBean> select(String merchandiseTag) {
@@ -113,13 +115,13 @@ public class MerchandiseDAOHibernate {
 			int merchandiseId) {
 		MerchandiseBean select = this.select(merchandiseId);
 		if (select != null) {
-			select.setMerchandiseContent(merchandiseContent);
 			select.setMerchandiseName(merchandiseName);
-			select.setMerchandisePicture(merchandisePicture);
 			select.setMerchandisePrice(merchandisePrice);
 			select.setMerchandiseQuantity(merchandiseQuantity);
 			select.setMerchandiseStatus(merchandiseStatus);
 			select.setMerchandiseTag(merchandiseTag);
+			select.setMerchandiseContent(merchandiseContent);
+			select.setMerchandisePicture(merchandisePicture);
 		}
 		return null;
 	}

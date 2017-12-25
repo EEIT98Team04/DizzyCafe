@@ -26,109 +26,103 @@
 			</thead>
 		</table>
 	</div>
-
 	<form id="post">
-	<div>
-		<span>主題 : </span>
-		<select name="grid">
-			<option value="1">咖啡品種產地版</option>
-			<option value="2">咖啡烘焙版</option>
-			<option value="3">咖啡沖泡方式版</option>
-			<option value="4">咖啡沖烘焙具版</option>
-			<option value="5">咖啡沖泡器具版</option>
-			<option value="6">咖啡閒聊版</option>
-		</select> 
-		<span>文章標題 : <input type="text" name="title" style="width:200px; height:10px;"/></span>		
-		<span><input type="file" name="image" value="image" /></span>
 		<div>
-			<textarea id='textarea' name="textarea" style="width:100%; height:300px;"></textarea>
+			<span>主題 : </span>
+			<select id="grid" name="grid">				
+				<option value="0">請選擇主題</option>
+				<option value="1">咖啡品種產地版</option>
+				<option value="2">咖啡烘焙版</option>
+				<option value="3">咖啡沖泡方式版</option>
+				<option value="4">咖啡沖烘焙具版</option>
+				<option value="5">咖啡沖泡器具版</option>
+				<option value="6">咖啡閒聊版</option>
+			</select> 
+			<span>文章標題 : <input id="d_article" name="title" type="text" style="width:200px; height:25px;"/></span>		
+			<textarea></textarea>
+			<input type="submit" value="發文" />	
 		</div>
-		<input type="submit" value="Submit" />	
-	</div>
 	</form>
-
+	<input id="upload" name="upload" type="file" accept="image/*" style="display:none"/>
+	<div style="margin-bottom:70px;"></div>
 	<!-- jQuery庫 -->
 	<script type="text/javascript"
 		src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script src="/DizzyCafe/hongwen/js/tinymce/tinymce.min.js"></script>
-<!-- 	<script src="/DizzyCafe/hongwen/js/document.js"></script> -->
+<!-- 	<script src="/DizzyCafe/hongwen/js/post.js"></script> -->
+	<script src="/DizzyCafe/hongwen/js/document.js"></script>
 	<script>
-	$(function() {	
-		var search = document.location.search;// 取得?後面的參數
-		var hyperlink = "/DizzyCafe/hongwen/reply.jsp?";
-		$('#post').on('submit', function() {		
-			console.log('submit');
-			
-			var that = $(this),
-			url='/DizzyCafe/Documentpost.hongwen',
-			method='POST',
-			data={};
-					
-			that.find('[name]').each(function(index, value) {
-				that = $(this), name = that.attr('name'), value = that.val();
-				data[name] = value;
-			});
+	$(function() {
+		tinymce.init({
+					selector : "textarea",
+					language : 'zh_TW',
+					height : 500,
+					menubar : false,
+					statusbar : false,
+					toolbar_items_size : 'small',
+					plugins : [
+							"advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+							"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+							"table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern" ],
 
-			$.ajax({
-				url : url,
-				type : method,
-				data : data,
-				success : function(response) {
-					alert("successful");
-				}
-			})
-			return false;
-		});
-		
-		
-		$('#test').DataTable(
-				{
-					ajax : {
-						url : '/DizzyCafe/Documentget.hongwen' + search,
-						type : 'GET',
-						dataSrc : function(json) {
-							return json;
+					toolbar1 : "code | cut copy paste | searchreplace | bullist numlist | outdent indent | image | insertdatetime preview",
+					toolbar2 : "undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify",
+					toolbar3 : "fontselect fontsizeselect forecolor charmap emoticons",
+					content_css : [
+							'//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+							'//www.tinymce.com/css/codepen.min.css' ],
+
+					init_instance_callback : function() {
+						window.setTimeout(function() {
+							$("#div").show();
+						}, 1000);
+					},
+
+					file_picker_callback : function(callback, value, meta) {
+						// Provide file and text for the link dialog
+						if (meta.filetype == 'file') {
+							callback('mypage.html', {
+								text : 'My text'
+							});
+						}
+
+						// Provide image and alt text for the image dialog
+						if (meta.filetype == 'image') {
+							$('#upload').trigger('click');
+							$('#upload').change(function(event) {
+								var file_data = $("#upload").prop("files")[0];   // Getting the properties of file from file field
+								var form_data = new FormData();                  // Creating object of FormData class
+								form_data.append("file", file_data);
+								console.log(form_data);
+								// 利用ajax傳送到伺服器
+								$.ajax({
+									url : '/DizzyCafe/imageupload.hongwen',
+									type : 'POST',
+									data :form_data,
+									cache : false,
+									contentType : false,
+									processData : false,
+									success : function(data) {
+										upload='';
+//										alert('upload success');
+										callback(data, {
+											text : data
+										});
+									}
+								});
+							});
+						}
+
+						// Provide alternative source and posted for the media
+						// dialog
+						if (meta.filetype == 'media') {
+							callback('movie.mp4', {
+								source2 : 'alt.ogg',
+								poster : 'image.jpg'
+							});
 						}
 					},
-					columns : [
-							{
-								data : 'name',
-								"render" : function(data, type, row, meta) {
-									if (type === 'display') {
-										var get = 'documentId=' + row.documentId
-												+ '&name=' + row.name;
-										data = '<a href="' + hyperlink + get + '">'
-												+ data + '</a>';
-									}
-									return data;
-								}
-							},
-							{
-								data : 'memberId',
-								"render" : function(data, type, row, meta) {
-									if (type === 'display') {
-										var get = 'memberId=' + row.memberId
-												+ '&name=' + row.name;
-										// data = '<a href="' + hyperlink +
-										// get +'">' + data + '</a>';
-										data = row.times + '/' + row.memberId;
-									}
-									return data;
-								}
-							}, {
-								data : 'memberId'
-							}, {
-								data : 'popularity'
-							} ],
-					language : {
-						paginate : {
-							next : "下一頁",
-							previous : "上一頁"
-						},
-						lengthMenu : '一頁顯示 _MENU_ 筆資料'
-					},
-					info : false,
-					order : [ 1, 'desc' ]
+
 				});
 	});
 	</script>

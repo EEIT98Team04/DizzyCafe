@@ -11,7 +11,8 @@
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height:100px"></div>
-	<div style="width: 70%;">
+	<h2 style="margin:auto;width:300px">折價卷專區</h2> 
+	<div style="width: 800px;margin:auto;">
 		<table id="test"></table>
 	</div>
 
@@ -22,11 +23,13 @@
 	<!-- jQuery庫 -->
 	<script type="text/javascript"
 		src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
 	<script>
 		$(document).ready(function() {
-			$('#test').DataTable({
+			var myTable = $('#test').DataTable({
 				ajax : {
-					url : '/DizzyCafe/coupons',
+					url : '/DizzyCafe/coupons.controller',
 					type : 'POST',
 // 					dataSrc : ''
 					dataSrc : 
@@ -45,14 +48,18 @@
 	    				}
 				},
 				columns : [ {
-					data : 'eventDiscount'
+					data : 'eventDiscount',
+					title : 'Discount'
 				}, {
-					data : 'couponDeadline'
+					data : 'couponDeadline',
+					title : 'Deadline'
 				}, {
-					data : 'merchandiseId'
+					data : 'merchandiseName',
+					title : 'MerchandiseName'
 				}, {
-					data : 'couponStatus'
-				} ],
+					data : 'couponStatus',
+					title : 'Status'
+				}],
 				language : {
 					paginate : {
 						next : "下一頁",

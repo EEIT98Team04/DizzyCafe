@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.sf.json.JSONArray;
+
 @Service
 @Transactional
 public class CourseService {
@@ -26,12 +28,27 @@ public class CourseService {
 		return courseDAO.selectByName(coruseName);
 	}
 	
-	public List<CourseBean> showCourseInPage(int courseIdStart, int courseIdEnd){
-		return courseDAO.selectPageNow(courseIdStart,courseIdEnd);
+	public JSONArray showCourseInPage(int page, int rows_perPage, JSONArray courses){
+		JSONArray result = new JSONArray();
+		/* logic: rows_perPage = 4
+		 * 1 : 1-4
+		 * 2 : 5-8
+		 */
+		for (int i = rows_perPage * (page - 1); i < rows_perPage * page && i < courses.size() ; i++) { 
+			result.add(courses.get(i));
+		}
+		return result;
 	}
 	
-	public int countTotalPages(int rows_perPage) {
-		return courseDAO.countTotalPage(rows_perPage);
+	public int countTotalPages(int rows_perPage, JSONArray courses) {
+		int result = 0;
+		if (courses.size() % rows_perPage == 0) {
+			result = courses.size() / rows_perPage;
+		} else if(courses.size() % rows_perPage > 0)
+		{
+			result  = courses.size() / rows_perPage + 1;
+		}
+		return result;
 	}
 
 	public CourseBean insert(CourseBean bean) {
@@ -40,5 +57,13 @@ public class CourseService {
 			return null;
 		else
 			return bean;
+	}
+	
+	public JSONArray selectPageNow() {
+		return courseDAO.selectPageNow();
+	}
+	
+	public JSONArray showCoruseInBackstage() {
+		return courseDAO.showCoruseInBackstage();
 	}
 }

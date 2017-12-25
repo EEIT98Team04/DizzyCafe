@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dragon.model.dao.ShoppingHibernateDAO;
+import net.sf.json.JSONArray;
 
 @Service
 @Transactional
@@ -18,43 +19,31 @@ public class ShoppingService {
 	@Autowired
 	private ShoppingDAO shoppingDAO;
 
+	public JSONArray selectMerchandiseList(int memberId) {
+		return shoppingDAO.selectMerchandiseList(memberId);
+	}
+	
 	public List<ShoppingBean> select(int memberId) {
-		List<ShoppingBean> bean = shoppingDAO.select(memberId);
-		return bean;
+		return shoppingDAO.select(memberId);
 	}
 
 	public List<ShoppingBean> select() {
-		List<ShoppingBean> bean = shoppingDAO.select();
-		return bean;
+		return shoppingDAO.select();
 	}
 
 	public ShoppingBean selectMerchandise(int memberId, int merchandiseId) {
-		ShoppingBean bean = shoppingDAO.selectMerchandise(memberId, merchandiseId);
-		if (bean != null) {
-			return bean;
-		}
-		return null;
+		return shoppingDAO.selectMerchandise(memberId, merchandiseId);
 	}
 
 	public int insert(ShoppingBean bean) {
-
-		int i = shoppingDAO.insert(bean);
-		return i;
+		return shoppingDAO.insert(bean);
 	}
 
-	public ShoppingBean changeCount(ShoppingBean bean) {
-		ShoppingBean update = shoppingDAO.selectMerchandise(bean.getMemberId(), bean.getMerchandiseId());
-		if (update != null) {
-			return shoppingDAO.update(bean);
-		}
-		return null;
+	public ShoppingBean changeCount(ShoppingBean bean, int amount) {
+		return shoppingDAO.update(bean, amount);
 	}
 
 	public ShoppingBean deletemerchandise(ShoppingBean bean) {
-		ShoppingBean delete = shoppingDAO.selectMerchandise(bean.getMemberId(), bean.getMerchandiseId());
-		if (delete != null) {
 			return shoppingDAO.delete(bean);
-		}
-		return null;
 	}
 }

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import dragon.model.ShoppingBean;
 import dragon.model.ShoppingDAO;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 
 @Repository
@@ -30,7 +32,26 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 
 
 	}
-
+	
+	public JSONArray selectMerchandiseList(int memberId) {
+		/*@SuppressWarnings忽略掉警訊(黃線), @SuppressWarnings("unchecked")就是忽略掉 unchecked 的警訊*/
+		@SuppressWarnings("unchecked")
+		Query<Object[]> select = this.getSession().createNativeQuery("select shopping.merchandiseId, merchandiseName, merchandisePrice, buyCount" + 
+				" from shopping Join merchandise" +
+				" on shopping.merchandiseId = merchandise.merchandiseId" +
+				" where shopping.memberId = " + memberId);
+		List<Object[]> temp = select.getResultList();
+		JSONArray result = new JSONArray();
+		for(Object[] var:temp) {
+			JSONObject table = new JSONObject();
+			table.put("merchandiseId", var[0]);
+			table.put("merchandiseName", var[1]);
+			table.put("merchandisePrice", var[2]);
+			table.put("buyCount", var[3]);
+			result.add(table);
+		}
+		return result;
+	}
 
 	@Override
 	public List<ShoppingBean> select(int memberId) {
@@ -76,13 +97,13 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 	private static final String update = "update shopping set buyCount=? where memberId =? and merchandiseId=?";
 
 	@Override
-	public ShoppingBean update(ShoppingBean bean) {
+	public ShoppingBean update(ShoppingBean bean, int amount) {
 		if(bean != null)
 		{
 			ShoppingBean update = this.selectMerchandise(bean.getMemberId(), bean.getMerchandiseId());
 			if(update != null)
 			{
-				update.setBuyCount(bean.getBuyCount());
+				update.setBuyCount(amount);
 			}
 			return update;
 		}

@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>DizzyCafe課程</title>
+<link rel="stylesheet" href="/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
 <style type="text/css">
 	.img{
 		height: 60px;
@@ -46,17 +47,20 @@
 			<tbody>
 				<c:forEach var="course" items="${courseList}" varStatus="status">
 					<tr>
-
-						<td><a
-							href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">
-							<img class="img" src="${pageContext.request.contextPath}${course.courseImg}" /></a></td>
+					<!--<a
+					 href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">
+							<img class="img" src="${pageContext.request.contextPath}${course.courseImg}" /></a>-->
+						<td>
+							<a href="javascript: openCourse();">
+							<img class="img" src="${pageContext.request.contextPath}${course.courseImg}" /></a>
+							</td>
 						<td><a
 							href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">${course.courseName}</a></td>
 						<td>${course.courseIntro}</td>
 						<td>${course.courseCost}</td>
 						<td>${course.courseBegin}</td>
 						<td>${course.courseEnd}</td>
-						<td>${courseNowPeople[status.count-1]} / ${course.courseLimit}</td>
+						<td>${course.courseNowPeople} / ${course.courseLimit}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -79,6 +83,28 @@
 	<div>
 		<a href="${pageContext.request.contextPath}/course/courseOfMemberController.controller?page=1">
 			<button>我的課程</button></a>
-	</div>
+	</div>	
+<script src='<c:url value="/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js" />'></script>
+<script src='<c:url value="/js/jquery.fancybox-1.3.4/fancybox/jquery.easing-1.3.pack.js" />'></script>
+<script src='<c:url value="/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.js" />'></script>
+<script src='<c:url value="/js/jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js" />'></script>
+<script type="text/javascript">
+function openCourse()
+{
+	//javascript: openCourse(/DizzyCafe,1008); return false;
+	debugger;
+	$(this).fancybox({
+		'width'				: 580,
+		'height'			: 350,
+		'padding'			: 0,
+		'autoScale'			: false,
+		'transitionIn'		: 'none',
+		'transitionOut'		: 'none',
+		'href'				: 'http://localhost:8080/DizzyCafe/course/courseShow.controller?course=1008',
+		'type'				: 'iframe',
+		'onClosed'			: function(){window.location.reload();}  //關閉子視窗後的動作,
+	});
+}
+</script>
 </body>
 </html>

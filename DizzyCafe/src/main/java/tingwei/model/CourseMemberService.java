@@ -24,8 +24,27 @@ public class CourseMemberService {
 		return courseMemberDAO.selectByMemberId(memberId);
 	}
 	
-	public int countTotalPagesWithId(int rows_perPage, int memberId) {
-		return courseMemberDAO.countTotalPageWithId(rows_perPage,memberId);
+	public JSONArray ShowCourceByPage(int page,int rows_perPage, JSONArray courses) {
+		JSONArray result = new JSONArray();
+		/* logic: rows_perPage = 4
+		 * 1 : 1-4
+		 * 2 : 5-8
+		 */
+		for (int i = rows_perPage * (page - 1); i < rows_perPage * page && i < courses.size(); i++) { 
+			result.add(courses.get(i));
+		}
+		return result;
+	}
+	
+	public int countTotalPagesWithId(int rows_perPage, JSONArray courses) {
+		int result = 0;
+		if (courses.size() % rows_perPage == 0) {
+			result = courses.size() / rows_perPage;
+		} else if(courses.size() % rows_perPage > 0)
+		{
+			result  = courses.size() / rows_perPage + 1;
+		}
+		return result;
 	}
 	
 	public int[] countNowPeople(int courseIdStart, int courseIdEnd, int rows_perPage) {
@@ -36,8 +55,8 @@ public class CourseMemberService {
 		return courseMemberDAO.countMyNowPeople(memberId, Start, End,rows_perPage);
 	}
 	
-	public JSONArray showMyCourseInPage(int row_numStart, int row_numEnd ,int rows_perPage, int memberId){
-		return courseMemberDAO.selectMyPageNow(row_numStart,row_numEnd,memberId);
+	public JSONArray showMyCourseInPage(int memberId){
+		return courseMemberDAO.selectMyPageNow(memberId);
 	}
 	
 //	public List<CourseBean> showCourseInPage(int courseIdStart, int courseIdEnd){

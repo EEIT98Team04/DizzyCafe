@@ -115,14 +115,19 @@ public class CourseMemberDAO {
 	
 	
 	//會員顯示自己已參加的課程(分頁)
-	public JSONArray selectMyPageNow(int row_numStart, int row_numEnd, int memberId) {
+	public JSONArray selectMyPageNow(int memberId) {
 		@SuppressWarnings("unchecked")
-		Query<Object[]> select = this.getSession().createNativeQuery("select  courseImg, courseName, courseBegin, courseEnd, courseLimit, course.courseId from (select ROW_NUMBER() OVER(ORDER BY courseId ASC) AS row_num," + 
-				"* from courseMemberForm where memberId = ?) as newTable  JOIN course  ON newTable.courseId = course.courseId"+
-				" where row_num >? and row_num <=? ORDER BY courseId DESC");
-		select.setParameter(1, memberId);
-		select.setParameter(2, row_numStart);
-		select.setParameter(3, row_numEnd);
+		Query<Object[]> select = this.getSession().createNativeQuery(
+				" select courseImg, courseName, courseBegin, courseEnd, courseLimit,course.courseId," + 
+				" (select COUNT(memberId)" + 
+				" from courseMemberForm" + 
+				" where courseId = course.courseId) AS courseNowPeople" + 
+				" from courseMemberForm" + 
+				" join course ON courseMemberForm.courseId = course.courseId" + 
+				" where courseMemberForm.memberId = ?" + 
+				" ORDER BY courseId DESC"
+				);
+		select.setParameter(1, memberId);;
 		List<Object[]> temp = select.getResultList();
 		JSONArray result = new JSONArray();
 		for(Object[] var : temp) {
@@ -133,6 +138,7 @@ public class CourseMemberDAO {
 			tt.put("courseEnd", var[3].toString());
 			tt.put("courseLimit", var[4]);
 			tt.put("courseId",var[5]);
+			tt.put("courseNowPeople", var[6]);
 			result.add(tt);
 		}
 		return result;

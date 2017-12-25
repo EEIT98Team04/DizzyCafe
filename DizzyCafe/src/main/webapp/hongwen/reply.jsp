@@ -7,13 +7,12 @@
 <title>DizzyCafe</title>
 <link rel="stylesheet" href="/DizzyCafe/hongwen/css/reply.css" />
 </head>
-<body>
+<body id="body">
 	<jsp:include page="/HTML/Navbar.jsp" />
-	<div style="margin-top:100px"></div>
-	
+	<a id="hyperlink" href="#20">11</a>
 	<div id="article"></div>
 	
-	<form id="post">
+	<form id="post" method="post">
 		<div>
 			<textarea></textarea>
 			<input type="submit" value="發文" />	
@@ -21,47 +20,57 @@
 	</form>
 	<script src="/DizzyCafe/hongwen/js/tinymce/tinymce.min.js"></script>
 	<script src="/DizzyCafe/hongwen/js/post.js"></script>
-<!-- 	<script src="/DizzyCafe/hongwen/js/document.js"></script> -->
+	<script src="/DizzyCafe/hongwen/js/reply.js"></script>
 	<script>
-		var search = document.location.search;//取得?後面的參數
-		$(function() {
-			$(function() {
-				console.log("Get into ajax");
-				$.ajax({
-					url : '/DizzyCafe/Reply.hongwen' + search,
-					type : 'GET',
-					//data:data,//post use
-					success : function(json) {
-						setdata(json);//
+		$(function(){
+			$('#post').on('submit', function() {
+// 			alert('submit');
+			var	t = tinyMCE.activeEditor.getBody().innerHTML;//取出tinymve內容
+			var that = $(this),data={};
+			
+			//轉json格式
+//			that.find('[name]').each(function(index, value) {
+//				that = $(this), 
+//					   name = that.attr('name'),//取得name的值 
+//					   value = that.val();//取得值
+//				data[name] = value;
+//			});
+			data['title']=$.getUrlParam('documentId');//取得param值
+			data['textarea']=t;//將tinymce值放入data，並宣告為json格式[key='textarea',value=t]
+
+			console.log(data);			
+
+			//資料檢查
+			var string = ['title','textarea'];//檢查資料的key	
+			
+			//初始化所有發文設定
+			tinyMCE.activeEditor.getBody().innerHTML='';//初始化內容
+
+			//ajax傳送
+			$.ajax({
+				url : '/DizzyCafe/Reply.hongwen',
+				type : 'POST',
+				data : data,
+				cache : false,
+				success : function(json) {
+					//回傳值是字串
+//					console.log(json);
+					if(json[0]['status'] == 'false'){
+						alert('請登入會員');
+					}else{
+						alert('發文成功');
 					}
-				})
+				}
 			})
+			return false;
 		});
-		var setdata = function(json){
-			var inner='',i,j;
-			var count=0;//樓層編號，初始值為0
-			var array = ['memberId','times','content'];
-			count=0;//初始化
-			for(i in json){
-				inner +='<div class="article">';
-				inner +='<div class="user">'+'使用者圖片'+'</div>';//使用者圖片
-				inner +='<div class="content">';
-				inner +='<div class="content_header">';
-				inner +='<div style="text-align: right;">'+count+'</div>';//樓層
-				inner +='<div>'+'文章標題'+'</div>';//xxx文章標題
-				inner +='</div>';
-				inner +='<div class="content_body">';
-				inner +='<div style="margin-bottom: 10px;">發文者 : '+json[i][array[0]]+'</div>';//發文者
-				inner +='<div style="margin-bottom: 10px;">時間 : '+json[i][array[1]]+'</div>';//發文時間
-				inner +='<div>'+json[i][array[2]]+'</div>';
-				inner +='</div>';
-				inner +='<div class="content_footer">檢舉</div>';
-				inner +='</div>';
-				inner +='</div>';
-				count++;//樓層編號
-			}
-			$('#article').html(inner); 
-		};
+		$.getUrlParam = function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+        }
+})
+		
 	</script>
 </body>
 </html>

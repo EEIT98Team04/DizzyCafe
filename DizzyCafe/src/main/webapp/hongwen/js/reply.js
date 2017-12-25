@@ -67,6 +67,7 @@ var setdata = function(json) {
 	var floor = '';
 	var i = 0;// 起始頁面
 	var j = 10;// 結束頁面
+	var user = $('#tmp').text();//抓user值
 
 	inner += '<div id="floor">直達<input id="xx" type="text" style="width:30px;">樓</div>';
 	// for(;i<=j;i++){
@@ -87,12 +88,21 @@ var setdata = function(json) {
 		inner += '<div>' + json[i][array[2]] + '</div>';
 		inner += '</div>';
 		inner += '<a ' + floor + '"></a>';// 樓層用
-		inner += '<div class="content_footer">檢舉</div>';
+		inner += '<div class="content_footer">';
+		//判斷是否同一使用者，是就顯示修改按鈕
+		if(user == json[i][array[0]]){
+			inner += '<input class="change" type="button" value="修改" style="display:none">';			
+		}
+		inner += '</div>';
 		inner += '</div>';
 		inner += '</div>';
 		count++;// 樓層編號
 	}
 	$('#article').html(inner);//最後輸出，覆蓋
+	
+	//修改按鈕顯示
+	modify();
+	
 	
 	//樓層//一定要放這，標籤產生完成，才能增加功能
 	$('#xx').keydown(function(event) {
@@ -114,3 +124,8 @@ var setdata = function(json) {
 		});
 	});
 };
+var modify = function(){
+	$(".change").show();
+	var x = $('#tmp').text();
+	console.log('user='+x);
+}

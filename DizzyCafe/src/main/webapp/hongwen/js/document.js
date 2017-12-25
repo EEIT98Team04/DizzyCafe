@@ -4,7 +4,7 @@ $(function() {
 
 		$('#test').DataTable({
 					ajax : {
-						url : '/DizzyCafe//Document.hongwen' + search,
+						url : '/DizzyCafe/Document.hongwen' + search,
 						type : 'GET',
 						cache : false,
 						dataSrc : function(json) {
@@ -51,8 +51,6 @@ $(function() {
 					info : false,
 					order : [ 1, 'desc' ]
 				});
-	});
-		
 		$('#post').on('submit', function() {
 // 			alert('submit');
 			var	t = tinyMCE.activeEditor.getBody().innerHTML;//取出tinymve內容
@@ -95,3 +93,4 @@ $(function() {
 			})
 			return false;
 		});
+	});

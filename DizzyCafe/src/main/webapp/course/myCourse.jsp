@@ -47,15 +47,15 @@
 				<c:forEach var="course" items="${myCourse}" varStatus="status">
 					<tr>
 						<td><a href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">
-							<img class="img" src="${pageContext.request.contextPath}/image/course/${course.courseImg}" />
-							</a></td>
+							<img class="img" src="${pageContext.request.contextPath}${course.courseImg}" /></a>
+							</td>
 						<td><a href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">${course.courseName}
 							<input name="courseIdinRow" type="hidden" value="${course.courseId }"/>
 							<input name="memberIdinRow" type="hidden" value="${user.memberId }"/>
 							</a></td> 
 						<td>${course.courseBegin}</td>
 						<td>${course.courseEnd}</td>
-						<td>${courseNowPeople[status.count-1]}/${course.courseLimit}</td>
+						<td>${course.courseNowPeople}/${course.courseLimit}</td>
 						<td><button name="quit" type="button" class="btn btn-primary"
 								data-toggle="modal" data-target="#quitCourse">我要退出</button></td>
 					</tr>

@@ -31,7 +31,7 @@ public class DocumentService {
 		if(bean != null) {
 			dao = documentDAO.insert(bean);
 			if(dao == true) {
-				temp = "[{\"status\":\""+bean.getDstatus()+"\"}]";
+				temp = "[{\"status\":\"success\"}]";
 				json = JSONArray.fromObject(temp);				
 			}
 		}			

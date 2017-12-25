@@ -25,6 +25,7 @@ public class ForgotPasswordController {
 
 	@RequestMapping(method= {RequestMethod.POST}, produces= {"text/html;charset=utf-8"})
 	public @ResponseBody String sendEmail(String memberEmail) {
+		System.out.println("進入Controller");
 		if(loginService.forgot_password_send_email(memberEmail)) {
 			return "信件已寄出";
 		} else {

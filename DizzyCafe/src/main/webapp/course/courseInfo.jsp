@@ -6,12 +6,81 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${course.courseName}</title>
+<style type="text/css">
+.courseTable{
+	border:3px #DEB887 solid;
+	cellpadding: 10;
+	border:1;
+	font-family: Microsoft JhengHei;
+}
+.courseTable tr:nth-child(even){
+  	background-color: #F5DEB3;
+  	}
+
+.courseTable tr:nth-child(odd) {
+  background-color: white;
+}
+</style>
 </head>
 <body>
+<table>
+	<tr height="100px"></tr>
+</table>
 	<jsp:include page="/HTML/Navbar.jsp" />
-	<div style="height: 100px"></div>
-	<h3>${course.courseImg}</h3>
-	<h3>${course.courseName}</h3>
+	<div align="center">
+		<table class="courseTable">
+			<tr>
+				<th></th>
+			</tr>
+			<tr>
+				<td><img
+					src="${pageContext.request.contextPath}${course.courseImg}" /></td>
+			</tr>
+			<tr>
+				<th>課程名稱</th>
+			</tr>
+			<tr>
+				<td>${course.courseName}</td>
+			</tr>
+			<tr>
+				<th>課程簡介</th>
+			</tr>
+			<tr>
+				<td>${course.courseIntro}</td>
+			</tr>
+			<tr>
+				<th>課程內容</th>
+			</tr>
+			<tr>
+				<td>${course.courseContent}</td>
+			</tr>
+			<tr>
+				<th>報名費用</th>
+			</tr>
+			<tr>
+				<td>${course.courseCost}</td>
+			</tr>
+			<tr>
+				<th>講師</th>
+			</tr>
+			<tr>
+				<td>${course.courseTeacher}</td>
+			</tr>
+			<tr>
+				<th>上課時間</th>
+			</tr>
+			<tr>
+				<td>${course.courseBegin}～ ${course.courseEnd}</td>
+			</tr>
+			<tr>
+				<th>報名時間</th>
+			</tr>
+			<tr>
+				<td>${course.courseSignupBegin}～ ${course.courseSignupEnd}</td>
+			</tr>
+		</table>
+	</div>
+	<!--<h3>${course.courseName}</h3>
 	<h3>${course.courseIntro}</h3>
 	<h3>${course.courseContent}</h3>
 	<h3>${course.courseCost}</h3>
@@ -19,11 +88,10 @@
 	<h3>${course.courseBegin}</h3>
 	<h3>${course.courseEnd}</h3>
 	<h3>${course.courseSignupBegin}</h3>
-	<h3>${course.courseSignupEnd}</h3>
+	<h3>${course.courseSignupEnd}</h3> -->
 
 	<!-- Button to open the modal login form -->
-	<button
-		onclick="document.getElementById('signup').style.display='block'">我要報名</button>
+	<button id="iwannasignup">我要報名</button>
 
 	<!-- The Modal -->
 	<div id="signup" class="minghui_modal">
@@ -31,25 +99,28 @@
 			class="close" title="Close Modal">&times;</span>
 
 		<!-- Modal Content -->
-		<form class="minghui_modal-content animate" action="${pageContext.request.contextPath}/course/courseSignUpController.controller" >
-<!-- 			<div class="imgcontainer"> -->
-<!-- 				<img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
-<!-- 			</div> -->
+		<form class="minghui_modal-content animate"
+			action="${pageContext.request.contextPath}/course/courseSignUpController.controller">
+			<!-- 			<div class="imgcontainer"> -->
+			<!-- 				<img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
+			<!-- 			</div> -->
 
-			<p>${user.memberName } 你好</p>
-				<input id="memberName" name="memberName" type="hidden" value="${user.memberName }">
+			<p>${user.memberName }你好</p>
+			<input id="memberName" name="memberName" type="hidden"
+				value="${user.memberName }">
 			<p>你要報名 ${course.courseName }</p>
-				<input id="courseId" name="courseId" type="hidden" value="${course.courseId }">
+			<input id="courseId" name="courseId" type="hidden"
+				value="${course.courseId }">
 			<div class="container">
-				<label><b>電話</b></label> 
-				<input class="minghui_input_type_text_password" type="text" placeholder="Phone number" name="phone" required> 
-				
-				<label><b>E-mail</b></label>
-				<input class="minghui_input_type_text_password" type="text" placeholder="E-mail" name="email" required>
-				<label for="same" id="sameAsMemberData"><input type="checkbox" id="same"> 同會員資料
-				</label>
+				<label><b>電話</b></label> <input
+					class="minghui_input_type_text_password" type="text"
+					placeholder="Phone number" name="phone" required> <label><b>E-mail</b></label>
+				<input class="minghui_input_type_text_password" type="text"
+					placeholder="E-mail" name="email" required> <label
+					for="same" id="sameAsMemberData"><input type="checkbox"
+					id="same"> 同會員資料 </label>
 			</div>
-			
+
 			<button type="submit">報名</button>
 
 			<div class="container" style="background-color: #f1f1f1">
@@ -71,19 +142,57 @@
 				modal.style.display = "none";
 			}
 		}
-		
-		
-		$('#same').change(function(){
-			if($('#same').prop('checked')==true){
-				$('input[name="phone"]').val("${user.memberPhone}").prop("readonly",true).css('background-color',"#FFF8D7");
-				$('input[name="email"]').val("${user.memberEmail}").prop("readonly",true).css('background-color',"#FFF8D7");	
-			}
-			else{
-				$('input[name="phone"]').val('').prop("readonly",false).css('background-color',"");
-				$('input[name="email"]').val('').prop("readonly",false).css('background-color',"");
+
+		$('#iwannasignup').click(function() {
+			if ('${not empty user}' == "true") {
+				document.getElementById('signup').style.display = 'block';
+			} else {
+				//要求登入
+
 			}
 		});
+
+		$(function() {
+			$.post("/DizzyCafe//course/CheckTimeController.controller", {
+				"courseId" : '${course.courseId }'
+			}, function(data) {
+				if (data == "TimeError") {
+					$('#iwannasignup').text("不是報名時間").prop("disabled", true);
+				}
+			});
+
+			if ('${not empty user}' == "true") {
+				alert("do user check")
+				$.post("/DizzyCafe//course/CheckSignedController.controller", {
+					"courseId" : '${course.courseId }',
+					"memberId" : '${user.memberId }'
+				}, function(data) {
+					if (data == "alreadySignedUp") {
+						$('#iwannasignup').text("已報名").prop("disabled", true);
+					}
+				});
+			}
+		});
+
+		$('#same').change(
+				function() {
+					if ($('#same').prop('checked') == true) {
+						$('input[name="phone"]').val("${user.memberPhone}")
+								.prop("readonly", true).css('background-color',
+										"#FFF8D7");
+						$('input[name="email"]').val("${user.memberEmail}")
+								.prop("readonly", true).css('background-color',
+										"#FFF8D7");
+					} else {
+						$('input[name="phone"]').val('')
+								.prop("readonly", false).css(
+										'background-color', "");
+						$('input[name="email"]').val('')
+								.prop("readonly", false).css(
+										'background-color', "");
+					}
+				});
 	</script>
-	
+
 </body>
 </html>

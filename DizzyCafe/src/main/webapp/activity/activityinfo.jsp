@@ -23,6 +23,12 @@
  	color:#BC5B27; 
  	text-decoration: none; 
 } 
+.forContent{
+	overflow : hidden;
+  	text-overflow : ellipsis;
+  	white-space : nowrap;
+  	width: 240px;
+}
 </style>
 </head>
 <body>
@@ -35,11 +41,11 @@
 			<c:forEach items="${items }" var="showBean" varStatus="sta">
 				<div class="card">
     				<a href="${pageContext.request.contextPath}/activities?No=${showBean.activityNo-1000}">
-						<img class="card-img-top" width="240px" src="<c:url value="/activity/${showBean.activityNo }.jpg"/>"/>
+						<img class="card-img-top" width="240px" src="${pageContext.request.contextPath}${showBean.activityPicture}"/>
 					</a>
     				<div class="card-body">
       					<h4 class="card-title">${showBean.activityName }</h4>
-      					<p class="card-text">${showBean.activityContent }</p>
+      					<div class="card-text content">${showBean.activityContent }</div>
      					 <p class="card-text"><small class="text-muted"><a class="more" href="${pageContext.request.contextPath}/activities?No=${showBean.activityNo-1000}">看更多</a></small></p>
    					</div>
   				</div>
@@ -67,7 +73,15 @@
 			</ul>
 		</div>
 	</div>
-	
+	<script>
+		$(document).ready(function(){
+			for(var i = 0;i<3;i++){
+				var temp = $('.content:eq('+i+')').html().split('>',2);
+				console.log(temp);  
+				$('.content:eq('+i+')').html(temp[0]+'>'+temp[1]+'>...');				
+			}
+		});
+	</script>
 <!-- 	<button type="button" id="newEvent">新增</button> -->
 <!-- 	<script> -->
 <!--  		$(function(){ -->

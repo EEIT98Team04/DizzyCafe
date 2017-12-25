@@ -23,18 +23,14 @@ public class CourseOfMemberController {
 	
 	@RequestMapping(path="/course/courseOfMemberController.controller", method= {RequestMethod.GET,RequestMethod.POST})
 	public String showMemberCourse(Model model, int page, HttpSession session) {
-		int row_num = 1;
-		int rows_perPage = 4;
-		
-		int row_numStart = (row_num + (page - 1) * rows_perPage);
-		int row_numEnd = (row_num + page * rows_perPage);		
-		
 		MemberBean user = (MemberBean) session.getAttribute("user");
-		int memberId = user.getMemberId();
+		int memberId = user.getMemberId(); //取課程資料
+		int rows_perPage = 4;
+		JSONArray _Course = courseMemberService.showMyCourseInPage(memberId);
 
-		model.addAttribute("TotalPages" ,courseMemberService.countTotalPagesWithId(rows_perPage,memberId));
-		model.addAttribute("myCourse" ,courseMemberService.showMyCourseInPage(row_numStart, row_numEnd,memberId));
-		model.addAttribute("courseNowPeople" ,courseMemberService.countMyNowPeople(memberId, row_numStart, row_numEnd,rows_perPage));
+		model.addAttribute("myCourse" ,courseMemberService.ShowCourceByPage(page,rows_perPage,_Course)); //本頁顯示課程
+		model.addAttribute("TotalPages" ,courseMemberService.countTotalPagesWithId(rows_perPage,_Course)); //計算總頁數
+		//model.addAttribute("courseNowPeople" ,courseMemberService.countMyNowPeople(memberId, row_numStart, row_numEnd,rows_perPage));
 		
 		return "myCourse";
 	}

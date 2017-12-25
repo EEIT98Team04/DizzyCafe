@@ -57,9 +57,9 @@ $(function() {
 								contentType : false,
 								processData : false,
 								success : function(data) {
-									// alert('success');
+//									alert('upload success');
 									callback(data, {
-										text : 'My text'
+										text : data
 									});
 								}
 							});

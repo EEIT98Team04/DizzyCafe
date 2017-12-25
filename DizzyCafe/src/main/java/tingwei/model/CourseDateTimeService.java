@@ -1,0 +1,58 @@
+package tingwei.model;
+
+import java.util.Calendar;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import net.sf.json.JSONArray;
+
+@Service
+@Transactional
+public class CourseDateTimeService {
+	
+	@Autowired
+	private CourseDateTimeDAO courseDateTimeDAO;
+	
+	public boolean insert(CourseDateTimeBean bean) {
+		CourseDateTimeBean temp = courseDateTimeDAO.insert(bean);
+		if(temp!=null)
+			return true;
+		else
+			return false;
+	}
+	
+	public void insertAll(CourseBean temp , String[] whichDay,String time ,int courseLength) {
+		CourseDateTimeBean courseDateTimeBean = new CourseDateTimeBean();
+		courseDateTimeBean.setCourseId(temp.getCourseId());
+		Calendar cal1 = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		cal1.setTime(temp.getCourseBegin());
+		cal2.setTime(temp.getCourseEnd());
+		
+		for(;cal1.getTimeInMillis()<cal2.getTimeInMillis();cal1.add(Calendar.DATE, 1)) {
+			//day_in_week等於選擇的上課時間的話
+			for(String var : whichDay) {
+				if(cal1.get(Calendar.DAY_OF_WEEK)==Integer.valueOf(var)) {
+					courseDateTimeBean.setCourseStartTime(new java.sql.Timestamp(cal1.getTimeInMillis()
+							+Integer.valueOf(time)*3600000));
+					courseDateTimeBean.setCourseEndTime(new java.sql.Timestamp(cal1.getTimeInMillis()
+							+(Integer.valueOf(time)+courseLength)*3600000));
+					System.out.println(courseDateTimeBean);
+					this.insert(courseDateTimeBean);
+				}
+			}
+		}
+	}
+	
+	public List<CourseDateTimeBean> select() {
+		System.out.println("CourseDateTimeService beanList:"+courseDateTimeDAO.select());
+		return courseDateTimeDAO.select();
+	}
+	
+	public JSONArray selectJoinCourse(){
+		return courseDateTimeDAO.selectJoinCourse();
+	}
+
+}

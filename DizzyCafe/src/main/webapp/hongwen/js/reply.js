@@ -10,8 +10,55 @@ $(function() {
 			setdata(json);//
 		}
 	});
-	//回文
-	
+	//回覆留言
+	$('#post').on('submit', function() {
+//			alert('submit');
+		var	t = tinyMCE.activeEditor.getBody().innerHTML;//取出tinymve內容
+		var that = $(this),data={};
+		
+		//轉json格式
+//		that.find('[name]').each(function(index, value) {
+//			that = $(this), 
+//				   name = that.attr('name'),//取得name的值 
+//				   value = that.val();//取得值
+//			data[name] = value;
+//		});
+		data['title']=$.getUrlParam('documentId');//取得param值
+		data['textarea']=t;//將tinymce值放入data，並宣告為json格式[key='textarea',value=t]
+
+		console.log(data);			
+
+		//資料檢查
+		var string = ['title','textarea'];//檢查資料的key	
+		
+		//初始化所有發文設定
+		tinyMCE.activeEditor.getBody().innerHTML='';//初始化內容
+
+		//ajax傳送
+		$.ajax({
+			url : '/DizzyCafe/Reply.hongwen',
+			type : 'POST',
+			data : data,
+			cache : false,
+			success : function(json) {
+				//回傳值是字串
+//				console.log(json);
+				if(json[0]['status'] == 'false'){
+					alert('請登入會員');
+				}else{
+					alert('發文成功');
+					window.location.replace(document.location.href);//取得現在的URL，並自動導向
+				}
+			}
+		})
+		return false;
+	});
+	//取得參數
+	$.getUrlParam = function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+    }
 })
 var setdata = function(json) {
 	var inner = '', i, j;

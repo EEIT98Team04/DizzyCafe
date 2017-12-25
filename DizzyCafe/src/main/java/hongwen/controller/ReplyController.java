@@ -39,8 +39,8 @@ public class ReplyController {
 			return json;
 		}
 //		int replyId, String membername, int memberId, int documentId, String content, Date times
-		ReplyBean replybean = new ReplyBean(1,bean.getMemberName(),bean.getMemberId(), Integer.parseInt((String) param.get(key[1])),
-				(String) param.get(key[2]), new java.util.Date());
+		ReplyBean replybean = new ReplyBean(1,bean.getMemberName(),bean.getMemberId(), Integer.parseInt((String) param.get(key[0])),
+				(String) param.get(key[1]), new java.util.Date());
 
 		json = replyService.insert(replybean);
 		return json;//if it's success,then return json about {"status":"success"}

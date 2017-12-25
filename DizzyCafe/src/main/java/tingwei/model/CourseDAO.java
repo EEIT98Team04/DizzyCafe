@@ -34,10 +34,34 @@ public class CourseDAO {
 		return select.getResultList();
 	}
 
-	public List<CourseBean> selectPageNow(int courseIdStart, int courseIdEnd) {
-		Query<CourseBean> select = this.getSession().createQuery("FROM CourseBean WHERE courseId >" + courseIdStart
-				+ " AND courseId <=" + courseIdEnd + " ORDER BY courseId DESC", CourseBean.class);
-		return select.getResultList();
+	public JSONArray selectPageNow() {
+		@SuppressWarnings("unchecked")
+		Query<Object[]> select = this.getSession().createNativeQuery
+				(" select *," + 
+				" (select COUNT(memberId)" + 
+				" from courseMemberForm" + 
+				" where courseId = course.courseId) AS courseNowPeople" + 
+				" from course ORDER BY courseid DESC");
+		List<Object[]> temp = select.getResultList();
+		JSONArray result = new JSONArray();
+		for(Object[] var : temp) {
+			JSONObject tt = new JSONObject();
+			tt.put("courseId", var[0]);
+			tt.put("courseName", var[1]);
+			tt.put("courseImg", var[2]);
+			tt.put("courseIntro", var[3]);
+			tt.put("courseContent", var[4]);
+			tt.put("courseCost", var[5]);
+			tt.put("courseTeacher", var[6]);
+			tt.put("courseBegin", var[7].toString());
+			tt.put("courseEnd", var[8].toString());
+			tt.put("courseSignupBegin", var[9].toString());
+			tt.put("courseSignupEnd", var[10].toString());
+			tt.put("courseLimit", var[11]);
+			tt.put("courseNowPeople", var[12]);
+			result.add(tt);
+		}
+		return result;
 	}
 
 	public boolean insert(CourseBean bean) {
@@ -76,13 +100,13 @@ public class CourseDAO {
 		return query.getResultList();
 	}
 
-	public int countTotalPage(int row_perPage) {
-		Long temp = (long) this.getSession().createQuery("Select COUNT(*) FROM CourseBean").uniqueResult();
-		if (temp.intValue() > 0 && temp.intValue() % row_perPage == 0)
-			return temp.intValue() / row_perPage;
-		else
-			return temp.intValue() / row_perPage + 1;
-	}
+//	public int countTotalPage(int row_perPage) {
+//		Long temp = (long) this.getSession().createQuery("Select COUNT(*) FROM CourseBean").uniqueResult();
+//		if (temp.intValue() > 0 && temp.intValue() % row_perPage == 0)
+//			return temp.intValue() / row_perPage;
+//		else
+//			return temp.intValue() / row_perPage + 1;
+//	}
 
 	public CourseBean update(int courseId, String courseName, String courseImg, String courseIntro,
 			String courseContent, int courseCost, String courseTeacher, java.sql.Date courseBegin,

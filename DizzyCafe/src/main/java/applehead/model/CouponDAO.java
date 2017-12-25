@@ -39,6 +39,19 @@ public class CouponDAO {
 		return result;
 	}
 	
+	public List<Object[]> selectFromMemberIdObject(int memberId) {
+		List<Object[]> result = null;
+		Query<Object[]> query = this.getSession().createNativeQuery(
+				"select c.eventDiscount,c.couponDeadline,c.couponStatus,m.merchandiseName "
+				+ "from coupon c join merchandise m "
+				+ "on c.merchandiseId = m.merchandiseId "
+				+ "where c.memberId = ?");
+		query.setParameter(1, memberId);
+		result = query.getResultList();
+		return result;
+	}
+	
+	
 	public CouponBean updateCouponStatus(int CouponStatus,int couponId) {
 		CouponBean update = null;
 		try {

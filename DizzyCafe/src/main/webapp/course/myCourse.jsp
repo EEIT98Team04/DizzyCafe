@@ -55,7 +55,7 @@
 							</a></td> 
 						<td>${course.courseBegin}</td>
 						<td>${course.courseEnd}</td>
-						<td>${courseNowPeople[status.count-1]}/${course.courseLimit}</td>
+						<td>${course.courseNowPeople}/${course.courseLimit}</td>
 						<td><button name="quit" type="button" class="btn btn-primary"
 								data-toggle="modal" data-target="#quitCourse">我要退出</button></td>
 					</tr>

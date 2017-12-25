@@ -11,7 +11,8 @@
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height:100px"></div>
-	<div style="width: 70%;">
+	<h2 style="margin:auto;width:300px">折價卷專區</h2> 
+	<div style="width: 800px;margin:auto;">
 		<table id="test"></table>
 	</div>
 
@@ -53,8 +54,8 @@
 					data : 'couponDeadline',
 					title : 'Deadline'
 				}, {
-					data : 'merchandiseId',
-					title : 'MerchandiseId'
+					data : 'merchandiseName',
+					title : 'MerchandiseName'
 				}, {
 					data : 'couponStatus',
 					title : 'Status'

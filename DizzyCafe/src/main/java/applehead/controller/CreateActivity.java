@@ -21,16 +21,10 @@ public class CreateActivity {
 
 	@Autowired
 	ActivityListService activityListService;
-		
-	
-	@RequestMapping(
-			path="/createEvent.controller",
-			method= {RequestMethod.GET,RequestMethod.POST}
-		)
-	public String createEvent(String activityName,String activityStart,
-			String activityEnd,String activityContent,
-			MultipartFile activityPicture,Model model) {
 
+	@RequestMapping(path = "/createEvent.controller", method = { RequestMethod.GET, RequestMethod.POST })
+	public String createEvent(String activityName, String activityStart, String activityEnd, String activityContent,
+			MultipartFile activityPicture, Model model) {
 		java.sql.Date startDate = null;
 		java.sql.Date endDate = null;
 		try {
@@ -46,28 +40,27 @@ public class CreateActivity {
 		bean.setActivityStart(startDate);
 		bean.setActivityEnd(endDate);
 		bean.setActivityContent(activityContent);
-		
-		
-		
+
 		if (!activityPicture.isEmpty()) {
 			try {
+				ActivityListBean temp = activityListService.createActivity(bean);
 				byte[] bytes = activityPicture.getBytes();
-	
+
 				// Create the file on server
 				String[] strs = activityPicture.getContentType().split("/");
 				String server_path = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
-				String path = "/activity/res/images/" + bean.getActivityName() + "." + strs[1];
-				
-				bean.setActivityPicture(path);
+				String path = "/activity/res/images/" + temp.getActivityNo() + "." + strs[1];
+
+				temp.setActivityPicture(path);
 				File serverFile = new File(server_path + path);
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();
-				
-				activityListService.createActivity(bean);
+
+				activityListService.updateActivity(temp);
 				return "createActivity.success";
 			} catch (Exception e) {
-				System.out.println(e.getMessage());				
+				System.out.println(e.getMessage());
 				return "createActivity.success";
 			}
 		} else {

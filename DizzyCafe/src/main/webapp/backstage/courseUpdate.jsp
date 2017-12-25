@@ -15,6 +15,8 @@
 	margin: auto;
 }
 </style>
+<link href="/DizzyCafe/wayne/css/lightbox.css" rel="stylesheet">
+<script src="<c:url value="../wayne/js/lightbox.js"/>"></script>
 </head>
 <body>
 	<jsp:include page="/backstage/index.jsp"></jsp:include>
@@ -23,7 +25,7 @@
 		<div class="container-fluid" style="margin-top: 50px">
 			<h2 style="margin: 20px auto; width: 90%">新增課程</h2>
 			<form id="form1" enctype="multipart/form-data" method="post"
-				action="${pageContext.request.contextPath}/course/courseNew.controller">
+				action="${pageContext.request.contextPath}/backstage/courseUpdate.controller">
 				<fieldset>
 				<div align="center"> 
 					<table>
@@ -31,36 +33,40 @@
 							<td>
 								<table>
 									<tr>
+									<th>課程ID</th>
+										<td>
+										<input type="text" name="courseId" value="${CourseBean.courseId }" readonly/></td>
+									</tr>
+									<tr>
 									<th>名稱</th>
 										<td>
-										<input type="text"
-											name="courseName" required></td>
+										<input type="text" name="courseName" value="${CourseBean.courseName }" required></td>
 									</tr>
 									<tr>
 									<th>圖片</th>
 									<td>
-										<input type="file" name="courseImg" accept="image/*" required>
+										<input type="file" name="courseImg" value="${CourseBean.courseImg }" accept="image/*" required>
 									</td>
 									</tr>
 									<tr>
 									<th>簡介</th>
 										<td><input type="text"
-											name="courseIntro" required> </td>
+											name="courseIntro" value="${CourseBean.courseIntro }" required> </td>
 									</tr>
 									<tr>
 									<th>講師</th>
 										<td>
-										<input type="text" name="courseTeacher" required></td>
+										<input type="text" name="courseTeacher" value="${CourseBean.courseTeacher }" required></td>
 									</tr>
 									<tr>
 									<th>人數上限</th>
 										<td>
-										<input type="text" name="courseLimit" required></td>
+										<input type="text" name="courseLimit" value="${CourseBean.courseLimit }" required></td>
 									</tr>
 									<tr>
 									<th>課程價格</th>
 									<td>
-									<input type="text" name="courseCost" required>
+									<input type="text" name="courseCost" value="${CourseBean.courseCost }" required>
 									</td>
 									</tr>
 								</table>
@@ -70,14 +76,14 @@
 									<tr>
 									<th><label for="courseSignupBegin">報名期限</label></th>
 										<td>
-											<input type="text" id="courseSignupBegin" name="courseSignupBegin" readonly>～ 
-											<input type="text" id="courseSignupEnd" name="courseSignupEnd" readonly>
+											<input type="text" id="courseSignupBegin" name="courseSignupBegin" value="${CourseBean.courseSignupBegin }" readonly>～ 
+											<input type="text" id="courseSignupEnd" name="courseSignupEnd" value="${CourseBean.courseSignupEnd }" readonly>
 										</td>
 									<tr>
 									<th><label for="courseBegin">課程日期</label></th>
 										<td>
-											<input type="text" id="courseBegin" name="courseBegin" readonly>～
-											<input type="text" id="courseEnd" name="courseEnd" readonly>
+											<input type="text" id="courseBegin" name="courseBegin" value="${CourseBean.courseBegin }" readonly>～
+											<input type="text" id="courseEnd" name="courseEnd" value="${CourseBean.courseEnd }" readonly>
 										</td>
 									</tr>
 									<tr>
@@ -114,7 +120,7 @@
 									</tr>
 									<tr>
 										<th></th>
-											<td>
+											<td class="days">
 												<label for="monday">
 												<input id="monday" type="checkbox" name="whichDay" value="2" />星期一</label>
 												<label for="tuesday">
@@ -147,100 +153,12 @@
 						<tr height="20px"></tr>
 						<tr>
 						<td colspan="2" align="center">
-						<button id="submit" type="submit" class="btn btn-info">送出</button>
+						<button id="submit" type="submit" class="btn btn-info">修改</button>
 						<button type="reset" class="btn" style="margin-left: 50px">清除</button>
 						</td>
 						</tr>
 					</table>
 					</div>
-					<!--<div> 
-						<label>課程名稱</label> <input type="text" name="courseName" required>
-						<span style="float: right;padding-right: 22.5%"> 
-							<label>課程圖片</label> 
-						</span>
-					</div>
-					<div>
-						<label>課程介紹</label>
-						<input type="text" name="courseIntro" required>
-						<span style="float: right;"> 
-							<input type="file" name="courseImg" accept="image/*" required>
-						</span>
-					</div>
-					<div style="margin-top:10px;">
-						<label>課程價格</label> <input type="text" name="courseCost" required>
-						<span>${error.xxxcourseCost }</span>
-						<span style="margin-left: 20%"> 
-							<label>上課時間</label> 
-							<select name="time">
-								<option value="9">09:00</option>
-								<option value="10">10:00</option>
-								<option value="11">11:00</option>
-								<option value="12">12:00</option>
-								<option value="13">13:00</option>
-								<option value="14">14:00</option>
-								<option value="15">15:00</option>
-								<option value="16">16:00</option>
-								<option value="17">17:00</option>
-								<option value="18">18:00</option>
-							</select>
-						</span>
-					</div>
-					<div>
-						
-						<span style="margin-left: 20%"> 
-							<label>上課時數</label> 
-							<select name="courseLength">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-							</select> <span>小時</span>
-						</span>
-					</div>
-					<div>
-						<label>人數上限</label> <input type="text" name="courseLimit" required>
-						<span style="margin-left: 20%"> 
-							<label>每周幾上課</label> <label for="monday"><input
-							id="monday" type="checkbox" name="whichDay" value="2" />星期一</label> <label
-							for="tuesday"><input id="tuesday" type="checkbox"
-							name="whichDay" value="3" />星期二</label> <label for="wednesday"><input
-							id="wednesday" type="checkbox" name="whichDay" value="4" />星期三 </label>
-							<label for="thursday"><input id="thursday" type="checkbox"
-							name="whichDay" value="5" />星期四 </label> <label for="friday"><input
-							id="friday" type="checkbox" name="whichDay" value="6" />星期五 </label> <label
-							for="saturday"><input id="saturday" type="checkbox"
-							name="whichDay" value="7" />星期六 </label> <label for="sunday"><input
-							id="sunday" type="checkbox" name="whichDay" value="1" />星期日</label>
-						</span>
-					</div>
-					<div style="margin-top:10px;">
-						<label for="courseSignupBegin">報名開始日期</label> <input type="text"
-							id="courseSignupBegin" name="courseSignupBegin" readonly>
-						<label style="margin-left: 17%" for="courseSignupEnd">報名結束日期</label> <input type="text"
-							id="courseSignupEnd" name="courseSignupEnd" readonly>
-					</div>
-  
-					<div>
-						<label for="courseBegin">課程開始日期</label> <input type="text"
-							id="courseBegin" name="courseBegin" readonly> 
-						<label style="margin-left: 17%"	for="courseEnd">課程結束日期</label> <input type="text" id="courseEnd"
-							name="courseEnd" readonly>
-					</div>
-					<div>
-						<label>課程內容</label>
-						<div>
-							<input type="text" name="courseContent" required id="editor1">
-						</div>
-					</div>
- 
-
-					<div style="margin:15px auto; width:20%">
-						<button id="submit" type="submit" class="btn btn-info">送出</button>
-						<button type="reset" class="btn" style="margin-left: 50px">清除</button>
-					</div>-->
-
 				</fieldset>
 			</form>
 		</div>
@@ -253,15 +171,55 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="../backstage/ckeditor/ckeditor.js"></script>
 	<script>
+		//回填上課時間
+		$(function(){
+			var time = "${CourseBean.courseTime}";
+			for(i=0;i<10;i++){
+				if($('select[name="time"] option:eq('+i+')').val()==time){
+					$('select[name="time"] option:eq('+i+')').attr('selected','selected');
+				}				
+			}
+		});
+	
+		
+		//回填上課時數
+		$(function(){
+			var courseLength = "${CourseBean.courseLength}";
+			for(i=0;i<6;i++){
+				if($('select[name="courseLength"] option:eq('+i+')').val()==courseLength){
+					$('select[name="courseLength"] option:eq('+i+')').attr('selected','selected');
+				}				
+			}
+		});
+		
+		//回填上課日
+		$(function(){
+			var temp = "${CourseBean.courseWeek}";
+			var whichDay = temp.split("");
+			$(':checkbox').each(function(){
+				var tmp = this;
+				$(whichDay).each(function(i){
+					if(tmp.value==this){
+						$(tmp).prop("checked","true");						
+					}
+				})
+			});
+		});
+		
 		//editor
 		CKEDITOR.replace('editor1');
-
+		//editor 回填
+		$(function(){
+			CKEDITOR.instances.editor1.setData("${CourseBean.courseContent}");
+		})
+		
+		
 		$('#submit').click(
 				function(e) {
 					//editor 資料處理
 					$('input[name="courseContent"]').val(
 							CKEDITOR.instances.editor1.getData());
-				});
+		});
 		
 		var dateFormat = "yy-mm-dd";
 		//課程時間

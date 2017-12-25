@@ -18,18 +18,22 @@ import tingwei.model.CourseDateTimeService;
 import tingwei.model.CourseService;
 
 @Controller
-@RequestMapping("/course/courseNew.controller")
-public class CourseNewController {
-	
+public class BackStageUpdateCourseController {
+
 	@Autowired
-	private CourseService courseService;
+	CourseService courseService;
 	@Autowired
-	private CourseDateTimeService courseDateTimeService;
-	
-	
-	
+	CourseDateTimeService courseDateTimeService;
+
+	@RequestMapping(path = "/backstage/courseFillBackUpdate.controller", method = { RequestMethod.GET, RequestMethod.POST })
+	public String fillBackUpdate(Model model, int courseId) {
+		CourseBean bean = courseService.courseUpdateChangePage(courseId);
+		model.addAttribute("CourseBean", bean);
+		return "courseUpdate";
+	}
+
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
-	public String method(Model model, String courseName, String courseIntro,
+	public String Update(Model model, int courseId, String courseName, String courseIntro,
 			String courseContent, int courseCost,
 			String courseTeacher, int courseLimit,
 			String courseSignupBegin, String courseSignupEnd,
@@ -42,6 +46,9 @@ public class CourseNewController {
 		java.sql.Date courseSignupEndNew = null;
 		java.sql.Date courseBeginNew = null;
 		java.sql.Date courseEndNew = null;
+		
+		System.out.println("courseSignupBegin"+courseSignupBegin);
+		System.out.println("courseSignupEnd"+courseSignupEnd);
 		
 		try {
 			courseSignupBeginNew = new java.sql.Date(dateFormate.parse(courseSignupBegin).getTime());
@@ -56,9 +63,9 @@ public class CourseNewController {
 		for(String var : whichDay) {
 			courseWeek = courseWeek + var;
 		}
-		System.out.println(courseWeek);
 		
 		CourseBean courseBean = new CourseBean();
+		courseBean.setCourseId(courseId);
 		courseBean.setCourseName(courseName);
 		courseBean.setCourseIntro(courseIntro);
 		courseBean.setCourseContent(courseContent);
@@ -72,7 +79,7 @@ public class CourseNewController {
 		courseBean.setCourseTime(time);
 		courseBean.setCourseLength(courseLength);
 		courseBean.setCourseWeek(courseWeek);
-		
+				
 		if (!courseImg.isEmpty()) {
 			try {
 				byte[] bytes = courseImg.getBytes();
@@ -88,7 +95,9 @@ public class CourseNewController {
 				stream.write(bytes);
 				stream.close();
 				
-				courseService.insert(courseBean);
+				courseService.update(courseBean);
+				//清除再重建
+				courseDateTimeService.delete(courseId);
 				courseDateTimeService.insertAll(courseBean, whichDay, time, courseLength);
 				
 				return "courseManage";
@@ -100,5 +109,4 @@ public class CourseNewController {
 			return "courseManage";
 		}
 	}
-
 }

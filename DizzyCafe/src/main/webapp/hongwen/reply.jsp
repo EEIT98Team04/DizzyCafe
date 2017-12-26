@@ -9,9 +9,8 @@
 </head>
 <body id="body">
 	<jsp:include page="/HTML/Navbar.jsp" />
-	<a id="hyperlink" href="#20">11</a>
-	<div id="article"></div>
-	
+	<div id="tmp" style="display:block">${user.memberName}</div>
+	<div id="article" ></div>
 	<form id="post" method="post">
 		<div>
 			<textarea></textarea>

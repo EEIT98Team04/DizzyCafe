@@ -77,8 +77,8 @@
 		$(document).ready(function(){
 			for(var i = 0;i<3;i++){
 				var temp = $('.content:eq('+i+')').html().split('>',2);
-				console.log(temp);  
-				$('.content:eq('+i+')').html(temp[0]+'>'+temp[1]+'>...');				
+				stringx = temp[1].substring(0,15);
+				$('.content:eq('+i+')').html('<p>'+stringx+'...</p>');				
 			}
 		});
 	</script>

@@ -53,4 +53,13 @@ public class DocumentDAO {
 			return false;
 		}
 	}
+	
+	public boolean update(DocumentBean bean) {
+		try {
+			this.getSession().update(bean);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

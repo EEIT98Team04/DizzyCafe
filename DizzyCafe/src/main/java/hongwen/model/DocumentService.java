@@ -53,5 +53,18 @@ public class DocumentService {
 		}			
 		return json;
 	}
+	public JSONArray update(DocumentBean bean) {
+		String temp = null;				//轉JSON檔案
+		JSONArray json = null;
+		boolean dao = false;
+		if(bean != null) {
+			dao = documentDAO.update(bean);
+			if(dao == true) {
+				temp = "[{\"status\":\"success\"}]";
+				json = JSONArray.fromObject(temp);				
+			}
+		}			
+		return json;
+	}
 
 }

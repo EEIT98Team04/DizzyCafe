@@ -84,6 +84,7 @@
 						<div>
 							<span>文章標題 : <input id="d_article" name="title"
 								type="text" style="width: 200px; height: 25px;" /></span>
+							<div id="documentid" style="display:none"></div>
 						</div>
 						<textarea></textarea>
 					</div>
@@ -99,11 +100,13 @@
 	</div>
 	<script>
 		$(function() {
+			var modify = "false";
 			$('#close').on('click',function(){
 				//初始化所有發文設定
 				tinyMCE.activeEditor.getBody().innerHTML='';//初始化內容
 				$('#d_article').val('');//清除標題內容
 				$('#grid').val('1');
+				modify = "false";
 			})
 			$('#post').on('click', function() {
 				var t = tinyMCE.activeEditor.getBody().innerHTML;//取出tinymve內容
@@ -115,9 +118,11 @@
 					value = that.val();//取得值
 					data[name] = value;
 				});
+				data['modify'] = modify;//判斷是發文還是修改，來不及改邏輯，直接給變數
+				data['documentid'] = $('#documentid').val();//documentid填入
 				data['textarea'] = t;//將tinymce值放入data，並宣告為json格式[key='textarea',value=t]
-
-				console.log(data);//data is a object
+				
+// 				console.log(data);//data is a object
 
 				//ajax傳送
 				$.ajax({
@@ -127,18 +132,17 @@
 					cache : false,
 					success : function(json) {
 						//回傳值是字串
-						console.log(json);
-						console.log(json[0]['status'] == 'false');
+						var location = '/DizzyCafe/hongwen/private.jsp';
 						if (json[0]['status'] == 'false') {
 							alert('請登入會員');
-							window.location.replace(document.location.href);//取得現在的URL，並自動導向
+							window.location.replace(location);//取得現在的URL，並自動導向
 						} else {
-							alert('發文成功');
-							window.location.replace(document.location.href);//取得現在的URL，並自動導向
+							modify = "false";
+							alert('發文or修改 成功');
+							window.location.replace(location);//取得現在的URL，並自動導向
 						}
 					}
 				})
-				return false;
 			});
 			$(document).on("click", '.binding', function() {
 				var search = '?';
@@ -153,6 +157,7 @@
 					//data:data,//post use
 					success : function(json) {
 						setdata(json);//
+						modify = "true";
 					}
 				});
 			});
@@ -161,7 +166,8 @@
 				//將文章相關內容填入
 				tinyMCE.activeEditor.getBody().innerHTML=json[0].content;//初始化內容
 				$('#d_article').val(json[0].name);//清除標題內容
-				$('#grid').val(json[0].boardId);
+				$('#grid').val(json[0].boardId);//boardid
+				$('#documentid').val(json[0].documentId);//documentid
 				//自動按發文鍵
 				$('#modify').trigger('click');
 			}

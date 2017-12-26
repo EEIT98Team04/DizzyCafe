@@ -26,4 +26,20 @@ public class MerchandiseBackstageService {
 		System.out.println("json:"+json);
 		return json;
 	}
+	
+	public MerchandiseBean updateMerchandiseInBackstageById(int merchandiseId) {
+		MerchandiseBean result = null;
+		result = backstagemerchandiseDAO.selectById(merchandiseId);
+		
+		return result;
+		
+	}
+	public boolean  updateMerchandiseInBackstage(MerchandiseBean bean) {
+		if(bean!=null) {
+			backstagemerchandiseDAO.update(bean);
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

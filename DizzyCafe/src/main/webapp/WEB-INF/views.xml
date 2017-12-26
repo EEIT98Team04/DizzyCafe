@@ -79,6 +79,11 @@
 		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/backstage/courseManage.jsp"></property>
 	</bean>
+	
+	<bean id="courseUpdate"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/backstage/courseUpdate.jsp"></property>
+	</bean>
 
 	<bean id="merchandise"
 		class="org.springframework.web.servlet.view.InternalResourceView">
@@ -94,6 +99,8 @@
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/wayne/merchandiseTag.jsp"></property>
 	</bean>
+	
+	
 
 
 	<bean id="shopping.cart"
@@ -105,4 +112,11 @@
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/dragon/checkout.jsp"></property>
 	</bean>
+	<bean id="merchandisemanage" 
+		class="org.springframework.web.servlet.view.RedirectView">
+		<property name="url" value="/backstage/merchandisemanage.jsp"></property>
+		<property name="contextRelative" value="true"></property>
+	</bean>
+	
+
 </beans>

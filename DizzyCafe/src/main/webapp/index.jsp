@@ -8,6 +8,7 @@
 <title>DizzyCafe</title>
 <style>
 </style>
+<jsp:include page="/HTML/TitleIcon.jsp" />
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />

@@ -18,9 +18,6 @@
     </MerchantInfo>
     
     <IgnorePayment>
-        <Method>Credit</Method>
-        <Method>WebATM</Method>
-        <Method>ATM</Method>
         <Method>CVS</Method>
         <Method>Tenpay</Method>
         <Method>TopUpUsed</Method>

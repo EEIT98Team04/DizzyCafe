@@ -58,7 +58,7 @@ public class CourseDAO {
 			tt.put("courseSignupBegin", var[9].toString());
 			tt.put("courseSignupEnd", var[10].toString());
 			tt.put("courseLimit", var[11]);
-			tt.put("courseNowPeople", var[12]);
+			tt.put("courseNowPeople", var[15]);
 			result.add(tt);
 		}
 		return result;
@@ -68,21 +68,6 @@ public class CourseDAO {
 		if (bean != null) {
 			try {
 				this.getSession().save(bean);
-				// Query query = this.getSession().createNativeQuery("INSERT INTO course"
-				// +
-				// "(courseName,courseImg,courseIntro,courseContent,courseCost,courseTeacher,courseBegin,courseEnd,courseSignupBegin,courseSignupEnd)"
-				// +"VALUES (?,?,?,?,?,?,?,?,?,?)");
-				// query.setParameter(1, bean.getCourseName());
-				// query.setParameter(2, bean.getCourseImg());
-				// query.setParameter(3, bean.getCourseIntro());
-				// query.setParameter(4, bean.getCourseContent());
-				// query.setParameter(5, bean.getCourseCost());
-				// query.setParameter(6, bean.getCourseTeacher());
-				// query.setParameter(7, bean.getCourseBegin());
-				// query.setParameter(8, bean.getCourseEnd());
-				// query.setParameter(9, bean.getCourseSignupBegin());
-				// query.setParameter(10, bean.getCourseSignupEnd());
-				// query.executeUpdate();
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -100,32 +85,25 @@ public class CourseDAO {
 		return query.getResultList();
 	}
 
-//	public int countTotalPage(int row_perPage) {
-//		Long temp = (long) this.getSession().createQuery("Select COUNT(*) FROM CourseBean").uniqueResult();
-//		if (temp.intValue() > 0 && temp.intValue() % row_perPage == 0)
-//			return temp.intValue() / row_perPage;
-//		else
-//			return temp.intValue() / row_perPage + 1;
-//	}
-
-	public CourseBean update(int courseId, String courseName, String courseImg, String courseIntro,
-			String courseContent, int courseCost, String courseTeacher, java.sql.Date courseBegin,
-			java.sql.Date courseEnd, java.sql.Date courseSignupBegin, java.sql.Date courseSignupEnd, int courseLimit) {
-		CourseBean select = this.select(courseId);
+	public CourseBean update(CourseBean bean) {
+		CourseBean select = this.select(bean.getCourseId());
 		if (select != null) {
-			select.setCourseName(courseName);
-			select.setCourseImg(courseImg);
-			select.setCourseIntro(courseIntro);
-			select.setCourseContent(courseContent);
-			select.setCourseCost(courseCost);
-			select.setCourseTeacher(courseTeacher);
-			select.setCourseBegin(courseBegin);
-			select.setCourseEnd(courseEnd);
-			select.setCourseSignupBegin(courseSignupBegin);
-			select.setCourseSignupEnd(courseSignupEnd);
-			select.setCourseLimit(courseLimit);
+			select.setCourseName(bean.getCourseName());
+			select.setCourseImg(bean.getCourseImg());
+			select.setCourseIntro(bean.getCourseIntro());
+			select.setCourseContent(bean.getCourseContent());
+			select.setCourseCost(bean.getCourseCost());
+			select.setCourseTeacher(bean.getCourseTeacher());
+			select.setCourseBegin(bean.getCourseBegin());
+			select.setCourseEnd(bean.getCourseEnd());
+			select.setCourseSignupBegin(bean.getCourseSignupBegin());
+			select.setCourseSignupEnd(bean.getCourseSignupEnd());
+			select.setCourseLimit(bean.getCourseLimit());
+			select.setCourseTime(bean.getCourseTime());
+			select.setCourseLength(bean.getCourseLength());
+			select.setCourseWeek(bean.getCourseWeek());
 		}
-		return null;
+		return select;
 	}
 
 	public int lastCoruesId() {

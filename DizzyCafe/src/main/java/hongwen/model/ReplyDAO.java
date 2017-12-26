@@ -30,6 +30,13 @@ public class ReplyDAO {
 		List<ReplyBean> result = query.getResultList();
 		return result;
 	}
+	//前台會員瀏覽私人文章
+	public List<ReplyBean> select(String membername) {
+		String search = "from ReplyBean where membername = '"+membername+"'";
+		Query<ReplyBean> query = this.getSession().createQuery(search, ReplyBean.class);
+		List<ReplyBean> result = query.getResultList();
+		return result;
+	}
 	
 	public boolean insert(ReplyBean bean) {
 		try {

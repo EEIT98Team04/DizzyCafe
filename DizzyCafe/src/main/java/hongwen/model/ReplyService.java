@@ -30,6 +30,13 @@ public class ReplyService {
 		return json;
 	}
 	
+	public JSONArray selectToJSON(String membername) {
+		List<ReplyBean> select = replyDAO.select(membername);
+		String temp = new Gson().toJson(select);				//轉JSON檔案
+		JSONArray json = JSONArray.fromObject(temp);
+		return json;
+	}
+	
 	public JSONArray insert(ReplyBean bean) {
 		String temp = null;				//轉JSON檔案
 		JSONArray json = null;
@@ -43,4 +50,5 @@ public class ReplyService {
 		}		
 		return json;
 	}
+	
 }

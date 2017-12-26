@@ -143,16 +143,12 @@
 			}
 		}
 
-		$('#iwannasignup').click(function() {
-			if ('${not empty user}' == "true") {
-				document.getElementById('signup').style.display = 'block';
-			} else {
-				//要求登入
-
-			}
-		});
 
 		$(function() {
+			if('${empty user}'== "true"){
+				$('#iwannasignup').text("請先登入").prop("disabled", true);
+			}
+			
 			$.post("/DizzyCafe//course/CheckTimeController.controller", {
 				"courseId" : '${course.courseId }'
 			}, function(data) {
@@ -163,7 +159,7 @@
 
 			if ('${not empty user}' == "true") {
 				alert("do user check")
-				$.post("/DizzyCafe//course/CheckSignedController.controller", {
+				$.post("/DizzyCafe/course/CheckSignedController.controller", {
 					"courseId" : '${course.courseId }',
 					"memberId" : '${user.memberId }'
 				}, function(data) {

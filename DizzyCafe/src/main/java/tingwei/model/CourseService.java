@@ -66,4 +66,12 @@ public class CourseService {
 	public JSONArray showCoruseInBackstage() {
 		return courseDAO.showCoruseInBackstage();
 	}
+	
+	public CourseBean courseUpdateChangePage(int couresId) {
+		return courseDAO.select(couresId);
+	}
+	
+	public CourseBean update(CourseBean bean) {
+		return courseDAO.update(bean);
+	}
 }

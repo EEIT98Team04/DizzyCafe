@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>DizzyCafe課程</title>
+<jsp:include page="/HTML/TitleIcon.jsp" />
 <link rel="stylesheet" href="/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
 <style type="text/css">
 	.img{
@@ -24,7 +25,6 @@
 		padding:0 20px;
 	}
 </style>
-
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
@@ -80,10 +80,6 @@
 		<button>test show course date time</button></a>
 	</div>
 	
-	<div>
-		<a href="${pageContext.request.contextPath}/course/courseOfMemberController.controller?page=1">
-			<button>我的課程</button></a>
-	</div>	
 <script src='<c:url value="/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js" />'></script>
 <script src='<c:url value="/js/jquery.fancybox-1.3.4/fancybox/jquery.easing-1.3.pack.js" />'></script>
 <script src='<c:url value="/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.js" />'></script>

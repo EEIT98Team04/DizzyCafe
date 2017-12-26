@@ -8,13 +8,13 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <style type="text/css">
 #form1 div {
 	width: 1000px;
 	margin: auto;
 }
 </style>
+<jsp:include page="../HTML/TitleIcon.jsp" />
 <link href="/DizzyCafe/wayne/css/lightbox.css" rel="stylesheet">
 <script src="<c:url value="../wayne/js/lightbox.js"/>"></script>
 </head>

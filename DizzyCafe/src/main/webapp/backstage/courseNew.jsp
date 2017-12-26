@@ -15,6 +15,7 @@
 	margin: auto;
 }
 </style>
+<jsp:include page="../HTML/TitleIcon.jsp" />
 </head>
 <body>
 	<jsp:include page="/backstage/index.jsp"></jsp:include>

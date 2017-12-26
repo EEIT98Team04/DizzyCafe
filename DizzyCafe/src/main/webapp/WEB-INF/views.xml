@@ -109,7 +109,9 @@
 	</bean>
 	<bean id="merchandisemanage" 
 		class="org.springframework.web.servlet.view.RedirectView">
-		<property name="url" value="/backstage/merchandise.jsp"></property>
+		<property name="url" value="/backstage/merchandisemanage.jsp"></property>
 		<property name="contextRelative" value="true"></property>
 	</bean>
+	
+
 </beans>

@@ -395,6 +395,7 @@
     					table.ajax.reload();
     				}
     			});
+    		});
     			$('#gogo2').on('click',(function(e){
         			e.preventDefault();
         			var form = $('#submitForm2')[0];
@@ -417,7 +418,7 @@
         				}
         			});
         		}));
-    		}));
+    		});
        	    function readImage(input) {
        	      if ( input.files && input.files[0] ) {
        	        var FR= new FileReader();

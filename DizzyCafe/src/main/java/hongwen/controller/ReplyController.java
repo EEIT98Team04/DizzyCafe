@@ -21,15 +21,15 @@ public class ReplyController {
 
 	@Autowired
 	ReplyService replyService;
-
+	//搜尋用
 	@RequestMapping(path = "/Reply.hongwen", method = { RequestMethod.GET })
-	public @ResponseBody JSONArray getJSON(@RequestParam Map<?, ?> param) {
+	public @ResponseBody JSONArray getmethod(@RequestParam Map<?, ?> param) {
 		JSONArray json = replyService.selectToJSON(Integer.parseInt((String) param.get("documentId")));
 		return json;
 	}
-
+	//發文用
 	@RequestMapping(path = "/Reply.hongwen", method = { RequestMethod.POST })
-	public @ResponseBody JSONArray JSON(HttpSession session, @RequestParam Map<?, ?> param) {
+	public @ResponseBody JSONArray postmethod(HttpSession session, @RequestParam Map<?, ?> param) {
 		String[] key = { "title", "textarea" };
 		JSONArray json = null;
 		MemberBean bean = (MemberBean) session.getAttribute("user");

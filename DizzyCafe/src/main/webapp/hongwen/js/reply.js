@@ -45,6 +45,7 @@ $(function() {
 //				console.log(json);
 				if(json[0]['status'] == 'false'){
 					alert('請登入會員');
+					window.location.replace(document.location.href);//取得現在的URL，並自動導向
 				}else{
 					alert('發文成功');
 					window.location.replace(document.location.href);//取得現在的URL，並自動導向

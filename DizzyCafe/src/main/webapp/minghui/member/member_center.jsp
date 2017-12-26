@@ -46,6 +46,7 @@
 					<a href="#" class="list-group-item">訂單</a>
 					<a href="${pageContext.request.contextPath }/event/dailyevent.jsp" class="list-group-item">每日活動</a>
 					<a href="${pageContext.request.contextPath}/coupon/showcoupon.jsp" class="list-group-item">折價卷</a>
+					<a href="/DizzyCafe/hongwen/private.jsp" class="list-group-item">論壇</a>
 				</div>
 			</div>
 			<div class="col-md-9">

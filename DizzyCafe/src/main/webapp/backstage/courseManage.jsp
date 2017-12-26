@@ -38,7 +38,7 @@
 			
 			
 			<div>
-				<table id="dataTable"></table>
+				<table style="text-align: center;" id="dataTable"></table>
 			</div>
 
 			<a href="${pageContext.request.contextPath}/backstage/courseNew.jsp"><button class="btn btn-primary">新增</button></a>
@@ -95,8 +95,7 @@
 						"targets" : 9,
 						"data" : null,
 						"render" : function(data,row) {
-							var html = "<a href='${pageContext.request.contextPath}//backstage/courseFillBackUpdate.controller?courseId="+data.courseId+"' class='btn btn-success' id='edit"+data.courseId+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>"+
-									   "<a style='margin-left:5px' href='#' class='btn btn-danger' id='delete"+data.courseId+"'><i class='fa fa-times' aria-hidden='true'></i></a>"
+							var html = "<a href='${pageContext.request.contextPath}//backstage/courseFillBackUpdate.controller?courseId="+data.courseId+"' class='btn btn-success' id='edit"+data.courseId+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>";
 							return html;
 						}
 					}],

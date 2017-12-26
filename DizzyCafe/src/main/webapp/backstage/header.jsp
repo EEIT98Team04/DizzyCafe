@@ -27,18 +27,18 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/activitiymanage.jsp">
             <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Activities</span>
+            <span class="nav-link-text">活動管理</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/merchandisemanage.jsp">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Merchandise</span>
+            <span class="nav-link-text">商品管理</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/courseManage.jsp">
-            <i class="fa fa-fw fa-area-chart"></i>
+            <i class="fa fa-fw fa-book"></i>
             <span class="nav-link-text">課程管理</span>
           </a>
         </li>

@@ -45,7 +45,7 @@
 									<tr>
 									<th>圖片</th>
 									<td>
-										<input type="file" name="courseImg" value="${CourseBean.courseImg }" accept="image/*" required>
+										<input type="file" name="courseImg" value="${CourseBean.courseImg }" accept="image/*">
 									</td>
 									</tr>
 									<tr>

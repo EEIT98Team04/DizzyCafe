@@ -80,7 +80,7 @@ public class CourseNewController {
 				// Create the file on server
 				String[] strs = courseImg.getContentType().split("/");
 				String server_path = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
-				String path = "/image/course/" + courseBean.getCourseName() + "." + strs[1];
+				String path = "/image/course/" + courseBean.getCourseId() + "." + strs[1];
 				
 				courseBean.setCourseImg(path);
 				File serverFile = new File(server_path + path);

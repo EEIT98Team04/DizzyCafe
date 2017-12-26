@@ -42,7 +42,7 @@
 				<div class="list-group">
 					<a
 						href="${pageContext.request.contextPath}/minghui/member/member_center.jsp"
-						class="list-group-item">首頁</a> <a href="#" class="list-group-item">課程</a>
+						class="list-group-item">首頁</a> <a href="${pageContext.request.contextPath}/course/courseOfMemberController.controller?page=1" class="list-group-item">課程</a>
 					<a href="#" class="list-group-item">訂單</a>
 				</div>
 			</div>

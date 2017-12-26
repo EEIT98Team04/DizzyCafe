@@ -64,7 +64,7 @@ public class BackStageUpdateCourseController {
 			courseWeek = courseWeek + var;
 		}
 		
-		CourseBean courseBean = new CourseBean();
+		CourseBean courseBean = courseService.select(courseId);
 		courseBean.setCourseId(courseId);
 		courseBean.setCourseName(courseName);
 		courseBean.setCourseIntro(courseIntro);
@@ -79,7 +79,7 @@ public class BackStageUpdateCourseController {
 		courseBean.setCourseTime(time);
 		courseBean.setCourseLength(courseLength);
 		courseBean.setCourseWeek(courseWeek);
-				
+		
 		if (!courseImg.isEmpty()) {
 			try {
 				byte[] bytes = courseImg.getBytes();
@@ -87,26 +87,24 @@ public class BackStageUpdateCourseController {
 				// Create the file on server
 				String[] strs = courseImg.getContentType().split("/");
 				String server_path = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
-				String path = "/image/course/" + courseBean.getCourseName() + "." + strs[1];
+				String path = "/image/course/" + courseBean.getCourseId() + "." + strs[1];
 				
 				courseBean.setCourseImg(path);
 				File serverFile = new File(server_path + path);
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();
-				
-				courseService.update(courseBean);
-				//清除再重建
-				courseDateTimeService.delete(courseId);
-				courseDateTimeService.insertAll(courseBean, whichDay, time, courseLength);
-				
-				return "courseManage";
+
 			} catch (Exception e) {
 				System.out.println(e.getMessage());				
-				return "courseManage";
 			}
-		} else {
-			return "courseManage";
 		}
+		
+		courseService.update(courseBean);
+		//清除再重建
+		courseDateTimeService.delete(courseId);
+		courseDateTimeService.insertAll(courseBean, whichDay, time, courseLength);
+		
+		return "courseManage";
 	}
 }

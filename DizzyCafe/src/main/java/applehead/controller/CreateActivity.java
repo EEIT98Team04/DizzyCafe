@@ -28,8 +28,8 @@ public class CreateActivity {
 		java.sql.Date startDate = null;
 		java.sql.Date endDate = null;
 		try {
-			startDate = new java.sql.Date(new SimpleDateFormat("MM/dd/yyyy").parse(activityStart).getTime());
-			endDate = new java.sql.Date(new SimpleDateFormat("MM/dd/yyyy").parse(activityEnd).getTime());
+			startDate = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(activityStart).getTime());
+			endDate = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(activityEnd).getTime());
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 			return "createActivity.success";

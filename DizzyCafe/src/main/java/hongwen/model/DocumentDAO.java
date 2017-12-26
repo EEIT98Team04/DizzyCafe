@@ -19,20 +19,22 @@ public class DocumentDAO {
 		return sessionFactory.getCurrentSession();
 	}
 
-	public List<DocumentBean> selectboardId(int id) {
+	public List<DocumentBean> select(int id) {
 		String search = "from DocumentBean where boardId = '" + id + "' and Dstatus = '1'";// Dstatus(0:disable,1:able)
 		Query<DocumentBean> query = this.getSession().createQuery(search, DocumentBean.class);
 		List<DocumentBean> result = query.getResultList();
 		return result;
 	}
-
-	public List<DocumentBean> selectdocumentId(int id) {
-		String search = "from DocumentBean where documentId = '" + id + "'";// Dstatus(0:disable,1:able)
+	
+	//前台會員瀏覽私人文章
+	public List<DocumentBean> select(String membername) {
+		String search = "from DocumentBean where membername = '" + membername + "'";
 		Query<DocumentBean> query = this.getSession().createQuery(search, DocumentBean.class);
 		List<DocumentBean> result = query.getResultList();
+		System.out.println(result.size());
 		return result;
 	}
-
+	
 	public DocumentBean get(int id) {
 		DocumentBean get = null;
 		try {

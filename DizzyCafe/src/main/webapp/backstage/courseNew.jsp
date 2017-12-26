@@ -263,7 +263,7 @@
 							CKEDITOR.instances.editor1.getData());
 				});
 		
-		var dateFormat = "yy/mm/dd";
+		var dateFormat = "yy-mm-dd";
 		//課程時間
 		$(function() {
 			var today = new Date();
@@ -318,9 +318,8 @@
 		function getDate(element, days) {
 			var date;
 			try {
-				debugger;
 				date = $.datepicker.parseDate(dateFormat, element.value);
-				date.setDate(date.getDate() + parseInt(days));
+// 				date.setDate(date.getDate() + parseInt(days));
 			} catch (error) {
 				date = null;
 			} 

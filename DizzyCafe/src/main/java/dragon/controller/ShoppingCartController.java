@@ -4,6 +4,8 @@ package dragon.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import dragon.model.ShoppingBean;
 import dragon.model.ShoppingService;
+import minghui.model.MemberBean;
 import wayne.model.MerchandiseBean;
 import wayne.model.MerchandiseService;
 
@@ -24,16 +27,19 @@ public class ShoppingCartController {
 	private MerchandiseService merchandiseService;
 
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
-	public String method(Model model)
+	public String method(HttpSession session, Model model)
 	{
-		int memberId = 101;
-
-		List<ShoppingBean> result = shoppingService.select(103);
+		MemberBean user = (MemberBean) session.getAttribute("user");
+		int memberId = user.getMemberId();
+		
+		List<ShoppingBean> result = shoppingService.select(memberId);
 		model.addAttribute("result", result);
 //		System.out.println(result);
 		
 		model.addAttribute("count", result.size()-1);
 //		System.out.println(result.size());
+		
+		List<Integer> merchandiseId = new ArrayList<>();
 		List<String> merchandiseName = new ArrayList<>();
 		List<Integer> merchandisePrice = new ArrayList<>();
 		List<Integer> buyCount = new ArrayList<>();
@@ -42,6 +48,7 @@ public class ShoppingCartController {
 		List<Object> ordersDetail2 = ordersDetail;
 		if (result != null) {
 			for (ShoppingBean bean : result) {
+				merchandiseId.add(bean.getMerchandiseId());
 				MerchandiseBean select = merchandiseService.select(bean.getMerchandiseId());
 				// 商品名稱
 				merchandiseName.add(select.getMerchandiseName());
@@ -62,11 +69,12 @@ public class ShoppingCartController {
 //				System.out.println(select.getMerchandisePrice() * bean.getBuyCount());
 				
 			}
+			model.addAttribute("merchandiseId", merchandiseId);
 			model.addAttribute("merchandiseName", merchandiseName);
 			model.addAttribute("merchandisePrice", merchandisePrice);
 			model.addAttribute("buyCount", buyCount);
 			model.addAttribute("subtotal", subtotal);
 		}
-		return "checkout";
+		return "shopping.cart";
 	}
 }

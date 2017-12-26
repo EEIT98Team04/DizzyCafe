@@ -189,9 +189,10 @@
     <script>
 //     	選日期
 	  $( function() {
-	    var dateFormat = "mm/dd/yy",
+	    var dateFormat = "yy-mm-dd",
 	      from = $( "#from" )
 	        .datepicker({
+	          dateFormat:dateFormat,
 	          defaultDate: "+1w",
 	          changeMonth: true,
 	          numberOfMonths: 1
@@ -200,6 +201,7 @@
 	          to.datepicker( "option", "minDate", getDate( this ) );
 	        }),
 	      to = $( "#to" ).datepicker({
+	    	 dateFormat:dateFormat,
 	        defaultDate: "+1w",
 	        changeMonth: true,
 	        numberOfMonths: 1
@@ -209,6 +211,7 @@
 	      });
 	    var from2 = $( "#from2" )
         .datepicker({
+        	dateFormat:dateFormat,
 	          defaultDate: "+1w",
 	          changeMonth: true,
 	          numberOfMonths: 1
@@ -217,6 +220,7 @@
 	          to.datepicker( "option", "minDate", getDate( this ) );
 	        }),
 	        to2 = $( "#to2" ).datepicker({
+	        	dateFormat:dateFormat,
 		        defaultDate: "+1w",
 		        changeMonth: true,
 		        numberOfMonths: 1
@@ -237,84 +241,94 @@
   </script>
   <script>
 //   顯示資料表
-	var count = 0;
-  	var table = $('#test').DataTable({
-		ajax : {
-			url : '/DizzyCafe/showyou.controller',
-			type : 'POST',
-			dataSrc : ''
-		},
-		initComplete : function(data,row){ 
-			CKEDITOR.replace( 'editor2' );
-// 			for(i=0;i<row.length;i++){ 
-// 				var datas = row[i];
-// 				$('#edit'+row[i].activityNo).click(function(e){
-// 					$('#updateEvent').css('display','block');
-// 					$('#updateEvent input[name=activityName]').val(datas.activityName);
-// 					$('#updateEvent input[name=activityStart]').val(datas.activityStart);
-// 					$('#updateEvent input[name=activityEnd]').val(datas.activityEnd);
-// 					CKEDITOR.instances.editor2.setData(datas.activityContent);
-// 					$('#updateEvent input[name=activityNo]').val(datas.activityNo);
-// 					$('#updateEvent img').attr('src','/DizzyCafe/'+datas.activityPicture);
-// 		    	});				
-// 			}
-		},
-		drawCallback : function(row){
-			if(count===0){
-				count++;
-			}else{
-				for(var i=0;i<row.aoData.length;i++){
-					temp = row.aoData[i]._aData;
-					$('#edit'+temp.activityNo).click(function(e){
-						$('#updateEvent').css('display','block');
-						$('#updateEvent input[name=activityName]').val(temp.activityName);
-						$('#updateEvent input[name=activityStart]').val(temp.activityStart);
-						$('#updateEvent input[name=activityEnd]').val(temp.activityEnd);
-						CKEDITOR.instances.editor2.setData(temp.activityContent);
-						$('#updateEvent input[name=activityNo]').val(temp.activityNo);
-						$('#updateEvent img').attr('src','/DizzyCafe/'+temp.activityPicture);
-			    	});			
-				}
-			}  
-		},
-		columns : [ {
-			data : 'activityNo',
-			title : '活動編號',
-			width : '100px'
-		}, {
-			data : 'activityName',
-			title : '活動名稱',
-			width : '100px'
-		}, {
-			data : 'activityStart',
-			title : '起始日期',
-			width : '200px'
-		}, {
-			data : 'activityEnd',
-			title : '結束日期',
-			width : '200px'
-		},{
-			width : '100px'
-		}],
-		"columnDefs" : [{
-			"targets" : 4,
-			"data" : null,
-			"render" : function(data,row) {
-				var html = "<a href='#' class='btn btn-success' id='edit"+data.activityNo+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
-				return html;
-			}
-		}],
-		language : {
-			paginate : {
-				next : "下一頁",
-				previous : "上一頁"
+// 	$(function(){
+		
+		var count = 0;
+	  	var table = $('#test').DataTable({
+			ajax : {
+				url : '/DizzyCafe/showyou.controller',
+				type : 'POST',
+				dataSrc : ''
 			},
-			lengthMenu : '一頁顯示 _MENU_ 筆資料'
-		},
-		info : false,
-		order : [0,'asc'],
-		rowId : 'activityNo'
-	});
+			initComplete : function(data,row){ 
+				CKEDITOR.replace( 'editor2' );
+			},
+			drawCallback : function(row){
+				if(count===0){
+					count++;
+				}else{
+					for(var i=0;i<row.aoData.length;i++){
+						var temp = row.aoData[i]._aData;
+						var Month = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+						var Monthx = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+						$('#edit'+temp.activityNo).unbind();
+						$('#edit'+temp.activityNo).on('click',function(e){
+							var id = $(this).attr('id').split('t')[1];
+							var good = row.aoData[id-1001]._aData;
+							$('#updateEvent').css('display','block');
+							$('#updateEvent input[name=activityName]').val(good.activityName);
+							for(var j = 0 ; j<12 ; j++){
+								xx = good.activityStart.split(' ');
+								yy = good.activityEnd.split(' ');
+								var hoho = 0;
+								if(xx[0]==Month[j]){
+									$('#updateEvent input[name=activityStart]').val(xx[2]+'-'+Monthx[j]+'-'+xx[1].split(',')[0]);
+									hoho++;
+								}
+								if(yy[0]==Month[j]){
+									$('#updateEvent input[name=activityEnd]').val(yy[2]+'-'+Monthx[j]+'-'+yy[1].split(',')[0]);
+									hoho++;
+								}
+								if(hoho==2){
+									break;
+								}
+							}
+							CKEDITOR.instances.editor2.setData(good.activityContent);
+							$('#updateEvent input[name=activityNo]').val(good.activityNo);
+							$('#updateEvent img').attr('src','/DizzyCafe/'+good.activityPicture);
+				    	});			
+					}
+				}  
+			},
+			columns : [ {
+				data : 'activityNo',
+				title : '活動編號',
+				width : '100px'
+			}, {
+				data : 'activityName',
+				title : '活動名稱',
+				width : '100px'
+			}, {
+				data : 'activityStart',
+				title : '起始日期',
+				width : '200px'
+			}, {
+				data : 'activityEnd',
+				title : '結束日期',
+				width : '200px'
+			},{
+				width : '100px'
+			}],
+			"columnDefs" : [{
+				"targets" : 4,
+				"data" : null,
+				"render" : function(data,row) {
+					var html = "<a href='#' class='btn btn-success' id='edit"+data.activityNo+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
+					return html;
+				}
+			}],
+			language : {
+				paginate : {
+					next : "下一頁",
+					previous : "上一頁"
+				},
+				lengthMenu : '一頁顯示 _MENU_ 筆資料'
+			},
+			info : false,
+			order : [0,'asc'],
+			rowId : 'activityNo'
+		});
+// 	});
   </script>
     <script>
 //     文字編輯器
@@ -395,30 +409,30 @@
     					table.ajax.reload();
     				}
     			});
-    		});
-    			$('#gogo2').on('click',(function(e){
-        			e.preventDefault();
-        			var form = $('#submitForm2')[0];
-        			var formData = new FormData(form);
+    		}));
+    		$('#gogo2').on('click',(function(e){
+        		e.preventDefault();
+        		var form = $('#submitForm2')[0];
+        		var formData = new FormData(form);
 //         			$("#gogo2").prop("disabled", true);
-        			console.log(formData);
-        			$.ajax({
-        				url: '/DizzyCafe/updateEvent.controller',
-        				type: 'post',
-        				data: formData,
-        				enctype: 'multipart/form-data',
-        				contentType: false,
-        				cache: false,
-        				processData: false,
-        				success: function(){
-        					alert('修改成功');
-        					updateEvent.style.display = "none";
-        					$('#myModal2').css('display','none');
-        					table.ajax.reload();
-        				}
-        			});
-        		}));
-    		});
+        		console.log(formData);
+        		$.ajax({
+        			url: '/DizzyCafe/updateEvent.controller',
+        			type: 'post',
+        			data: formData,
+        			enctype: 'multipart/form-data',
+        			contentType: false,
+        			cache: false,
+        			processData: false,
+        			success: function(){
+        				alert('修改成功');
+        				updateEvent.style.display = "none";
+        				$('#myModal2').css('display','none');
+        				table.ajax.reload();
+        			}
+        		});
+        	}));
+
        	    function readImage(input) {
        	      if ( input.files && input.files[0] ) {
        	        var FR= new FileReader();

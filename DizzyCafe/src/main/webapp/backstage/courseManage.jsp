@@ -38,7 +38,7 @@
 			
 			
 			<div>
-				<table id="dataTable"></table>
+				<table style="text-align: center;" id="dataTable"></table>
 			</div>
 
 			<a href="${pageContext.request.contextPath}/backstage/courseNew.jsp"><button class="btn btn-primary">新增</button></a>
@@ -54,7 +54,6 @@
 						type:'POST',
 						dataSrc: ''
 					},
-					
 					columns:[{
 						data:'courseId',
 						title:'編號',
@@ -91,6 +90,14 @@
 						data:'courseLimit',
 						title:'人數上限',
 						width:'10%',
+					}],
+					"columnDefs" : [{
+						"targets" : 9,
+						"data" : null,
+						"render" : function(data,row) {
+							var html = "<a href='${pageContext.request.contextPath}//backstage/courseFillBackUpdate.controller?courseId="+data.courseId+"' class='btn btn-success' id='edit"+data.courseId+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>";
+							return html;
+						}
 					}],
 					language : {
 						paginate : {

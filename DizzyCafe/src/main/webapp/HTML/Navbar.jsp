@@ -8,7 +8,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link rel="icon" type="image/png" sizes="16x16"	href="${pageContext.request.contextPath}/image/favicon-16x16.png">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 <script
@@ -162,6 +161,7 @@
 		</form>
 	</div>
 </nav>
+
 <footer class="fixed-bottom text-center">
           <p>Copyright © DizzyCafe 2017</p>
     </footer>

@@ -24,6 +24,7 @@ import dragon.model.ShoppingBean;
 import hongwen.model.BoardBean;
 import hongwen.model.DocumentBean;
 import hongwen.model.ReplyBean;
+import minghui.model.ManagerBean;
 import minghui.model.MemberBean;
 import tingwei.model.CourseBean;
 import tingwei.model.CourseDateTimeBean;
@@ -54,7 +55,7 @@ public class SpringJavaConfig{
 		properties.setProperty("hibernate.show_sql", "true");
 		builder.addProperties(properties);
 		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,CourseMemberBean.class,MerchandiseBean.class,MemberBean.class,OrdersBean.class,OrdersDetailsBean.class,ShoppingBean.class);
-		builder.addAnnotatedClasses(BoardBean.class,DocumentBean.class,ReplyBean.class);
+		builder.addAnnotatedClasses(BoardBean.class,DocumentBean.class,ReplyBean.class,ManagerBean.class);
 		
 
 		return builder.buildSessionFactory();

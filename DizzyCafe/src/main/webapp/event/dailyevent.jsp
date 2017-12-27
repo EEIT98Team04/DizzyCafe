@@ -24,42 +24,42 @@ body{
 }
 #circleImg{
 	POSITION: absolute;
-	TOP: 30px; LEFT : 260px;
+	TOP: 25px; LEFT : 335px;
 	Z-INDEX: 1; 
 } 
 #playImg { 
 	POSITION: absolute; 
 	TOP: 125px; LEFT : 435px; 
-	Z-INDEX: 2; 
+	Z-INDEX: 4; 
 } 
 #firstImg { 
  	position: absolute; 
- 	top: 310px; left : 650px;
+ 	top: 370px; left : 600px;
  	Z-INDEX: 3;
 }
 #secondImg { 
  	position: absolute; 
- 	top: 410px; left : 560px;
+ 	top: 385px; left : 485px;
  	Z-INDEX: 3;
 } 
 #thirdImg { 
  	position: absolute; 
- 	top: 310px; left : 395px;
+ 	top: 250px; left : 400px;
  	Z-INDEX: 3;
 } 
 #fourthImg { 
  	position: absolute; 
- 	top: 190px; left : 430px;
+ 	top: 145px; left : 485px;
  	Z-INDEX: 3;
 } 
 #fifthImg { 
  	position: absolute; 
- 	top: 120px; left : 530px;
+ 	top: 130px; left : 600px;
  	Z-INDEX: 3;
 } 
 #sixthImg { 
  	position: absolute; 
- 	top: 190px; left : 695px;
+ 	top: 260px; left : 700px;
  	Z-INDEX: 3;
 }  
 
@@ -83,15 +83,15 @@ body{
 	<div style="height:100px"></div>
 <div class="BIG">
 	<div class="forDiv">
-		<img src="${pageContext.request.contextPath }/event/arrow.png" width="300px" id="playImg" />
-		<img src="${pageContext.request.contextPath }/event/circle123.png" width="650px" id="circleImg"/>  
+		<img src="${pageContext.request.contextPath }/event/coolarrow.png" width="300px" id="playImg" />
+		<img src="${pageContext.request.contextPath }/event/roulette_bg.png" width="500px" id="circleImg"/>  
 <!-- 		<img src="/DizzyCafe/event/event.png" width="500px" id="firstImg" /> -->
 		<span id="firstImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>firstImg</span>
-		<span id="secondImg" class="imm"><input type="hidden" value="87"/>ハズレ</span>
+		<span id="secondImg" class="imm"><input type="hidden" value="87"/>銘謝惠顧</span>
 		<span id="thirdImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>thirdImg</span>
-		<span id="fourthImg" class="imm"><input type="hidden" value="87"/>ハズレ</span>
+		<span id="fourthImg" class="imm"><input type="hidden" value="87"/>銘謝惠顧</span>
 		<span id="fifthImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>fifthImg</span>
-		<span id="sixthImg" class="imm"><input type="hidden" value="87"/>ハズレ</span>
+		<span id="sixthImg" class="imm"><input type="hidden" value="87"/>銘謝惠顧</span>
 <!-- 		<form action="/gimedacoupon.controller" method="POST" id="forForm"> -->
 <!-- 		</form> -->
 	</div>

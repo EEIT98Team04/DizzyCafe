@@ -15,7 +15,6 @@ $(function() {
 				type : 'GET',
 				cache : false,
 				dataSrc : function(json) {
-					console.log(json);
 					return json;
 				}
 			},

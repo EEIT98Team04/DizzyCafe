@@ -21,6 +21,9 @@ public class ReplyService {
 	private DocumentDAO documentDAO;
 
 	public JSONArray selectToJSON(int documentId) {
+		//更新人氣
+		documentDAO.popularity(documentId);
+		//讀取回覆
 		List<ReplyBean> select = replyDAO.select(documentId);
 		DocumentBean d = documentDAO.get(documentId);
 		ReplyBean r = new ReplyBean(0, d.getMembername(), d.getMemberId(), d.getDocumentId(), d.getContent(),

@@ -16,15 +16,7 @@
 		<h2>歡迎光臨咖啡論壇</h2>
 	</div>
 	<div style="background-color: #fff1cc;">
-		<table id="test">
-			<thead>
-                <tr class="danger">
-                    <th>留言板</th>
-                    <th>人氣</th>
-                    <th>留言板公告</th>
-                </tr>
-            </thead>
-		</table>
+		<table id="test"></table>
 	</div>
 	<!-- jQuery庫 -->
 	<script type="text/javascript"

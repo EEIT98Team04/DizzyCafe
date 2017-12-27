@@ -23,8 +23,7 @@ public class DocumentController {
 	DocumentService documentService;
 
 	@RequestMapping(path = "/Document.hongwen", method = { RequestMethod.GET})
-	public @ResponseBody JSONArray getJSON(@RequestParam Map<?,?> param) {
-		System.out.println("documentget");
+	public @ResponseBody JSONArray getJSON(@RequestParam Map<?,?> param) {		
 		JSONArray json = documentService.selectToJSON(Integer.parseInt((String)param.get("boardId")));
 		return json;
 	}
@@ -47,7 +46,6 @@ public class DocumentController {
 //		for (Object key : param.keySet()) {
 //			System.out.println(key + " : " + param.get(key));
 //		}
-		System.out.println("documentpost");
 		String[] key = {"title","grid","textarea","modify","documentid"};
 		JSONArray json = null;
 		MemberBean bean = (MemberBean) session.getAttribute("user");

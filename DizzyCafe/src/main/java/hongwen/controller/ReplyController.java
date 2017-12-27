@@ -30,7 +30,7 @@ public class ReplyController {
 	//發文用
 	@RequestMapping(path = "/Reply.hongwen", method = { RequestMethod.POST })
 	public @ResponseBody JSONArray postmethod(HttpSession session, @RequestParam Map<?, ?> param) {
-		String[] key = { "title", "textarea" };
+		String[] key = { "title", "textarea","modify"};
 		JSONArray json = null;
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		if (bean == null || "".equals(String.valueOf(bean.getMemberId())) || "".equals(bean.getMemberName())) {
@@ -41,8 +41,12 @@ public class ReplyController {
 //		int replyId, String membername, int memberId, int documentId, String content, Date times
 		ReplyBean replybean = new ReplyBean(1,bean.getMemberName(),bean.getMemberId(), Integer.parseInt((String) param.get(key[0])),
 				(String) param.get(key[1]), new java.util.Date());
-
-		json = replyService.insert(replybean);
+		
+		if("true".equals(param.get(key[2]))) {
+			json = replyService.update(replybean);						
+		}else{
+			json = replyService.insert(replybean);			
+		}
 		return json;//if it's success,then return json about {"status":"success"}
 	}
 }

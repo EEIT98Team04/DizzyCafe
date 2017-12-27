@@ -53,7 +53,7 @@ public class DocumentController {
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		int tmp = 0;
 		
-		if("".equals((String)param.get(key[4]))) {
+		if(!"".equals((String)param.get(key[4]))) {
 			tmp = Integer.parseInt((String)param.get(key[4]));
 		}
 		

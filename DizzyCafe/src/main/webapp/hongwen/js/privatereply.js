@@ -33,7 +33,16 @@ $(function() {
 				width : '500px'
 			}, {
 				data : 'replyId',
-				width : '100px'
+				title : '修改',
+				width : '100px',
+				"render" : function(data, type, row, meta) {
+					if (type === 'display') {
+						data = "<a href='#' class='btn reply' id='"
+								+ row.replyId
+								+ "'><i class='fa fa-pencil' aria-hidden='true'></i></a>";
+					}
+					return data;
+				}
 			} ],
 			language : {
 				paginate : {

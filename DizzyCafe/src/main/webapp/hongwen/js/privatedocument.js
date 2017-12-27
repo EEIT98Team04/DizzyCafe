@@ -1,6 +1,7 @@
 $(function() {
 	var search = '?membername=' + $('#membername').text();
-	$('#document').DataTable(
+	$('#document')
+			.DataTable(
 					{
 						ajax : {
 							url : '/DizzyCafe/Privatedocument.hongwen' + search,

@@ -26,7 +26,7 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/activitiymanage.jsp">
-            <i class="fa fa-fw fa-area-chart"></i>
+            <i class="fa fa-fw fa-futbol-o"></i>
             <span class="nav-link-text">活動管理</span>
           </a>
         </li>

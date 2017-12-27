@@ -51,7 +51,7 @@ public class MerchandiseService {
 	}
 	
 	public MerchandiseBean select(int merchandiseId) {
-		return merchandiseDao.select(merchandiseId);
+		return merchandiseDao.selectById(merchandiseId);
 	}
 	
 	public List<MerchandiseBean> select(String merchandiseTag){

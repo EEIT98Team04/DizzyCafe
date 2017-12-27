@@ -18,7 +18,7 @@ var reply = function() {
 				return json;
 			}
 		},
-		columns : [ {
+		columns : [{
 			data : 'membername',
 			title : '發文者',
 			width : '100px'
@@ -30,7 +30,18 @@ var reply = function() {
 			data : 'content',
 			title : '回覆內容',
 			width : '500px'
-		} ],
+		} ,{
+			data : 'replyId',
+			width : '100px'
+		}],
+//		"columnDefs" : [{
+//			"targets" : 4,
+//			"data" : null,
+//			"render" : function(data,row) {
+//				var html = "<a href='#' class='btn btn-success' id='edit"+data.replyId+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
+//				return html;
+//			}
+//		}],
 		language : {
 			paginate : {
 				next : "下一頁",

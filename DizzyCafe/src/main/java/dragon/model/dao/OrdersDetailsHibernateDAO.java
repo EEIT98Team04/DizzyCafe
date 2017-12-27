@@ -12,6 +12,7 @@ import dragon.model.OrdersDetailsBean;
 import dragon.model.OrdersDetailsDAO;
 import dragon.model.ShoppingBean;
 import dragon.model.ShoppingDAO;
+import net.sf.json.JSONArray;
 
 @Repository
 public class OrdersDetailsHibernateDAO implements OrdersDetailsDAO {

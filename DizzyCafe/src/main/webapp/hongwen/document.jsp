@@ -28,7 +28,6 @@
 	</div>
 	<form id="post">
 		<div>
-			<span>主題 : </span>
 			<span>文章標題 : <input id="d_article" name="title" type="text" style="width:200px; height:25px;"/></span>		
 			<textarea></textarea>
 			<input type="submit" value="發文" />	

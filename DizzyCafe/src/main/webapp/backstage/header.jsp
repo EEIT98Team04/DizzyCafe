@@ -37,10 +37,22 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="${pageContext.request.contextPath }/backstage/courseManage.jsp">
+<%--           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/courseManage.jsp"> --%>
+<!--             <i class="fa fa-fw fa-book"></i> -->
+<!--             <span class="nav-link-text">課程管理</span> -->
+<!--           </a> -->
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#course" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-book"></i>
             <span class="nav-link-text">課程管理</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="course">
+            <li>
+              <a href="${pageContext.request.contextPath }/backstage/courseManage.jsp">課程清單</a>
+            </li>
+            <li>
+              <a href="${pageContext.request.contextPath }/backstage/courseCalendar.jsp">行事曆</a>
+            </li>
+            </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">

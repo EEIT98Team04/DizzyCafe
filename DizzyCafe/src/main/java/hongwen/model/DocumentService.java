@@ -17,6 +17,15 @@ public class DocumentService {
 	@Autowired
 	private DocumentDAO documentDAO;
 
+	//修改文章
+	public JSONArray modify(int id) {
+		DocumentBean select = documentDAO.get(id);
+		String temp = new Gson().toJson(select);				//轉JSON檔案
+		temp = "["+temp+"]";
+		JSONArray json = JSONArray.fromObject(temp);
+		return json;
+	}
+	
 	public JSONArray selectToJSON(int id) {
 		List<DocumentBean> select = documentDAO.select(id);
 		String temp = new Gson().toJson(select);				//轉JSON檔案

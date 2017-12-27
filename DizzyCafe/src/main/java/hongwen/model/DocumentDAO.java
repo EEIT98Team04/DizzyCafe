@@ -53,14 +53,4 @@ public class DocumentDAO {
 			return false;
 		}
 	}
-
-	// public boolean insert(BoardBean bean) {
-	// try {
-	// this.getSession().save(bean);
-	// return true;
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// return false;
-	// }
-	// }
 }

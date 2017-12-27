@@ -80,7 +80,7 @@ public class MerchandiseDAOHibernate {
 		}
 	}
 	
-	public MerchandiseBean select(int merchandiseId) {
+	public MerchandiseBean selectById(int merchandiseId) {
 		return this.getsession().get(MerchandiseBean.class, merchandiseId);
 	}
 	
@@ -101,7 +101,7 @@ public class MerchandiseDAOHibernate {
 
 	public MerchandiseBean insert(MerchandiseBean bean) {
 		if (bean != null) {
-			MerchandiseBean select = this.select(bean.getMerchandiseId());
+			MerchandiseBean select = this.selectById(bean.getMerchandiseId());
 			if (select == null) {
 				this.getsession().save(bean);
 				return bean;
@@ -113,7 +113,7 @@ public class MerchandiseDAOHibernate {
 	public MerchandiseBean update(String merchandiseName, String merchandiseContent, String merchandisePicture,
 			String merchandiseTag, int merchandisePrice, int merchandiseQuantity, String merchandiseStatus,
 			int merchandiseId) {
-		MerchandiseBean select = this.select(merchandiseId);
+		MerchandiseBean select = this.selectById(merchandiseId);
 		if (select != null) {
 			select.setMerchandiseName(merchandiseName);
 			select.setMerchandisePrice(merchandisePrice);
@@ -127,7 +127,7 @@ public class MerchandiseDAOHibernate {
 	}
 
 	public boolean delete(int merchandiseId) {
-		MerchandiseBean select = this.select(merchandiseId);
+		MerchandiseBean select = this.selectById(merchandiseId);
 		if (select != null) {
 			this.getsession().delete(select);
 			return true;

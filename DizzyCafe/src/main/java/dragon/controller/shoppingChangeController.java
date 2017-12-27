@@ -29,7 +29,7 @@ class shoppinglist{
 public class shoppingChangeController {
 	@Autowired
 	private ShoppingService shoppingService;
-
+	@Autowired
 	private MerchandiseService merchandiseService;
 
 	@RequestMapping(path = "/selectShopping.controller", method = {RequestMethod.GET, RequestMethod.POST})
@@ -57,7 +57,7 @@ public class shoppingChangeController {
 		/*利用Service使用DAO方法拿取JSON型態的回傳值，包覆著商品名稱、商品價格和購買數量*/
 		JSONArray json = shoppingService.selectMerchandiseList(memberId);
 		/*測試是否有拿到*/
-		System.out.println(json);	
+//		System.out.println(json);	
 		return json;
 
 	}

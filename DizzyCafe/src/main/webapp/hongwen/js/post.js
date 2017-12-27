@@ -2,7 +2,7 @@ $(function() {
 		tinymce.init({
 					selector : "textarea",
 					language : 'zh_TW',
-					height : 500,
+					height : 400,
 					menubar : false,
 					statusbar : false,
 					toolbar_items_size : 'small',

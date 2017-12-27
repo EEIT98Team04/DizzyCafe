@@ -1,12 +1,7 @@
 package dragon.controller;
-<<<<<<< HEAD
-
 import java.util.HashMap;
 import java.util.Map;
 
-=======
-
->>>>>>> branch 'master' of https://github.com/EEIT98Team04/DizzyCafe.git
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

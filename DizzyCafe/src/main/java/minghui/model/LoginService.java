@@ -1,8 +1,6 @@
 package minghui.model;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -11,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.common.base.Joiner;
+import com.google.common.io.Files;
 
 import minghui.model.dao.MemberDAO;
 import minghui.utils.Encryption;
@@ -148,17 +149,29 @@ public class LoginService {
 	public boolean uploadServerFile(MultipartFile memberPhoto, MemberBean bean) {
 		if (!memberPhoto.isEmpty()) {
 			try {
+				
+//				byte[] bytes = memberPhoto.getBytes();
+//				String[] strs = memberPhoto.getContentType().split("/");
+//				System.out.println(strs[1]);
+//				String path = "/minghui/res/member_photo/" + bean.getMemberName() + "." + strs[1];
+//				File serverFile = new File(server_path + path);
+//				bean.setMemberPhoto("/DizzyCafe" + path);
+//				memberDAO.update(bean);
+//				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+//				stream.write(bytes);
+//				stream.close();
+				
+				
 				byte[] bytes = memberPhoto.getBytes();
-
 				String[] strs = memberPhoto.getContentType().split("/");
-				System.out.println(strs[1]);
-				String path = "/minghui/res/member_photo/" + bean.getMemberName() + "." + strs[1];
-				File serverFile = new File(server_path + path);
-				bean.setMemberPhoto("/DizzyCafe" + path);
+				Joiner joiner = Joiner.on("");
+				String guava_path = joiner.join("/minghui/res/member_photo/", bean.getMemberName(), ".", strs[1]);
+				
+				File serverFile = new File(server_path + guava_path);
+				bean.setMemberPhoto("/DizzyCafe" + guava_path);
 				memberDAO.update(bean);
-				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
+				Files.write(bytes, serverFile);				
+				
 				return true;
 			} catch (Exception e) {
 				System.out.println(e.getMessage());				

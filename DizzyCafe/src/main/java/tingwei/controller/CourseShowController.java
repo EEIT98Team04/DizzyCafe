@@ -20,7 +20,7 @@ public class CourseShowController {
 	//Show course info
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
 	public String method(Model model ,int course) {
-		CourseBean bean = courseService.select(course);
+		CourseBean bean = courseService.selectByCourseId(course);
 		if(bean!=null) {
 			model.addAttribute("course",bean);
 			return "showCourseSuccess";

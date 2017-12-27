@@ -61,7 +61,7 @@ public class BackStageUpdateCourseController {
 			courseWeek = courseWeek + var;
 		}
 		
-		CourseBean courseBean = courseService.select(courseId);
+		CourseBean courseBean = courseService.selectByCourseId(courseId);
 		courseBean.setCourseId(courseId);
 		courseBean.setCourseName(courseName);
 		courseBean.setCourseIntro(courseIntro);

@@ -17,9 +17,10 @@
 	rel="stylesheet" type="text/css">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
-<link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.css"/>
 <jsp:include page="../HTML/TitleIcon.jsp" />
 </head>
+
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<jsp:include page="/backstage/index.jsp"></jsp:include>
@@ -31,8 +32,6 @@
 					<a href="${pageContext.request.contextPath}/backstage/index.jsp">回首頁</a>
 					</li>
 				<li class="breadcrumb-item active">課程管理</li>
-				<li class="breadcrumb-item">
-					<a href="${pageContext.request.contextPath}/backstage/CourseCalendar.jsp">行事曆</a></li>
 			</ol>
 			<div class="row">
 				<div class="col-12"></div>
@@ -47,7 +46,7 @@
 			<a style="margin-left:680px;" href="${pageContext.request.contextPath}/backstage/courseNew.jsp"><button class="btn btn-primary">新增</button></a>
 		</div>
 	</div>
- 	<script src="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></script> 
+
  	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
  	<script> 
  	//顯示資料表dataTable
@@ -114,6 +113,5 @@
 				});
 	
  	</script> 
-	<jsp:include page="/backstage/footer.jsp"></jsp:include>
 </body>
 </html>

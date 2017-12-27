@@ -26,21 +26,33 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/activitiymanage.jsp">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Activities</span>
+            <i class="fa fa-fw fa-futbol-o"></i>
+            <span class="nav-link-text">活動管理</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/merchandisemanage.jsp">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Merchandise</span>
+            <span class="nav-link-text">商品管理</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="${pageContext.request.contextPath }/backstage/courseManage.jsp">
-            <i class="fa fa-fw fa-area-chart"></i>
+<%--           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/courseManage.jsp"> --%>
+<!--             <i class="fa fa-fw fa-book"></i> -->
+<!--             <span class="nav-link-text">課程管理</span> -->
+<!--           </a> -->
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#course" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-book"></i>
             <span class="nav-link-text">課程管理</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="course">
+            <li>
+              <a href="${pageContext.request.contextPath }/backstage/courseManage.jsp">課程清單</a>
+            </li>
+            <li>
+              <a href="${pageContext.request.contextPath }/backstage/courseCalendar.jsp">行事曆</a>
+            </li>
+            </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">

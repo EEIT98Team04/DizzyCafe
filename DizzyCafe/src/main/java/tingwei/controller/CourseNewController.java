@@ -34,10 +34,10 @@ public class CourseNewController {
 			String courseTeacher, int courseLimit,
 			String courseSignupBegin, String courseSignupEnd,
 			String courseBegin, String courseEnd,
-			String[] whichDay,String time ,int courseLength,
+			String[] whichDay,int time ,int courseLength,
 			MultipartFile courseImg) {
 		
-		SimpleDateFormat dateFormate = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date courseSignupBeginNew = null;
 		java.sql.Date courseSignupEndNew = null;
 		java.sql.Date courseBeginNew = null;
@@ -52,6 +52,12 @@ public class CourseNewController {
 			e1.printStackTrace();
 		}
 
+		String courseWeek = "";
+		for(String var : whichDay) {
+			courseWeek = courseWeek + var;
+		}
+		System.out.println(courseWeek);
+		
 		CourseBean courseBean = new CourseBean();
 		courseBean.setCourseName(courseName);
 		courseBean.setCourseIntro(courseIntro);
@@ -63,8 +69,9 @@ public class CourseNewController {
 		courseBean.setCourseSignupEnd(courseSignupEndNew);
 		courseBean.setCourseBegin(courseBeginNew);
 		courseBean.setCourseEnd(courseEndNew);
-		
-		System.out.println(courseImg);
+		courseBean.setCourseTime(time);
+		courseBean.setCourseLength(courseLength);
+		courseBean.setCourseWeek(courseWeek);
 		
 		if (!courseImg.isEmpty()) {
 			try {
@@ -73,7 +80,7 @@ public class CourseNewController {
 				// Create the file on server
 				String[] strs = courseImg.getContentType().split("/");
 				String server_path = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
-				String path = "/image/course/" + courseBean.getCourseName() + "." + strs[1];
+				String path = "/image/course/" + courseBean.getCourseId() + "." + strs[1];
 				
 				courseBean.setCourseImg(path);
 				File serverFile = new File(server_path + path);

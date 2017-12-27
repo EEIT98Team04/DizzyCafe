@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.gson.Gson;
-
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Service
 @Transactional
@@ -28,9 +27,16 @@ public class CouponService {
 	
 	//ajax用，selectById傳回GSON格式
 	public JSONArray selectToJSON(int memberId) {
-		List<CouponBean> select = couponDAO.selectFromMemberId(memberId);
-		String temp = new Gson().toJson(select );
-		JSONArray json = JSONArray.fromObject(temp);
+		List<Object[]> select = couponDAO.selectFromMemberIdObject(memberId);
+		JSONArray json = new JSONArray();
+		for(Object[] temp : select) {
+			JSONObject xxx = new JSONObject();
+			xxx.put("eventDiscount", temp[0]);
+			xxx.put("couponDeadline", temp[1].toString());
+			xxx.put("couponStatus", temp[2]);
+			xxx.put("merchandiseName", temp[3]);
+			json.add(xxx);
+		}
 		return json;
 	}
 	

@@ -1,5 +1,7 @@
 package applehead.controller;
 
+import java.util.Calendar;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,10 @@ public class DailyEventController {
 	public @ResponseBody void selectEventItems(String prize,String discount,HttpSession session) {
 		MemberBean bean = (MemberBean)session.getAttribute("user");
 		MemberBean temp = null;
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new java.sql.Date(System.currentTimeMillis()));
+		cal.add(Calendar.MONTH, 1);
+		cal.getTime().getTime();
 		if(!"87".equals(prize)) {	
 			if(bean!=null) {
 				CouponBean insert = new CouponBean();
@@ -41,7 +47,7 @@ public class DailyEventController {
 				insert.setCouponStatus(0);
 				insert.setEventDiscount(Double.parseDouble(discount));
 				insert.setMerchandiseId(Integer.valueOf(prize));
-				insert.setCouponDeadline(new java.sql.Date(System.currentTimeMillis()+86400000*30));
+				insert.setCouponDeadline(new java.sql.Date(cal.getTime().getTime()));
 				couponService.insertCoupon(insert);
 				temp = memberService.updateDailyEvent(bean);
 				session.setAttribute("user", temp);				

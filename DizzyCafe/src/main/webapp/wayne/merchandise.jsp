@@ -45,7 +45,7 @@
 						<a
 							href="${pageContext.request.contextPath}/merchandisedetails.controller?merchandiseId=${bean.merchandiseId}">
 							<img class="imgone"
-							src="${pageContext.request.contextPath}/${bean.merchandisePicture}">
+							src="${pageContext.request.contextPath}${bean.merchandisePicture}">
 						</a>
 					</div>
 					<div class="colthree">

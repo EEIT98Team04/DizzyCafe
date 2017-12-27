@@ -8,22 +8,12 @@
 <title>DizzyCafe</title>
 <style>
 </style>
+<jsp:include page="/HTML/TitleIcon.jsp" />
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height: 100px"></div>
 	<div>
-		<a
-			href="${pageContext.request.contextPath}/course/course.controller?page=1">課程</a>
-
-		<a
-			href="${pageContext.request.contextPath}/activity.controller?nowPage=0">haha</a>
-
-		<form action="<c:url value="/activity.controller" />" method="get">
-			<input type="submit" value="press">
-		</form>
-		<a href="${pageContext.request.contextPath}/coupon/showcoupon.jsp">coupon</a>
-		<a href="${pageContext.request.contextPath }/event/dailyevent.jsp">每日活動</a>
 		<a href="${pageContext.request.contextPath}/shopping/shoppingCart.controller">購物車</a>
 	</div>
 		 <div id="carouselExampleIndicators" class="carousel slide border border-light" data-ride="carousel" style="margin:auto;width:1024px;height:600px" data-interval="3000">

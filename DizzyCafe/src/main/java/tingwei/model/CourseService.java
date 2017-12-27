@@ -20,7 +20,7 @@ public class CourseService {
 //		return courseDAO.select();
 //	}
 	
-	public CourseBean select(int courseId) {
+	public CourseBean selectByCourseId(int courseId) {
 		return courseDAO.select(courseId);
 	}
 	
@@ -28,12 +28,27 @@ public class CourseService {
 		return courseDAO.selectByName(coruseName);
 	}
 	
-	public List<CourseBean> showCourseInPage(int courseIdStart, int courseIdEnd){
-		return courseDAO.selectPageNow(courseIdStart,courseIdEnd);
+	public JSONArray showCourseInPage(int page, int rows_perPage, JSONArray courses){
+		JSONArray result = new JSONArray();
+		/* logic: rows_perPage = 4
+		 * 1 : 1-4
+		 * 2 : 5-8
+		 */
+		for (int i = rows_perPage * (page - 1); i < rows_perPage * page && i < courses.size() ; i++) { 
+			result.add(courses.get(i));
+		}
+		return result;
 	}
 	
-	public int countTotalPages(int rows_perPage) {
-		return courseDAO.countTotalPage(rows_perPage);
+	public int countTotalPages(int rows_perPage, JSONArray courses) {
+		int result = 0;
+		if (courses.size() % rows_perPage == 0) {
+			result = courses.size() / rows_perPage;
+		} else if(courses.size() % rows_perPage > 0)
+		{
+			result  = courses.size() / rows_perPage + 1;
+		}
+		return result;
 	}
 
 	public CourseBean insert(CourseBean bean) {
@@ -44,11 +59,25 @@ public class CourseService {
 			return bean;
 	}
 	
-	public int lastCoruesId() {
-		return courseDAO.lastCoruesId();
+	public JSONArray selectPageNow() {
+		return courseDAO.selectPageNow();
 	}
 	
 	public JSONArray showCoruseInBackstage() {
 		return courseDAO.showCoruseInBackstage();
+	}
+	
+	public CourseBean courseUpdateChangePage(int couresId) {
+		return courseDAO.select(couresId);
+	}
+	
+	public CourseBean update(CourseBean bean) {
+		return courseDAO.update(bean);
+	}
+	
+	public int getLimitByCourseId(int courseId) {
+		CourseBean bean = this.selectByCourseId(courseId);
+		int limit = bean.getCourseLimit();
+		return limit;
 	}
 }

@@ -3,6 +3,7 @@ package tingwei.model;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,6 +32,8 @@ public class CourseDateTimeDAO {
 	public CourseDateTimeBean insert(CourseDateTimeBean bean) {
 		if(bean!=null) {
 			this.getSession().save(bean);
+			this.getSession().flush();
+			this.getSession().clear();
 		}
 		return null;
 	}
@@ -64,5 +67,15 @@ public class CourseDateTimeDAO {
 		return result;
 	}
 	
+	public void delete(int courseId) {
+		Query delete = this.getSession().createNativeQuery("DELETE courseDateTime WHERE courseId = ?");
+		delete.setParameter(1, courseId);
+		delete.executeUpdate();
+	}
+	
+	public void deleteAll() {
+		Query deleteAll = this.getSession().createNativeQuery("DELETE courseDateTime");
+		deleteAll.executeUpdate();
+	}
 }
 

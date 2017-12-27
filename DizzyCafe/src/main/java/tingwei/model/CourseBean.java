@@ -23,7 +23,29 @@ public class CourseBean {
 	private java.sql.Date courseSignupBegin;
 	private java.sql.Date courseSignupEnd;
 	private int courseLimit;
+	private int courseTime;
+	private int courseLength;
+	private String courseWeek;
 	
+	public int getCourseTime() {
+		return courseTime;
+	}
+	public void setCourseTime(int courseTime) {
+		this.courseTime = courseTime;
+	}
+	
+	public int getCourseLength() {
+		return courseLength;
+	}
+	public void setCourseLength(int courseLength) {
+		this.courseLength = courseLength;
+	}
+	public String getCourseWeek() {
+		return courseWeek;
+	}
+	public void setCourseWeek(String courseWeek) {
+		this.courseWeek = courseWeek;
+	}
 	public int getCourseLimit() {
 		return courseLimit;
 	}

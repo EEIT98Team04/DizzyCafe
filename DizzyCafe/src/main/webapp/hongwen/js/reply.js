@@ -1,81 +1,118 @@
 $(function() {
 	var search = document.location.search;// 取得?後面的參數
-	console.log("Get into ajax");
+	var modify = "false";// 文章狀態(修改or發文)
+	
+	//回傳回覆資料
 	$.ajax({
 		url : '/DizzyCafe/Reply.hongwen' + search,
 		type : 'GET',
 		// data:data,//post use
 		success : function(json) {
-//			alert('success');
 			setdata(json);//
 		}
 	});
-	//回覆留言
-	$('#post').on('submit', function() {
-//			alert('submit');
-		var	t = tinyMCE.activeEditor.getBody().innerHTML;//取出tinymve內容
-		var that = $(this),data={};
+	// 回覆留言
+	$('#post').on('click', function() {
+		var t = tinyMCE.activeEditor.getBody().innerHTML;// 取出tinymve內容
+		var that = $(this), data = {};
 		
-		//轉json格式
-//		that.find('[name]').each(function(index, value) {
-//			that = $(this), 
-//				   name = that.attr('name'),//取得name的值 
-//				   value = that.val();//取得值
-//			data[name] = value;
-//		});
-		data['title']=$.getUrlParam('documentId');//取得param值
-		data['textarea']=t;//將tinymce值放入data，並宣告為json格式[key='textarea',value=t]
+		data['modify'] = modify;// 判斷是發文還是修改，來不及改邏輯，直接給變數
+		data['title'] = $.getUrlParam('documentId');// 取得param值
+		data['textarea'] = t;// 將tinymce值放入data，並宣告為json格式[key='textarea',value=t]
 
-		console.log(data);			
+		console.log(data);
 
-		//資料檢查
-		var string = ['title','textarea'];//檢查資料的key	
-		
-		//初始化所有發文設定
-		tinyMCE.activeEditor.getBody().innerHTML='';//初始化內容
-
-		//ajax傳送
+		// ajax傳送
 		$.ajax({
 			url : '/DizzyCafe/Reply.hongwen',
 			type : 'POST',
 			data : data,
 			cache : false,
 			success : function(json) {
-				//回傳值是字串
-//				console.log(json);
-				if(json[0]['status'] == 'false'){
+				// 回傳值是字串
+				// console.log(json);
+				if (json[0]['status'] == 'false') {
 					alert('請登入會員');
-					window.location.replace(document.location.href);//取得現在的URL，並自動導向
-				}else{
-					alert('發文成功');
-					window.location.replace(document.location.href);//取得現在的URL，並自動導向
+					window.location.replace(document.location.href);// 取得現在的URL，並自動導向
+				} else {
+					if (modify == "false") {
+						alert('回文成功');
+					} else {
+						modify == "false"
+						alert('修改回文成功');
+					}
+					window.location.replace(document.location.href);// 取得現在的URL，並自動導向
 				}
 			}
 		})
-		return false;
 	});
-	//取得參數
-	$.getUrlParam = function (name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) return unescape(r[2]); return null;
-    }
+	$('#close').on('click', function() {
+		// 初始化所有發文設定
+		tinyMCE.activeEditor.getBody().innerHTML = '';// 初始化內容
+		$('#d_article').val('');// 清除標題內容
+		$('#grid').val('1');
+		modify = "false";
+	})
+	// 取得參數
+	$.getUrlParam = function(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null)
+			return unescape(r[2]);
+		return null;
+	}
+	// 發文
+	$(document).on("click", '#btnreply', function() {
+		modify = "false";
+		$('#modify').trigger('click');
+	})
+	// 修改
+	$(document).on("click", '.reply', function() {
+		var search = '?';
+		var id = $(this).attr("id");
+		search += 'id=' + id;
+		modify = "true";
+
+		// 傳送資料
+		$.ajax({
+			url : '/DizzyCafe/Replymodify.hongwen' + search,
+			type : 'GET',
+			// data:data,//post use
+			success : function(json) {
+				console.log(json[0].content);
+				console.log(tinyMCE.activeEditor.getBody().innerHTML);
+
+				// 將文章相關內容填入
+				tinyMCE.activeEditor.getBody().innerHTML = json[0].content;// 初始化內容
+				console.log(tinyMCE.activeEditor.getBody().innerHTML);
+				$('#documentid').val(json[0].documentId);// documentid
+				// 自動按發文鍵
+				$('#modify').trigger('click');
+			}
+		});
+	});
 })
 var setdata = function(json) {
 	var inner = '', i, j;
 	var count = 0;// 樓層編號，初始值為0
-	var array = [ 'membername', 'times', 'content' ];
+	var array = [ 'membername', 'times', 'content' ,'replyId','memberId'];
 	var floor = '';
 	var i = 0;// 起始頁面
 	var j = 10;// 結束頁面
-	var user = $('#tmp').text();//抓user值
+	var user = $('#tmp').text();// 抓user值
+	var tmp;//暫存
+	var x = 0;
 
 	inner += '<div id="floor">直達<input id="xx" type="text" style="width:30px;">樓</div>';
+	inner += '<span><button id="btnreply" type="button" class="btn btn-success btn-sm" style="margin-left:1125px;">回覆文章</button></span>';
 	// for(;i<=j;i++){
 	for (i in json) {
 		floor = 'id="' + count + '"';
 		inner += '<div class="article">';
-		inner += '<div class="user">' + '使用者圖片' + '</div>';// 使用者圖片
+		inner += '<div class="user">';// 使用者個資
+		inner += '<img class="photo" src="DizzyCafe/" style="width: 100px; height: 100px">';// 使用者個資
+		inner += '<div>'+json[i][array[4]]+'</div>';// 使用者id
+		inner += '</div>';// 使用者個資
 		inner += '<div class="content">';
 		inner += '<div class="content_header">';
 		inner += '<div "style="text-align: right;">第' + count + '樓</div>';// 樓層
@@ -84,28 +121,30 @@ var setdata = function(json) {
 		inner += '<div class="content_body">';
 		inner += '<div style="margin-bottom: 10px;">發文者 : ' + json[i][array[0]]
 				+ '</div>';// 發文者
+		for(x in tmp){
+			console.log('forloop');
+			if(tmp[x][0] == json[i][array[0]]){
+				console.log(tmp[x][0]);
+			}
+		}
 		inner += '<div style="margin-bottom: 10px;">時間 : ' + json[i][array[1]]
 				+ '</div>';// 發文時間
 		inner += '<div>' + json[i][array[2]] + '</div>';
 		inner += '</div>';
 		inner += '<a ' + floor + '"></a>';// 樓層用
 		inner += '<div class="content_footer">';
-		//判斷是否同一使用者，是就顯示修改按鈕
-		if(user == json[i][array[0]]){
-			inner += '<input class="change" type="button" value="修改" style="display:none">';			
+		// 判斷是否同一使用者，是就顯示修改按鈕
+		if (user == json[i][array[0]]) {
+			inner += '<button id="'+json[i][array[3]]+'" type="button" class="btn btn-primary reply">修改</button>';
 		}
 		inner += '</div>';
 		inner += '</div>';
 		inner += '</div>';
 		count++;// 樓層編號
 	}
-	$('#article').html(inner);//最後輸出，覆蓋
-	
-	//修改按鈕顯示
-	modify();
-	
-	
-	//樓層//一定要放這，標籤產生完成，才能增加功能
+	$('#article').html(inner);// 最後輸出，覆蓋
+
+	// 樓層//一定要放這，標籤產生完成，才能增加功能
 	$('#xx').keydown(function(event) {
 		// alert( event.which );//判斷按下哪個按鈕
 		if (event.which == 13) {
@@ -117,16 +156,31 @@ var setdata = function(json) {
 			window.location = '#' + floor;
 		}
 	});
-	//搜尋
+	// 搜尋
 	$("#myInput").on("keyup", function() {
 		var value = $(this).val().toLowerCase();
 		$("#list tr").filter(function() {
 			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 		});
 	});
+	
+	//回傳使用者資料
+	$.ajax({
+		url : '/DizzyCafe/Data.hongwen',
+		type : 'GET',
+		success : function(json) {
+			tmp = json;
+//			var x = 0;
+//			$('.photo').each(function(){
+//				var i;
+//				$(this).attr('src',x);
+//				console.log('-----------------------------------------');
+//				for(i in json){
+//					var tmp = json[i][0];
+//					console.log(tmp);
+//				}
+//				x++;
+//			});
+		}
+	});
 };
-var modify = function(){
-	$(".change").show();
-	var x = $('#tmp').text();
-	console.log('user='+x);
-}

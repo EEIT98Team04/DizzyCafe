@@ -9,7 +9,7 @@
 	border:1px solid white;
 	margin-bottom: 50px;
 	box-sizing: border-box;
-	width: 80vw;
+	width: 1000px;
 	height: 600px;
 }
 
@@ -61,5 +61,7 @@
 #floor{
 	margin-top:70px;
 	background-color:#f2dede;
+	width:max;
+	min-width:1200px;
 /* 	color:white; */
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hongwen.model.ReplyBean;
 import hongwen.model.ReplyService;
+import minghui.model.LoginService;
 import minghui.model.MemberBean;
 import net.sf.json.JSONArray;
 
@@ -21,6 +22,8 @@ public class ReplyController {
 
 	@Autowired
 	ReplyService replyService;
+	@Autowired
+	private LoginService service;
 	//搜尋用
 	@RequestMapping(path = "/Reply.hongwen", method = { RequestMethod.GET })
 	public @ResponseBody JSONArray getmethod(@RequestParam Map<?, ?> param) {
@@ -48,5 +51,12 @@ public class ReplyController {
 			json = replyService.insert(replybean);			
 		}
 		return json;//if it's success,then return json about {"status":"success"}
+	}
+
+	//瀏覽文章顯示使用者相關資訊
+	@RequestMapping(path = "/Data.hongwen", method = { RequestMethod.GET })
+	public @ResponseBody JSONArray data(@RequestParam Map<?, ?> param) {
+		JSONArray json = service.selectToJSON();
+		return json;
 	}
 }

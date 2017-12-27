@@ -65,7 +65,8 @@
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<h4 class="modal-title">發文/修改</h4>
-						<button id="close" type="button" class="close" data-dismiss="modal">&times;</button>
+						<button id="close" type="button" class="close"
+							data-dismiss="modal">&times;</button>
 					</div>
 					<!-- Modal body -->
 					<div id='send' class="modal-body">
@@ -82,7 +83,7 @@
 						<div>
 							<span>文章標題 : <input id="d_article" name="title"
 								type="text" style="width: 200px; height: 25px;" /></span>
-							<div id="documentid" style="display:none"></div>
+							<div id="documentid" style="display: none"></div>
 						</div>
 						<textarea id="tiny1"></textarea>
 					</div>
@@ -97,136 +98,135 @@
 		</div>
 	</div>
 	<script>
-	$(function() {
-		var modify = "false";//文章狀態(修改or發文)
-		var status = "0";//文章或回文(1or2),0為默認
-		$('#close').on('click', function() {
-			// 初始化所有發文設定
-			tinyMCE.activeEditor.getBody().innerHTML = '';// 初始化內容
-			$('#d_article').val('');// 清除標題內容
-			$('#grid').val('1');
-			modify = "false";
-		})
-		$('#post').on('click', function() {
-			var t = tinyMCE.activeEditor.getBody().innerHTML;// 取出tinymve內容
-			var that = $(this), data = {};
+		$(function() {
+			var modify = "false";//文章狀態(修改or發文)
+			var status = "0";//文章或回文(1or2),0為默認
+			$('#close').on('click', function() {
+				// 初始化所有發文設定
+				tinyMCE.activeEditor.getBody().innerHTML = '';// 初始化內容
+				$('#d_article').val('');// 清除標題內容
+				$('#grid').val('1');
+				modify = "false";
+			})
+			$('#post').on('click', function() {
+				var t = tinyMCE.activeEditor.getBody().innerHTML;// 取出tinymve內容
+				var that = $(this), data = {};
 
-			// 轉json格式
-			$('#send').find('[name]').each(function(index, value) {
-				that = $(this), name = that.attr('name'),// 取得name的值
-				value = that.val();// 取得值
-				data[name] = value;
-			});
-			data['modify'] = modify;// 判斷是發文還是修改，來不及改邏輯，直接給變數
-			data['documentid'] = $('#documentid').val();// documentid填入
-			data['textarea'] = t;// 將tinymce值放入data，並宣告為json格式[key='textarea',value=t]
-			if(status == "2"){
-				data['title'] = $('#documentid').val();// documentid填入
-			}
+				// 轉json格式
+				$('#send').find('[name]').each(function(index, value) {
+					that = $(this), name = that.attr('name'),// 取得name的值
+					value = that.val();// 取得值
+					data[name] = value;
+				});
+				data['modify'] = modify;// 判斷是發文還是修改，來不及改邏輯，直接給變數
+				data['documentid'] = $('#documentid').val();// documentid填入
+				data['textarea'] = t;// 將tinymce值放入data，並宣告為json格式[key='textarea',value=t]
+				if (status == "2") {
+					data['title'] = $('#documentid').val();// documentid填入
+				}
 
-			// console.log(data);//data is a object
-			
-			//判斷是文章還是回文
-			if(status == "1"){
-				// ajax傳送
-				$.ajax({
-					url : '/DizzyCafe/Document.hongwen',
-					type : 'POST',
-					data : data,
-					cache : false,
-					success : function(json) {
-						// 回傳值是字串
-						var location = '/DizzyCafe/hongwen/private.jsp';
-						if (json[0]['status'] == 'false') {
-							alert('請登入會員');
-							window.location.replace(location);// 取得現在的URL，並自動導向
-						} else {
-							if(modify == "true"){
-								modify = "false";
-								alert('修改成功');
-								window.location.replace(location);// 取得現在的URL，並自動導向								
-							}else{
-								alert('發文成功');
-								window.location.replace(location);// 取得現在的URL，並自動導向	
+				// console.log(data);//data is a object
+
+				//判斷是文章還是回文
+				if (status == "1") {
+					// ajax傳送
+					$.ajax({
+						url : '/DizzyCafe/Document.hongwen',
+						type : 'POST',
+						data : data,
+						cache : false,
+						success : function(json) {
+							// 回傳值是字串
+							var location = '/DizzyCafe/hongwen/private.jsp';
+							if (json[0]['status'] == 'false') {
+								alert('請登入會員');
+								window.location.replace(location);// 取得現在的URL，並自動導向
+							} else {
+								if (modify == "true") {
+									modify = "false";
+									alert('修改成功');
+									window.location.replace(location);// 取得現在的URL，並自動導向								
+								} else {
+									alert('發文成功');
+									window.location.replace(location);// 取得現在的URL，並自動導向	
+								}
 							}
 						}
-					}
-				})	
-			}else if(status == "2"){
-				// ajax傳送
-				$.ajax({
-					url : '/DizzyCafe/Reply.hongwen',
-					type : 'POST',
-					data : data,
-					cache : false,
-					success : function(json) {
-						// 回傳值是字串
-						var location = '/DizzyCafe/hongwen/private.jsp';
-						if (json[0]['status'] == 'false') {
-							alert('請登入會員');
-							window.location.replace(location);// 取得現在的URL，並自動導向
-						} else {
-							modify = "false";
-							alert('回文修改成功');
+					})
+				} else if (status == "2") {
+					// ajax傳送
+					$.ajax({
+						url : '/DizzyCafe/Reply.hongwen',
+						type : 'POST',
+						data : data,
+						cache : false,
+						success : function(json) {
+							// 回傳值是字串
+							var location = '/DizzyCafe/hongwen/private.jsp';
+							if (json[0]['status'] == 'false') {
+								alert('請登入會員');
+							} else {
+								modify = "false";
+								alert('回文修改成功');
+							}
 							window.location.replace(location);// 取得現在的URL，並自動導向
 						}
+					})
+				} else {
+					alert('發生不可預期錯誤!');
+				}
+			});
+			$(document).on("click", '.binding', function() {
+				var search = '?';
+				var id = $(this).attr("id");
+
+				search += 'id=' + id;
+
+				// 傳送資料
+				$.ajax({
+					url : '/DizzyCafe/Privatemodify.hongwen' + search,
+					type : 'GET',
+					// data:data,//post use
+					success : function(json) {
+						$('#send div:eq(0)').css('display', 'block');
+						$('#send div:eq(1)').css('display', 'block');
+						setdata(json);//
+						modify = "true";
+						status = "1";
 					}
-				})	
-			}else{
-				alert('發生不可預期錯誤!');
+				});
+			});
+			$(document).on("click", '.reply', function() {
+				var search = '?';
+				var id = $(this).attr("id");
+
+				search += 'id=' + id;
+
+				// 傳送資料
+				$.ajax({
+					url : '/DizzyCafe/Replymodify.hongwen' + search,
+					type : 'GET',
+					// data:data,//post use
+					success : function(json) {
+						$('#send div:eq(0)').css('display', 'none');
+						$('#send div:eq(1)').css('display', 'none');
+						setdata(json);//
+						modify = "true";
+						status = "2";
+					}
+				});
+			});
+			var setdata = function(json) {
+				console.log(json[0].name);
+				// 將文章相關內容填入
+				tinyMCE.activeEditor.getBody().innerHTML = json[0].content;// 初始化內容
+				$('#d_article').val(json[0].name);// 標題內容
+				$('#grid').val(json[0].boardId);// boardid
+				$('#documentid').val(json[0].documentId);// documentid
+				// 自動按發文鍵
+				$('#modify').trigger('click');
 			}
-		});
-		$(document).on("click", '.binding', function() {
-			var search = '?';
-			var id = $(this).attr("id");
-
-			search += 'id=' + id;
-
-			// 傳送資料
-			$.ajax({
-				url : '/DizzyCafe/Privatemodify.hongwen' + search,
-				type : 'GET',
-				// data:data,//post use
-				success : function(json) {
-					$('#send div:eq(0)').css('display','block');
-					$('#send div:eq(1)').css('display','block');
-					setdata(json);//
-					modify = "true";
-					status = "1";
-				}
-			});
-		});
-		$(document).on("click", '.reply', function() {
-			var search = '?';
-			var id = $(this).attr("id");
-
-			search += 'id=' + id;
-
-			// 傳送資料
-			$.ajax({
-				url : '/DizzyCafe/Replymodify.hongwen' + search,
-				type : 'GET',
-				// data:data,//post use
-				success : function(json) {
-					$('#send div:eq(0)').css('display','none');
-					$('#send div:eq(1)').css('display','none');
-					setdata(json);//
-					modify = "true";
-					status = "2";
-				}
-			});
-		});
-		var setdata = function(json) {
-			console.log(json[0].name);
-			// 將文章相關內容填入
-			tinyMCE.activeEditor.getBody().innerHTML = json[0].content;// 初始化內容
-			$('#d_article').val(json[0].name);// 清除標題內容
-			$('#grid').val(json[0].boardId);// boardid
-			$('#documentid').val(json[0].documentId);// documentid
-			// 自動按發文鍵
-			$('#modify').trigger('click');
-		}
-	})
+		})
 	</script>
 </body>
 </html>

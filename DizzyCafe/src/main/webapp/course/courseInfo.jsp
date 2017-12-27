@@ -145,25 +145,27 @@
 
 
 		$(function() {
-			if('${empty user}'== "true"){
+			if('${empty user}'== "true"){              //未登入
 				$('#iwannasignup').text("請先登入").prop("disabled", true);
 			}
 			
-			$.post("/DizzyCafe//course/CheckTimeController.controller", {
+			$.post("/DizzyCafe//course/CheckTimeAndLimitController.controller", {
 				"courseId" : '${course.courseId }'
 			}, function(data) {
-				if (data == "TimeError") {
+				if (data == "TimeError") {              //非報名時間
 					$('#iwannasignup').text("不是報名時間").prop("disabled", true);
+				}else if(data == "limited"){               //人數到達上限
+					$('#iwannasignup').text("人數已達上限").prop("disabled", true);
 				}
 			});
 
-			if ('${not empty user}' == "true") {
+			if ('${not empty user}' == "true") {       
 				alert("do user check")
 				$.post("/DizzyCafe/course/CheckSignedController.controller", {
 					"courseId" : '${course.courseId }',
 					"memberId" : '${user.memberId }'
 				}, function(data) {
-					if (data == "alreadySignedUp") {
+					if (data == "alreadySignedUp") {     //已報名
 						$('#iwannasignup').text("已報名").prop("disabled", true);
 					}
 				});

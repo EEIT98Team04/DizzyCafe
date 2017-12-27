@@ -136,8 +136,13 @@ public class CourseDAO {
 			tt.put("courseLimit", var[11]);
 			result.add(tt);
 		}
-
 		return result;
-
+	}
+	
+	public int getIdFromName(String courseName) {
+		Query temp = this.getSession().createNativeQuery(" SELECT courseId FROM course WHERE courseName = ?");
+		temp.setParameter(1, courseName);
+		int courseId = ((Integer)temp.uniqueResult()).intValue();
+		return courseId;
 	}
 }

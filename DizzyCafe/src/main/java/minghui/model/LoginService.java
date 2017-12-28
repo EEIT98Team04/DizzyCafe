@@ -1,6 +1,7 @@
 package minghui.model;
 
 import java.io.File;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -12,10 +13,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.base.Joiner;
 import com.google.common.io.Files;
+import com.google.gson.Gson;
 
 import minghui.model.dao.MemberDAO;
 import minghui.utils.Encryption;
 import minghui.utils.MailUtils;
+import net.sf.json.JSONArray;
 
 @Service
 public class LoginService {
@@ -179,5 +182,14 @@ public class LoginService {
 			}
 		}
 		return false;
+	}
+	
+	//hongwen
+	@Transactional
+	public JSONArray selectToJSON() {
+		List<TmpBean> select = memberDAO.selectall();
+		String temp = new Gson().toJson(select); // 轉JSON檔案
+		JSONArray json = JSONArray.fromObject(temp);
+		return json;
 	}
 }

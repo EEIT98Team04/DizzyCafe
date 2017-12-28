@@ -23,31 +23,4 @@ public class BoardService {
 		JSONArray json = JSONArray.fromObject(temp);
 		return json;
 	}	
-	
-//	//insert coupon
-//	public void insertCoupon(BoardBean bean) {
-//		if(bean!=null) {
-//			boardDAO.insert(bean);	
-//		}
-//	}
-	
-	//coupon過期
-//	public List<BoardBean> updateDeadline(int memberId){
-//		List<BoardBean> result = null;
-//		List<BoardBean> list = new ArrayList<>();
-//		//還要更新memberId
-//		result = boardDAO.selectFromMemberId(102);
-//		if(result!=null) {
-//			for(BoardBean bean : result) {
-//				if(bean.getCouponStatus()==0) {
-//					if(bean.getCouponDeadline().before(new java.sql.Date(System.currentTimeMillis()))) {
-//						BoardBean temp = boardDAO.updateCouponStatus(2,bean.getCouponId());
-//						list.add(temp);
-//					}					
-//				}
-//			}
-//		}
-//		System.out.println("result = "+list);
-//		return list;
-//	}
 }

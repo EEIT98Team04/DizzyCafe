@@ -9,20 +9,221 @@
 </head>
 <body id="body">
 	<jsp:include page="/HTML/Navbar.jsp" />
-	<div id="tmp" style="display:block">${user.memberName}</div>
-	<div id="article" ></div>
-	<form id="post" method="post">
-		<div>
-			<textarea></textarea>
-			<input type="submit" value="發文" />	
+	<div id="tmp" style="display: block">${user.memberName}</div>
+
+	<div id="article"></div>
+
+	<div class="container">
+		<!-- Button to Open the Modal -->
+		<button id="modify" type="button" class="btn btn-primary"
+			data-toggle="modal" data-target="#myModal" style="display:none">回文</button>
+		<input id="upload" name="upload" type="file" accept="image/*"
+			style="display: none" />
+		<!-- The Modal -->
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">回文</h4>
+						<button id="close" type="button" class="close"
+							data-dismiss="modal">&times;</button>
+					</div>
+					<!-- Modal body -->
+					<div id='send' class="modal-body">
+						<div>
+							<div id="documentid" style="display: none"></div>
+						</div>
+						<textarea></textarea>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button id="post" type="button" class="btn btn-success"
+							data-dismiss="modal">送出</button>
+					</div>
+				</div>
+			</div>
 		</div>
-	</form>
-	<input id="upload" name="upload" type="file" multiple style="display:none"/>
-	<div style="margin-bottom:100px"></div>
+	</div>
+	<input id="upload" name="upload" type="file" multiple
+		style="display: none" />
+	<div style="margin-bottom: 100px"></div>
 	<script src="/DizzyCafe/hongwen/js/tinymce/tinymce.min.js"></script>
 	<script src="/DizzyCafe/hongwen/js/post.js"></script>
-	<script src="/DizzyCafe/hongwen/js/reply.js"></script>
-	<script>		
+<!-- 	<script src="/DizzyCafe/hongwen/js/reply.js"></script> -->
+	<script>
+	$(function() {
+		var search = document.location.search;// 取得?後面的參數
+		var modify = "false";// 文章狀態(修改or發文)
+		var photo;//暫存
+		
+		//回傳使用者資料
+		$.ajax({
+			url : '/DizzyCafe/Data.hongwen',
+			type : 'GET',
+			success : function(json) {
+				tmp = json;
+			}
+		});
+		//回傳回覆資料
+		$.ajax({
+			url : '/DizzyCafe/Reply.hongwen' + search,
+			type : 'GET',
+			// data:data,//post use
+			success : function(json) {
+				setdata(json);//
+			}
+		});
+		// 回覆留言
+		$('#post').on('click', function() {
+			var t = tinyMCE.activeEditor.getBody().innerHTML;// 取出tinymve內容
+			var that = $(this), data = {};
+			
+			data['modify'] = modify;// 判斷是發文還是修改，來不及改邏輯，直接給變數
+			data['title'] = $.getUrlParam('documentId');// 取得param值
+			data['textarea'] = t;// 將tinymce值放入data，並宣告為json格式[key='textarea',value=t]
+
+			console.log(data);
+
+			// ajax傳送
+			$.ajax({
+				url : '/DizzyCafe/Reply.hongwen',
+				type : 'POST',
+				data : data,
+				cache : false,
+				success : function(json) {
+					// 回傳值是字串
+					// console.log(json);
+					if (json[0]['status'] == 'false') {
+						alert('請登入會員');
+						window.location.replace(document.location.href);// 取得現在的URL，並自動導向
+					} else {
+						if (modify == "false") {
+							alert('回文成功');
+						} else {
+							modify == "false"
+							alert('修改回文成功');
+						}
+						window.location.replace(document.location.href);// 取得現在的URL，並自動導向
+					}
+				}
+			})
+		});
+		$('#close').on('click', function() {
+			// 初始化所有發文設定
+			tinyMCE.activeEditor.getBody().innerHTML = '';// 初始化內容
+			$('#d_article').val('');// 清除標題內容
+			$('#grid').val('1');
+			modify = "false";
+		})
+		// 取得參數
+		$.getUrlParam = function(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null)
+				return unescape(r[2]);
+			return null;
+		}
+		// 發文
+		$(document).on("click", '#btnreply', function() {
+			modify = "false";
+			$('#modify').trigger('click');
+		})
+		// 修改
+		$(document).on("click", '.reply', function() {
+			var search = '?';
+			var id = $(this).attr("id");
+			search += 'id=' + id;
+			modify = "true";
+
+			// 傳送資料
+			$.ajax({
+				url : '/DizzyCafe/Replymodify.hongwen' + search,
+				type : 'GET',
+				// data:data,//post use
+				success : function(json) {
+					console.log(json[0].content);
+					console.log(tinyMCE.activeEditor.getBody().innerHTML);
+
+					// 將文章相關內容填入
+					tinyMCE.activeEditor.getBody().innerHTML = json[0].content;// 初始化內容
+					console.log(tinyMCE.activeEditor.getBody().innerHTML);
+					$('#documentid').val(json[0].documentId);// documentid
+					// 自動按發文鍵
+					$('#modify').trigger('click');
+				}
+			});
+		});
+	})
+	var setdata = function(json) {
+		var inner = '', i, j;
+		var count = 0;// 樓層編號，初始值為0
+		var array = [ 'membername', 'times', 'content' ,'replyId','memberId'];
+		var floor = '';
+		var i = 0;// 起始頁面
+		var j = 10;// 結束頁面
+		var user = $('#tmp').text();// 抓user值
+		var x = 0;
+
+		inner += '<div id="floor">直達<input id="xx" type="text" style="width:30px;">樓</div>';
+		inner += '<span><button id="btnreply" type="button" class="btn btn-success btn-sm" style="margin-left:1125px;">回覆文章</button></span>';
+		// for(;i<=j;i++){
+		for (i in json) {
+			floor = 'id="' + count + '"';
+			for(x in tmp){
+				if(tmp[x][0] == json[i][array[0]]){
+					photo = tmp[x][1];
+				}
+			}
+			inner += '<div class="article">';
+			inner += '<div class="user">';// 使用者個資
+			inner += '<img class="photo" src="/DizzyCafe'+photo+'" style="width: 100px; height: 100px">';// 使用者個資
+			inner += '<div>'+json[i][array[0]]+'</div>';// 使用者id
+			inner += '</div>';// 使用者個資
+			inner += '<div class="content">';
+			inner += '<div class="content_header">';
+			inner += '<div "style="text-align: right;">第' + count + '樓</div>';// 樓層
+			inner += '<div>' + '文章標題' + '</div>';// xxx文章標題
+			inner += '</div>';
+			inner += '<div class="content_body">';
+			inner += '<div style="margin-bottom: 10px;">時間 : ' + json[i][array[1]]
+					+ '</div>';// 發文時間
+			inner += '<div>' + json[i][array[2]] + '</div>';
+			inner += '</div>';
+			inner += '<a ' + floor + '"></a>';// 樓層用
+			inner += '<div class="content_footer">';
+			// 判斷是否同一使用者，是就顯示修改按鈕
+			if (user == json[i][array[0]]) {
+				inner += '<button id="'+json[i][array[3]]+'" type="button" class="btn btn-primary reply">修改</button>';
+			}
+			inner += '</div>';
+			inner += '</div>';
+			inner += '</div>';
+			count++;// 樓層編號
+		}
+		$('#article').html(inner);// 最後輸出，覆蓋
+
+		// 樓層//一定要放這，標籤產生完成，才能增加功能
+		$('#xx').keydown(function(event) {
+			// alert( event.which );//判斷按下哪個按鈕
+			if (event.which == 13) {
+				// alert($('#xx').val());
+				floor = $('#xx').val() - 1;
+				if (typeof (floor) == "undefined") {
+					alert('請輸入數值');
+				}
+				window.location = '#' + floor;
+			}
+		});
+		// 搜尋
+		$("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#list tr").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	};
 	</script>
 </body>
 </html>

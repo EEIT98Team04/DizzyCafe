@@ -9,8 +9,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/dragon/css/shoppingCartStyle.css" />
 <title>shopping</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />

@@ -35,8 +35,8 @@ public class ShoppingService {
 		return shoppingDAO.selectMerchandise(memberId, merchandiseId);
 	}
 
-	public int insert(ShoppingBean bean) {
-		return shoppingDAO.insert(bean);
+	public int insert(int memberId, int merchandiseId, int buyCount) {
+		return shoppingDAO.insert(memberId, merchandiseId, buyCount);
 	}
 
 	public ShoppingBean changeCount(ShoppingBean bean, int amount) {

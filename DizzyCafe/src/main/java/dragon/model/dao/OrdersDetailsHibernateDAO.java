@@ -13,6 +13,7 @@ import dragon.model.OrdersDetailsDAO;
 import dragon.model.ShoppingBean;
 import dragon.model.ShoppingDAO;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Repository
 public class OrdersDetailsHibernateDAO implements OrdersDetailsDAO {
@@ -37,6 +38,28 @@ public class OrdersDetailsHibernateDAO implements OrdersDetailsDAO {
 		Query<OrdersDetailsBean> select = this.getSession().createQuery("from OrdersDetailsBean where ordersId = :ordersId", OrdersDetailsBean.class);
 		select.setParameter("ordersId", ordersId);
 		return select.list();
+	}
+
+	@Override
+	public JSONArray selectOrderDetails(int ordersId) {
+		@SuppressWarnings("unchecked")
+		Query<Object[]> select = this.getSession().createNativeQuery("select merchandise.merchandiseId"
+				+ ", ordersDetails.merchandiseName, ordersDetails.merchandisePrice, ordersDetails.buyCount" 
+				+ " from ordersDetails" 
+				+ " Join merchandise" 
+				+ " On ordersDetails.merchandiseName = merchandise.merchandiseName" 
+				+ " where ordersDetails.ordersId=" + ordersId);
+		List<Object[]> temp = select.getResultList();
+		JSONArray result = new JSONArray();
+		for(Object[] var:temp) {
+			JSONObject orderDetails = new JSONObject();
+			orderDetails.put("merchandiseId", var[0]);
+			orderDetails.put("merchandiseName", var[1]);
+			orderDetails.put("merchandisePrice", var[2]);
+			orderDetails.put("buyCount", var[3]);
+			result.add(orderDetails);
+		}
+		return result;
 	}
 
 	@Override

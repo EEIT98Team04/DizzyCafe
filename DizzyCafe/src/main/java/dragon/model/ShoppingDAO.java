@@ -16,7 +16,7 @@ public interface ShoppingDAO {
 	
 	List<ShoppingBean> select();
 	
-	int insert(ShoppingBean bean);
+	int insert(int memberId, int merchandiseId, int buyCount);
 	
 	ShoppingBean update(ShoppingBean bean, int amount);
 	

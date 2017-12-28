@@ -51,14 +51,13 @@ public class OrdersHibernateDAO implements OrdersDAO {
 	@Override
 	public JSONArray selectMemberToJson(int memberId) {
 		@SuppressWarnings("unchecked")
-		Query<Object[]> select = this.getSession().createNativeQuery("select orders.ordersDate, orders.autoOrderId"
-				+ ", orders.shipStyle, orders.paymentStyle, orders.totalPrice, orders.ordersStatusId, merchandise.merchandiseId"
-				+ ", ordersDetails.merchandiseName, ordersDetails.merchandisePrice, ordersDetails.buyCount" 
-				+ " from orders Join ordersDetails" 
-				+ " On orders.autoOrderId = ordersDetails.ordersId" 
-				+ " Join merchandise" 
-				+ " On ordersDetails.merchandiseName = merchandise.merchandiseName" 
-				+ " where orders.memberId = " + memberId);
+		Query<Object[]> select = this.getSession().createNativeQuery("select orders.ordersDate, orders.autoOrderId, orders.shipStyle"
+				+ ", orders.paymentStyle, orders.totalPrice, ordersStatus.ordersStatus"
+				+ " from orders"
+				+ " Join ordersStatus" 
+				+ " On orders.ordersStatusId = ordersStatus.ordersStatusId" 
+				+ " where memberId=" + memberId
+				+ " order by autoOrderId DESC" );
 		List<Object[]> temp = select.getResultList();
 		JSONArray result = new JSONArray();
 		for(Object[] var:temp) {
@@ -68,11 +67,7 @@ public class OrdersHibernateDAO implements OrdersDAO {
 			orders.put("shipStyle", var[2]);
 			orders.put("paymentStyle", var[3]);
 			orders.put("totalPrice", var[4]);
-			orders.put("ordersStatusId", var[5]);
-			orders.put("merchandiseId", var[6]);
-			orders.put("merchandiseName", var[7]);
-			orders.put("merchandisePrice", var[8]);
-			orders.put("buyCount", var[9]);
+			orders.put("ordersStatus", var[5]);
 			result.add(orders);
 		}
 		return result;

@@ -32,7 +32,7 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 
 
 	}
-	
+	@Override
 	public JSONArray selectMerchandiseList(int memberId) {
 		/*@SuppressWarnings忽略掉警訊(黃線), @SuppressWarnings("unchecked")就是忽略掉 unchecked 的警訊*/
 		@SuppressWarnings("unchecked")
@@ -81,17 +81,17 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 	private static final String insert = "insert into shopping values(?, ?, ?)";
 
 	@Override
-	public int insert(ShoppingBean bean) {
-		if(bean != null)
-		{
-			ShoppingBean insert = this.selectMerchandise(bean.getMemberId(), bean.getMerchandiseId());
+	public int insert(int memberId, int merchandiseId, int buyCount) {
+			ShoppingBean insert = this.selectMerchandise(memberId, merchandiseId);
 			if(insert == null)
 			{
+				ShoppingBean bean = null;
+				bean.setMemberId(memberId);
+				bean.setMerchandiseId(merchandiseId);
+				bean.setBuyCount(buyCount);
 				this.getSession().save(bean);
 			}
 			return 1;
-		}
-		return 0;
 	}
 
 	private static final String update = "update shopping set buyCount=? where memberId =? and merchandiseId=?";

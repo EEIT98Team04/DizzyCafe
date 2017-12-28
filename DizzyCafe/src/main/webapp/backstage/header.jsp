@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 
 
   <!-- Bootstrap core CSS-->
@@ -9,6 +8,7 @@
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+  <link href="css/changeFont.css" rel="stylesheet">
 
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -109,9 +109,11 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+          <a class="nav-link" href="${pageContext.request.contextPath }/backstage/logout.controller">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>
     </div>
   </nav>
+  
+  

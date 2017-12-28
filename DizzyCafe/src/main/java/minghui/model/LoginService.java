@@ -1,8 +1,6 @@
 package minghui.model;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -11,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.common.base.Joiner;
+import com.google.common.io.Files;
 
 import minghui.model.dao.MemberDAO;
 import minghui.utils.Encryption;
@@ -34,6 +35,30 @@ public class LoginService {
 			}
 		}
 		return null;
+	}
+	
+	@Transactional
+	public MemberBean login_fb(MemberBean bean) {
+		MemberBean result_name = memberDAO.select(bean.getMemberName());
+		if(result_name != null) {
+			if(bean.getMemberPhoto().contains("/DizzyCafe")) {
+				result_name.setMemberPhoto(bean.getMemberPhoto());
+				return result_name;	
+			}
+			return result_name;
+		}else {
+			MemberBean result_email = memberDAO.select_by_email(bean.getMemberEmail());
+			if(result_email != null) {
+				if(bean.getMemberPhoto().contains("/DizzyCafe")) {
+					result_email.setMemberPhoto(bean.getMemberPhoto());
+					return result_email;	
+				}
+				return result_email;
+			}else {
+				return null;
+//				return memberDAO.insert(bean);
+			}
+		}
 	}
 
 	@Transactional
@@ -120,18 +145,33 @@ public class LoginService {
 		return bean;
 	}
 	
+	@Transactional
 	public boolean uploadServerFile(MultipartFile memberPhoto, MemberBean bean) {
 		if (!memberPhoto.isEmpty()) {
 			try {
+				
+//				byte[] bytes = memberPhoto.getBytes();
+//				String[] strs = memberPhoto.getContentType().split("/");
+//				System.out.println(strs[1]);
+//				String path = "/minghui/res/member_photo/" + bean.getMemberName() + "." + strs[1];
+//				File serverFile = new File(server_path + path);
+//				bean.setMemberPhoto("/DizzyCafe" + path);
+//				memberDAO.update(bean);
+//				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+//				stream.write(bytes);
+//				stream.close();
+				
+				
 				byte[] bytes = memberPhoto.getBytes();
-
 				String[] strs = memberPhoto.getContentType().split("/");
-				String path = "/minghui/res/member_photo/" + bean.getMemberName() + "." + strs[1];
-				bean.setMemberPhoto(path);
-				File serverFile = new File(server_path + path);
-				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
+				Joiner joiner = Joiner.on("");
+				String guava_path = joiner.join("/minghui/res/member_photo/", bean.getMemberName(), ".", strs[1]);
+				
+				File serverFile = new File(server_path + guava_path);
+				bean.setMemberPhoto("/DizzyCafe" + guava_path);
+				memberDAO.update(bean);
+				Files.write(bytes, serverFile);				
+				
 				return true;
 			} catch (Exception e) {
 				System.out.println(e.getMessage());				

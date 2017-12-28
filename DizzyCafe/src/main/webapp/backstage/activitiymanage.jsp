@@ -58,9 +58,12 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="${pageContext.request.contextPath}/backstage/index.jsp">Dashboard</a>
+          <a href="${pageContext.request.contextPath}/backstage/index.jsp">回首頁</a>
         </li>
-        <li class="breadcrumb-item active">Blank Page</li>
+        <li class="breadcrumb-item active">活動管理</li>
+        <li class="breadcrumb-item">
+          <a href="${pageContext.request.contextPath}/backstage/activitymanage.jsp">活動清單</a>
+        </li>
       </ol>
       <div class="row">
         <div class="col-12">
@@ -117,7 +120,7 @@
 		      	<!-- Modal footer -->
 		    	<div class="modal-footer">
 		    		<button type="submit" class="btn btn-primary" id="gogo">確定</button>
-		        	<button type="button" class="btn btn-secondary" >取消</button>
+		        	<button type="button" class="btn btn-secondary" onclick="document.getElementById('myModal').style.display='none'">取消</button>
 		    	</div>
 	    	</div>
   		</div>
@@ -164,7 +167,7 @@
 		      	<!-- Modal footer -->
 		    	<div class="modal-footer">
 		    		<button type="submit" class="btn btn-primary" id="gogo2">確定</button>
-		        	<button type="button" class="btn btn-secondary" >取消</button>
+		        	<button type="button" class="btn btn-secondary" onclick="document.getElementById('myModal2').style.display='none'">取消</button>
 		    	</div>
 	    	</div>
   		</div>

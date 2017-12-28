@@ -18,9 +18,7 @@
     </MerchantInfo>
     
     <IgnorePayment>
-        <Method>CVS</Method>
-        <Method>Tenpay</Method>
-        <Method>TopUpUsed</Method>
+
     </IgnorePayment>
 
 </Conf>

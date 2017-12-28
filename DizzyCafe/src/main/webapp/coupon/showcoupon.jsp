@@ -42,23 +42,24 @@
 	        					}else if(json[i].couponStatus == 2){
 	        						json[i].couponStatus = '已過期';
 	        					}
+	        					json[i].eventDiscount = json[i].eventDiscount*10+'折';
 	      					}
 	      					console.log(json);
 	      				return json;
 	    				}
 				},
 				columns : [ {
-					data : 'eventDiscount',
-					title : 'Discount'
-				}, {
-					data : 'couponDeadline',
-					title : 'Deadline'
-				}, {
 					data : 'merchandiseName',
-					title : 'MerchandiseName'
+					title : '商品名稱'
+				}, {
+					data : 'eventDiscount',
+					title : '折扣'
 				}, {
 					data : 'couponStatus',
-					title : 'Status'
+					title : '狀態'
+				}, {
+					data : 'couponDeadline',
+					title : '過期日'
 				}],
 				language : {
 					paginate : {

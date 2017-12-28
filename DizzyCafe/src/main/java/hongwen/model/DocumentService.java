@@ -16,6 +16,8 @@ public class DocumentService {
 	
 	@Autowired
 	private DocumentDAO documentDAO;
+	@Autowired
+	BoardDAO boardDAO;
 
 	//修改文章
 	public JSONArray modify(int id) {
@@ -25,8 +27,11 @@ public class DocumentService {
 		JSONArray json = JSONArray.fromObject(temp);
 		return json;
 	}
-	
+	//boardid
 	public JSONArray selectToJSON(int id) {
+		//更新人氣
+		boardDAO.popularity(id);
+		//讀取文章
 		List<DocumentBean> select = documentDAO.select(id);
 		String temp = new Gson().toJson(select);				//轉JSON檔案
 		JSONArray json = JSONArray.fromObject(temp);
@@ -46,6 +51,19 @@ public class DocumentService {
 		boolean dao = false;
 		if(bean != null) {
 			dao = documentDAO.insert(bean);
+			if(dao == true) {
+				temp = "[{\"status\":\"success\"}]";
+				json = JSONArray.fromObject(temp);				
+			}
+		}			
+		return json;
+	}
+	public JSONArray update(DocumentBean bean) {
+		String temp = null;				//轉JSON檔案
+		JSONArray json = null;
+		boolean dao = false;
+		if(bean != null) {
+			dao = documentDAO.update(bean);
 			if(dao == true) {
 				temp = "[{\"status\":\"success\"}]";
 				json = JSONArray.fromObject(temp);				

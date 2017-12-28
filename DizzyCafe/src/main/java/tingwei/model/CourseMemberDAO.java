@@ -183,4 +183,12 @@ public class CourseMemberDAO {
 		}else
 			return false; 
 	}
+	
+	public int getNowPeopleByCourseId(int courseId) {
+		Query temp = this.getSession().createNativeQuery(
+				"SELECT COUNT(memberId) from coursememberForm WHERE courseId = ?");
+		temp.setParameter(1, courseId);
+		int nowPeople = ((Integer)temp.uniqueResult()).intValue();
+		return nowPeople;
+	}
 }

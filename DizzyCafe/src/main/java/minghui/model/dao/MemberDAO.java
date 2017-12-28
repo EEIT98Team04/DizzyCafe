@@ -1,5 +1,7 @@
 package minghui.model.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import minghui.model.MemberBean;
+import minghui.model.TmpBean;
 
 @Repository
 public class MemberDAO {
@@ -66,5 +69,16 @@ public class MemberDAO {
 			}
 		}
 		return null;
+	}
+	
+	//hongwen
+	public List<TmpBean> selectall() {
+		String search = "select user.memberName ,user.memberPhoto from MemberBean as user";
+		@SuppressWarnings("rawtypes")
+		Query query = this.getSession().createQuery(search);
+		System.out.println("1");
+		@SuppressWarnings("unchecked")
+		List<TmpBean> result = (List<TmpBean>) query.getResultList();
+		return result;
 	}
 }

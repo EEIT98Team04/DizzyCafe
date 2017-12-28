@@ -48,7 +48,7 @@
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-	<jsp:include page="/backstage/index.jsp"></jsp:include>
+	<jsp:include page="/backstage/header.jsp"></jsp:include>
 	<div class="content-wrapper">
 		<div class="container-fluid">
 
@@ -170,8 +170,6 @@
 			</div>
 		</div>
 	</div>
-	  <jsp:include page="/backstage/footer.jsp"></jsp:include>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="ckeditor/ckeditor.js"></script>
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>

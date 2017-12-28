@@ -47,9 +47,6 @@ public class BackStageUpdateCourseController {
 		java.sql.Date courseBeginNew = null;
 		java.sql.Date courseEndNew = null;
 		
-		System.out.println("courseSignupBegin"+courseSignupBegin);
-		System.out.println("courseSignupEnd"+courseSignupEnd);
-		
 		try {
 			courseSignupBeginNew = new java.sql.Date(dateFormate.parse(courseSignupBegin).getTime());
 			courseSignupEndNew = new java.sql.Date(dateFormate.parse(courseSignupEnd).getTime());
@@ -64,7 +61,7 @@ public class BackStageUpdateCourseController {
 			courseWeek = courseWeek + var;
 		}
 		
-		CourseBean courseBean = courseService.select(courseId);
+		CourseBean courseBean = courseService.selectByCourseId(courseId);
 		courseBean.setCourseId(courseId);
 		courseBean.setCourseName(courseName);
 		courseBean.setCourseIntro(courseIntro);

@@ -50,5 +50,9 @@
 	            <span class="sr-only">Next</span>
 	        </a>
 	    </div>
+    
+    <footer class="fixed-bottom text-center">
+          <p>Copyright © DizzyCafe 2017</p>
+    </footer>
 </body>
 </html>

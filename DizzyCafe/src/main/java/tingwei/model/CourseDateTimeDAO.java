@@ -72,5 +72,10 @@ public class CourseDateTimeDAO {
 		delete.setParameter(1, courseId);
 		delete.executeUpdate();
 	}
+	
+	public void deleteAll() {
+		Query deleteAll = this.getSession().createNativeQuery("DELETE courseDateTime");
+		deleteAll.executeUpdate();
+	}
 }
 

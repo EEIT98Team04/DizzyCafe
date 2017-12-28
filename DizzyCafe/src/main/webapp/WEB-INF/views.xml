@@ -13,6 +13,21 @@
 		<property name="url" value="/index.jsp" />
 	</bean>	
 	
+	<bean id="backstage.login.success" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/backstage/index.jsp"></property>
+	</bean>
+	
+	<bean id="backstage.logout" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/backstage/login.jsp"></property>
+	</bean>
+
+	<bean id="backstage.login.error"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/backstage/login.jsp" />
+	</bean>	
+	
 	<bean id="change.password"
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/minghui/changePassword.jsp" />		
@@ -110,6 +125,7 @@
 
 	<bean id="checkout"
 		class="org.springframework.web.servlet.view.InternalResourceView">
+
 		<property name="url" value="/dragon/checkout.jsp"></property>
 	</bean>
 	<bean id="merchandisemanage" 

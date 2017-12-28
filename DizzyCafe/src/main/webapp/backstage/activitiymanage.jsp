@@ -61,6 +61,9 @@
           <a href="${pageContext.request.contextPath}/backstage/index.jsp">回首頁</a>
         </li>
         <li class="breadcrumb-item active">活動管理</li>
+        <li class="breadcrumb-item">
+          <a href="${pageContext.request.contextPath}/backstage/activitymanage.jsp">活動清單</a>
+        </li>
       </ol>
       <div class="row">
         <div class="col-12">

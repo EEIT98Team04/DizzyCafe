@@ -29,6 +29,35 @@
   	white-space : nowrap;
   	width: 240px;
 }
+.evtslist{
+	width: 1000px;
+	height:auto;
+	margin:auto;
+}
+.evtslist-items{
+	width: 100%;
+	height:200px;'
+	margin: 20px auto;
+    background: #CFD0D4;
+    padding: 6px;
+}
+.evtslist-item__img{
+	margin: 0 6px 0 0;
+    border: 1px solid #C4C5C8;
+    float: left;
+    width: 40%;
+    height: 188px;
+    position: relative;
+}
+.evtslist-item__txt{
+	width: 59.2%;
+	height: 188px;
+	border: 1px solid #C4C5C8;
+    background: #EFEFEF;
+    padding: 5px 20px 10px;
+    overflow: hidden;
+    float: left;
+}
 </style>
 </head>
 <body>
@@ -73,6 +102,20 @@
 			</ul>
 		</div>
 	</div>
+<!-- 	<div class="evtslist"> -->
+<%-- 		<c:forEach items="${items }" var="showBean" varStatus="sta"> --%>
+<!-- 			<div class="evtslist-items"> -->
+<!-- 				<div class="evtslist-item__img"> -->
+<%-- 					<a href="${pageContext.request.contextPath}/activities?No=${showBean.activityNo-1000}"> --%>
+<%-- 						<img style="width:100%" src="${pageContext.request.contextPath}${showBean.activityPicture}"/> --%>
+<!-- 					</a> -->
+<!-- 				</div> -->
+<!-- 				<div class="evtslist-item__txt"> -->
+<!-- 					<p>123</p> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<%-- 		</c:forEach> --%>
+<!-- 	</div> -->
 	<script>
 		$(document).ready(function(){
 			for(var i = 0;i<3;i++){

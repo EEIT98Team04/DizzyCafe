@@ -24,11 +24,19 @@
             <span class="nav-link-text">前台首頁</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="${pageContext.request.contextPath }/backstage/activitiymanage.jsp">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-futbol-o"></i>
             <span class="nav-link-text">活動管理</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="collapseMulti">
+            <li>
+              <a href="${pageContext.request.contextPath }/backstage/activitiymanage.jsp">活動清單</a>
+            </li>
+            <li>
+              <a href="${pageContext.request.contextPath }/backstage/dailyeventmanage.jsp">每日活動</a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/merchandisemanage.jsp">

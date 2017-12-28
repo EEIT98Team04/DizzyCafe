@@ -64,12 +64,25 @@ $(function() {
 			data[name] = value;
 		});
 		data['grid'] = $.getUrlParam('boardId');// 取得版面編號
+		data['modify'] = "false";// 判斷是發文還是修改，來不及改邏輯，直接給變數
+		data['documentid'] ="0";// documentid填入
 		data['textarea'] = t;// 將tinymce值放入data，並宣告為json格式[key='textarea',value=t]
 
 		// console.log(data);
 
 		// 資料檢查
 		var string = [ 'grid', 'title', 'textarea' ];// 檢查資料的key
+		
+		if (data['title'] =='') {
+			alert('文章標題不可空白');
+			return false;
+			window.location.replace(document.location.href);// 取得現在的URL，並自動導向
+		}
+		if (data['textarea'] =='') {
+			alert('文章內容不可空白');
+			return false;
+			window.location.replace(document.location.href);// 取得現在的URL，並自動導向
+		}
 
 		// 初始化所有發文設定
 		tinyMCE.activeEditor.getBody().innerHTML = '';// 初始化內容

@@ -46,11 +46,13 @@ list-style-type:none;
 }
 .spanone{
 	width:20%;
-	margin-left:30px;
+	margin-left:40px;
 }
 .pone{
     font-family:arial;
     margin-top:20px;
+    text-align: center;
+    margin-right:50px;
 }
 .imgone{
 	width:80%;

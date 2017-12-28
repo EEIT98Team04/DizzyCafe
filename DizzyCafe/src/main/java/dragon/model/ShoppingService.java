@@ -18,7 +18,7 @@ import net.sf.json.JSONArray;
 public class ShoppingService {
 	@Autowired
 	private ShoppingDAO shoppingDAO;
-
+	
 	public JSONArray selectMerchandiseList(int memberId) {
 		return shoppingDAO.selectMerchandiseList(memberId);
 	}
@@ -35,8 +35,8 @@ public class ShoppingService {
 		return shoppingDAO.selectMerchandise(memberId, merchandiseId);
 	}
 
-	public int insert(ShoppingBean bean) {
-		return shoppingDAO.insert(bean);
+	public int insert(int memberId, int merchandiseId, int buyCount) {
+		return shoppingDAO.insert(memberId, merchandiseId, buyCount);
 	}
 
 	public ShoppingBean changeCount(ShoppingBean bean, int amount) {
@@ -45,5 +45,8 @@ public class ShoppingService {
 
 	public ShoppingBean deletemerchandise(ShoppingBean bean) {
 			return shoppingDAO.delete(bean);
+	}
+	public ShoppingBean updateCart(ShoppingBean bean) {
+		return shoppingDAO.updateCart(bean);
 	}
 }

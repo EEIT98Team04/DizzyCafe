@@ -46,9 +46,36 @@
 			<a style="margin-left:680px;" href="${pageContext.request.contextPath}/backstage/courseNew.jsp"><button class="btn btn-primary">新增</button></a>
 		</div>
 	</div>
+	
+			<!-- Modal -->
+	<div class="modal" id="pop">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div id="showText" class="modal-body">
+	      </div>
+	      <div class="modal-footer">
+	      	<button id="ok" type="button" class="btn btn-success">確定</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
  	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
  	<script> 
+ 	
+ 	$(function(){
+ 		alert("${session.newCourse}");
+ 		alert("${session.Update}");
+	 	if(""!="${newCourse}"){
+	 		$('#pop').show();
+	 		$('#showText').text("${newCourse}");
+	 	}
+	 	if(""!="${Update}"){
+	 		$('#pop').show();
+	 		$('#showText').text("${Update}");
+	 	}
+ 	});
+ 	
  	//顯示資料表dataTable
  	$('#dataTable').DataTable({
 					ajax : {

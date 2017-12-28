@@ -225,7 +225,6 @@
 		</form>
 	</div>
 </nav>
->>>>>>> branch 'master' of https://github.com/EEIT98Team04/DizzyCafe.git
 <script src='<c:url value="/minghui/js/minghui.js" />'></script>
 <!-- </body> -->
 <!-- </html> -->

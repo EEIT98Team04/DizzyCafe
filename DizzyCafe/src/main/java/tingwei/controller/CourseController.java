@@ -27,6 +27,8 @@ public class CourseController {
 		
 		model.addAttribute("TotalPages" ,courseService.countTotalPages(rows_perPage,_Course));
 		model.addAttribute("courseList" ,courseService.showCourseInPage(page, rows_perPage,_Course));
+		model.addAttribute("rows_perPage" ,rows_perPage);
+		
 		
 		return "courseList";
 	}

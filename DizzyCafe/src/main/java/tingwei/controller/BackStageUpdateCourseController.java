@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tingwei.model.CourseBean;
 import tingwei.model.CourseDateTimeService;
@@ -39,7 +40,7 @@ public class BackStageUpdateCourseController {
 			String courseSignupBegin, String courseSignupEnd,
 			String courseBegin, String courseEnd,
 			String[] whichDay,int time ,int courseLength,
-			MultipartFile courseImg) {
+			MultipartFile courseImg, RedirectAttributes redirectAttrs) {
 		
 		SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date courseSignupBeginNew = null;
@@ -77,6 +78,8 @@ public class BackStageUpdateCourseController {
 		courseBean.setCourseLength(courseLength);
 		courseBean.setCourseWeek(courseWeek);
 		
+		redirectAttrs.addFlashAttribute("Update", "更新成功");
+		
 		if (!courseImg.isEmpty()) {
 			try {
 				byte[] bytes = courseImg.getBytes();
@@ -101,7 +104,7 @@ public class BackStageUpdateCourseController {
 		//清除再重建
 		courseDateTimeService.delete(courseId);
 		courseDateTimeService.insertAll(courseBean, whichDay, time, courseLength);
-		
+
 		return "courseManage";
 	}
 }

@@ -36,7 +36,7 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 	public JSONArray selectMerchandiseList(int memberId) {
 		/*@SuppressWarnings忽略掉警訊(黃線), @SuppressWarnings("unchecked")就是忽略掉 unchecked 的警訊*/
 		@SuppressWarnings("unchecked")
-		Query<Object[]> select = this.getSession().createNativeQuery("select shopping.merchandiseId, merchandiseName, merchandisePrice, buyCount" + 
+		Query<Object[]> select = this.getSession().createNativeQuery("select shopping.merchandiseId, merchandiseName, merchandisePrice, merchandisePicture, buyCount" + 
 				" from shopping Join merchandise" +
 				" on shopping.merchandiseId = merchandise.merchandiseId" +
 				" where shopping.memberId = " + memberId);
@@ -47,7 +47,8 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 			table.put("merchandiseId", var[0]);
 			table.put("merchandiseName", var[1]);
 			table.put("merchandisePrice", var[2]);
-			table.put("buyCount", var[3]);
+			table.put("merchandisePicture", var[3]);
+			table.put("buyCount", var[4]);
 			result.add(table);
 		}
 		return result;
@@ -81,18 +82,23 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 	private static final String insert = "insert into shopping values(?, ?, ?)";
 
 	@Override
-	public int insert(ShoppingBean bean) {
-		if(bean != null)
-		{
-			ShoppingBean insert = this.selectMerchandise(bean.getMemberId(), bean.getMerchandiseId());
+	public int insert(int memberId, int merchandiseId, int buyCount) {
+			ShoppingBean insert = this.selectMerchandise(memberId, merchandiseId);
 			if(insert == null)
 			{
+				ShoppingBean bean = new ShoppingBean();
+				bean.setMemberId(memberId);
+				bean.setMerchandiseId(merchandiseId);
+				bean.setBuyCount(buyCount);
 				this.getSession().save(bean);
+				return 1;
+			}else {
+				return 0;
 			}
-			return 1;
-		}
-		return 0;
+			
+			
 	}
+	
 
 	private static final String update = "update shopping set buyCount=? where memberId =? and merchandiseId=?";
 
@@ -108,6 +114,12 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 			return update;
 		}
 		return null;
+	}
+	
+	public ShoppingBean updateCart(ShoppingBean bean) {
+		
+		
+		return (ShoppingBean) this.getSession().merge(bean);
 	}
 
 	private static final String delete = "delete from shopping where memberId=? and merchandiseId=?";

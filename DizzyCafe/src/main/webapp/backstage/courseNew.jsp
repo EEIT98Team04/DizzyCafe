@@ -168,6 +168,11 @@
 			</form>
 		</div>
 	</div>
+	
+	
+	
+
+	
 	<div>
 		<jsp:include page="/backstage/footer.jsp"></jsp:include>
 	</div>
@@ -184,7 +189,7 @@
 					//editor 資料處理
 					$('input[name="courseContent"]').val(
 							CKEDITOR.instances.editor1.getData());
-				});
+		});
 		
 		var dateFormat = "yy-mm-dd";
 		//課程時間

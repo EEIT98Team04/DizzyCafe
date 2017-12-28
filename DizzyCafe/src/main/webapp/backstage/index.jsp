@@ -6,8 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <jsp:include page="/backstage/header.jsp"></jsp:include>
+<div class="content-wrapper">
+    <div class="container-fluid">
+		<p>welcome, ${manager.managerAccount }</p>
+	</div>
+</div>
 <jsp:include page="/backstage/footer.jsp"></jsp:include>
 </body>
 </html>

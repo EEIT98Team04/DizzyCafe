@@ -31,6 +31,69 @@
 </style>
 <!-- </head> -->
 <!-- <body> -->
+
+
+<script>
+  function statusChangeCallback(response) {
+    if (response.status === 'connected') {
+      testAPI();
+  	}
+  }
+  
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1675233945870821',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.8' // use graph api version 2.8
+  });
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+  
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  function testAPI() {
+    FB.api('/me',{fields: ['id','name','email','birthday','address','picture']}, function(response) {
+	    var data = response;
+	    //ajax傳送
+	  	$.ajax({
+	  		url : '/DizzyCafe/fblogin.controller',
+	  		type : 'POST',
+	  		data : data,
+	  		cache : false,
+	  		success : function(json) {
+							if(json){
+								alert('登入成功');	
+								location.replace(window.location.href);
+							}else{
+								alert('請登入會員');
+							}
+			}
+  		})
+    });
+    
+  }
+</script>
+
+
 <nav class="navbar navbar-expand-lg navbar-light fixed-top"
 	style="border-bottom: 1px solid #DDDDDD; background-color: white;">
 	<a class="navbar-brand"
@@ -81,7 +144,7 @@
 				<div style="float: right;">
 					<a href="${pageContext.request.contextPath}/minghui/member/member_center.jsp">
 						<img title="${user.memberName}" style="width:36px;height:36px"
-							src='${pageContext.request.contextPath}/${user.memberPhoto}'>
+							src='${user.memberPhoto}'>
 					</a>
 					<a href="${pageContext.request.contextPath}/logout.controller?option=logout">登出</a>
 				</div>
@@ -106,7 +169,7 @@
 
 			<div class="container">
 				<label><b>Username</b></label> <input type="text" class="minghui_input_type_text_password"
-					placeholder="Enter Username" name="memberName" required> <br>
+					placeholder="Enter Username" value="${param.memberName}" name="memberName" required> <br>
 				<label><b>Password</b></label> <input type="password" class="minghui_input_type_text_password"
 					placeholder="Enter Password" name="memberPassword" required>
 
@@ -115,10 +178,11 @@
 			</div>
 
 			<div class="container" style="background-color: #f1f1f1">
-				<i class="fa fa-facebook-official"
-					style="font-size: 48px; color: blue" title="facebook 登入"></i> <span
+				<fb:login-button scope="public_profile,email,user_birthday" onlogin="checkLoginState();">
+				</fb:login-button>
+				 <span
 					class="psw">Forgot <a href="#" onclick=
-					"window.open(' http://127.0.0.1:8080/${pageContext.request.contextPath}/minghui/forgotPassword.jsp', '', config='height=300,width=500');">password</a>
+					"window.open('${pageContext.request.contextPath}/minghui/forgot-password.jsp', '', config='height=500,width=500');">password</a>
 					?
 				</span>
 			</div>
@@ -161,10 +225,6 @@
 		</form>
 	</div>
 </nav>
-
-<footer class="fixed-bottom text-center">
-          <p>Copyright © DizzyCafe 2017</p>
-    </footer>
 <script src='<c:url value="/minghui/js/minghui.js" />'></script>
 <!-- </body> -->
 <!-- </html> -->

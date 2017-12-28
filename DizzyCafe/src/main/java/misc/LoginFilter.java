@@ -29,7 +29,6 @@ public class LoginFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		
-		System.out.println("進入過濾器");
 		
 		boolean alreadyLogin = req.getSession().getAttribute("user") != null;
 		Map<String,String> errors = new HashMap<>();

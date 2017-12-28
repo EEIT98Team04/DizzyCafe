@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import applehead.model.ActivityListBean;
 import applehead.model.CouponBean;
+import applehead.model.DailyEventBean;
 import dragon.model.OrdersBean;
 import dragon.model.OrdersDetailsBean;
 import dragon.model.ShoppingBean;
@@ -56,7 +57,7 @@ public class SpringJavaConfig{
 		properties.setProperty("hibernate.show_sql", "true");
 		builder.addProperties(properties);
 		builder.addAnnotatedClasses(ActivityListBean.class,CouponBean.class,CourseBean.class,CourseDateTimeBean.class,CourseMemberBean.class,MerchandiseBean.class,MemberBean.class,OrdersBean.class,OrdersDetailsBean.class,ShoppingBean.class);
-		builder.addAnnotatedClasses(BoardBean.class,DocumentBean.class,ReplyBean.class,ManagerBean.class);
+		builder.addAnnotatedClasses(BoardBean.class,DocumentBean.class,ReplyBean.class,ManagerBean.class,DailyEventBean.class);
 		
 
 		return builder.buildSessionFactory();

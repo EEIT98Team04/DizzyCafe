@@ -23,8 +23,7 @@ public class DocumentController {
 	DocumentService documentService;
 
 	@RequestMapping(path = "/Document.hongwen", method = { RequestMethod.GET})
-	public @ResponseBody JSONArray getJSON(@RequestParam Map<?,?> param) {
-		System.out.println("documentget");
+	public @ResponseBody JSONArray getJSON(@RequestParam Map<?,?> param) {		
 		JSONArray json = documentService.selectToJSON(Integer.parseInt((String)param.get("boardId")));
 		return json;
 	}
@@ -47,19 +46,29 @@ public class DocumentController {
 //		for (Object key : param.keySet()) {
 //			System.out.println(key + " : " + param.get(key));
 //		}
-		System.out.println("documentpost");
-		String[] key = {"title","grid","textarea"};
+		String[] key = {"title","grid","textarea","modify","documentid"};
 		JSONArray json = null;
 		MemberBean bean = (MemberBean) session.getAttribute("user");
+		int tmp = 0;
+		String x = (String)param.get(key[4]);
+				
+		if(!"".equals(x)) {
+			tmp = Integer.parseInt((String)param.get(key[4]));
+		}
+		
 		if(bean == null || "".equals(String.valueOf(bean.getMemberId())) || "".equals(bean.getMemberName())) {
 			String temp = "[{\"status\":\"false\"}]";//回傳一個json陣列物件，內容為status:false，與下面insert回傳值的key相同
 			json = JSONArray.fromObject(temp);
 			return json;
 		}
-		DocumentBean documentbean = new DocumentBean(1,(String)param.get(key[0]),
+		DocumentBean documentbean = new DocumentBean(tmp,(String)param.get(key[0]),
 				new java.util.Date(),bean.getMemberName(),1,bean.getMemberId(),
 				Integer.parseInt((String)param.get(key[1])),true,(String)param.get(key[2]));
-		json = documentService.insert(documentbean);
+		if("true".equals(param.get(key[3]))) {
+			json = documentService.update(documentbean);						
+		}else{
+			json = documentService.insert(documentbean);			
+		}		
 		return json;
 	}
 }

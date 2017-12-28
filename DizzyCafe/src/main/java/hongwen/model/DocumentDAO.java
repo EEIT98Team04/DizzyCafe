@@ -53,4 +53,19 @@ public class DocumentDAO {
 			return false;
 		}
 	}
+	
+	public boolean update(DocumentBean bean) {
+		try {
+			this.getSession().update(bean);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	//更新人氣
+	public boolean popularity(int id) {
+		DocumentBean bean = this.getSession().get(DocumentBean.class, id);
+		bean.setPopularity(bean.getPopularity()+1);
+		return true;
+	}
 }

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 
 
   <!-- Bootstrap core CSS-->
@@ -9,6 +8,7 @@
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+  <link href="css/changeFont.css" rel="stylesheet">
 
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -24,11 +24,19 @@
             <span class="nav-link-text">前台首頁</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="${pageContext.request.contextPath }/backstage/activitiymanage.jsp">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-futbol-o"></i>
             <span class="nav-link-text">活動管理</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="collapseMulti">
+            <li>
+              <a href="${pageContext.request.contextPath }/backstage/activitiymanage.jsp">活動清單</a>
+            </li>
+            <li>
+              <a href="${pageContext.request.contextPath }/backstage/dailyeventmanage.jsp">每日活動</a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/merchandisemanage.jsp">
@@ -101,9 +109,11 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+          <a class="nav-link" href="${pageContext.request.contextPath }/backstage/logout.controller">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>
     </div>
   </nav>
+  
+  

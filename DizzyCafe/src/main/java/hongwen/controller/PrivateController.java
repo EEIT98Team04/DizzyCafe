@@ -41,7 +41,14 @@ public class PrivateController {
 		JSONArray json = documentService.modify(Integer.parseInt((String)param.get("id")));
 		return json;
 	}
-
+	
+	// 修改回文用
+		@RequestMapping(path = "/Replymodify.hongwen", method = { RequestMethod.GET })
+		public @ResponseBody JSONArray replymodify(@RequestParam Map<?, ?> param) {
+			JSONArray json = replyService.modify(Integer.parseInt((String)param.get("id")));
+			return json;
+		}
+	
 	// 查閱檢舉文章
 	@RequestMapping(path = "/Privatereport.hongwen", method = { RequestMethod.GET })
 	public @ResponseBody JSONArray privatereport(@RequestParam Map<?, ?> param) {

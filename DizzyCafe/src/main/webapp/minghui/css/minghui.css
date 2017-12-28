@@ -1,3 +1,7 @@
+body{
+	font-family: Microsoft JhengHei;
+}
+
 /* Full-width input fields */
 .minghui_input_type_text_password{
 	width: 100%;

@@ -17,6 +17,8 @@ $(document).ready(function() {
 				},
 				columns : [{
 					data : 'name',
+					title : '留言板',
+					width:200,
 					"render": function(data, type, row, meta){
 			            if(type === 'display'){
 			            	var hyperlink = "/DizzyCafe/hongwen/document.jsp?";
@@ -26,9 +28,12 @@ $(document).ready(function() {
 			            return data;
 			         }
 				}, {
-					data : 'popularity'
+					data : 'announcement',
+					title : '公告',
 				}, {
-					data : 'announcement'
+					data : 'popularity',
+					title : '人氣',
+					width:100,
 				}],
 			});
 });

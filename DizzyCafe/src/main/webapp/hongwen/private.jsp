@@ -187,6 +187,26 @@
 					}
 				});
 			});
+			$(document).on("click", '.delete', function() {
+				var search = '?';
+				var id = $(this).attr("id");
+
+				search += 'id=' + id;
+
+				// 傳送資料
+				$.ajax({
+					url : '/DizzyCafe/Privatemodify.hongwen' + search,
+					type : 'GET',
+					// data:data,//post use
+					success : function(json) {
+						$('#send div:eq(0)').css('display', 'block');
+						$('#send div:eq(1)').css('display', 'block');
+						setdata(json);//
+						modify = "true";
+						status = "1";
+					}
+				});
+			});
 			$(document).on("click", '.reply', function() {
 				var search = '?';
 				var id = $(this).attr("id");

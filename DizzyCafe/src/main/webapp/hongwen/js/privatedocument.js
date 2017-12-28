@@ -43,7 +43,20 @@ $(function() {
 										}
 										return data;
 									}
-								} ],
+								},
+								{
+									data : 'documentId',
+									title : '刪除',
+									width : '100px',
+									"render" : function(data, type, row, meta) {
+										if (type === 'display') {
+											data = "<a href='#' class='btn delete' id='x"
+													+ row.documentId
+													+ "'><i class='fa fa-pencil' aria-hidden='true'></i></a>";
+										}
+										return data;
+									}
+								}],
 						language : {
 							paginate : {
 								next : "下一頁",

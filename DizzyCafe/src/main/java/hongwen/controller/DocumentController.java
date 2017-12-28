@@ -50,8 +50,9 @@ public class DocumentController {
 		JSONArray json = null;
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		int tmp = 0;
-		
-		if(!"".equals((String)param.get(key[4]))) {
+		String x = (String)param.get(key[4]);
+				
+		if(!"".equals(x)) {
 			tmp = Integer.parseInt((String)param.get(key[4]));
 		}
 		

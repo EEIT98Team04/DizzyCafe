@@ -18,7 +18,7 @@
 <jsp:include page="../HTML/TitleIcon.jsp" />
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-	<jsp:include page="/backstage/index.jsp"></jsp:include>
+	<jsp:include page="/backstage/header.jsp"></jsp:include>
 	<div class="content-wrapper">
 		<div class="container-fluid">
 		
@@ -158,7 +158,7 @@
 						<tr height="20px"></tr>
 						<tr>
 						<td colspan="2" align="center">
-						<button id="submit" type="submit" class="btn btn-info">送出</button>
+						<button id="submit" type="submit" class="btn btn-info" onclick="alert('新增成功')">送出</button>
 						<button type="reset" class="btn" style="margin-left: 50px">清除</button>
 						</td>
 						</tr>

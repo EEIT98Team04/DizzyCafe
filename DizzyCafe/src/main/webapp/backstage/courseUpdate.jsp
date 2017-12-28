@@ -19,7 +19,7 @@
 <script src="<c:url value="../wayne/js/lightbox.js"/>"></script>
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-	<jsp:include page="/backstage/index.jsp"></jsp:include>
+	<jsp:include page="/backstage/header.jsp"></jsp:include>
 
 	<div class="content-wrapper">
 		<div class="container-fluid">
@@ -164,7 +164,7 @@
 						<tr height="20px"></tr>
 						<tr>
 						<td colspan="2" align="center">
-						<button id="submit" type="submit" class="btn btn-info">修改</button>
+						<button id="submit" type="submit" class="btn btn-info" onclick="alert('修改成功')">修改</button>
 						<button type="reset" class="btn" style="margin-left: 50px">清除</button>
 						</td>
 						</tr>
@@ -228,7 +228,6 @@
 		
 		
 		$('#submit').click(
-			alert("更新成功");
 				function(e) {
 					//editor 資料處理
 					$('input[name="courseContent"]').val(

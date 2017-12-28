@@ -38,7 +38,6 @@ public class UpdateMerchandiseController {
 		bean.setMerchandiseTag(merchandiseTag);
 		bean.setMerchandiseContent(merchandiseContent);
 		
-		System.out.println("content:"+bean.getMerchandiseContent());
 		if(merchandisePicture==null) {
 			bean.setMerchandisePicture(bean.getMerchandisePicture());
 			return "merchandisemanage";

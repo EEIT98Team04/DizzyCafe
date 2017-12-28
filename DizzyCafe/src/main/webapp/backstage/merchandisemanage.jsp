@@ -23,7 +23,10 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-
+<!-- datatable  -->
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+	
 <style>
 .forText {
 	margin: 10px auto;
@@ -168,12 +171,19 @@
 		</div>
 	</div>
 	  <jsp:include page="/backstage/footer.jsp"></jsp:include>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="ckeditor/ckeditor.js"></script>
+	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-	<script
-		src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+	<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+	<script src="//cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+	<script src="//cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+	<script src="//cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
 	<script>
 		//顯示資料表dataTable
 		var hoho = 0;
@@ -184,6 +194,10 @@
 					type : 'POST',
 					dataSrc : ''
 						},
+						dom: 'Bfrtip',
+						buttons: [
+							'copy', 'excel', 'print'
+				        ],
 				initComplete : function(data, row) {
 					CKEDITOR.replace('editor2');
 						},
@@ -273,7 +287,8 @@
 					},
 					info : false,
 					order : [ 0, 'asc' ],
-					rowId : 'merchandiseId'			
+					rowId : 'merchandiseId'		
+					
 				});
 		
 		//  文字編輯器
@@ -406,6 +421,9 @@
 				}
 			}
 		});
+		
+	
+		
 	</script>
 	<jsp:include page="/backstage/footer.jsp"></jsp:include>
 </body>

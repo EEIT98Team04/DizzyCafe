@@ -65,7 +65,7 @@
 					</div>
 					<div class="col6">
 						<input class="button1" id="button1" type="submit"
-							onclick="openNav()" value="加入購物車">
+							onclick="insertNav()" value="加入購物車">
 					</div>
 
 				</div>
@@ -75,30 +75,47 @@
 			</div>
 		</section>
 	</article>
-	<div id="mySidenav" class="sidenav">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<div>
-			<img class="sideimg"
-				src="${pageContext.request.contextPath}/${bean.merchandisePicture }" />
-		</div>
-		<div id="sidePrice">${bean.merchandiseName}x</div>
-	</div>
 
+	<div id="mySidenav" class="sidenav"><p class="cart">CART</p>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div id="product"></div>
+		<div class="ordersub">ORDER SUBTOTAL :</div>
+		<div class="checkoutbtndiv"><button class="checkoutbtn" type="button">CHECKOUT</button></div>
+	</div>
+	
 <%-- 	<script src="<c:url value="wayne/js/imgZoom.js"/>"></script> --%>
+
 	<script> 
 
-
-function openNav() {
-   	    document.getElementById("mySidenav").style.width = "300px";
-    	var select = document.getElementById("select");
-		var getQuantity = select.value;
-		var sidePrice = document.getElementById("sidePrice");
-		sidePrice.insertAdjacentText("beforeEnd", getQuantity);
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
+// $('#button1').click(function(e){
+// 	e.preventDefault();
+// 	var buyCount = $('#select').val();
+// 	var merchandiseId = '${bean.merchandiseId}';
+// 	$.ajax({
+// 		url : "/DizzyCafe/insertCart.controller",
+// 		type : 'POST',
+// 		data : {'buyCount':buyCount,'merchandiseId':merchandiseId},
+// 		success: function(data){
+// 			for(var i=0;i<data.length;i++){
+// 				var merchandiseId = data[i].merchandiseId;
+// 				var merchandiseName = data[i].merchandiseName;
+// 				var merchandisePrice = data[i].merchandisePrice;
+// 				var merchandisePicture = data[i].merchandisePicture;
+// 				var buyCount = data[i].buyCount;				
+// 			$.each(data, function(index,mer){			
+// 				var product = $('#mySidenav>#product');
+				
+// 				var merchandisePicture = $("<img>").attr('src','${pageContext.request.contextPath}'+mer.merchandisePicture);
+				
+// 				var merchandiseName = $("<div></div>").text(mer.merchandiseName);
+// 				var merchandisePrice = $("<div></div>").text(mer.merchandisePrice+"元" + "x" + mer.buyCount);
+// 				var bigDiv = $("<div></div>").append([merchandisePicture, merchandiseName, merchandisePrice]);
+// 				product.append(bigDiv);
+// 				$("#product").find("img").css("width","20%");
+// 			});
+// 		}
+// 	})
+// });
  /*Execute the magnify function:*/
 //  magnify("myimage", 3);
  /*Specify the id of the image, and the strength of the magnifier glass:*/ 

@@ -10,7 +10,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Service
-@Transactional
+//@Transactional
 public class DailyEventService {
 	@Autowired
 	DailyEventDAO dailyEventDAO;
@@ -28,5 +28,16 @@ public class DailyEventService {
 			ja.add(json);
 		}
 		return ja;
+	}
+	public boolean updateAll(List<DailyEventBean> list) {		
+		try {
+			for(int i=0;i<list.size();i++) {
+				int temp = dailyEventDAO.update(list.get(i));
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

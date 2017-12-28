@@ -120,7 +120,7 @@
 		      	<!-- Modal footer -->
 		    	<div class="modal-footer">
 		    		<button type="submit" class="btn btn-primary" id="gogo">確定</button>
-		        	<button type="button" class="btn btn-secondary" >取消</button>
+		        	<button type="button" class="btn btn-secondary" onclick="document.getElementById('myModal').style.display='none'">取消</button>
 		    	</div>
 	    	</div>
   		</div>
@@ -167,7 +167,7 @@
 		      	<!-- Modal footer -->
 		    	<div class="modal-footer">
 		    		<button type="submit" class="btn btn-primary" id="gogo2">確定</button>
-		        	<button type="button" class="btn btn-secondary" >取消</button>
+		        	<button type="button" class="btn btn-secondary" onclick="document.getElementById('myModal2').style.display='none'">取消</button>
 		    	</div>
 	    	</div>
   		</div>

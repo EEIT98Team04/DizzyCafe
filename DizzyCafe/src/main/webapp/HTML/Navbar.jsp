@@ -161,10 +161,6 @@
 		</form>
 	</div>
 </nav>
-
-<footer class="fixed-bottom text-center">
-          <p>Copyright © DizzyCafe 2017</p>
-    </footer>
 <script src='<c:url value="/minghui/js/minghui.js" />'></script>
 <!-- </body> -->
 <!-- </html> -->

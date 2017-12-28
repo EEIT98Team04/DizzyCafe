@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tingwei.model.CourseBean;
 import tingwei.model.CourseDateTimeService;
@@ -35,7 +36,7 @@ public class CourseNewController {
 			String courseSignupBegin, String courseSignupEnd,
 			String courseBegin, String courseEnd,
 			String[] whichDay,int time ,int courseLength,
-			MultipartFile courseImg) {
+			MultipartFile courseImg, RedirectAttributes redirectAttrs) {
 		
 		SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date courseSignupBeginNew = null;
@@ -56,7 +57,6 @@ public class CourseNewController {
 		for(String var : whichDay) {
 			courseWeek = courseWeek + var;
 		}
-		System.out.println(courseWeek);
 		
 		CourseBean courseBean = new CourseBean();
 		courseBean.setCourseName(courseName);
@@ -72,6 +72,8 @@ public class CourseNewController {
 		courseBean.setCourseTime(time);
 		courseBean.setCourseLength(courseLength);
 		courseBean.setCourseWeek(courseWeek);
+		
+		redirectAttrs.addFlashAttribute("newCourse", "新增成功");
 		
 		if (!courseImg.isEmpty()) {
 			try {
@@ -90,6 +92,7 @@ public class CourseNewController {
 				
 				courseService.insert(courseBean);
 				courseDateTimeService.insertAll(courseBean, whichDay, time, courseLength);
+
 				
 				return "courseManage";
 			} catch (Exception e) {

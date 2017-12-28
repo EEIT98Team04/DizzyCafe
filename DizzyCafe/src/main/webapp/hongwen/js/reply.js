@@ -33,12 +33,6 @@ $(function() {
 				// console.log(json);
 				if (json[0]['status'] == 'false') {
 					alert('請登入會員');
-<<<<<<< HEAD
-					window.location.replace(document.location.href);//取得現在的URL，並自動導向
-				}else{
-					alert('發文成功');
-//					window.location.replace(document.location.href);//取得現在的URL，並自動導向
-=======
 					window.location.replace(document.location.href);// 取得現在的URL，並自動導向
 				} else {
 					if (modify == "false") {
@@ -48,7 +42,6 @@ $(function() {
 						alert('修改回文成功');
 					}
 					window.location.replace(document.location.href);// 取得現在的URL，並自動導向
->>>>>>> branch 'master' of https://github.com/EEIT98Team04/DizzyCafe.git
 				}
 			}
 		})

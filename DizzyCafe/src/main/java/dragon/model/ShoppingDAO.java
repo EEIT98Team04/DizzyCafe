@@ -21,4 +21,6 @@ public interface ShoppingDAO {
 	ShoppingBean update(ShoppingBean bean, int amount);
 	
 	ShoppingBean delete(ShoppingBean bean);
+	
+	ShoppingBean updateCart(ShoppingBean bean);
 }

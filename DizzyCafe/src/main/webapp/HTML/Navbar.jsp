@@ -17,7 +17,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
 <link rel="stylesheet" href='<c:url value="/minghui/css/minghui.css" />'>
+<link rel="stylesheet" href='<c:url value="/wayne/css/nav.css" />'>
 <style>
 .asd {
 	border-color: black;
@@ -28,11 +30,85 @@
 .asd:hover {
 	background-color: #ADADAD;
 }
+.navbar-nav li{
+	font-weight:bold;
+	margin-left:15px;
+	margin-top:10px;
+}
+.fa-5{
+	margin-right:50px;
+}
+.collapse{
+	font-weight:bold;
+}
 </style>
 <!-- </head> -->
 <!-- <body> -->
+
+
+<script>
+  function statusChangeCallback(response) {
+    if (response.status === 'connected') {
+      testAPI();
+  	}
+  }
+  
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1675233945870821',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.8' // use graph api version 2.8
+  });
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+  
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  function testAPI() {
+    FB.api('/me',{fields: ['id','name','email','birthday','address','picture']}, function(response) {
+	    var data = response;
+	    //ajax傳送
+	  	$.ajax({
+	  		url : '/DizzyCafe/fblogin.controller',
+	  		type : 'POST',
+	  		data : data,
+	  		cache : false,
+	  		success : function(json) {
+							if(json){
+								alert('登入成功');	
+								location.replace(window.location.href);
+							}else{
+								alert('請登入會員');
+							}
+			}
+  		})
+    });
+    
+  }
+</script>
+
+
 <nav class="navbar navbar-expand-lg navbar-light fixed-top"
-	style="border-bottom: 1px solid #DDDDDD; background-color: white;">
+	style="background-color: white;">
 	<a class="navbar-brand"
 		href="${pageContext.request.contextPath}/index.jsp"> <img
 		src="${pageContext.request.contextPath}/image/index_icon.png"
@@ -69,7 +145,9 @@
 			<li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
 			<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
 			</li>
+			
 		</ul>
+		<div><i class="fa fa-shopping-cart fa-5" aria-hidden="true" onclick="selectNav()"></i></div>
 		<c:choose>
 			<c:when test="${empty user}">
 				<button class="btn asd"
@@ -81,7 +159,7 @@
 				<div style="float: right;">
 					<a href="${pageContext.request.contextPath}/minghui/member/member_center.jsp">
 						<img title="${user.memberName}" style="width:36px;height:36px"
-							src='${pageContext.request.contextPath}/${user.memberPhoto}'>
+							src='${user.memberPhoto}'>
 					</a>
 					<a href="${pageContext.request.contextPath}/logout.controller?option=logout">登出</a>
 				</div>
@@ -106,7 +184,7 @@
 
 			<div class="container">
 				<label><b>Username</b></label> <input type="text" class="minghui_input_type_text_password"
-					placeholder="Enter Username" name="memberName" required> <br>
+					placeholder="Enter Username" value="${param.memberName}" name="memberName" required> <br>
 				<label><b>Password</b></label> <input type="password" class="minghui_input_type_text_password"
 					placeholder="Enter Password" name="memberPassword" required>
 
@@ -115,10 +193,11 @@
 			</div>
 
 			<div class="container" style="background-color: #f1f1f1">
-				<i class="fa fa-facebook-official"
-					style="font-size: 48px; color: blue" title="facebook 登入"></i> <span
+				<fb:login-button scope="public_profile,email,user_birthday" onlogin="checkLoginState();">
+				</fb:login-button>
+				 <span
 					class="psw">Forgot <a href="#" onclick=
-					"window.open(' http://127.0.0.1:8080/${pageContext.request.contextPath}/minghui/forgotPassword.jsp', '', config='height=300,width=500');">password</a>
+					"window.open('${pageContext.request.contextPath}/minghui/forgot-password.jsp', '', config='height=500,width=500');">password</a>
 					?
 				</span>
 			</div>
@@ -159,12 +238,91 @@
 			</div>
 
 		</form>
-	</div>
-</nav>
 
-<footer class="fixed-bottom text-center">
-          <p>Copyright © DizzyCafe 2017</p>
-    </footer>
+	</div>
+
+
+</nav>
+	<div id="mySidenav" class="sidenav"><p class="cart">CART</p>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div id="product"></div>
+		<div id="ordbtn" class="ordbtn">
+		<div id="ordersub" class="ordersub" ></div>
+		<div class="checkoutbtndiv"><a href="${pageContext.request.contextPath}/shopping/shoppingCart.controller"><button class="checkoutbtn" type="button">CHECKOUT</button></a></div>
+		</div>
+	</div>
+<script>
+function insertNav() {
+		
+	    document.getElementById("mySidenav").style.width = "300px";
+		var buyCount = $('#select').val();
+		var merchandiseId = '${bean.merchandiseId}';
+		$.ajax({
+			url : "/DizzyCafe/insertCart.controller",
+			type : 'POST',
+			data : {'buyCount':buyCount,'merchandiseId':merchandiseId},
+			success: function(data){
+//	 			for(var i=0;i<data.length;i++){
+//	 				var merchandiseId = data[i].merchandiseId;
+//	 				var merchandiseName = data[i].merchandiseName;
+//	 				var merchandisePrice = data[i].merchandisePrice;
+//	 				var merchandisePicture = data[i].merchandisePicture;
+//	 				var buyCount = data[i].buyCount;
+// 					var order = document.getElementById('ordersub').text();
+					var totalPrice = 0;
+					$('#product').empty();
+				$.each(data, function(index,mer){			
+					var product = $('#mySidenav>#product');
+
+					var merchandisePicture = $("<img>").attr('src','${pageContext.request.contextPath}'+mer.merchandisePicture);
+					
+					var merchandiseName = $("<div></div>").text(mer.merchandiseName);
+					var merchandisePrice = $("<div></div>").text(mer.merchandisePrice+"元" + "x" + mer.buyCount);
+					var Price = mer.merchandisePrice*mer.buyCount;
+					totalPrice = Price + totalPrice;
+					var bigDiv = $("<div></div>").append([merchandisePicture, merchandiseName, merchandisePrice]);
+					product.append(bigDiv);
+					$("#product").find("img").css("width","20%");
+			});
+				$('#ordersub').text("ORDER SUBTOTAL : "+totalPrice);
+		}
+	})
+}
+
+function selectNav(){
+	
+	document.getElementById("mySidenav").style.width = "300px";
+	$.ajax({
+		url : "/DizzyCafe/selectCart.controller",
+		type : 'POST',
+		success: function(data){
+
+				var totalPrice = 0;
+				$('#product').empty();
+			$.each(data, function(index,mer){			
+				var product = $('#mySidenav>#product');
+
+				var merchandisePicture = $("<img>").attr('src','${pageContext.request.contextPath}'+mer.merchandisePicture);
+				
+				var merchandiseName = $("<div></div>").text(mer.merchandiseName);
+				var merchandisePrice = $("<div></div>").text(mer.merchandisePrice+"元" + "x" + mer.buyCount);
+				var Price = mer.merchandisePrice*mer.buyCount;
+				totalPrice = Price + totalPrice;
+				var bigDiv = $("<div></div>").append([merchandisePicture, merchandiseName, merchandisePrice]);
+				product.append(bigDiv);
+				$("#product").find("img").css("width","20%");
+		});
+			$('#ordersub').text("ORDER SUBTOTAL : "+totalPrice);
+	}
+})
+}
+		
+		
+function closeNav() {
+document.getElementById("mySidenav").style.width = "0";
+}
+
+</script>
 <script src='<c:url value="/minghui/js/minghui.js" />'></script>
 <!-- </body> -->
 <!-- </html> -->

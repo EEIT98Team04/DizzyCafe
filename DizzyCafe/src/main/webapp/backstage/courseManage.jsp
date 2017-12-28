@@ -17,11 +17,13 @@
 	rel="stylesheet" type="text/css">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
-<link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.css"/>
+<jsp:include page="../HTML/TitleIcon.jsp" />
 </head>
 
+
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-	<jsp:include page="/backstage/index.jsp"></jsp:include>
+	<jsp:include page="/backstage/header.jsp"></jsp:include>
 	<div class="content-wrapper">
 		<div class="container-fluid">
 			<!-- Breadcrumbs-->
@@ -41,12 +43,41 @@
 				<table style="text-align: center;" id="dataTable"></table>
 			</div>
 
-			<a href="${pageContext.request.contextPath}/backstage/courseNew.jsp"><button class="btn btn-primary">新增</button></a>
+			<a style="margin-left:680px;" href="${pageContext.request.contextPath}/backstage/courseNew.jsp"><button class="btn btn-primary">新增</button></a>
 		</div>
 	</div>
- 	<script src="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></script> 
+	
+			<!-- Modal -->
+<!-- 	<div class="modal" id="pop"> -->
+<!-- 	  <div class="modal-dialog" role="document"> -->
+<!-- 	    <div class="modal-content"> -->
+<!-- 	      <div id="showText" class="modal-body"> -->
+<!-- 	      </div> -->
+<!-- 	      <div class="modal-footer"> -->
+<!-- 	      	<button id="ok" type="button" class="btn btn-success">確定</button> -->
+<!-- 	      </div> -->
+<!-- 	    </div> -->
+<!-- 	  </div> -->
+<!-- 	</div> -->
+
+	<jsp:include page="/backstage/footer.jsp"></jsp:include>
+
  	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
  	<script> 
+ 	
+//  	$(function(){
+//  		alert("${session.newCourse}");
+//  		alert("${session.Update}");
+// 	 	if(""!="${newCourse}"){
+// 	 		$('#pop').show();
+// 	 		$('#showText').text("${newCourse}");
+// 	 	}
+// 	 	if(""!="${Update}"){
+// 	 		$('#pop').show();
+// 	 		$('#showText').text("${Update}");
+// 	 	}
+//  	});
+ 	
  	//顯示資料表dataTable
  	$('#dataTable').DataTable({
 					ajax : {
@@ -111,6 +142,5 @@
 				});
 	
  	</script> 
-	<jsp:include page="/backstage/footer.jsp"></jsp:include>
 </body>
 </html>

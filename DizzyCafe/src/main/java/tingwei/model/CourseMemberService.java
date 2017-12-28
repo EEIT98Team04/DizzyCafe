@@ -82,4 +82,10 @@ public class CourseMemberService {
 	public boolean checkSignedUpTime(int courseId) {
 		return courseMemberDAO.checkSignedUpTime(courseId);
 	}
+	
+	public int getNowPeopleByCourseId(int courseId) {
+		int nowPeople = courseMemberDAO.getNowPeopleByCourseId(courseId);
+		return nowPeople;
+	}
+	
 }

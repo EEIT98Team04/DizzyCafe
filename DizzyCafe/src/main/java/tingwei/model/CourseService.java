@@ -20,7 +20,7 @@ public class CourseService {
 //		return courseDAO.select();
 //	}
 	
-	public CourseBean select(int courseId) {
+	public CourseBean selectByCourseId(int courseId) {
 		return courseDAO.select(courseId);
 	}
 	
@@ -73,5 +73,11 @@ public class CourseService {
 	
 	public CourseBean update(CourseBean bean) {
 		return courseDAO.update(bean);
+	}
+	
+	public int getLimitByCourseId(int courseId) {
+		CourseBean bean = this.selectByCourseId(courseId);
+		int limit = bean.getCourseLimit();
+		return limit;
 	}
 }

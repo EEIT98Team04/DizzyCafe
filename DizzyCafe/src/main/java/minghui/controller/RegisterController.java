@@ -40,8 +40,8 @@ public class RegisterController {
 		}
 		
 		System.out.println(memberPhoto);
-		if(loginService.uploadServerFile(memberPhoto, bean)) {
-			loginService.register(bean);
+		if(loginService.register(bean)) {
+			loginService.uploadServerFile(memberPhoto, bean);
 			return "login.success";
 		}else {
 			model.addAttribute("error_register", "註冊失敗");

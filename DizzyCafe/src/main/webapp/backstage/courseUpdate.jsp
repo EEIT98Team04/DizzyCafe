@@ -8,22 +8,33 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <style type="text/css">
 #form1 div {
 	width: 1000px;
 	margin: auto;
 }
 </style>
+<jsp:include page="../HTML/TitleIcon.jsp" />
 <link href="/DizzyCafe/wayne/css/lightbox.css" rel="stylesheet">
 <script src="<c:url value="../wayne/js/lightbox.js"/>"></script>
 </head>
-<body>
-	<jsp:include page="/backstage/index.jsp"></jsp:include>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<jsp:include page="/backstage/header.jsp"></jsp:include>
 
 	<div class="content-wrapper">
-		<div class="container-fluid" style="margin-top: 50px">
-			<h2 style="margin: 20px auto; width: 90%">新增課程</h2>
+		<div class="container-fluid">
+		
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="${pageContext.request.contextPath}/backstage/index.jsp">回首頁</a>
+					</li>
+				<li class="breadcrumb-item">
+					<a href="${pageContext.request.contextPath}/backstage/courseManage.jsp">課程管理</a>
+					</li>
+				<li class="breadcrumb-item active">修改課程</li>
+			</ol>
+			
+			<h2 style="margin: 20px auto; width: 90%">修改課程</h2>
 			<form id="form1" enctype="multipart/form-data" method="post"
 				action="${pageContext.request.contextPath}/backstage/courseUpdate.controller">
 				<fieldset>
@@ -153,7 +164,7 @@
 						<tr height="20px"></tr>
 						<tr>
 						<td colspan="2" align="center">
-						<button id="submit" type="submit" class="btn btn-info">修改</button>
+						<button id="submit" type="submit" class="btn btn-info" onclick="alert('修改成功')">修改</button>
 						<button type="reset" class="btn" style="margin-left: 50px">清除</button>
 						</td>
 						</tr>
@@ -163,6 +174,8 @@
 			</form>
 		</div>
 	</div>
+	
+	
 	<div>
 		<jsp:include page="/backstage/footer.jsp"></jsp:include>
 	</div>

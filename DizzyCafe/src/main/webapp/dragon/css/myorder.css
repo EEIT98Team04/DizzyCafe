@@ -1,0 +1,67 @@
+.myOrderList{
+	margin: auto;;
+	margin-top:80px;
+	width: 600px;
+	text-align: center;
+}
+
+.myOrder{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: auto;;
+	margin-top:50px;
+	width: 600px;
+	text-align: center;
+	border-collapse: collapse;
+/* 	position: relative; */
+	left: 50px; 
+}
+.detailsList{
+	display: none;
+	width: 600px;
+	margin: auto;;
+	margin-top:-50px;
+	text-align: center;
+}
+
+.detailsListTable{
+	width: 600px;
+}
+
+.detailsListName td{
+	padding-left: 22px;
+	padding-right: 22px;
+}
+
+.arrow{
+	/*指定背景圖片大小*/
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	width: 60px;
+	height: 20px;
+	float: right;
+}
+th {
+	font-size: 13px;
+	font-weight: normal;
+	padding: 8px;
+	background: #b9c9fe;
+	border-top: 4px solid #aabcfe;
+	border-bottom: 1px solid #fff;
+	color: #039;
+}
+
+td {
+	padding: 8px;
+	background: #e8edff; 
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid transparent;
+}
+
+tr:hover td {
+	background: #d0dafd;
+	color: #339;
+}
+
+

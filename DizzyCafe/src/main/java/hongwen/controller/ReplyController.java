@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hongwen.model.ReplyBean;
 import hongwen.model.ReplyService;
+import minghui.model.LoginService;
 import minghui.model.MemberBean;
 import net.sf.json.JSONArray;
 
@@ -21,6 +22,8 @@ public class ReplyController {
 
 	@Autowired
 	ReplyService replyService;
+	@Autowired
+	private LoginService service;
 	//搜尋用
 	@RequestMapping(path = "/Reply.hongwen", method = { RequestMethod.GET })
 	public @ResponseBody JSONArray getmethod(@RequestParam Map<?, ?> param) {
@@ -30,7 +33,7 @@ public class ReplyController {
 	//發文用
 	@RequestMapping(path = "/Reply.hongwen", method = { RequestMethod.POST })
 	public @ResponseBody JSONArray postmethod(HttpSession session, @RequestParam Map<?, ?> param) {
-		String[] key = { "title", "textarea" };
+		String[] key = { "title", "textarea","modify"};
 		JSONArray json = null;
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		if (bean == null || "".equals(String.valueOf(bean.getMemberId())) || "".equals(bean.getMemberName())) {
@@ -41,8 +44,19 @@ public class ReplyController {
 //		int replyId, String membername, int memberId, int documentId, String content, Date times
 		ReplyBean replybean = new ReplyBean(1,bean.getMemberName(),bean.getMemberId(), Integer.parseInt((String) param.get(key[0])),
 				(String) param.get(key[1]), new java.util.Date());
-
-		json = replyService.insert(replybean);
+		
+		if("true".equals(param.get(key[2]))) {
+			json = replyService.update(replybean);						
+		}else{
+			json = replyService.insert(replybean);			
+		}
 		return json;//if it's success,then return json about {"status":"success"}
+	}
+
+	//瀏覽文章顯示使用者相關資訊
+	@RequestMapping(path = "/Data.hongwen", method = { RequestMethod.GET })
+	public @ResponseBody JSONArray data(@RequestParam Map<?, ?> param) {
+		JSONArray json = service.selectToJSON();
+		return json;
 	}
 }

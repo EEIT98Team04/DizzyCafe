@@ -231,6 +231,7 @@
 			</div>
 
 		</form>
+
 	</div>
 
 
@@ -315,7 +316,6 @@ document.getElementById("mySidenav").style.width = "0";
 }
 
 </script>
-</nav>
 <script src='<c:url value="/minghui/js/minghui.js" />'></script>
 <!-- </body> -->
 <!-- </html> -->

@@ -174,6 +174,8 @@
 			</form>
 		</div>
 	</div>
+	
+	
 	<div>
 		<jsp:include page="/backstage/footer.jsp"></jsp:include>
 	</div>
@@ -226,6 +228,7 @@
 		
 		
 		$('#submit').click(
+			alert("更新成功");
 				function(e) {
 					//editor 資料處理
 					$('input[name="courseContent"]').val(

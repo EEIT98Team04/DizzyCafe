@@ -7,65 +7,96 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>DizzyCafe課程</title>
 <jsp:include page="/HTML/TitleIcon.jsp" />
-<link rel="stylesheet" href="/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
 <style type="text/css">
-	.img{
-		height: 60px;
-		width: 60px;
-	}
-	.list{
-		margin: 20px auto;
-		width: 70%;
-	}
-	.page{
-		margin: 20px auto;
-		width: 50%;
-	}
-	.list td{
-		padding:0 20px;
-	}
+.img {
+	width: 240px;
+}
+
+.list {
+	margin: 20px auto;
+	width: 70%;
+}
+
+.page {
+	margin: 20px auto;
+	width: 50%;
+}
+#news-list .content:hover .date {
+    background: url(../image/idx-10.png) center center no-repeat #FABE00;
+}
+
+#news-list .date {
+    position: absolute;
+    top: 27%;
+    left: 15px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    background: url(../image/idx-10.png) center center no-repeat #979797;
+    color: #fff;
+}
+#news-list .content:first-child {
+    padding-top: 0;
+}
+#news-list .content {
+    border-bottom: 1px solid #8E8A85;
+    padding: 2.5% 0;
+}
+.row {
+	margin-top: 15px;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+#news-list h3 a {
+    color: #5b2407;
+    font-size: 1em!important;
+}
+#news-list .more {
+    display: inline-block;
+    color: #9c3f0d;
+    padding: 0 20px 0 0;
+    cursor: pointer;
+    background: url(../image/nws-02.png) right center no-repeat;
+}
+
 </style>
 </head>
-<body>
+<body style="font-family: Microsoft JhengHei;">
 	<jsp:include page="/HTML/Navbar.jsp" />
-	<div style="height:100px"></div>
-	<div class="list">
-		<table style="text-align: center">
-
-			<thead>
-				<tr>
-					<th>圖片</th>
-					<th>課程名稱</th>
-					<th>課程簡介</th>
-					<th>課程價格</th>
-					<th>開始時間</th>
-					<th>結束時間</th>
-					<th>現在人數</th>
-<!-- 					<th>管理</th> -->
-				</tr>
-			</thead>
-			<tbody>
+	<div style="height: 80px"></div>
+	<div class="container row">
+      <p style="font-weight:normal;word-spacing:0pt;font-size:32px;text-align:left;line-height:1;padding-left:300px;">課程專區
+    </div>
+	<div style="width:100%;">
+		<article class="container-fluid" style="padding-left:475px">
+			<section class="row container" id="news-list">
 				<c:forEach var="course" items="${courseList}" varStatus="status">
-					<tr>
-					<!--<a
-					 href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">
-							<img class="img" src="${pageContext.request.contextPath}${course.courseImg}" /></a>-->
-						<td>
-							<a href="javascript: openCourse();">
-							<img class="img" src="${pageContext.request.contextPath}${course.courseImg}" /></a>
-							</td>
-						<td><a
-							href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">${course.courseName}</a></td>
-						<td>${course.courseIntro}</td>
-						<td>${course.courseCost}</td>
-						<td>${course.courseBegin}</td>
-						<td>${course.courseEnd}</td>
-						<td>${course.courseNowPeople} / ${course.courseLimit}</td>
-					</tr>
+					<div class="col-sm-8 col-sm-offset-2 col-xs-12">
+						<div class="content row">
+							<div class="col-md-4 cover">
+								<a href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">
+									<img class="img-responsive img"
+									src="${pageContext.request.contextPath}${course.courseImg}">
+								</a>
+								<input type="hidden" id="tempTime${status.count }" value="${course.courseBegin}"/>
+								<div id="date${status.count }" class="date"></div>
+							</div>
+							<div class="col-md-8">
+								<h3>
+									<a href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">
+									${course.courseName}</a>
+								</h3>
+								<p>${course.courseIntro}</p>
+								<a class="more"
+									href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">看更多</a>
+							</div>
+						</div>
+					</div>
 				</c:forEach>
-			</tbody>
-		</table>
-		<div>
+			</section>
+		</article>
+
+		<div style="width:300px ; margin:auto" >
 			<ul class="pagination page">
 				<c:forEach var="pages" begin="1" end="${TotalPages}">
 					<li class="page-item"><a class="page-link"
@@ -73,34 +104,14 @@
 				</c:forEach>
 			</ul>
 		</div>
+
 	</div>
-	
-	<div>
-		<a href="${pageContext.request.contextPath}/course/CourseCalendar.jsp">
-		<button>test show course date time</button></a>
-	</div>
-	
-<script src='<c:url value="/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js" />'></script>
-<script src='<c:url value="/js/jquery.fancybox-1.3.4/fancybox/jquery.easing-1.3.pack.js" />'></script>
-<script src='<c:url value="/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.js" />'></script>
-<script src='<c:url value="/js/jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js" />'></script>
-<script type="text/javascript">
-function openCourse()
-{
-	//javascript: openCourse(/DizzyCafe,1008); return false;
-	debugger;
-	$(this).fancybox({
-		'width'				: 580,
-		'height'			: 350,
-		'padding'			: 0,
-		'autoScale'			: false,
-		'transitionIn'		: 'none',
-		'transitionOut'		: 'none',
-		'href'				: 'http://localhost:8080/DizzyCafe/course/courseShow.controller?course=1008',
-		'type'				: 'iframe',
-		'onClosed'			: function(){window.location.reload();}  //關閉子視窗後的動作,
-	});
-}
-</script>
+	<script type="text/javascript">
+		for(var i = 1;i<=${rows_perPage};i++){
+			temp=$('#tempTime'+i).val().split('-');
+			$('#date'+i).html("<p style='height:11px;'>"+temp[2]+"</p>");
+			$('#date'+i).append(temp[1]+"月");
+		}
+	</script>
 </body>
 </html>

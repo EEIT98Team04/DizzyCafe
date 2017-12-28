@@ -28,7 +28,7 @@ public class DocumentDAO {
 	
 	//前台會員瀏覽私人文章
 	public List<DocumentBean> select(String membername) {
-		String search = "from DocumentBean where membername = '" + membername + "'";
+		String search = "from DocumentBean where membername = '" + membername + "' and Dstatus = '1'";
 		Query<DocumentBean> query = this.getSession().createQuery(search, DocumentBean.class);
 		List<DocumentBean> result = query.getResultList();
 		System.out.println(result.size());

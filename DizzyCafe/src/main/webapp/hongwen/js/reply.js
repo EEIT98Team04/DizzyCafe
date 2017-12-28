@@ -2,6 +2,7 @@ $(function() {
 		var search = document.location.search;// 取得?後面的參數
 		var modify = "false";// 文章狀態(修改or發文)
 		var photo;//暫存
+		var replyid;
 		
 		//回傳使用者資料
 		$.ajax({
@@ -28,7 +29,8 @@ $(function() {
 			data['modify'] = modify;// 判斷是發文還是修改，來不及改邏輯，直接給變數
 			data['title'] = $.getUrlParam('documentId');// 取得param值
 			data['textarea'] = t;// 將tinymce值放入data，並宣告為json格式[key='textarea',value=t]
-
+			data['replyid'] = replyid;
+			
 			console.log(data);
 
 			// ajax傳送
@@ -79,6 +81,7 @@ $(function() {
 		$(document).on("click", '.reply', function() {
 			var search = '?';
 			var id = $(this).attr("id");
+			replyid = id;
 			search += 'id=' + id;
 			modify = "true";
 

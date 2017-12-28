@@ -38,17 +38,24 @@ public class PrivateController {
 	// 修改文章用
 	@RequestMapping(path = "/Privatemodify.hongwen", method = { RequestMethod.GET })
 	public @ResponseBody JSONArray privatemodify(@RequestParam Map<?, ?> param) {
-		JSONArray json = documentService.modify(Integer.parseInt((String)param.get("id")));
+		JSONArray json = documentService.modify(Integer.parseInt((String) param.get("id")));
 		return json;
 	}
-	
+
 	// 修改回文用
-		@RequestMapping(path = "/Replymodify.hongwen", method = { RequestMethod.GET })
-		public @ResponseBody JSONArray replymodify(@RequestParam Map<?, ?> param) {
-			JSONArray json = replyService.modify(Integer.parseInt((String)param.get("id")));
-			return json;
-		}
-	
+	@RequestMapping(path = "/Replymodify.hongwen", method = { RequestMethod.GET })
+	public @ResponseBody JSONArray replymodify(@RequestParam Map<?, ?> param) {
+		JSONArray json = replyService.modify(Integer.parseInt((String) param.get("id")));
+		return json;
+	}
+
+	// 刪除回文用
+	@RequestMapping(path = "/Replydelete.hongwen", method = { RequestMethod.GET })
+	public @ResponseBody JSONArray delete(@RequestParam Map<?, ?> param) {
+		JSONArray json = documentService.delete(Integer.parseInt((String) param.get("id")));
+		return json;
+	}
+
 	// 查閱檢舉文章
 	@RequestMapping(path = "/Privatereport.hongwen", method = { RequestMethod.GET })
 	public @ResponseBody JSONArray privatereport(@RequestParam Map<?, ?> param) {

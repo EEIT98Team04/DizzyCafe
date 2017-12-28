@@ -17,7 +17,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
 <link rel="stylesheet" href='<c:url value="/minghui/css/minghui.css" />'>
+<link rel="stylesheet" href='<c:url value="/wayne/css/nav.css" />'>
 <style>
 .asd {
 	border-color: black;
@@ -27,6 +29,11 @@
 
 .asd:hover {
 	background-color: #ADADAD;
+}
+.navbar-nav li{
+	font-weight:bold;
+	margin-left:15px;
+	margin-top:10px;
 }
 </style>
 <!-- </head> -->
@@ -132,6 +139,7 @@
 			<li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
 			<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
 			</li>
+			<li><i style="margin-left:900px;" class="fa fa-shopping-cart fa-5" aria-hidden="true" onclick="selectNav()"></i></li>
 		</ul>
 		<c:choose>
 			<c:when test="${empty user}">
@@ -223,8 +231,91 @@
 			</div>
 
 		</form>
+
 	</div>
+
+
 </nav>
+	<div id="mySidenav" class="sidenav"><p class="cart">CART</p>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div id="product"></div>
+		<div id="ordbtn" class="ordbtn">
+		<div id="ordersub" class="ordersub" ></div>
+		<div class="checkoutbtndiv"><a href="${pageContext.request.contextPath}/shopping/shoppingCart.controller"><button class="checkoutbtn" type="button">CHECKOUT</button></a></div>
+		</div>
+	</div>
+<script>
+function insertNav() {
+
+	    document.getElementById("mySidenav").style.width = "300px";
+		var buyCount = $('#select').val();
+		var merchandiseId = '${bean.merchandiseId}';
+		$.ajax({
+			url : "/DizzyCafe/insertCart.controller",
+			type : 'POST',
+			data : {'buyCount':buyCount,'merchandiseId':merchandiseId},
+			success: function(data){
+//	 			for(var i=0;i<data.length;i++){
+//	 				var merchandiseId = data[i].merchandiseId;
+//	 				var merchandiseName = data[i].merchandiseName;
+//	 				var merchandisePrice = data[i].merchandisePrice;
+//	 				var merchandisePicture = data[i].merchandisePicture;
+//	 				var buyCount = data[i].buyCount;
+// 					var order = document.getElementById('ordersub').text();
+					var totalPrice = 0;
+					$('#product').empty();
+				$.each(data, function(index,mer){			
+					var product = $('#mySidenav>#product');
+
+					var merchandisePicture = $("<img>").attr('src','${pageContext.request.contextPath}'+mer.merchandisePicture);
+					
+					var merchandiseName = $("<div></div>").text(mer.merchandiseName);
+					var merchandisePrice = $("<div></div>").text(mer.merchandisePrice+"元" + "x" + mer.buyCount);
+					var Price = mer.merchandisePrice*mer.buyCount;
+					totalPrice = Price + totalPrice;
+					var bigDiv = $("<div></div>").append([merchandisePicture, merchandiseName, merchandisePrice]);
+					product.append(bigDiv);
+					$("#product").find("img").css("width","20%");
+			});
+				$('#ordersub').text("ORDER SUBTOTAL : "+totalPrice);
+		}
+	})
+}
+
+function selectNav(){
+	
+	document.getElementById("mySidenav").style.width = "300px";
+	$.ajax({
+		url : "/DizzyCafe/selectCart.controller",
+		type : 'POST',
+		success: function(data){
+
+				var totalPrice = 0;
+				$('#product').empty();
+			$.each(data, function(index,mer){			
+				var product = $('#mySidenav>#product');
+
+				var merchandisePicture = $("<img>").attr('src','${pageContext.request.contextPath}'+mer.merchandisePicture);
+				
+				var merchandiseName = $("<div></div>").text(mer.merchandiseName);
+				var merchandisePrice = $("<div></div>").text(mer.merchandisePrice+"元" + "x" + mer.buyCount);
+				var Price = mer.merchandisePrice*mer.buyCount;
+				totalPrice = Price + totalPrice;
+				var bigDiv = $("<div></div>").append([merchandisePicture, merchandiseName, merchandisePrice]);
+				product.append(bigDiv);
+				$("#product").find("img").css("width","20%");
+		});
+			$('#ordersub').text("ORDER SUBTOTAL : "+totalPrice);
+	}
+})
+}
+		
+		
+function closeNav() {
+document.getElementById("mySidenav").style.width = "0";
+}
+
+</script>
 <script src='<c:url value="/minghui/js/minghui.js" />'></script>
 <!-- </body> -->
 <!-- </html> -->

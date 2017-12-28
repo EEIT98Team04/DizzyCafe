@@ -14,21 +14,17 @@
 	border: 1;
 	font-family: Microsoft JhengHei;
 }
-
 .courseTable tr:nth-child(even) {
 	background-color: #F5DEB3;
 }
-
 .courseTable tr:nth-child(odd) {
 	background-color: white;
 }
-
 .container {
 	width: 100%;
 	max-width: 1250px;
 	margin: 0 auto;
 }
-
 #news-show .date > div {
     width: 75px;
     height: 75px;
@@ -194,19 +190,16 @@
 	
 		// Get the modal
 		var modal = document.getElementById('signup');
-
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
 			if (event.target == modal) {
 				modal.style.display = "none";
 			}
 		}
-
 		$(function() {
 			if ('${empty user}' == "true") { //未登入
 				$('#iwannasignup').text("請先登入").prop("disabled", true).attr("class","btn btn-default");
 			}
-
 			$.post("/DizzyCafe//course/CheckTimeAndLimitController.controller",
 					{
 						"courseId" : '${course.courseId }'
@@ -217,7 +210,6 @@
 							$('#iwannasignup').text("人數已達上限").prop("disabled",true).attr("class","btn btn-default");
 						}
 					});
-
 			if ('${not empty user}' == "true") {
 				$.post("/DizzyCafe/course/CheckSignedController.controller", {
 					"courseId" : '${course.courseId }',
@@ -229,7 +221,6 @@
 				});
 			}
 		});
-
 		$('#same').change(
 				function() {
 					if ($('#same').prop('checked') == true) {

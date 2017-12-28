@@ -13,18 +13,21 @@
 
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-	<jsp:include page="/backstage/index.jsp"></jsp:include>
+	<jsp:include page="/backstage/header.jsp"></jsp:include>
 		<div class="content-wrapper">
 			<div class="container-fluid">
 				<div style="height: 40px"></div>
 				<div id="calendar" style="margin: auto; width: 700px"></div>
 				<div style="margin-left:625px; margin-top:20px">
-					<button type="button" class="btn btn-info" id="update">儲存變更</button>
+					<button type="button" class="btn btn-info" id="update" onclick="alert('儲存成功');">儲存變更</button>
 					<button type="button" class="btn btn-default" style="margin-left:50px;" id="cancel">取消變更</button>
 				</div>
 		</div>
 	</div>
-
+	
+	<jsp:include page="/backstage/footer.jsp"></jsp:include>
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<script type="text/javascript"
 		src='<c:url value="/js/fullcalendar-3.7.0/lib/jquery-ui.min.js" />'></script>
 	<script type="text/javascript"

@@ -23,7 +23,7 @@
 
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-	<jsp:include page="/backstage/index.jsp"></jsp:include>
+	<jsp:include page="/backstage/header.jsp"></jsp:include>
 	<div class="content-wrapper">
 		<div class="container-fluid">
 			<!-- Breadcrumbs-->
@@ -48,33 +48,35 @@
 	</div>
 	
 			<!-- Modal -->
-	<div class="modal" id="pop">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div id="showText" class="modal-body">
-	      </div>
-	      <div class="modal-footer">
-	      	<button id="ok" type="button" class="btn btn-success">確定</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+<!-- 	<div class="modal" id="pop"> -->
+<!-- 	  <div class="modal-dialog" role="document"> -->
+<!-- 	    <div class="modal-content"> -->
+<!-- 	      <div id="showText" class="modal-body"> -->
+<!-- 	      </div> -->
+<!-- 	      <div class="modal-footer"> -->
+<!-- 	      	<button id="ok" type="button" class="btn btn-success">確定</button> -->
+<!-- 	      </div> -->
+<!-- 	    </div> -->
+<!-- 	  </div> -->
+<!-- 	</div> -->
+
+	<jsp:include page="/backstage/footer.jsp"></jsp:include>
 
  	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
  	<script> 
  	
- 	$(function(){
- 		alert("${session.newCourse}");
- 		alert("${session.Update}");
-	 	if(""!="${newCourse}"){
-	 		$('#pop').show();
-	 		$('#showText').text("${newCourse}");
-	 	}
-	 	if(""!="${Update}"){
-	 		$('#pop').show();
-	 		$('#showText').text("${Update}");
-	 	}
- 	});
+//  	$(function(){
+//  		alert("${session.newCourse}");
+//  		alert("${session.Update}");
+// 	 	if(""!="${newCourse}"){
+// 	 		$('#pop').show();
+// 	 		$('#showText').text("${newCourse}");
+// 	 	}
+// 	 	if(""!="${Update}"){
+// 	 		$('#pop').show();
+// 	 		$('#showText').text("${Update}");
+// 	 	}
+//  	});
  	
  	//顯示資料表dataTable
  	$('#dataTable').DataTable({

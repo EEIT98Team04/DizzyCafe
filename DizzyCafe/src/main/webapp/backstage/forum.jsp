@@ -73,11 +73,13 @@
 				}
 			} ]
 		});
-		var tagtmp;
+		var tagtmp=[];
 		var data={};
 		$(document).on('dblclick','.doubleClick',function(){
-			tagtmp = $(this);
-			$(this).replaceWith($('<input class="xx" style="margin:auto;width:500px;" type="text" max=30 value="' + this.innerHTML + '">'));
+			tagtmp[$(this).attr('id')] = $(this);
+			$(this).replaceWith($('<input id="'+$(this).attr('id')+
+					'" class="xx" style="margin:auto;width:500px;" type="text" max=30 value="'
+					+ this.innerHTML + '">'));
 		});
 		$(document).on('keydown','.xx',function(){
 // 			alert( event.which );//判斷按下哪個按鈕
@@ -86,13 +88,14 @@
 				if (typeof (floor) == "undefined") {
 					alert('請輸入數值');
 				}else{
-					alert('修改完成');
-					tagtmp[0].innerText = $(this).val();
-					$(this).replaceWith($(tagtmp));
+// 					alert('修改完成');
+					var buf = tagtmp[$(this).attr('id')];
+					buf[0].innerText = $(this).val();
+					$(this).replaceWith($(buf));
 // 					var x = tagtmp.attr('id');
 // 					x = tagtmp[0].id;
-					data['boardId'] = tagtmp.attr('id');
-					data['announcement'] = tagtmp[0].innerText;
+					data['boardId'] = buf.attr('id');
+					data['announcement'] = buf[0].innerText;
 					//傳送更改完後的資料
 					$.ajax({
 						url:'/DizzyCafe/Forum.hongwen',
@@ -101,7 +104,7 @@
 						dataType: "json",
 						success:function(json){
 							if (json[0]['status'] == 'success') {
-								alert('更新成功');
+								alert('資料庫更新成功');
 							}else{
 								alert('Oops！Something Wrong!Please Report Manager！');								
 								window.location.replace(document.location.href);// 取得現在的URL，並自動導向

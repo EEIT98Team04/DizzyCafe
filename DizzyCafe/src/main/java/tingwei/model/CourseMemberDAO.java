@@ -118,7 +118,7 @@ public class CourseMemberDAO {
 	public JSONArray selectMyPageNow(int memberId) {
 		@SuppressWarnings("unchecked")
 		Query<Object[]> select = this.getSession().createNativeQuery(
-				" select courseImg, courseName, courseBegin, courseEnd, courseLimit,course.courseId," + 
+				" select courseImg, courseName, courseBegin, courseEnd, courseIntro,courseLimit,course.courseId," + 
 				" (select COUNT(memberId)" + 
 				" from courseMemberForm" + 
 				" where courseId = course.courseId) AS courseNowPeople" + 
@@ -136,9 +136,10 @@ public class CourseMemberDAO {
 			tt.put("courseName", var[1]);
 			tt.put("courseBegin", var[2].toString());
 			tt.put("courseEnd", var[3].toString());
-			tt.put("courseLimit", var[4]);
-			tt.put("courseId",var[5]);
-			tt.put("courseNowPeople", var[6]);
+			tt.put("courseIntro", var[4]);
+			tt.put("courseLimit", var[5]);
+			tt.put("courseId",var[6]);
+			tt.put("courseNowPeople", var[7]);
 			result.add(tt);
 		}
 		return result;

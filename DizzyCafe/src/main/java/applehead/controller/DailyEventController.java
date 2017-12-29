@@ -53,7 +53,7 @@ public class DailyEventController {
 				session.setAttribute("user", temp);				
 			}
 		}else {
-			if(bean!=null) {
+			if(bean!=null) { 
 			temp = memberService.updateDailyEvent(bean);
 			session.setAttribute("user", temp);
 			}

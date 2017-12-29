@@ -16,13 +16,6 @@ import net.sf.json.JSONArray;
 public class TestCtroller {
 	@Autowired
 	BoardService boardService;
-
-//	@RequestMapping(value = urlPattern , method = RequestMethod.POST)
-//	public @ResponseBody Person save(@RequestBody Person jsonString) {
-//
-//	   Person person=personService.savedata(jsonString);
-//	   return person;
-//	}
 	
 	@RequestMapping(path = "/test.hongwen", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody JSONArray postJSON(@RequestParam Map<?,?> json) {

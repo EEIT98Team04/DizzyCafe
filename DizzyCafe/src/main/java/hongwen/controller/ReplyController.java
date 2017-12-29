@@ -52,7 +52,7 @@ public class ReplyController {
 		}else{
 			json = replyService.insert(replybean);			
 		}
-		return json;//if it's success,then return json about {"status":"success"}
+		return json;//if it's success,then return json include {"status":"success"}
 	}
 
 	//瀏覽文章顯示使用者相關資訊

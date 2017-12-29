@@ -17,7 +17,7 @@
 					href="/DizzyCafe/backstage/index.jsp">回首頁</a></li>
 				<li class="breadcrumb-item active">公告管理</li>
 				<li class="breadcrumb-item"><a
-					href="/DizzyCafe/backstage/report.jsp">公告管理</a></li>
+					href="/DizzyCafe/backstage/report.jsp">檢舉管理</a></li>
 			</ol>
 			<table id='test'></table>
 		</div>
@@ -54,12 +54,6 @@
 			}, {
 				data : 'announcement',
 				title : '公告',
-// 				"render": function(data, type, row, meta){
-// 		            if(type === 'display'){
-// 		                data = '<a class="doubleClick" href="#">' + data + '</a>';
-// 		            }
-// 		            return data;
-// 		         }
 			} ],
 			'createdRow' : function(row, data, dataIndex) {
 				$(row).attr('id', "tr"+data.boardId);
@@ -73,6 +67,7 @@
 				}
 			} ]
 		});
+		
 		var tagtmp=[];
 		var data={};
 		$(document).on('dblclick','.doubleClick',function(){

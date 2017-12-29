@@ -136,8 +136,8 @@ var setdata = function(json) {
 		inner += '<div class="article">';
 		inner += '<div class="user">';// 使用者個資
 		inner += '<img class="photo" src="' + photo
-				+ '" style="width: 100px; height: 100px">';// 使用者個資
-		inner += '<div>' + json[i][array[0]] + '</div>';// 使用者id
+				+ '" style="width: 200px; height: 200px">';// 使用者個資
+		inner += '<div>發文者 : ' + json[i][array[0]] + '</div>';// 使用者id
 		inner += '</div>';// 使用者個資
 		inner += '<div class="content">';
 		inner += '<div class="content_header">';
@@ -176,6 +176,7 @@ var setdata = function(json) {
 				alert('請輸入數值');
 			}
 			window.location = '#' + floor;
+			floor = '';
 		}
 	});
 	// 搜尋

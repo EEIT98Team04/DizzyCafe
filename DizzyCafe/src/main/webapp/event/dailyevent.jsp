@@ -122,19 +122,23 @@ body{
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
+		var roundDecimal = function (val, precision) {
+			  return Math.round(Math.round(val * Math.pow(10, (precision || 0) + 1)) / 10) / Math.pow(10, (precision || 0));
+			}
+		
+		
 		$.getJSON('/DizzyCafe/getItem.controller',function(showItems){
-			console.log(showItems);
 			$('#firstImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[0].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ showItems[0].discount*10 + '折</span>'
+					+ roundDecimal(showItems[0].discount*10,1) + '折</span>'
 					+ '<input type="hidden" value="' + showItems[0].merchandiseId+'"/>');
 			$('#thirdImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[1].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ showItems[1].discount*10 + '折</span>'
+					+ roundDecimal(showItems[1].discount*10,1) + '折</span>'
 					+ '<input type="hidden" value="' + showItems[1].merchandiseId+'"/>');
 			$('#fifthImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[2].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ showItems[2].discount*10 + '折</span>'
+					+ roundDecimal(showItems[2].discount*10,1) + '折</span>'
 					+ '<input type="hidden" value="' + showItems[2].merchandiseId+'"/>');
 		});		
 		
@@ -180,14 +184,13 @@ body{
 // 				dis = 'discount=' + $("#here input:last").val();
 // 				res = prize+'&'+dis;
 				res = {};
-				res.prize = $("#here input:first").val();
-				res.discount = $("#here input:last").val()/10;
-				
+				res.prize = $("#here input").val();
+				res.discount = $("#here span:last").html().split('折')[0]/10;
 		    	$.post('/DizzyCafe/dailyEvent.controller',res);
 				
 			},
 // 			parseInt(Math.random()*2000+3000));
-			parseInt(3200));
+			parseInt(3260));
 		});	
 
 	</script>

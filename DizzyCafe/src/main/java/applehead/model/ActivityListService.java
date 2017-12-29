@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.gson.Gson;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Service
 @Transactional
@@ -87,6 +88,19 @@ public class ActivityListService {
 		JSONArray json = JSONArray.fromObject(temp);
 		System.out.println("json:"+json);
 		return json;
+	}
+	
+	public JSONArray getActivityDiscount() {
+		List<Object[]> temp = null;
+		JSONArray result = new JSONArray();
+		temp = activityListDAO.selectWithTime(new java.sql.Date(System.currentTimeMillis()));
+		for(Object[] gogo : temp) {
+			JSONObject cool = new JSONObject();
+			cool.put("discount", ((java.math.BigDecimal)gogo[0]).doubleValue());
+			cool.put("tag", gogo[1].toString());
+			result.add(cool);
+		}
+		return result;		
 	}
 
 }

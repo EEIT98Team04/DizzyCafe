@@ -171,6 +171,9 @@
 	<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 	<script>
 	$(function(){
+		var roundDecimal = function (val, precision) {
+			  return Math.round(Math.round(val * Math.pow(10, (precision || 0) + 1)) / 10) / Math.pow(10, (precision || 0));
+			}
 		$('#update').on('click',function(){
 			$('#myModal').css('display','block');
 		});
@@ -210,17 +213,17 @@
 			console.log(showItems);
 			$('#firstImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[0].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ '<input type="text" style="width:40px;z-index:6" value="'+ parseInt(showItems[0].discount*100)/10 
+					+ '<input type="text" style="width:40px;z-index:6" value="'+ roundDecimal(showItems[0].discount*10,1) 
 					+ '"/>' + '折</span>'
 					+ '<input type="hidden" value="' + showItems[0].merchandiseId+'"/>');
 			$('#thirdImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[1].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ '<input type="text" style="width:40px;z-index:6" value="'+ parseInt(showItems[1].discount*100)/10
+					+ '<input type="text" style="width:40px;z-index:6" value="'+ roundDecimal(showItems[1].discount*10,1)
 					+ '"/>' + '折</span>'
 					+ '<input type="hidden" value="' + showItems[1].merchandiseId+'"/>');
 			$('#fifthImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[2].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ '<input type="text" style="width:40px;z-index:6" value="'+ parseInt(showItems[2].discount*100)/10 
+					+ '<input type="text" style="width:40px;z-index:6" value="'+ roundDecimal(showItems[2].discount*10,1) 
 					+ '"/>' + '折</span>'
 					+ '<input type="hidden" value="' + showItems[2].merchandiseId+'"/>');
 		});

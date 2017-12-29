@@ -28,7 +28,6 @@ import hongwen.model.ReplyBean;
 import minghui.model.AdplayBean;
 import minghui.model.ManagerBean;
 import minghui.model.MemberBean;
-import minghui.model.TmpBean;
 import tingwei.model.CourseBean;
 import tingwei.model.CourseDateTimeBean;
 import tingwei.model.CourseMemberBean;

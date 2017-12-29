@@ -49,6 +49,7 @@
 						</a>
 					</div>
 					<div class="colthree">
+						<input type="hidden" class="tag" value="${bean.merchandiseTag }"/>
 						<p class="pone">
 							${bean.merchandiseName}<br /> ${bean.merchandisePrice}元<br />
 						</p>
@@ -80,5 +81,34 @@
 	</div>
 
 	<footer></footer>
+	
+	<script>
+		$.ajax({
+			url : '/DizzyCafe/checkactivitydiscount.controller',
+			type : 'GET',
+			success : function(data){
+				var temp = 1;
+				$.each(data,function(key,value){
+// 					if(value.tag=='tools'){
+						
+// 					}
+					if(temp > value.discount){
+						temp = value.discount;
+					}
+				});
+				$.each($('.tag'),function(key,value){
+					if($(value).val()==data[0].tag){
+						var old = $(this).parent().find('p').html().split('<br>');
+						var oo = old[1].split('元');
+						oo[0] = oo[0]*temp;
+						$(this).parent().find('p').html(old[0]+'<br>特價中 : '+oo[0]+'元<br>')
+// 						$(this).parent('p').html();
+						
+					};
+				});
+			}
+		});
+	
+	</script>
 </body>
 </html>

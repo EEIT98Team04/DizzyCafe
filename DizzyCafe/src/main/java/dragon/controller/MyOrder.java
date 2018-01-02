@@ -25,8 +25,7 @@ public class MyOrder {
 	@RequestMapping(path="/myOrder.controller", method= {RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody JSONArray myOrder(HttpSession session) {
 		MemberBean bean = (MemberBean) session.getAttribute("user");
-//		int memberId = bean.getMemberId();
-		int memberId = 101;
+		int memberId = bean.getMemberId();
 		JSONArray json = ordersService.selectMemberToJson(memberId);
 		System.out.println(json);
 		return json;

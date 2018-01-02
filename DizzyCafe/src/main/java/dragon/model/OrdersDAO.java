@@ -12,6 +12,18 @@ public interface OrdersDAO {
 	
 	JSONArray selectMemberToJson(int memberId);
 	
+	JSONArray selectAllOrder();
+	
+	JSONArray selectUnpaidOrder();
+	
+	JSONArray selectWaitshipmentOrder();
+	
+	JSONArray selectShipOrder();
+	
+	JSONArray selectFinishOrder();
+	
+	JSONArray selectCancelOrder();
+
 	List<OrdersBean> select();
 	
 	OrdersBean insert(OrdersBean bean);

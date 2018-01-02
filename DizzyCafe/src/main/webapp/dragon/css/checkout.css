@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+.shipmain{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: auto;
+	margin: 100px;
+	text-align:center;
+}
+.selectShipTitle{
+	margin: auto;
+	text-align: left;
+	width: 300px;
+}
+.selectShip{
+	margin: auto;
+	text-align: left;
+	width: 300px;
+}
+li{
+	list-style:none;
+	margin: 5px;
+	margin-left: -40px;
+}
+.shipCostCell{
+	text-align: right;
+}
+.userdata{
+	margin:auto;
+	text-align:center;
+	width:500px;
+	margin-top: -70px;
+}
+.userdata div{
+	text-align: left;
+}
+.titledata{
+	text-align:center;
+}
+
+
+/* #map{ 此行指定放置廣告的div  */
+/* width:666px; 此行設定div的寬度  */
+/* height:488px; 此行設定div的高度  */
+/* background:url(popWindow.png) no-repeat; 此行設定div的背景圖形  */
+/* box-shadow:5px 5px 10px black; 此行設定div的外框陰影  */
+/* border:2px gray solid; 此行設定div的外框線條  */
+/* border-radius:20px; 此行設定div的外框圓角  */
+/* position:fixed; 此行設定div為不隨捲動而移動的模式  */
+/* } */

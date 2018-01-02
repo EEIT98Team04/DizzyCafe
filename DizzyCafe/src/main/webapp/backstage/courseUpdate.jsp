@@ -210,6 +210,7 @@
 		$(function(){
 			var temp = "${CourseBean.courseWeek}";
 			var whichDay = temp.split("");
+			console.log(whichDay);
 			$(':checkbox').each(function(){
 				var tmp = this;
 				$(whichDay).each(function(i){

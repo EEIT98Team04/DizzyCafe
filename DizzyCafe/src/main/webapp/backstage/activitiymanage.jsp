@@ -354,7 +354,7 @@
 				lengthMenu : '一頁顯示 _MENU_ 筆資料'
 			},
 			info : false,
-			order : [0,'asc'],
+			order : [0,'desc'],
 			rowId : 'activityNo'
 		});
 // 	});

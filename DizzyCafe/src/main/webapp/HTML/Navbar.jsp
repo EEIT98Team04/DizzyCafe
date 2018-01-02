@@ -125,7 +125,7 @@
 				href="${pageContext.request.contextPath}/index.jsp">HOME </a></li>
 			<li class="nav-item"><a class="nav-link" href="#">COFFEE</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="${pageContext.request.contextPath}/merchandise.controller?page=1">商品</a></li>
+				href="${pageContext.request.contextPath}/merchandise.controller?page=1">PRODUCT</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="${pageContext.request.contextPath}/hongwen/board.jsp">FORUM</a></li>
 			<li class="nav-item dropdown"><a
@@ -137,8 +137,6 @@
 						href="${pageContext.request.contextPath}/activity.controller?nowPage=0">活動專區</a>
 					<a class="dropdown-item"
 						href="${pageContext.request.contextPath}/course/course.controller?page=1">課程</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Something else here</a>
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
 			</li>

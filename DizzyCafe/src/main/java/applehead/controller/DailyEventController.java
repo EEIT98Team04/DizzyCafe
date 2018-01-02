@@ -45,7 +45,7 @@ public class DailyEventController {
 				CouponBean insert = new CouponBean();
 				insert.setMemberId(bean.getMemberId());
 				insert.setCouponStatus(0);
-				insert.setEventDiscount(Double.parseDouble(discount));
+				insert.setEventDiscount(Double.parseDouble(discount)/100);
 				insert.setMerchandiseId(Integer.valueOf(prize));
 				insert.setCouponDeadline(new java.sql.Date(cal.getTime().getTime()));
 				couponService.insertCoupon(insert);

@@ -15,6 +15,10 @@
 	margin: auto;
 	position: relative;
 }
+#photo {
+	position:absolute;
+    z-index:1;
+}
 </style>
 <jsp:include page="../HTML/TitleIcon.jsp" />
 </head>
@@ -22,7 +26,6 @@
 	<jsp:include page="/backstage/header.jsp"></jsp:include>
 	<div class="content-wrapper">
 		<div class="container-fluid">
-		
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">
 					<a href="${pageContext.request.contextPath}/backstage/index.jsp">回首頁</a>
@@ -38,8 +41,8 @@
 				action="${pageContext.request.contextPath}/course/courseNew.controller">
 				<fieldset>
 				<div align="center"> 
-				<img id="photo" style="position:absolute;left:1000px; width:200px;display:none;" class="img-responsive img" 
-					src="${pageContext.request.contextPath}${CourseBean.courseImg}">
+<!-- 				<img id="photo" style="position:absolute;left:1000px; width:200px;display:none;" class="img-responsive img"  -->
+<%-- 					src="${pageContext.request.contextPath}${CourseBean.courseImg}"> --%>
 					<table>
 						<tr>
 							<td>
@@ -54,6 +57,14 @@
 									<th>圖片</th>
 									<td>
 										<input id="uploadImg" type="file" name="courseImg" accept="image/*" required>
+									</td>
+									</tr>
+									<tr>
+									<th></th>
+									<td>
+										<span id="showImg" style="color:#DDDDDD;">預覽</span>
+										<br/>
+										<img id="photo" style="display:none;max-width:800px;" class="img-responsive img photo" src="${pageContext.request.contextPath}${CourseBean.courseImg}">
 									</td>
 									</tr>
 									<tr>
@@ -84,14 +95,14 @@
 									<tr>
 									<th><label for="courseSignupBegin">報名期限</label></th>
 										<td>
-											<input type="text" id="courseSignupBegin" name="courseSignupBegin" readonly>～ 
-											<input type="text" id="courseSignupEnd" name="courseSignupEnd" readonly>
+											<input type="text" id="courseSignupBegin" name="courseSignupBegin" readonly required>～ 
+											<input type="text" id="courseSignupEnd" name="courseSignupEnd" readonly required>
 										</td>
 									<tr>
 									<th><label for="courseBegin">課程日期</label></th>
 										<td>
-											<input type="text" id="courseBegin" name="courseBegin" readonly>～
-											<input type="text" id="courseEnd" name="courseEnd" readonly>
+											<input type="text" id="courseBegin" name="courseBegin" readonly required>～
+											<input type="text" id="courseEnd" name="courseEnd" readonly required>
 										</td>
 									</tr>
 									<tr>
@@ -161,8 +172,9 @@
 						<tr height="20px"></tr>
 						<tr>
 						<td colspan="2" align="center">
-						<button id="submit" type="submit" class="btn btn-info" onclick="alert('新增成功')">送出</button>
-						<button type="reset" class="btn" style="margin-left: 50px">清除</button>
+						<button id="submitBtn" type="submit" class="btn btn-info" onclick="return checkSubmit();">送出</button>
+						<a href="${pageContext.request.contextPath}/backstage/courseManage.jsp" style="margin-left: 50px">
+						<button type="button" class="btn">取消</button></a>
 						</td>
 						</tr>
 					</table>
@@ -186,13 +198,45 @@
 	<script>
 		//editor
 		CKEDITOR.replace('editor1');
+		
+		function checkSubmit(){
+			var validating = "";
 
-		$('#submit').click(
-				function(e) {
-					//editor 資料處理
-					$('input[name="courseContent"]').val(
-							CKEDITOR.instances.editor1.getData());
-		});
+			//courseSignupBegin
+			//courseSignupEnd
+			if($('[name="courseSignupBegin"]').val() == ''||
+			   $('[name="courseSignupEnd"]').val() == '')
+			{
+				validating += "請完整輸入報名日期。" + '\n';
+			}
+			
+			//courseBegin
+			//courseEnd
+			if($('[name="courseBegin"]').val() == ''||
+			   $('[name="courseEnd"]').val() == '')
+			{
+				validating += "請完整輸入課程日期。" + '\n';
+			}
+			
+			if($('[type="checkbox"]:checked').length == 0){
+				validating += "請選擇上課日。" + '\n';
+			}
+			
+			if(CKEDITOR.instances.editor1.getData() == ''){
+				validating += "請輸入課程內容。" + '\n';
+			}
+			
+			if(validating > ''){
+				alert(validating);
+				return false;
+			}
+			else{
+				
+				$('input[name="courseContent"]').val(
+								CKEDITOR.instances.editor1.getData());
+				return true;
+			}
+		}
 		
 		var dateFormat = "yy-mm-dd";
 		//課程時間
@@ -250,7 +294,7 @@
 			var date;
 			try {
 				date = $.datepicker.parseDate(dateFormat, element.value);
-				//date.setDate(date.getDate() + parseInt(days));
+				date.setDate(date.getDate() + parseInt(days));
 			} catch (error) {
 				date = null;
 			} 
@@ -259,9 +303,19 @@
 		
 		//圖片
 		$("#uploadImg").change(function(){
-			$('#photo').show();
+			$('#photo').attr("display","block");
    	      	readImage( this );
+   	      	$('#showImg').css("color","blue");
+	   	    $('#showImg').mouseenter(function(){
+	 			$('#photo').show();
+	 		});
+	 		
+	 		$('#showImg').mouseleave(function(){
+	 			$('#photo').hide();
+	 		});
    	    });
+		
+		
 		
 		function readImage(input) {
      	      if ( input.files && input.files[0] ) {

@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,21 +17,23 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class ImageUpload {
+	@Autowired
+	private ServletContext servletContext; 
+	
 	@RequestMapping(path = "/imageupload.hongwen", method = { RequestMethod.POST })
 	public @ResponseBody String upload(HttpSession session, MultipartFile upload) {
 		if (upload.isEmpty() || upload == null) {
 			return "fileEmpty";
 		}
 		try {
-			String server_path = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins"+
-									"/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
+			String serverPath = servletContext.getRealPath(".");
 			String randomenglish = "abcdefghijklmnopqrstuvwxyz"; 
 			String path = "/hongwen/resources/" + 
 						new SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
 			String photoname = "/"+ randomenglish.charAt((int)(Math.random()*25)) 
 					+ new java.util.Date().getTime() + ".jpg";
-			String mkdirpath = server_path + path;
-			String finalpath = server_path + path + photoname;
+			String mkdirpath = serverPath + path;
+			String finalpath = serverPath + path + photoname;
 			File file = null;
 			byte[] bytes = null;
 			

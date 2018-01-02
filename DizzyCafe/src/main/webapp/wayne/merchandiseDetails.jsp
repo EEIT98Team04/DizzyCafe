@@ -14,8 +14,8 @@
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
-	<article class="article">
-		<header></header>
+	<div style="width:100%;height:100%;position:relative;">
+		<article id="merchandise_details_article" class="article">
 		<section class="section">
 			<aside class="aside">
 				<h3 class="asideTitle">coffee</h3>
@@ -76,11 +76,13 @@
 		</section>
 	</article>
 
-	<div id="mySidenav" class="sidenav"><p class="cart">CART</p>
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<div id="product"></div>
-		<div class="ordersub">ORDER SUBTOTAL :</div>
-		<div class="checkoutbtndiv"><button class="checkoutbtn" type="button">CHECKOUT</button></div>
+<!-- 	<div id="mySidenav" class="sidenav" style="position:absolute;height:"><p class="cart">CART</p> -->
+<!-- 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+<!-- 		<div id="product"></div> -->
+<!-- 		<div class="ordersub">ORDER SUBTOTAL :</div> -->
+<!-- 		<div class="checkoutbtndiv"><button class="checkoutbtn" type="button">CHECKOUT</button></div> -->
+<!-- 	</div> -->
+	
 	</div>
 	
 <%-- 	<script src="<c:url value="wayne/js/imgZoom.js"/>"></script> --%>

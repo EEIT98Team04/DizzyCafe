@@ -4,6 +4,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ public class CreateMerchandiseController {
 
 	@Autowired
 	MerchandiseService merchandiseService;
+	
+	@Autowired
+	ServletContext servletContext;
 
 	@RequestMapping(path = "createmerchandise.controller", method = { RequestMethod.GET, RequestMethod.POST })
 	public String CreateMerchandise(String merchandiseName, String merchandiseContent, MultipartFile merchandisePicture,
@@ -39,7 +44,7 @@ public class CreateMerchandiseController {
 
 				// Create the file on server
 				String[] strs = merchandisePicture.getContentType().split("/");
-				String server_path = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
+				String server_path = servletContext.getRealPath(".");
 				String path = "/wayne/images/" + bean.getMerchandiseName() + "." + strs[1];
 
 				bean.setMerchandisePicture(path);

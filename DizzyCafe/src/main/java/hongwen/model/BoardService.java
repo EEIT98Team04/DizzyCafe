@@ -22,5 +22,12 @@ public class BoardService {
 		String temp = new Gson().toJson(select );
 		JSONArray json = JSONArray.fromObject(temp);
 		return json;
-	}	
+	}
+	public JSONArray updateName(int id,String announcement) {
+		JSONArray json = null;
+		String status = "[{\"status\":\"success\"}]";
+		boardDAO.selectById(id,announcement);
+		json = JSONArray.fromObject(status);
+		return json;
+	}
 }

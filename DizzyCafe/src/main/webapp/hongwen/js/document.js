@@ -10,6 +10,8 @@ $(function() {
 			return unescape(r[2]);
 		return null;
 	}
+	var id = $.getUrlParam('boardId');
+	$('#b'+id).css('display','block');
 	$('#test').DataTable(
 			{
 				ajax : {

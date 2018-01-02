@@ -43,6 +43,9 @@
   	i:hover{
   		color:white;
   	}
+  	label{
+  		width:100px;
+  	}
   </style>
 </head>
 
@@ -92,7 +95,12 @@
 			<div class="container">
 				<label><b>活動名稱</b></label><input type="text" name="activityName" required class="forText"> <br> 
 				<label for="from"><b>活動開始時間</b></label><input type="text" id="from" name="activityStart" class="forText" required readonly> <br> 
-				<label for="to"><b>活動結束時間</b></label><input type="text" id="to" name="activityEnd" class="forText" required readonly> <br> 
+				<label for="to"><b>活動結束時間</b></label><input type="text" id="to" name="activityEnd" class="forText" required readonly> <br>
+				<label><b>折價商品</b></label><select name="merchandiseTag">
+					<option value="" selected>請選擇</option>
+					<option value="bean">咖啡豆</option>
+					<option value="bottle">保溫瓶</option>								
+				</select><span style="margin-left:30px"><label><b>折扣</b></label><input type="text" name="activityDiscount" class="forText" style="width:50px;">折</span> <br>  
 				<label><b>活動內容</b></label><input type="text" name="activityContent" class="forText" required id="editor1"> <br>
 				<label><b>活動圖片</b></label><input type="file" name="activityPicture" class="forText" accept="image/*" required id="uploadImage">
 				<img id="showImg" width="240px"/>
@@ -136,10 +144,16 @@
 			</div>
 
 			<div class="container">
+				<input type="hidden" name="ADnumber">
 				<input type="hidden" name="activityNo">
 				<label><b>活動名稱</b></label><input type="text" name="activityName" class="forText"> <br> 
 				<label for="from"><b>活動開始時間</b></label><input type="text" id="from2" name="activityStart" class="forText" readonly> <br> 
-				<label for="to"><b>活動結束時間</b></label><input type="text" id="to2" name="activityEnd" class="forText" readonly> <br> 
+				<label for="to"><b>活動結束時間</b></label><input type="text" id="to2" name="activityEnd" class="forText" readonly> <br>
+				<label><b>折價商品</b></label><select name="merchandiseTag">
+					<option value="" selected>請選擇</option>
+					<option value="bean">咖啡豆</option>
+					<option value="bottle">保溫瓶</option>								
+				</select><span style="margin-left:30px"><label><b>折扣</b></label><input type="text" name="activityDiscount" class="forText" style="width:50px;">折</span> <br> 
 				<label><b>活動內容</b></label><input type="text" name="activityContent" class="forText" id="editor2"> <br>
 				<label><b>活動圖片</b></label><input type="file" name="activityPicture" class="forText" accept="image/*" id="uploadImage2">
 				<img width="240px"/>
@@ -245,7 +259,7 @@
   <script>
 //   顯示資料表
 // 	$(function(){
-		
+		var hoho = 0;
 		var count = 0;
 	  	var table = $('#test').DataTable({
 			ajax : {
@@ -257,6 +271,7 @@
 				CKEDITOR.replace( 'editor2' );
 			},
 			drawCallback : function(row){
+// 				console.log(row);
 				if(count===0){
 					count++;
 				}else{
@@ -264,31 +279,40 @@
 						var temp = row.aoData[i]._aData;
 						var Month = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
 						var Monthx = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-						$('#edit'+temp.activityNo).unbind();
-						$('#edit'+temp.activityNo).on('click',function(e){
+						$('#edit'+i).unbind();
+						$('#edit'+i).on('click',function(e){
 							var id = $(this).attr('id').split('t')[1];
-							var good = row.aoData[id-1001]._aData;
+							var good = row.aoData[id]._aData;
 							$('#updateEvent').css('display','block');
+							$('#updateEvent input[name=ADnumber]').val(good.ADnumber);
 							$('#updateEvent input[name=activityName]').val(good.activityName);
-							for(var j = 0 ; j<12 ; j++){
-								xx = good.activityStart.split(' ');
-								yy = good.activityEnd.split(' ');
-								var hoho = 0;
-								if(xx[0]==Month[j]){
-									$('#updateEvent input[name=activityStart]').val(xx[2]+'-'+Monthx[j]+'-'+xx[1].split(',')[0]);
-									hoho++;
-								}
-								if(yy[0]==Month[j]){
-									$('#updateEvent input[name=activityEnd]').val(yy[2]+'-'+Monthx[j]+'-'+yy[1].split(',')[0]);
-									hoho++;
-								}
-								if(hoho==2){
-									break;
-								}
-							}
+// 							for(var j = 0 ; j<12 ; j++){
+// 								xx = good.activityStart.split(' ');
+// 								yy = good.activityEnd.split(' ');
+// 								var hoho = 0;
+// 								if(xx[0]==Month[j]){
+// 									$('#updateEvent input[name=activityStart]').val(xx[2]+'-'+Monthx[j]+'-'+xx[1].split(',')[0]);
+// 									hoho++;
+// 								}
+// 								if(yy[0]==Month[j]){
+// 									$('#updateEvent input[name=activityEnd]').val(yy[2]+'-'+Monthx[j]+'-'+yy[1].split(',')[0]);
+// 									hoho++;
+// 								}
+// 								if(hoho==2){
+// 									break;
+// 								}
+// 							}
+							$('#updateEvent input[name=activityStart]').val(good.activityStart);
+							$('#updateEvent input[name=activityEnd]').val(good.activityEnd);
 							CKEDITOR.instances.editor2.setData(good.activityContent);
 							$('#updateEvent input[name=activityNo]').val(good.activityNo);
 							$('#updateEvent img').attr('src','/DizzyCafe/'+good.activityPicture);
+							$('#updateEvent input[name=activityDiscount]').val((good.activityDiscount*100).toString().split('0')[0]);
+							if(good.merchandiseTag=='bottle'){
+								$('#updateEvent option:eq(2)').prop('selected',true);
+							}else if(good.merchandiseTag=='bean'){
+								$('#updateEvent option:eq(1)').prop('selected',true);
+							}
 				    	});			
 					}
 				}  
@@ -315,8 +339,10 @@
 			"columnDefs" : [{
 				"targets" : 4,
 				"data" : null,
-				"render" : function(data,row) {
-					var html = "<a href='#' class='btn btn-success' id='edit"+data.activityNo+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
+				"render" : function(data,row,meta) {
+// 					var html = "<a href='#' class='btn btn-success' id='edit"+data.activityNo+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>";
+					var html = "<a href='#' class='btn btn-success' id='edit"+hoho+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>";
+					hoho++;
 					return html;
 				}
 			}],
@@ -380,6 +406,8 @@
     				alert('請填結束時間');
     			}else if($('#insertEvent input[name=activityContent]').val()==""){
     				alert('請填內容');
+    			}else if($('#insertEvent input[name=activityPicture]').val()==""){
+    				alert('請傳圖片');
     			}else{
 	    			$('#myModal').css('display','block');				
     			}
@@ -409,6 +437,7 @@
     					alert('新增成功');
     					insertEvent.style.display = "none";
     					$('#myModal').css('display','none');
+    					hoho=0;
     					table.ajax.reload();
     				}
     			});
@@ -431,6 +460,7 @@
         				alert('修改成功');
         				updateEvent.style.display = "none";
         				$('#myModal2').css('display','none');
+        				hoho=0;
         				table.ajax.reload();
         			}
         		});

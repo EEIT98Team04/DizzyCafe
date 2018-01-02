@@ -140,11 +140,8 @@
 						href="${pageContext.request.contextPath}/activity.controller?nowPage=0">活動專區</a>
 					<a class="dropdown-item"
 						href="${pageContext.request.contextPath}/course/course.controller?page=1">課程</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Something else here</a>
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-			<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
 			</li>
 			
 		</ul>

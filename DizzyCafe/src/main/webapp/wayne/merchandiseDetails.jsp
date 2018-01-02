@@ -44,11 +44,15 @@
 				</div>
 				<div class="col4">
 					<h2>${bean.merchandiseName}</h2>
+					<c:choose>
+					<c:when test="${bean.merchandiseTag}=='bean' ">
 					<ul>
 						<li>獨家配方豆</li>
 						<li>新鮮烘培</li>
 						<li>國際認證</li>
 					</ul>
+					</c:when>
+					</c:choose>
 					<div class="col5">${bean.merchandisePrice}元
 						<select class="select" id="select">
 							<option value="1">1</option>

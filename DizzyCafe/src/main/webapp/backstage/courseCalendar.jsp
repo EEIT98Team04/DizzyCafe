@@ -24,7 +24,7 @@
 			<div class="container-fluid">
 				<div style="height: 40px"></div>
 				<div id="calendar" style="margin: auto; width: 700px"></div>
-				<div style="margin-left:625px; margin-top:20px">
+				<div style="margin:auto; margin-top:20px; padding-left:150px; width:500px;">
 					<button type="button" class="btn btn-info" id="update" onclick="alert('儲存成功');">儲存變更</button>
 					<button type="button" class="btn btn-default" style="margin-left:50px;" id="cancel">取消變更</button>
 				</div>

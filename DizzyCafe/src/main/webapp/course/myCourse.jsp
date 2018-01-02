@@ -117,11 +117,11 @@
 		src='<c:url value="/js/fullcalendar-3.7.0/fullcalendar.js" />'></script>
 
 	<script>
-		$('#quit').mouseenter(function(){
+		$('img[name="quit"]').mouseenter(function(){
 			$(this).attr("src","${pageContext.request.contextPath}/image/close_hover.png");
 		});
 		
-		$('#quit').mouseleave(function(){
+		$('img[name="quit"]').mouseleave(function(){
 			$(this).attr("src","${pageContext.request.contextPath}/image/close.png");
 		});
 	

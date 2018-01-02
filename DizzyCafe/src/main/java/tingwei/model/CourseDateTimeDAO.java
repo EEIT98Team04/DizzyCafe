@@ -61,7 +61,9 @@ public class CourseDateTimeDAO {
 			tt.put("title", var[0]);
 			tt.put("start", var[1].toString());
 			tt.put("end", var[2].toString());
-//			tt.put("color", "blue");
+			if( ((java.sql.Timestamp)var[1]).getTime() < System.currentTimeMillis()) {
+				tt.put("color", "#AAAAAA");
+			}
 			result.add(tt);
 		}
 
@@ -83,6 +85,9 @@ public class CourseDateTimeDAO {
 			tt.put("title", var[0]);
 			tt.put("start", var[1].toString());
 			tt.put("end", var[2].toString());
+			if( ((java.sql.Timestamp)var[1]).getTime() < System.currentTimeMillis()) {
+				tt.put("color", "#AAAAAA");
+			}
 			result.add(tt);
 		}
 
@@ -105,6 +110,9 @@ public class CourseDateTimeDAO {
 			tt.put("title", var[0]);
 			tt.put("start", var[1].toString());
 			tt.put("end", var[2].toString());
+			if( ((java.sql.Timestamp)var[1]).getTime() < System.currentTimeMillis()) {
+				tt.put("color", "#AAAAAA");
+			}
 			result.add(tt);
 		}
 

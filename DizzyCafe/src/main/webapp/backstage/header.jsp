@@ -42,6 +42,14 @@
           </ul>
         </li>
         
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Merchandises">
+          <a class="nav-link" href="${pageContext.request.contextPath }/backstage/merchandisemanage.jsp">
+            <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+            <span class="nav-link-text">商品管理</span>
+          </a>
+        </li>
+       
+        
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           	<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#manage" data-parent="#exampleAccordion">
           		<i class="fa fa-fw fa-book"></i>

@@ -49,8 +49,8 @@
 
 <script>
   function statusChangeCallback(response) {
-    if (response.status === 'connected') {
-      testAPI();
+	  if (response.status === 'connected') {
+    	testAPI();
   	}
   }
   
@@ -69,9 +69,9 @@
     version    : 'v2.8' // use graph api version 2.8
   });
 
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
+//   FB.getLoginStatus(function(response) {
+//     statusChangeCallback(response);
+//   });
   
   };
 

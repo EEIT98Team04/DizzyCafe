@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -49,7 +50,6 @@ public class SpringJavaConfig{
 	}
 	@Bean
 	public SessionFactory sessionFactory() {
-		System.out.println("sessionFactory");
 		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
 		Properties properties = new Properties();		
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLServerDialect");
@@ -66,5 +66,21 @@ public class SpringJavaConfig{
 	@Bean
 	public PlatformTransactionManager txManager() {
 		return new HibernateTransactionManager(sessionFactory());
+	}
+	
+	@Bean
+	public JavaMailSenderImpl mailSender() {
+		JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
+		javaMailSenderImpl.setDefaultEncoding("UTF-8");
+		javaMailSenderImpl.setHost("smtp.gmail.com");
+		javaMailSenderImpl.setPort(587);
+		Properties mailServerProperties = System.getProperties();
+		mailServerProperties.put("mail.smtp.auth", "true");
+		mailServerProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		mailServerProperties.put("mail.smtp.starttls.enable", "true");
+		javaMailSenderImpl.setJavaMailProperties(mailServerProperties);
+		javaMailSenderImpl.setUsername("dizzycafeeeit98@gmail.com");
+		javaMailSenderImpl.setPassword("Eeit9804");			
+		return javaMailSenderImpl;
 	}
 }

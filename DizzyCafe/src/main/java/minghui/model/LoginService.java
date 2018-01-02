@@ -5,8 +5,13 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailParseException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,14 +22,18 @@ import com.google.gson.Gson;
 
 import minghui.model.dao.MemberDAO;
 import minghui.utils.Encryption;
-import minghui.utils.MailUtils;
 import net.sf.json.JSONArray;
 
 @Service
 public class LoginService {
-	private static final String server_path = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
+	
+	@Autowired
+	private ServletContext servletContext;
 
 	@Transactional(readOnly = true)
 	public MemberBean login(String memberName, String memberPassword) {
@@ -44,7 +53,7 @@ public class LoginService {
 	public MemberBean login_fb(MemberBean bean) {
 		MemberBean result_name = memberDAO.select(bean.getMemberName());
 		if(result_name != null) {
-			if(bean.getMemberPhoto().contains("/DizzyCafe")) {
+			if(bean.getMemberPhoto().contains("/" + servletContext.getServletContextName())) {
 				result_name.setMemberPhoto(bean.getMemberPhoto());
 				return result_name;	
 			}
@@ -52,7 +61,7 @@ public class LoginService {
 		}else {
 			MemberBean result_email = memberDAO.select_by_email(bean.getMemberEmail());
 			if(result_email != null) {
-				if(bean.getMemberPhoto().contains("/DizzyCafe")) {
+				if(bean.getMemberPhoto().contains("/" + servletContext.getServletContextName())) {
 					result_email.setMemberPhoto(bean.getMemberPhoto());
 					return result_email;	
 				}
@@ -101,29 +110,38 @@ public class LoginService {
 
 	@Transactional
 	public boolean forgot_password_send_email(String memberEmail) {
-		System.out.println("memberEmail:" + memberEmail);
+		long start = System.currentTimeMillis();
+		
 		MemberBean bean = memberDAO.select_by_email(memberEmail);
-		System.out.println(bean);
 		if (bean != null) {
-			try {
 				String subject = "DizzyCafe 會員重設密碼";
 				
 				String random_URL = String.valueOf(System.currentTimeMillis()) + bean.getMemberName();
 					
 				String html = "<p>親愛的" + bean.getMemberName() + "您好，請點擊下方連結重新設置密碼</p>"
-//						+ "<a href='http://127.0.0.1:8080/DizzyCafe/forgotPassword.controller?vc=" + random_URL + "'>重設密碼</a> ";
-				+ "<a href='http://127.0.0.1:8080/DizzyCafe/forgotPassword.controller?vc=" + random_URL + "'>重設密碼</a> ";
+				+ "<a href='http://localhost:8080/DizzyCafe/forgotPassword.controller?vc=" + random_URL + "'>重設密碼</a> ";
 
-				MailUtils.generateAndSendEmail(memberEmail, subject, html);
+				MimeMessage message = javaMailSender.createMimeMessage();
+				
+				try {
+					MimeMessageHelper helper = new MimeMessageHelper(message, true);
+					helper.setTo(memberEmail);
+					helper.setSubject(subject);
+					helper.setText(html,true);
+					bean.setMemberTempPassword(random_URL);
+				}
+				catch (MessagingException e) {
+					throw new MailParseException(e);
+				}
+		 
+				javaMailSender.send(message);
+				
 				bean.setMemberTempPassword(random_URL);
+				
+				System.out.println("cost : " + (System.currentTimeMillis() - start) / 1000.0 + "second");
+				
 				return true;
-			} catch (AddressException e) {
-				e.printStackTrace();
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			
 		}
 		return false;
 	}
@@ -150,6 +168,9 @@ public class LoginService {
 	
 	@Transactional
 	public boolean uploadServerFile(MultipartFile memberPhoto, MemberBean bean) {
+//		System.out.println(Joiner.on("/").join(servletContext.getRealPath(".").split("\\")));
+//		System.out.println("\\");
+		
 		if (!memberPhoto.isEmpty()) {
 			try {
 				
@@ -164,14 +185,12 @@ public class LoginService {
 //				stream.write(bytes);
 //				stream.close();
 				
-				
 				byte[] bytes = memberPhoto.getBytes();
 				String[] strs = memberPhoto.getContentType().split("/");
 				Joiner joiner = Joiner.on("");
 				String guava_path = joiner.join("/minghui/res/member_photo/", bean.getMemberName(), ".", strs[1]);
-				
-				File serverFile = new File(server_path + guava_path);
-				bean.setMemberPhoto("/DizzyCafe" + guava_path);
+				File serverFile = new File(servletContext.getRealPath(".") + guava_path);
+				bean.setMemberPhoto("/" + servletContext.getServletContextName() + guava_path);
 				memberDAO.update(bean);
 				Files.write(bytes, serverFile);				
 				

@@ -47,7 +47,21 @@ public class AddCartController {
 		int memberId = bean.getMemberId();
 		
 		JSONArray Json = shoppingService.selectMerchandiseList(memberId);
+//		System.out.println(Json);
 		return Json;
 		
+	}
+	
+	@RequestMapping(path="/deleteCart.controller",method= {RequestMethod.POST,RequestMethod.GET})
+	public @ResponseBody JSONArray deleteCart(HttpSession session, String merchandiseId) {
+		System.out.println(merchandiseId);
+		System.out.println("1");
+		MemberBean bean = (MemberBean) session.getAttribute("user");
+		int memberId = bean.getMemberId();
+		int merchandiseid = Integer.valueOf(merchandiseId);
+		ShoppingBean selectMerchandise = shoppingService.selectMerchandise(memberId, merchandiseid);
+		shoppingService.deletemerchandise(selectMerchandise);
+		JSONArray Json = shoppingService.selectMerchandiseList(memberId);
+		return Json;
 	}
 }

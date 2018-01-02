@@ -26,7 +26,7 @@ public class MerchandiseDAOHibernate {
 	public List<MerchandiseBean> selectPageNow(int pageNow, int rows_perPage) {
 		int base = 1;
 		Query<MerchandiseBean> select = this.getsession().createQuery("FROM MerchandiseBean WHERE merchandiseId >="
-				+ (base + (pageNow - 1) * rows_perPage) + " AND merchandiseId <" + (base + pageNow * rows_perPage),
+				+ (base + (pageNow - 1) * rows_perPage) + " AND merchandiseId <" + (base + pageNow * rows_perPage) ,
 				MerchandiseBean.class);
 		return select.getResultList();
 	}
@@ -39,8 +39,7 @@ public class MerchandiseDAOHibernate {
 				"select * from (select ROW_NUMBER() OVER(ORDER BY merchandiseId ASC) AS row_num,* "
 				+ "from merchandise where merchandiseTag = ?) as newTable where row_num >= " +
 						(base + (pageNow - 1) * rows_perPage)+" and row_num < " +
-						(base + pageNow * rows_perPage)
-				);
+						(base + pageNow * rows_perPage) );
 		select.setParameter(1, tag);
 		List<Object[]> list = select.getResultList();
 		
@@ -61,7 +60,7 @@ public class MerchandiseDAOHibernate {
 	}
 	//計算總共分頁頁數 merchandise.controller做
 	public int countTotalPage(int row_perPage) {
-		Long temp = (long) this.getsession().createQuery("Select COUNT(*) FROM MerchandiseBean").uniqueResult();
+		Long temp = (long) this.getsession().createQuery("Select COUNT(*) FROM MerchandiseBean ").uniqueResult();
 		if (temp.intValue() % row_perPage == 0) {
 			return temp.intValue() / row_perPage;
 		} else {

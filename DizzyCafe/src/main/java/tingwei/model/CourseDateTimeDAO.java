@@ -61,6 +61,7 @@ public class CourseDateTimeDAO {
 			tt.put("title", var[0]);
 			tt.put("start", var[1].toString());
 			tt.put("end", var[2].toString());
+//			tt.put("color", "blue");
 			result.add(tt);
 		}
 
@@ -73,6 +74,28 @@ public class CourseDateTimeDAO {
 				+ "from course join courseDateTime on course.courseId = courseDateTime.courseId "
 				+ "WHERE course.courseId = ?");
 		select.setParameter(1, courseId);
+		List<Object[]> temp = select.getResultList();
+
+		JSONArray result = new JSONArray();
+		
+		for(Object[] var : temp) {
+			JSONObject tt = new JSONObject();
+			tt.put("title", var[0]);
+			tt.put("start", var[1].toString());
+			tt.put("end", var[2].toString());
+			result.add(tt);
+		}
+
+		return result;
+	}
+	
+	public JSONArray selectMemberCourse(int memberId) {
+		@SuppressWarnings("unchecked")
+		Query<Object[]> select = this.getSession().createNativeQuery("select course.courseName, courseDateTime.courseStartTime, courseDateTime.courseEndTime "
+				+ "from course join courseDateTime on course.courseId = courseDateTime.courseId "
+				+ "join coursememberForm on coursememberForm.courseId = course.courseId "
+				+ "WHERE memberId = ?");
+		select.setParameter(1, memberId);
 		List<Object[]> temp = select.getResultList();
 
 		JSONArray result = new JSONArray();

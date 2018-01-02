@@ -63,6 +63,10 @@ public class CourseDateTimeService {
 		return courseDateTimeDAO.selectPerCourse(courseId);
 	}
 	
+	public JSONArray selectMemberCourse(int memberId){
+		return courseDateTimeDAO.selectMemberCourse(memberId);
+	}
+	
 	public void delete(int courseId) {
 		courseDateTimeDAO.delete(courseId);
 	}

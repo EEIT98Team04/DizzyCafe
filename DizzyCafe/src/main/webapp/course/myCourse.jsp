@@ -6,6 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>我的課程</title>
+<jsp:include page="/HTML/TitleIcon.jsp" />
+<link type="text/css" rel="stylesheet"
+	href='<c:url value="/js/fullcalendar-3.7.0/fullcalendar.css" />'>
 <style type="text/css">
 .more{
 	background: url(/DizzyCafe/activity/nws-02.png) right center no-repeat;
@@ -18,45 +21,20 @@
  	color:#BC5B27; 
  	text-decoration: none; 
 } 
+.fc-content{
+	color:white;
+}
 </style>
 
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height: 100px"></div>
-	<div id="CourseList" class="list" style="width:1500px; margin:auto; padding-left:200px;">
-<!-- 		<table style="text-align: center"> -->
-
-<!-- 			<thead> -->
-<!-- 				<tr> -->
-<!-- 					<th>圖片</th> -->
-<!-- 					<th>課程名稱</th> -->
-<!-- 					<th>開始時間</th> -->
-<!-- 					<th>結束時間</th> -->
-<!-- 					<th>現在人數</th> -->
-<!-- 				</tr> -->
-<!-- 			</thead> -->
-<!-- 			<tbody> -->
-<%-- 				<c:forEach var="course" items="${myCourse}" varStatus="status"> --%>
-<!-- 					<tr> -->
-<%-- 						<td><a href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}"> --%>
-<%-- 							<img class="img" src="${pageContext.request.contextPath}${course.courseImg}" /></a> --%>
-<!-- 							</td> -->
-<%-- 						<td><a href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">${course.courseName} --%>
-<%-- 							<input name="courseIdinRow" type="hidden" value="${course.courseId }"/> --%>
-<%-- 							<input name="memberIdinRow" type="hidden" value="${user.memberId }"/> --%>
-<!-- 							</a></td>  -->
-<%-- 						<td>${course.courseBegin}</td> --%>
-<%-- 						<td>${course.courseEnd}</td> --%>
-<%-- 						<td>${course.courseNowPeople}/${course.courseLimit}</td> --%>
-<!-- 						<td><button name="quit" type="button" class="btn btn-primary" -->
-<!-- 								data-toggle="modal" data-target="#quitCourse">我要退出</button></td> -->
-<!-- 					</tr> -->
-<%-- 				</c:forEach> --%>
-<!-- 			</tbody> -->
-<!-- 		</table> -->
-
 	
+	<div id="calendar" style="width:700px; margin:auto;">
+	</div>
+	
+	<div id="CourseList" class="list" style="width:1500px; margin:auto; padding-left:200px; margin-top:50px;">
 		<c:forEach var="course" items="${myCourse}" varStatus="status">
 
 				<c:choose>
@@ -65,7 +43,7 @@
 					</c:when>
 				</c:choose>
 				<div style="width:300px;float:left;margin-left:50px;position: relative;">
-					<img name="quit" data-toggle="modal" data-target="#quitCourse" style="position: absolute; left:280px; top:5px;" src="${pageContext.request.contextPath}/image/close.png" />
+					<img id="quit" name="quit" data-toggle="modal" data-target="#quitCourse" style="position: absolute; left:280px; top:5px;" src="${pageContext.request.contextPath}/image/close.png" />
     				<a href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">
 						<img class="card-img-top" style="width:300px" src="${pageContext.request.contextPath}${course.courseImg}">
 					</a>
@@ -130,16 +108,31 @@
 			</div>
 		</div>
 
-	<script>
-	
-	$(function(){
-		if(${empty myCourse}){
-			$('#CourseList').hide();
-			$('#noCourse').show();
-		}
-	});
 
+	<script type="text/javascript"
+		src='<c:url value="/js/fullcalendar-3.7.0/lib/jquery-ui.min.js" />'></script>
+	<script type="text/javascript"
+		src='<c:url value="/js/fullcalendar-3.7.0/lib/moment.min.js" />'></script>
+	<script type="text/javascript"
+		src='<c:url value="/js/fullcalendar-3.7.0/fullcalendar.js" />'></script>
+
+	<script>
+		$('#quit').mouseenter(function(){
+			$(this).attr("src","${pageContext.request.contextPath}/image/close_hover.png");
+		});
+		
+		$('#quit').mouseleave(function(){
+			$(this).attr("src","${pageContext.request.contextPath}/image/close.png");
+		});
 	
+	
+		$(function(){
+			if(${empty myCourse}){
+				$('#CourseList').hide();
+				$('#noCourse').show();
+			}
+		});
+
 	
 		$('img[name="quit"]').click(function(){
 			$('#alertHead').text("退出 "+$(this).parent().find('h4').text() +" 課程");
@@ -159,6 +152,58 @@
 				    location.reload();
 			});
 		})
+		
+		$(document).ready(function(){
+			var data;
+			$.get("/DizzyCafe/courseCalendar.controller",function(json){
+				console.log(json);
+			});
+		});
+		
+		var memberId = ${user.memberId};
+		$('#calendar').fullCalendar({
+			editable : true,
+			header :{
+			    left:   'today prev,next',
+			    center: 'title',
+			    right:  'month,agendaWeek,agendaDay '
+			},
+			eventSources : [
+				{
+					url:'/DizzyCafe//courseCalendarByMemberId.controller',
+					data:{memberId:memberId},
+					error: function() {
+		                alert('there was an error while fetching events!');
+		            },
+				}
+			],
+			dayClick : function(date, event, view) {
+				console.log('add event');
+				console.log(date);
+				console.log(event);
+				console.log(view);
+			},
+			eventClick : function(date, event, view) {
+				console.log('modify event');
+				console.log(date);
+				console.log(event);
+				console.log(view);
+			},
+			 monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],  
+			 	monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],  
+			 	dayNames: ["日", "一", "二", "三", "四", "五", "六"],  
+			 	dayNamesShort: ["日", "一", "二", "三", "四", "五", "六"],  
+			 	today: ["今天"],  
+			 	buttonText: {  
+			 	today: '今天',  
+			 	month: '月',  
+			 	week: '週',  
+			 	day: '日',   
+			 },  
+			 eventStartEditable : false,
+		});
+		
+		
 	</script>
 </body>
 </html>

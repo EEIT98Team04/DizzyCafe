@@ -48,7 +48,8 @@
    			 			return {
    			     			start: e.start,
    			     			end: e.end,
-   			     			title: e.title
+   			     			title: e.title,
+   			     			color: e.color
    			 			};
    					}));
    		console.log(calendarData);
@@ -107,6 +108,18 @@
 			 	week: '週',  
 			 	day: '日',   
 			 },
+			 eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) {
+				 debugger;
+				 event.color="red";
+			 },
+			 /*eventRender: function(event, element, view) {
+			    	debugger;
+			    	$(this).css('background-color', 'blue');
+			        /*element.bind('click', function() {
+			            $(this).css('background-color', 'blue');
+			        });
+			 },
+			 eventColor: '#378006',*/
 		});
 
 	</script>

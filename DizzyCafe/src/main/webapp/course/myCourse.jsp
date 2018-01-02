@@ -129,6 +129,7 @@
 		$(function(){
 			if(${empty myCourse}){
 				$('#CourseList').hide();
+				$('#calendar').hide();				
 				$('#noCourse').show();
 			}
 		});

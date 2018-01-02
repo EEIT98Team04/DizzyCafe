@@ -356,6 +356,7 @@
 				 	week: '週',  
 				 	day: '日',   
 				 },
+				 eventStartEditable : false,
 			});
 		
 	</script>

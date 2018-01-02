@@ -67,6 +67,27 @@ public class CourseDateTimeDAO {
 		return result;
 	}
 	
+	public JSONArray selectPerCourse(int courseId) {
+		@SuppressWarnings("unchecked")
+		Query<Object[]> select = this.getSession().createNativeQuery("select course.courseName, courseDateTime.courseStartTime, courseDateTime.courseEndTime "
+				+ "from course join courseDateTime on course.courseId = courseDateTime.courseId "
+				+ "WHERE course.courseId = ?");
+		select.setParameter(1, courseId);
+		List<Object[]> temp = select.getResultList();
+
+		JSONArray result = new JSONArray();
+		
+		for(Object[] var : temp) {
+			JSONObject tt = new JSONObject();
+			tt.put("title", var[0]);
+			tt.put("start", var[1].toString());
+			tt.put("end", var[2].toString());
+			result.add(tt);
+		}
+
+		return result;
+	}
+	
 	public void delete(int courseId) {
 		Query delete = this.getSession().createNativeQuery("DELETE courseDateTime WHERE courseId = ?");
 		delete.setParameter(1, courseId);

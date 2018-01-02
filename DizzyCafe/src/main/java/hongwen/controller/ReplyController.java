@@ -33,7 +33,7 @@ public class ReplyController {
 	//發文用
 	@RequestMapping(path = "/Reply.hongwen", method = { RequestMethod.POST })
 	public @ResponseBody JSONArray postmethod(HttpSession session, @RequestParam Map<?, ?> param) {
-		String[] key = { "title", "textarea","modify"};
+		String[] key = { "title", "textarea","modify","replyid"};
 		JSONArray json = null;
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		if (bean == null || "".equals(String.valueOf(bean.getMemberId())) || "".equals(bean.getMemberName())) {
@@ -42,7 +42,9 @@ public class ReplyController {
 			return json;
 		}
 //		int replyId, String membername, int memberId, int documentId, String content, Date times
-		ReplyBean replybean = new ReplyBean(1,bean.getMemberName(),bean.getMemberId(), Integer.parseInt((String) param.get(key[0])),
+		ReplyBean replybean = new ReplyBean(Integer.parseInt((String)param.get(key[3])),
+				bean.getMemberName(),bean.getMemberId(), 
+				Integer.parseInt((String) param.get(key[0])),
 				(String) param.get(key[1]), new java.util.Date());
 		
 		if("true".equals(param.get(key[2]))) {
@@ -50,7 +52,7 @@ public class ReplyController {
 		}else{
 			json = replyService.insert(replybean);			
 		}
-		return json;//if it's success,then return json about {"status":"success"}
+		return json;//if it's success,then return json include {"status":"success"}
 	}
 
 	//瀏覽文章顯示使用者相關資訊

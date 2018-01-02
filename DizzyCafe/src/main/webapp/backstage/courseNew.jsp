@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>DizzyCafe管理系統</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
@@ -13,6 +13,7 @@
 #form1 div {
 	width: 1000px;
 	margin: auto;
+	position: relative;
 }
 </style>
 <jsp:include page="../HTML/TitleIcon.jsp" />
@@ -37,6 +38,8 @@
 				action="${pageContext.request.contextPath}/course/courseNew.controller">
 				<fieldset>
 				<div align="center"> 
+				<img id="photo" style="position:absolute;left:1000px; width:200px;display:none;" class="img-responsive img" 
+					src="${pageContext.request.contextPath}${CourseBean.courseImg}">
 					<table>
 						<tr>
 							<td>
@@ -50,7 +53,7 @@
 									<tr>
 									<th>圖片</th>
 									<td>
-										<input type="file" name="courseImg" accept="image/*" required>
+										<input id="uploadImg" type="file" name="courseImg" accept="image/*" required>
 									</td>
 									</tr>
 									<tr>
@@ -247,12 +250,29 @@
 			var date;
 			try {
 				date = $.datepicker.parseDate(dateFormat, element.value);
-// 				date.setDate(date.getDate() + parseInt(days));
+				//date.setDate(date.getDate() + parseInt(days));
 			} catch (error) {
 				date = null;
 			} 
 			return date;
 		}
+		
+		//圖片
+		$("#uploadImg").change(function(){
+			$('#photo').show();
+   	      	readImage( this );
+   	    });
+		
+		function readImage(input) {
+     	      if ( input.files && input.files[0] ) {
+     	        var FR= new FileReader();
+     	        FR.onload = function(e) {
+     	          //e.target.result = base64 format picture
+     	          $('#photo').attr( "src", e.target.result );
+     	        };       
+     	        FR.readAsDataURL( input.files[0] );
+     	   }
+        }
 	</script>
 
 </body>

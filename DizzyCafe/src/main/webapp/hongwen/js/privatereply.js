@@ -29,7 +29,13 @@ $(function() {
 			}, {
 				data : 'content',
 				title : '回覆內容',
-				width : '500px'
+				width : '500px',
+				"render" : function(data, type, row, meta) {
+					if (type === 'display') {
+						data = row.content.substring(0,25);
+					}
+					return data;
+				}
 			}, {
 				data : 'replyId',
 				title : '修改',

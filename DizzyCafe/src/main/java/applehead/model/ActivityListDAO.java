@@ -74,6 +74,15 @@ public class ActivityListDAO {
 		return count;
 	}
 	
-	
+	public List<Object[]> selectWithTime(java.sql.Date date){
+		List<Object[]> result = null;
+		Query<Object[]> query = this.getSession().createNativeQuery("select ad.activityDiscount,ad.merchandiseTag from ActivityList al join "
+				+ "ActivityDetails ad on al.activityNo = ad.activityNo "
+				+ "where :hoho > al.activityStart and :hihi < al.activityEnd");
+		query.setParameter("hoho", date);
+		query.setParameter("hihi", date);
+		result = query.getResultList();
+		return result;
+	}
 	
 }

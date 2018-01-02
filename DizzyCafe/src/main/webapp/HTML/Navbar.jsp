@@ -68,9 +68,6 @@
     version    : 'v2.8' // use graph api version 2.8
   });
 
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
   
   };
 
@@ -143,7 +140,6 @@
 					<a class="dropdown-item" href="#">Something else here</a>
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-			<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
 			</li>
 			
 		</ul>

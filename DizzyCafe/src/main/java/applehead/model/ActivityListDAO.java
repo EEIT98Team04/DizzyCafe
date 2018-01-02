@@ -29,7 +29,7 @@ public class ActivityListDAO {
 
 	public List<ActivityListBean> selectList() {
 		List<ActivityListBean> result = null;
-		Query<ActivityListBean> query = this.getSession().createQuery("from ActivityListBean", ActivityListBean.class);
+		Query<ActivityListBean> query = this.getSession().createQuery("from ActivityListBean order by activityNo desc", ActivityListBean.class);
 		result = query.getResultList();
 		return result;
 	}

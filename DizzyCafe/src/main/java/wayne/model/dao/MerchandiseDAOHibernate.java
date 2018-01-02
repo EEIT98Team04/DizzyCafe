@@ -23,61 +23,78 @@ public class MerchandiseDAOHibernate {
 	}
 	
 	//分頁展示商品 merchandise.controller做
-	public List<MerchandiseBean> selectPageNow(int pageNow, int rows_perPage) {
-		int base = 1;
-		Query<MerchandiseBean> select = this.getsession().createQuery("FROM MerchandiseBean WHERE merchandiseId >="
-				+ (base + (pageNow - 1) * rows_perPage) + " AND merchandiseId <" + (base + pageNow * rows_perPage) ,
-				MerchandiseBean.class);
-		return select.getResultList();
-	}
-	//分頁展示商品 merchandisetag.controller做
-	public JSONArray selectPageNowTag(int pageNow, int rows_perPage, String tag) {
+//	public List<MerchandiseBean> selectPageNow(int pageNow, int rows_perPage) {
+//		int base = 1;
+//		Query<MerchandiseBean> select = this.getsession().createQuery("FROM MerchandiseBean WHERE merchandiseId >="
+//				+ (base + (pageNow - 1) * rows_perPage) + " AND merchandiseId <" + (base + pageNow * rows_perPage) ,
+//				MerchandiseBean.class);
+//		return select.getResultList();
+//	}
+	//分頁展示商品 merchandise.controller做
+	public JSONArray selectPageNow() {
+		Query<Object[]> select = this.getsession().createNativeQuery("SELECT * FROM merchandise ORDER BY merchandiseId DESC");
+		List<Object[]> temp = select.getResultList();
 		JSONArray result = new JSONArray();
-		int base = 1;
-		
+		for(Object[] var: temp) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("merchandiseId", var[0]);
+			jsonObject.put("merchandiseName", var[1]);
+			jsonObject.put("merchandiseContent", var[2]);
+			jsonObject.put("merchandisePicture", var[3]);
+			jsonObject.put("merchandiseTag", var[4]);
+			jsonObject.put("merchandisePrice", var[5]);
+			jsonObject.put("merchandiseQuantity", var[6]);
+			jsonObject.put("merchandiseStatus", var[7]);
+			result.add(jsonObject);
+		}
+		return result; 
+	}
+	
+	//分頁展示商品 merchandisetag.controller做
+	public JSONArray selectPageNowTag(String tag) {
+		JSONArray result = new JSONArray();
+	
 		Query<Object[]> select = this.getsession().createNativeQuery(
-				"select * from (select ROW_NUMBER() OVER(ORDER BY merchandiseId ASC) AS row_num,* "
-				+ "from merchandise where merchandiseTag = ?) as newTable where row_num >= " +
-						(base + (pageNow - 1) * rows_perPage)+" and row_num < " +
-						(base + pageNow * rows_perPage) );
+				"SELECT * FROM merchandise where merchandiseTag = ? ORDER BY merchandiseId DESC" );
 		select.setParameter(1, tag);
 		List<Object[]> list = select.getResultList();
 		
 		for(Object[] var: list) {
-			JSONObject jsonobject = new JSONObject();
-			jsonobject.put("row_num", var[0]);
-			jsonobject.put("merchandiseId", var[1]);
-			jsonobject.put("merchandiseName", var[2]);
-			jsonobject.put("merchandiseContent", var[3]);
-			jsonobject.put("merchandisePicture", var[4]);
-			jsonobject.put("merchandiseTag", var[5]);
-			jsonobject.put("merchandisePrice", var[6]);
-			jsonobject.put("merchandiseQuantity", var[7]);
-			jsonobject.put("merchandiseStatus", var[8]);
-			result.add(jsonobject);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("merchandiseId", var[0]);
+			jsonObject.put("merchandiseName", var[1]);
+			jsonObject.put("merchandiseContent", var[2]);
+			jsonObject.put("merchandisePicture", var[3]);
+			jsonObject.put("merchandiseTag", var[4]);
+			jsonObject.put("merchandisePrice", var[5]);
+			jsonObject.put("merchandiseQuantity", var[6]);
+			jsonObject.put("merchandiseStatus", var[7]);
+			result.add(jsonObject);
 		}
 		return result;
 	}
-	//計算總共分頁頁數 merchandise.controller做
-	public int countTotalPage(int row_perPage) {
-		Long temp = (long) this.getsession().createQuery("Select COUNT(*) FROM MerchandiseBean ").uniqueResult();
-		if (temp.intValue() % row_perPage == 0) {
-			return temp.intValue() / row_perPage;
-		} else {
-			return temp.intValue() / row_perPage + 1;
-		}
-	}
-	//計算總共分頁頁數 merchandisetag.controller做
-	public int countTotalPageTag(int row_perPage, String tag) {
-		Long temp = (long) this.getsession()
-				.createQuery("Select COUNT(*) FROM MerchandiseBean where merchandiseTag = '" + tag +"'")
-				.uniqueResult();
-		if (temp.intValue() % row_perPage == 0) {
-			return temp.intValue() / row_perPage;
-		} else {
-			return temp.intValue() / row_perPage + 1;
-		}
-	}
+	
+	
+//	//計算總共分頁頁數 merchandise.controller做
+//	public int countTotalPage(int row_perPage) {
+//		Long temp = (long) this.getsession().createQuery("Select COUNT(*) FROM MerchandiseBean ").uniqueResult();
+//		if (temp.intValue() % row_perPage == 0) {
+//			return temp.intValue() / row_perPage;
+//		} else {
+//			return temp.intValue() / row_perPage + 1;
+//		}
+//	}
+//	//計算總共分頁頁數 merchandisetag.controller做
+//	public int countTotalPageTag(int row_perPage, String tag) {
+//		Long temp = (long) this.getsession()
+//				.createQuery("Select COUNT(*) FROM MerchandiseBean where merchandiseTag = '" + tag +"'")
+//				.uniqueResult();
+//		if (temp.intValue() % row_perPage == 0) {
+//			return temp.intValue() / row_perPage;
+//		} else {
+//			return temp.intValue() / row_perPage + 1;
+//		}
+//	}
 	
 	public MerchandiseBean selectById(int merchandiseId) {
 		return this.getsession().get(MerchandiseBean.class, merchandiseId);

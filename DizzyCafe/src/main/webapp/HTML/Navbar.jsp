@@ -310,7 +310,7 @@ function insertNav() {
 						})
 					});
 			});
-				$('#ordersub').text("ORDER SUBTOTAL : "+totalPrice);
+				$('#ordersub').text("總金額 : "+totalPrice);
 		}
 	})
 }
@@ -363,7 +363,7 @@ function selectNav(){
 					console.log(123);
 				}
 			};
-			$('#ordersub').text("ORDER SUBTOTAL : "+totalPrice);
+			$('#ordersub').text("總金額 : "+totalPrice);
 			
 		}
 	})

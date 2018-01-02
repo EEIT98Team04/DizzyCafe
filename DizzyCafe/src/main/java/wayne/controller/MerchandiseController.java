@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import net.sf.json.JSONArray;
 import wayne.model.MerchandiseBean;
 import wayne.model.MerchandiseService;
 
@@ -22,8 +23,13 @@ public class MerchandiseController{
 	@RequestMapping(method= {RequestMethod.POST,RequestMethod.GET})
 	public String method(MerchandiseBean bean, Model model, BindingResult bindingresult ,int page, String tag) {
 		System.out.println("MerchandiseController");
-		model.addAttribute("totalPages" ,merchandiseService.countTotalPages());	
-		model.addAttribute("beans" ,merchandiseService.showMerchandiseInPage(page));
+		int rows_perPage = 6;
+		JSONArray _merchnadise = merchandiseService.showMerchandiseInPage();
+		
+		model.addAttribute("beans" ,merchandiseService.ShowMerchandiseByPage(page, rows_perPage, _merchnadise));
+		model.addAttribute("totalPages", merchandiseService.countTotalPages(rows_perPage, _merchnadise));
+//		model.addAttribute("totalPages" ,merchandiseService.countTotalPages());	
+//		model.addAttribute("beans" ,merchandiseService.showMerchandiseInPage(page));
 		
 		
 		

@@ -15,6 +15,11 @@ public class ActivityDetailsBean {
 	private String merchandiseTag;
 	private double activityDiscount;
 
+	@Override
+	public String toString() {
+		return "ActivityDetailsBean [adNumber=" + adNumber + ", activityNo=" + activityNo + ", merchandiseTag="
+				+ merchandiseTag + ", activityDiscount=" + activityDiscount + "]";
+	}
 	public int getActivityNo() {
 		return activityNo;
 	}

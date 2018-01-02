@@ -20,6 +20,6 @@ public class BackStageShowActivities {
 				method= {RequestMethod.GET,RequestMethod.POST}
 			)
 	public @ResponseBody JSONArray haha(Model model,String page) {
-		return activityListService.showActivityInBackstage();
+		return activityListService.showActivityInBackstagePlus();
 	}
 }

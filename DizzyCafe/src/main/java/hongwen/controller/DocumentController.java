@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,13 @@ public class DocumentController {
 
 	@Autowired
 	DocumentService documentService;
+	
+	@Autowired
+	private ServletContext servletContext;
 
 	@RequestMapping(path = "/ReportFile.hongwen", method = { RequestMethod.GET })
 	public @ResponseBody String forum(@RequestParam Map<?, ?> param) {
-		String serverPath = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins"
-				+ "/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
+		String serverPath = servletContext.getRealPath(".");
 		String filePath = "/hongwen/resources";
 		String sourcePath = serverPath + filePath;
 		String filename = "/report.txt";
@@ -76,8 +79,7 @@ public class DocumentController {
 	@RequestMapping(path = "/Report.hongwen", method = { RequestMethod.POST })
 	public @ResponseBody String Report(TmpBean bean) {
 
-		String serverPath = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins"
-				+ "/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
+		String serverPath = servletContext.getRealPath(".");
 		String filePath = "/hongwen/resources";
 		String filename = "/report.txt";
 		String sourcePath = serverPath + filePath;

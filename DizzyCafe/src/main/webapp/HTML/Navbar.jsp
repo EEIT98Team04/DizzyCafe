@@ -49,8 +49,8 @@
 
 <script>
   function statusChangeCallback(response) {
-    if (response.status === 'connected') {
-      testAPI();
+	  if (response.status === 'connected') {
+    	testAPI();
   	}
   }
   
@@ -69,9 +69,9 @@
     version    : 'v2.8' // use graph api version 2.8
   });
 
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
+//   FB.getLoginStatus(function(response) {
+//     statusChangeCallback(response);
+//   });
   
   };
 
@@ -140,11 +140,8 @@
 						href="${pageContext.request.contextPath}/activity.controller?nowPage=0">活動專區</a>
 					<a class="dropdown-item"
 						href="${pageContext.request.contextPath}/course/course.controller?page=1">課程</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Something else here</a>
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-			<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
 			</li>
 			
 		</ul>

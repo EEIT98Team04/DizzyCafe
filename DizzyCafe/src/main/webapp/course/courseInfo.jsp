@@ -37,6 +37,9 @@
     line-height: 2em;
     padding: 5px 0 0 0;
 }
+.fc-content{
+	color:white;
+}
 </style>
 </head>
 <body>
@@ -60,7 +63,7 @@
 								<div id="date">
 								</div>
 							</td>
-							<td style="padding-left:15px;"><h3>${course.courseIntro}</h3></td>
+							<td style="padding-left:15px;"><h3>${course.courseName}</h3></td>
 						</tr>
 					</tbody>
 				</table>
@@ -68,12 +71,13 @@
 			<!--title-->
 			<div class="content" id="articleContent">
 				<div class="part" data-type="p" style="margin:20px 95px; width:756px;">
+					<p>${course.courseIntro }</p>
 					${course.courseContent }
-					
 					
 					<p>講師 : ${course.courseTeacher } 老師</p>
 					<p>報名時間 : ${course.courseSignupBegin } ～　${course.courseSignupEnd }</p>
 					<p>課程時間 : ${course.courseBegin } ～　${course.courseEnd }</p>
+					<p id="week"></p>
 					<p>現在人數 : ${nowPeople } / ${course.courseLimit }</p>
 					<p>人數有限，心動不如馬上行動</p>
 					<br>
@@ -84,7 +88,7 @@
 				
 				<div style="margin:auto; width:100px;">
 				<button id="iwannasignup" class="btn btn-success"
-					onclick="document.getElementById('signup').style.display='block'">我要報名</button>
+					onclick="joinClass();">我要報名</button>
 				</div>
 			</div>
 		</div>
@@ -95,8 +99,6 @@
 
 	<!-- The Modal -->
 	<div id="signup" class="minghui_modal">
-		<span onclick="document.getElementById('signup').style.display='none'"
-			class="close" title="Close Modal">&times;</span>
 
 		<!-- Modal Content -->
 		<form id="signUpForm" class="minghui_modal-content animate" style="margin-top:30px;"
@@ -132,7 +134,7 @@
 				<button id="gogo" class="btn btn-success" type="button"
 				style="margin-right:25px;margin-left:35px;">報名</button>
 				<button type="button" class="btn" 
-					onclick="document.getElementById('signup').style.display='none'"
+					onclick="cancel();"
 					class="cancelbtn">取消</button>
 			</div>
 		</form>
@@ -144,9 +146,6 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="exampleModalLabel">報名課程</h5>
-	        <button id="checkx" type="button" class="close">
-	          <span >&times;</span>
-	        </button>
 	      </div>
 	      <div class="modal-body">
 	        	確定要報名 ${course.courseName } 嗎?
@@ -159,7 +158,6 @@
 	  </div>
 	</div>
 
-
 	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<script type="text/javascript"
 		src='<c:url value="/js/fullcalendar-3.7.0/lib/jquery-ui.min.js" />'></script>
@@ -169,7 +167,7 @@
 		src='<c:url value="/js/fullcalendar-3.7.0/fullcalendar.js" />'></script>
 
 	<script>
-	
+	var _btn;
 	
 	$(function(){
 		//顯示左邊月日
@@ -195,12 +193,44 @@
 		$('#signup').css('display','none');
 	});
 	
+	//日期從數字轉成中文
+	var week = '${course.courseWeek}';
+	week=week.replace('1','日');
+	week=week.replace('2','一');
+	week=week.replace('3','二');
+	week=week.replace('4','三');
+	week=week.replace('5','四');
+	week=week.replace('6','五');
+	week=week.replace('7','六');
+	$('#week').text('每周 '+week+' 上課');
 	
 	$(function(){
 		$('#submit').click(function(){
 			$('#signUpForm').submit();
 		});
 	});
+	
+	function joinClass()
+	{
+		//$.find('.navbar')
+		/*$.find('.navbar').each(function()
+				{
+					$(this).attr("style","background-color: white; display: block;");
+				});*/
+// 		document.getElementById('minghui_member_login').style.display='block';
+		$('nav').css("z-index",1);
+		document.getElementById('signup').style.display='block';
+		_btn = $('[class="fc-button-group"]').find('.fc-state-active');
+		_btn.removeClass('fc-state-active');
+	}
+	
+	function cancel()
+	{
+		document.getElementById('signup').style.display='none';
+		if(_btn != undefined){
+			_btn.addClass('fc-state-active');
+		}
+	}
 	
 		// Get the modal
 		var modal = document.getElementById('signup');
@@ -235,6 +265,8 @@
 				});
 			}
 		});
+		
+		//同會員資料
 		$('#same').change(
 				function() {
 					if ($('#same').prop('checked') == true) {

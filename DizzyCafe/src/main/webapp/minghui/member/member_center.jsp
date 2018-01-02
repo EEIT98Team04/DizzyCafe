@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>會員中心</title>
+<jsp:include page="/HTML/TitleIcon.jsp" />
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />

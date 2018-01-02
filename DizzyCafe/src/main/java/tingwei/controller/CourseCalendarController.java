@@ -10,15 +10,24 @@ import net.sf.json.JSONArray;
 import tingwei.model.CourseDateTimeService;
 
 @Controller
-@RequestMapping("/courseCalendar.controller")
 public class CourseCalendarController {
 	
 	@Autowired
 	private CourseDateTimeService courseDateTimeService;
 	
-	@RequestMapping(method= {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(path= {"/courseCalendar.controller"} ,method= {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody JSONArray method() {
 		JSONArray select = courseDateTimeService.selectJoinCourse();
+
+		return select;
+	}
+	
+	
+	@RequestMapping(path= {"/courseCalendarByCourseId.controller"} ,method= {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody JSONArray perCourse(int courseId) {
+		JSONArray select = courseDateTimeService.selectPerCourse(courseId);
+		
+		System.out.println("abubu:"+courseId);
 
 		return select;
 	}

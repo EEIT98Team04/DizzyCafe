@@ -5,18 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>DizzyCafe管理系統</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
 #form1 div {
 	width: 1000px;
 	margin: auto;
+	position: relative;
 }
 </style>
 <jsp:include page="../HTML/TitleIcon.jsp" />
-<link href="/DizzyCafe/wayne/css/lightbox.css" rel="stylesheet">
-<script src="<c:url value="../wayne/js/lightbox.js"/>"></script>
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<jsp:include page="/backstage/header.jsp"></jsp:include>
@@ -39,6 +38,8 @@
 				action="${pageContext.request.contextPath}/backstage/courseUpdate.controller">
 				<fieldset>
 				<div align="center"> 
+					<img id="photo" style="position:absolute;left:1000px; width:200px;" class="img-responsive img" 
+						src="${pageContext.request.contextPath}${CourseBean.courseImg}">
 					<table>
 						<tr>
 							<td>
@@ -56,7 +57,7 @@
 									<tr>
 									<th>圖片</th>
 									<td>
-										<input type="file" name="courseImg" value="${CourseBean.courseImg }" accept="image/*">
+										<input id="uploadImg" type="file" name="courseImg" value="${CourseBean.courseImg }" accept="image/*">
 									</td>
 									</tr>
 									<tr>
@@ -219,6 +220,8 @@
 			});
 		});
 		
+		
+		
 		//editor
 		CKEDITOR.replace('editor1');
 		//editor 回填
@@ -290,12 +293,28 @@
 			var date;
 			try {
 				date = $.datepicker.parseDate(dateFormat, element.value);
-// 				date.setDate(date.getDate() + parseInt(days));
+				//date.setDate(date.getDate() + parseInt(days));
 			} catch (error) {
 				date = null;
 			} 
 			return date;
 		}
+		
+		//回填圖片
+		$("#uploadImg").change(function(){
+   	      	readImage( this );
+   	    });
+		
+		function readImage(input) {
+     	      if ( input.files && input.files[0] ) {
+     	        var FR= new FileReader();
+     	        FR.onload = function(e) {
+     	          //e.target.result = base64 format picture
+     	          $('#photo').attr( "src", e.target.result );
+     	        };       
+     	        FR.readAsDataURL( input.files[0] );
+     	   }
+        }
 	</script>
 
 </body>

@@ -12,7 +12,12 @@
 <body style="background-color: #fff1cc;">
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="margin-top: 80px; text-align: center;">
-		<h2>歡迎光臨留言板</h2>
+		<h2 id="b1" style="display:none">咖啡品種產地版</h2>
+		<h2 id="b2" style="display:none">咖啡烘焙版</h2>
+		<h2 id="b3" style="display:none">咖啡沖泡方式版</h2>
+		<h2 id="b4" style="display:none">咖啡沖烘焙具版</h2>
+		<h2 id="b5" style="display:none">咖啡沖泡器具版</h2>
+		<h2 id="b6" style="display:none">咖啡閒聊版</h2>
 	</div>
 	<div>
 		<table id="test">
@@ -42,7 +47,6 @@
 	<script src="/DizzyCafe/hongwen/js/post.js"></script>
 	<script src="/DizzyCafe/hongwen/js/document.js"></script>
 	<script>
-	
 	</script>
 </body>
 </html>

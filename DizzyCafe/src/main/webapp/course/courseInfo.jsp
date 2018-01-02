@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${course.courseName}</title>
+<link type="text/css" rel="stylesheet"
+	href='<c:url value="/js/fullcalendar-3.7.0/fullcalendar.css" />'>
 <jsp:include page="/HTML/TitleIcon.jsp" />
 <style type="text/css">
 .courseTable {
@@ -76,7 +78,10 @@
 					<p>人數有限，心動不如馬上行動</p>
 					<br>
 					<p>※本課程將酌收費用 ${course.courseCost } 元</p>
+					<br><br>
+					<div id="calendar" style="width:600px;"></div>
 				</div>
+				
 				<div style="margin:auto; width:100px;">
 				<button id="iwannasignup" class="btn btn-success"
 					onclick="document.getElementById('signup').style.display='block'">我要報名</button>
@@ -153,6 +158,15 @@
 	    </div>
 	  </div>
 	</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script type="text/javascript"
+		src='<c:url value="/js/fullcalendar-3.7.0/lib/jquery-ui.min.js" />'></script>
+	<script type="text/javascript"
+		src='<c:url value="/js/fullcalendar-3.7.0/lib/moment.min.js" />'></script>
+	<script type="text/javascript"
+		src='<c:url value="/js/fullcalendar-3.7.0/fullcalendar.js" />'></script>
 
 	<script>
 	
@@ -239,6 +253,79 @@
 										'background-color', "");
 					}
 				});
+		
+		
+		
+		//儲存變更
+		$('#update').click(function() {
+		    var moment = $('#calendar').fullCalendar('clientEvents');
+		    var calendarData = JSON.stringify(moment.map(function(e){
+	   			 			return {
+	   			     			start: e.start,
+	   			     			end: e.end,
+	   			     			title: e.title
+	   			 			};
+	   					}));
+	   		console.log(calendarData);
+		    console.log(moment);
+		    $.ajax({
+		    	url:"/DizzyCafe/backstage/CalendarUpdate.controller",
+		    	data:calendarData,
+		    	contentType: "application/json;charset=utf-8",
+		    	type:'POST'
+		    });
+//	 	    alert("已更新");
+		});
+		
+		//取消變更
+		$('#cancel').click(function(){
+			$('#calendar').fullCalendar('refetchEvents');	
+		});
+		
+		
+		//full calendar
+		var id = ${course.courseId};
+		$('#calendar').fullCalendar({
+				editable : true,
+				header :{
+				    left:   'today prev,next',
+				    center: 'title',
+				    right:  'month,agendaWeek,agendaDay '
+				},
+				eventSources : [
+					{
+						url:'/DizzyCafe/courseCalendarByCourseId.controller',
+						data:{courseId:id},
+						error: function() {
+			                alert('there was an error while fetching events!');
+			            },
+					}
+				],
+				dayClick : function(date, event, view) {
+					console.log('add event');
+					console.log(date);
+					console.log(event);
+					console.log(view);
+				},
+				eventClick : function(date, event, view) {
+					console.log('modify event');
+					console.log(date);
+					console.log(event);
+					console.log(view);
+				},
+				 monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],  
+				 	monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],  
+				 	dayNames: ["日", "一", "二", "三", "四", "五", "六"],  
+				 	dayNamesShort: ["日", "一", "二", "三", "四", "五", "六"],  
+				 	today: ["今天"],  
+				 	buttonText: {  
+				 	today: '今天',  
+				 	month: '月',  
+				 	week: '週',  
+				 	day: '日',   
+				 },
+			});
+		
 	</script>
 
 </body>

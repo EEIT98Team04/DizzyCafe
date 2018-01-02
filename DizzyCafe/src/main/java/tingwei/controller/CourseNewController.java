@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +28,8 @@ public class CourseNewController {
 	private CourseService courseService;
 	@Autowired
 	private CourseDateTimeService courseDateTimeService;
-	
+	@Autowired
+	private ServletContext servletContext;
 	
 	
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
@@ -81,11 +84,10 @@ public class CourseNewController {
 	
 				// Create the file on server
 				String[] strs = courseImg.getContentType().split("/");
-				String server_path = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
 				String path = "/image/course/" + courseBean.getCourseId() + "." + strs[1];
 				
 				courseBean.setCourseImg(path);
-				File serverFile = new File(server_path + path);
+				File serverFile = new File(servletContext.getRealPath(".") + path);
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();

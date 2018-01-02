@@ -12,35 +12,8 @@
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
-	<div style="height: 100px"></div>
-	<div>
-		<a href="${pageContext.request.contextPath}/shopping/shoppingCart.controller">購物車</a>
-	</div>
-		 <div id="carouselExampleIndicators" class="carousel slide border border-light" data-ride="carousel" style="margin:auto;width:1024px;height:600px" data-interval="3000">
-<!-- 	        <ol class="carousel-indicators"> -->
-<!-- 	            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li> -->
-<!-- 	            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li> -->
-<!-- 	        </ol> -->
+		 <div id="carouselExampleIndicators" class="carousel slide border border-light" data-pause="false" data-ride="carousel" data-interval="3000">
 	        <div class="carousel-inner">
-<!-- 	            <div class="carousel-item active"> -->
-<%-- 	            	<a href="${pageContext.request.contextPath}/activities?No=1"> --%>
-<%-- 	                	<img class="d-block" width='1024' height='600' src="${pageContext.request.contextPath}/activity/1001.jpg" alt="First slide"> --%>
-<!-- 	                </a> -->
-<!-- 	                <div class="carousel-caption d-none d-md-block"> -->
-<!-- 	                    <h3>活動名稱</h3> -->
-<!-- 	                    <p>簡單敘述</p> -->
-<!-- 	                </div> -->
-<!-- 	            </div> -->
-	            
-<!-- 	            <div class="carousel-item"> -->
-<%-- 	            	<a href="${pageContext.request.contextPath}/activities?No=2"> --%>
-<%-- 	                	<img class="d-block" width='1024' height='600' src="${pageContext.request.contextPath}/activity/1002.jpg" alt="Second slide"> --%>
-<!-- 	                </a> -->
-<!-- 	                <div class="carousel-caption d-none d-md-block"> -->
-<!-- 	                    <h3>活動名稱</h3> -->
-<!-- 	                    <p>簡單敘述</p> -->
-<!-- 	                </div> -->
-<!-- 	            </div> -->
 	        </div>
 	        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 	            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -52,10 +25,6 @@
 	        </a>
 	    </div>
     
-    <footer class="fixed-bottom text-center">
-          <p>Copyright © DizzyCafe 2017</p>
-    </footer>
-    
     <script>
     $(function() { 
     	$.ajax({
@@ -64,6 +33,8 @@
 			success:function(datas){
 				
 				var cell_div_carousel_inner = $('#carouselExampleIndicators>div.carousel-inner');
+				var clientHeight = window.screen.height / 100 * 87;
+				console.log(clientHeight);
 				
 				for(var i = 0; i < datas.length; i++){
 					var class_carousel_item = "carousel-item";
@@ -71,7 +42,7 @@
 						class_carousel_item = "carousel-item active";
 					}
 					var cell_a = $('<a></a>').attr("href", "/DizzyCafe/activities?No=" + (datas[i].id - 1000));
-					var cell_img = $('<img class="d-block" width="1024" height="600" alt="GGG" />').attr('src','/DizzyCafe'+datas[i].activityPicture);
+					var cell_img = $('<img style="width:100%; height:' + clientHeight + 'px" class="d-block" alt="GGG" />').attr('src','/DizzyCafe'+datas[i].activityPicture);
 					cell_a.append(cell_img);
 					var cell_h3 = $('<h3></h3>').text(datas[i].activityName);
 					var cell_p = $('<p></p>').text(datas[i].name);

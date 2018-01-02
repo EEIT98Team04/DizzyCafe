@@ -13,7 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(urlPatterns= {"/backstage/index.jsp","/backstage/activitiymanage.jsp",
-		"/backstage/merchandisemanage.jsp","/backstage/courseManage.jsp"})
+		"/backstage/merchandisemanage.jsp","/backstage/courseManage.jsp",
+		"/backstage/adplayManage.jsp","/backstage/courseCalendar.jsp",
+		"/backstage/courseNew.jsp","/backstage/courseUpdate.jsp",
+		"/backstage/dailyeventmanage.jsp","/backstage/report.jsp",
+		"/backstage/forum.jsp"})
 public class ManagerLoginFilter implements Filter {
 
 	@Override

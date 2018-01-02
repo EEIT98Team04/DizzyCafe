@@ -36,6 +36,9 @@
             <li>
               <a href="${pageContext.request.contextPath }/backstage/dailyeventmanage.jsp">每日活動</a>
             </li>
+            <li>
+              <a href="${pageContext.request.contextPath }/backstage/adplayManage.jsp">活動輪播牆</a>
+            </li>
           </ul>
         </li>
         

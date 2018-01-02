@@ -1,5 +1,6 @@
 package minghui.model;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,25 @@ public class AdplayService {
 			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("id", temp[0]);
 			jsonObj.put("activityName", temp[1]);
-			jsonObj.put("name", temp[2]);
-			jsonObj.put("activityPicture", temp[3]);
+			jsonObj.put("activityPicture", temp[2]);
 			jsonArr.add(jsonObj);
 		}
 		return jsonArr;
+	}
+	
+	@Transactional
+	public void delete() {
+		adplayDAO.delete_all();
+	}
+	
+	@Transactional
+	public void insert(Collection<String> values) {
+		System.out.println("entry adplayService insert method");
+		for(String value : values) {
+			System.out.println("entry adplayService insert method for loop");
+			AdplayBean bean = new AdplayBean();
+			bean.setId(Integer.valueOf(value));
+			adplayDAO.insert(bean);
+		}
 	}
 }

@@ -9,6 +9,9 @@
 	href="/DizzyCafe/wayne/css/merchandiseDetails.css">
 <link href="/DizzyCafe/wayne/css/lightbox.css" rel="stylesheet">
 <title>${bean.merchandiseName }</title>
+<style>
+
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="<c:url value="wayne/js/lightbox.js"/>"></script>
 </head>
@@ -23,12 +26,12 @@
 					<li><a
 						href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=bean">咖啡豆
 							Whole Beans</a></li>
-					<li><a href="">濾掛式咖啡 Drip Coffee</a></li>
+					<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=drip coffee">濾掛式咖啡 Drip Coffee</a></li>
 				</ul>
 				<h3 class="asideTitle">Merchandise</h3>
 				<ul>
-					<li><a href="">手沖濾杯 Drip Coffee Set</a></li>
-					<li><a href="">咖啡沖煮相關器具 Accessories</a></li>
+					<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=drip coffee set">手沖濾杯 Drip Coffee Set</a></li>
+					<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=accessories">咖啡沖煮相關器具 Accessories</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=bottle">咖啡杯瓶及保溫罐
 							Bottle</a></li>

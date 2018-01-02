@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.sf.json.JSONArray;
 import wayne.model.dao.MerchandiseDAOHibernate;
 
 
@@ -19,22 +20,45 @@ public class MerchandiseService {
 	MerchandiseDAOHibernate merchandiseDao;
 	
 	// merchandise.controller
-	public List<MerchandiseBean> showMerchandiseInPage(int nowPage){
-		return merchandiseDao.selectPageNow(nowPage,rows_perPage);
+	public JSONArray showMerchandiseInPage(){
+		return merchandiseDao.selectPageNow();
+	}
+	
+	public JSONArray ShowMerchandiseByPage(int page,int rows_perPage, JSONArray merchandises) {
+		JSONArray result = new JSONArray();
+		/* logic: rows_perPage = 4
+		 * 1 : 1-4
+		 * 2 : 5-8
+		 */
+		for (int i = rows_perPage * (page - 1); i < rows_perPage * page && i < merchandises.size(); i++) { 
+			result.add(merchandises.get(i));
+		}
+		return result;
+	}
+	
+	public int countTotalPages(int rows_perPage, JSONArray merchandises) {
+		int result = 0;
+		if (merchandises.size() % rows_perPage == 0) {
+			result = merchandises.size() / rows_perPage;
+		} else if(merchandises.size() % rows_perPage > 0)
+		{
+			result  = merchandises.size() / rows_perPage + 1;
+		}
+		return result;
 	}
 	
 	// merchandisetag.controller
-	public List<MerchandiseBean> showMerchandiseInPageTag(int nowPage, String tag){
-		return merchandiseDao.selectPageNowTag(nowPage, rows_perPage, tag);
+	public JSONArray showMerchandiseInPageTag(String tag){
+		return merchandiseDao.selectPageNowTag(tag);
 	}
-	// merchandise.controller
-	public int countTotalPages() {
-		return merchandiseDao.countTotalPage(this.getRows_perPage());
-	}
-	// merchandisetag.controller
-	public int countTotalPagesTag(String tag) {
-		return merchandiseDao.countTotalPageTag(this.getRows_perPage(), tag);
-	}
+//	// merchandise.controller
+//	public int countTotalPages() {
+//		return merchandiseDao.countTotalPage(this.getRows_perPage());
+//	}
+//	// merchandisetag.controller
+//	public int countTotalPagesTag(String tag) {
+//		return merchandiseDao.countTotalPageTag(this.getRows_perPage(), tag);
+//	}
 	
 	public int getRows_perPage() {
 		return rows_perPage;

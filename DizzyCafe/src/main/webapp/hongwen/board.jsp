@@ -10,12 +10,12 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/hongwen/css/board.css" />
 </head>
-<body>
+<body  style="background-color: #fff1cc;">
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="margin-top: 80px; text-align: center;">
 		<h2>歡迎光臨咖啡論壇</h2>
 	</div>
-	<div style="background-color: #fff1cc;">
+	<div>
 		<table id="test"></table>
 	</div>
 	<!-- jQuery庫 -->

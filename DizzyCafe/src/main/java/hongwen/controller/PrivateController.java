@@ -1,5 +1,8 @@
 package hongwen.controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,21 +41,61 @@ public class PrivateController {
 	// 修改文章用
 	@RequestMapping(path = "/Privatemodify.hongwen", method = { RequestMethod.GET })
 	public @ResponseBody JSONArray privatemodify(@RequestParam Map<?, ?> param) {
-		JSONArray json = documentService.modify(Integer.parseInt((String)param.get("id")));
+		JSONArray json = documentService.modify(Integer.parseInt((String) param.get("id")));
 		return json;
 	}
-	
+
 	// 修改回文用
-		@RequestMapping(path = "/Replymodify.hongwen", method = { RequestMethod.GET })
-		public @ResponseBody JSONArray replymodify(@RequestParam Map<?, ?> param) {
-			JSONArray json = replyService.modify(Integer.parseInt((String)param.get("id")));
-			return json;
-		}
-	
+	@RequestMapping(path = "/Replymodify.hongwen", method = { RequestMethod.GET })
+	public @ResponseBody JSONArray replymodify(@RequestParam Map<?, ?> param) {
+		JSONArray json = replyService.modify(Integer.parseInt((String) param.get("id")));
+		return json;
+	}
+
+	// 刪除回文用
+	@RequestMapping(path = "/Replydelete.hongwen", method = { RequestMethod.GET })
+	public @ResponseBody JSONArray delete(@RequestParam Map<?, ?> param) {
+		JSONArray json = documentService.delete(Integer.parseInt((String) param.get("id")));
+		return json;
+	}
+
 	// 查閱檢舉文章
 	@RequestMapping(path = "/Privatereport.hongwen", method = { RequestMethod.GET })
 	public @ResponseBody JSONArray privatereport(@RequestParam Map<?, ?> param) {
-		JSONArray json = documentService.selectToJSON((String) param.get("membername"));
+		JSONArray json = null;
+		
+		FileReader fr = null;
+		BufferedReader br = null;
+		String serverPath = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins"
+				+ "/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
+		String filePath = "/hongwen/resources";
+		String fileName = "/report.txt";
+		String sourcePath = serverPath + filePath;
+		String path = sourcePath + fileName;
+
+		try {
+			fr = new FileReader(path);
+			br = new BufferedReader(fr);
+			String data;
+			String jsonString = "[";
+			while((data = br.readLine()) != null) {
+				if(!"[".equals(jsonString)) {
+					jsonString += ",";
+				}
+				jsonString += data;
+			}
+			jsonString += "]";
+			json = JSONArray.fromObject(jsonString);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				br.close();
+				fr.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}		
 		return json;
 	}
 }

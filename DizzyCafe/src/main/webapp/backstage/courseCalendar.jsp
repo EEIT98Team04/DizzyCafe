@@ -5,11 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;" charset=UTF-8>
-<title>test maybe will be calendar</title>
+<title>DizzyCafe管理系統</title>
 
 <link type="text/css" rel="stylesheet"
 	href='<c:url value="/js/fullcalendar-3.7.0/fullcalendar.css" />'>
 <jsp:include page="../HTML/TitleIcon.jsp" />
+
+<style>
+.fc-content{
+	color:white;
+}
+</style>
 
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -104,8 +110,6 @@
 		});
 
 	</script>
-	
-
 
 </body>
 </html>

@@ -38,7 +38,8 @@
 .fa-5{
 	margin-right:50px;
 }
-.collapse{
+.bigDiv{
+	margin-top:20px;
 	font-weight:bold;
 }
 </style>
@@ -214,7 +215,7 @@
 				<input type="file" id="memberPhoto" name="memberPhoto"
 					accept="image/*" required>
 			</div>
-
+			
 			<div class="container">
 				<label><b>帳號</b></label> <input type="text" placeholder="輸入帳號" class="minghui_input_type_text_password"
 					name="memberName" required> <br> <label><b>密碼</b></label>
@@ -239,18 +240,29 @@
 
 
 </nav>
+<div id="rrrrr" class="rrrrr">
 	<div id="mySidenav" class="sidenav"><p class="cart">CART</p>
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<div id="product"></div>
-		<div id="ordbtn" class="ordbtn">
-		<div id="ordersub" class="ordersub" ></div>
-		<div class="checkoutbtndiv"><a href="${pageContext.request.contextPath}/shopping/shoppingCart.controller"><button class="checkoutbtn" type="button">CHECKOUT</button></a></div>
-		</div>
+		<div id="product" class="product"></div>
+		<div id="bottom_container" class="bottom_container" >
+			<div id="ordersub" class="ordersub"></div>
+			<a href="${pageContext.request.contextPath}/shopping/shoppingCart.controller"><button class="checkoutbtn" type="button">CHECKOUT</button></a>
+	</div>
+	</div>
 	</div>
 <script>
+
 function insertNav() {
-		
+	if ('${empty user.memberId}' == "true") { //未登入
+	document.getElementById('minghui_member_login').style.display='block';
+	return ;
+	}
 	    document.getElementById("mySidenav").style.width = "300px";
+// 	    document.getElementById("myimage").style.zIndex = "-1";
+// 	    document.getElementById("mySidenav").style.zIndex = "99";
+// 	    document.getElementById("merchandise_details_article").style.backgroundColor = "rgb(0, 0, 0)";
+// 	    document.getElementById("merchandise_details_article").style.backgroundColor = "rgba(0, 0, 0, 0.1)";
+
 		var buyCount = $('#select').val();
 		var merchandiseId = '${bean.merchandiseId}';
 		$.ajax({
@@ -268,51 +280,91 @@ function insertNav() {
 					var totalPrice = 0;
 					$('#product').empty();
 				$.each(data, function(index,mer){			
-					var product = $('#mySidenav>#product');
+					var product = $('#product');
 
 					var merchandisePicture = $("<img>").attr('src','${pageContext.request.contextPath}'+mer.merchandisePicture);
 					
 					var merchandiseName = $("<div></div>").text(mer.merchandiseName);
-					var merchandisePrice = $("<div></div>").text(mer.merchandisePrice+"元" + "x" + mer.buyCount);
+					var merchandisePrice = $("<div></div>").html(mer.merchandisePrice+"元" + "x" + mer.buyCount + "<br>");
+					var merchandiseDelete = '<button id= "button' + index + '" type="button">remove</button>';
+					merchandisePrice.append(merchandiseDelete);
 					var Price = mer.merchandisePrice*mer.buyCount;
 					totalPrice = Price + totalPrice;
-					var bigDiv = $("<div></div>").append([merchandisePicture, merchandiseName, merchandisePrice]);
+					var bigDiv = $("<div></div>").append([merchandisePicture, merchandiseName, merchandisePrice]).attr("class","bigDiv");
 					product.append(bigDiv);
-					$("#product").find("img").css("width","20%");
+					$("#product").find("img").css("width","25%");
+					
+					$("#button" + index).click(function(){
+						var merchandiseId = data[index].merchandiseId;
+						$.ajax({
+							url : "/DizzyCafe/deleteCart.controller",
+							type : 'POST',
+							data : {'merchandiseId':merchandiseId},
+							success : function(data){
+								selectNav();
+							}
+						})
+					});
 			});
-				$('#ordersub').text("ORDER SUBTOTAL : "+totalPrice);
+				$('#ordersub').text("總金額 : "+totalPrice);
 		}
 	})
 }
 
 function selectNav(){
-	
+	if ('${empty user.memberId}' == "true") { //未登入
+		document.getElementById('minghui_member_login').style.display='block';
+		return ;
+		}
 	document.getElementById("mySidenav").style.width = "300px";
 	$.ajax({
 		url : "/DizzyCafe/selectCart.controller",
 		type : 'POST',
 		success: function(data){
-
 				var totalPrice = 0;
 				$('#product').empty();
 			$.each(data, function(index,mer){			
 				var product = $('#mySidenav>#product');
-
-				var merchandisePicture = $("<img>").attr('src','${pageContext.request.contextPath}'+mer.merchandisePicture);
 				
+				var merchandisePicture = $("<img>").attr('src','${pageContext.request.contextPath}'+mer.merchandisePicture);
 				var merchandiseName = $("<div></div>").text(mer.merchandiseName);
-				var merchandisePrice = $("<div></div>").text(mer.merchandisePrice+"元" + "x" + mer.buyCount);
+				var merchandisePrice = $("<div></div>").html(mer.merchandisePrice+"元" + "x" + mer.buyCount + "<br>");
+					var merchandiseDelete = '<button id= "button' + index + '" type="button">remove</button>';
+					merchandisePrice.append(merchandiseDelete);
+				
 				var Price = mer.merchandisePrice*mer.buyCount;
 				totalPrice = Price + totalPrice;
 				var bigDiv = $("<div></div>").append([merchandisePicture, merchandiseName, merchandisePrice]);
 				product.append(bigDiv);
-				$("#product").find("img").css("width","20%");
+				$("#product").find("img").css("width","25%");
+				
+
+				$("#button" + index).click(function(){
+					var merchandiseId = data[index].merchandiseId;
+					$.ajax({
+						url : "/DizzyCafe/deleteCart.controller",
+						type : 'POST',
+						data : {'merchandiseId':merchandiseId},
+						success : function(data){
+							selectNav();
+						}
+					})
+				})
+				
 		});
-			$('#ordersub').text("ORDER SUBTOTAL : "+totalPrice);
-	}
-})
+			window.onclick = function(e){
+							
+				if($('#mySidenav').find(this)){
+					
+					console.log(123);
+				}
+			};
+			$('#ordersub').text("總金額 : "+totalPrice);
+			
+		}
+	})
 }
-		
+
 		
 function closeNav() {
 document.getElementById("mySidenav").style.width = "0";

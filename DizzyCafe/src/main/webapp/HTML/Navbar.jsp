@@ -48,8 +48,8 @@
 
 <script>
   function statusChangeCallback(response) {
-    if (response.status === 'connected') {
-      testAPI();
+	  if (response.status === 'connected') {
+    	testAPI();
   	}
   }
   

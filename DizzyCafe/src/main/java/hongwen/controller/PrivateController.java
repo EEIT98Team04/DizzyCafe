@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,8 @@ public class PrivateController {
 	DocumentService documentService;
 	@Autowired
 	ReplyService replyService;
+	@Autowired
+	private ServletContext servletContext;
 
 	// 前台會員中心瀏覽文章用
 	@RequestMapping(path = "/Privatedocument.hongwen", method = { RequestMethod.GET })
@@ -66,8 +70,7 @@ public class PrivateController {
 		
 		FileReader fr = null;
 		BufferedReader br = null;
-		String serverPath = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins"
-				+ "/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
+		String serverPath = servletContext.getRealPath(".");;
 		String filePath = "/hongwen/resources";
 		String fileName = "/report.txt";
 		String sourcePath = serverPath + filePath;

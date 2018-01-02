@@ -99,7 +99,7 @@
 						dataType: "json",
 						success:function(json){
 							if (json[0]['status'] == 'success') {
-								alert('資料庫更新成功');
+								alert('資料更新成功！');
 							}else{
 								alert('Oops！Something Wrong!Please Report Manager！');								
 								window.location.replace(document.location.href);// 取得現在的URL，並自動導向

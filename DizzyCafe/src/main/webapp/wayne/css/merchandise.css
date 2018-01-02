@@ -4,7 +4,7 @@
 	margin-top:200px;
 }
 .asideTitle{
-	background-color:#d0d0d0;
+	background-color:#E0E0E0;
 	text-align:center;
 }
 .sectionone{
@@ -78,4 +78,7 @@ list-style-type:none;
   background-color:#d0d0d0;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+}
+li a{
+	color:#BB3D00;
 }

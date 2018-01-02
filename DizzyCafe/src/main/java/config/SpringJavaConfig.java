@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -82,5 +83,16 @@ public class SpringJavaConfig{
 		javaMailSenderImpl.setUsername("dizzycafeeeit98@gmail.com");
 		javaMailSenderImpl.setPassword("Eeit9804");			
 		return javaMailSenderImpl;
+	}
+	
+	@Bean
+	public ThreadPoolTaskExecutor taskExecutor() {
+		ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+		threadPoolTaskExecutor.setCorePoolSize(5);
+		threadPoolTaskExecutor.setMaxPoolSize(10);
+		threadPoolTaskExecutor.setQueueCapacity(40);
+		threadPoolTaskExecutor.setWaitForTasksToCompleteOnShutdown(true);
+		
+		return threadPoolTaskExecutor;
 	}
 }

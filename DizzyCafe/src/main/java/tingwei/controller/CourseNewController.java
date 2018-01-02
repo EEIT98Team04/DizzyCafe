@@ -76,7 +76,7 @@ public class CourseNewController {
 		courseBean.setCourseLength(courseLength);
 		courseBean.setCourseWeek(courseWeek);
 		
-		redirectAttrs.addFlashAttribute("newCourse", "新增成功");
+		//redirectAttrs.addFlashAttribute("newCourse", "新增成功");
 		
 		if (!courseImg.isEmpty()) {
 			try {

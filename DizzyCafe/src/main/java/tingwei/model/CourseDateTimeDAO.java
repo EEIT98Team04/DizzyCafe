@@ -61,6 +61,9 @@ public class CourseDateTimeDAO {
 			tt.put("title", var[0]);
 			tt.put("start", var[1].toString());
 			tt.put("end", var[2].toString());
+			if( ((java.sql.Timestamp)var[1]).getTime() < System.currentTimeMillis()) {
+				tt.put("color", "#AAAAAA");
+			}
 			result.add(tt);
 		}
 
@@ -82,6 +85,34 @@ public class CourseDateTimeDAO {
 			tt.put("title", var[0]);
 			tt.put("start", var[1].toString());
 			tt.put("end", var[2].toString());
+			if( ((java.sql.Timestamp)var[1]).getTime() < System.currentTimeMillis()) {
+				tt.put("color", "#AAAAAA");
+			}
+			result.add(tt);
+		}
+
+		return result;
+	}
+	
+	public JSONArray selectMemberCourse(int memberId) {
+		@SuppressWarnings("unchecked")
+		Query<Object[]> select = this.getSession().createNativeQuery("select course.courseName, courseDateTime.courseStartTime, courseDateTime.courseEndTime "
+				+ "from course join courseDateTime on course.courseId = courseDateTime.courseId "
+				+ "join coursememberForm on coursememberForm.courseId = course.courseId "
+				+ "WHERE memberId = ?");
+		select.setParameter(1, memberId);
+		List<Object[]> temp = select.getResultList();
+
+		JSONArray result = new JSONArray();
+		
+		for(Object[] var : temp) {
+			JSONObject tt = new JSONObject();
+			tt.put("title", var[0]);
+			tt.put("start", var[1].toString());
+			tt.put("end", var[2].toString());
+			if( ((java.sql.Timestamp)var[1]).getTime() < System.currentTimeMillis()) {
+				tt.put("color", "#AAAAAA");
+			}
 			result.add(tt);
 		}
 

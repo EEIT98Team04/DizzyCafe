@@ -18,7 +18,6 @@ public class CourseCalendarController {
 	@RequestMapping(path= {"/courseCalendar.controller"} ,method= {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody JSONArray method() {
 		JSONArray select = courseDateTimeService.selectJoinCourse();
-
 		return select;
 	}
 	
@@ -26,9 +25,12 @@ public class CourseCalendarController {
 	@RequestMapping(path= {"/courseCalendarByCourseId.controller"} ,method= {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody JSONArray perCourse(int courseId) {
 		JSONArray select = courseDateTimeService.selectPerCourse(courseId);
-		
-		System.out.println("abubu:"+courseId);
-
+		return select;
+	}
+	
+	@RequestMapping(path= {"/courseCalendarByMemberId.controller"} ,method= {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody JSONArray memberCourse(int memberId) {
+		JSONArray select = courseDateTimeService.selectMemberCourse(memberId);
 		return select;
 	}
 

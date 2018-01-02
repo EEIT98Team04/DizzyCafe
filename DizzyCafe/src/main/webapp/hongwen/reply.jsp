@@ -9,7 +9,8 @@
 </head>
 <body id="body">
 	<jsp:include page="/HTML/Navbar.jsp" />
-	<div id="tmp" style="display: block">${user.memberName}</div>
+	<div id="tmp" style="display:none">${user.memberName}</div>
+	<div id="tmpid" style="display:none">${user.memberId}</div>
 
 	<div id="article"></div>
 

@@ -33,4 +33,11 @@ public class BoardDAO {
 		return true;
 	}
 
+	public boolean selectById(int id,String announcement) {
+		BoardBean bean = null;
+		bean = this.getSession().get(BoardBean.class, id);
+		bean.setAnnouncement(announcement);
+		this.getSession().update(bean);
+		return true;
+	}
 }

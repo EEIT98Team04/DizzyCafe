@@ -21,9 +21,9 @@ public class ReplyService {
 	private DocumentDAO documentDAO;
 
 	public JSONArray selectToJSON(int documentId) {
-		//更新人氣
+		// 更新人氣
 		documentDAO.popularity(documentId);
-		//讀取回覆
+		// 讀取回覆
 		List<ReplyBean> select = replyDAO.select(documentId);
 		DocumentBean d = documentDAO.get(documentId);
 		ReplyBean r = new ReplyBean(0, d.getMembername(), d.getMemberId(), d.getDocumentId(), d.getContent(),
@@ -63,18 +63,19 @@ public class ReplyService {
 		JSONArray json = JSONArray.fromObject(temp);
 		return json;
 	}
-	
+
+	// 更新
 	public JSONArray update(ReplyBean bean) {
-		String temp = null;				//轉JSON檔案
+		String temp = null; // 轉JSON檔案
 		JSONArray json = null;
 		boolean dao = false;
-		if(bean != null) {
+		if (bean != null) {
 			dao = replyDAO.update(bean);
-			if(dao == true) {
+			if (dao == true) {
 				temp = "[{\"status\":\"success\"}]";
-				json = JSONArray.fromObject(temp);				
+				json = JSONArray.fromObject(temp);
 			}
-		}			
+		}
 		return json;
 	}
 }

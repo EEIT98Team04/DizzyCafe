@@ -25,7 +25,7 @@ public class CourseOfMemberController {
 	public String showMemberCourse(Model model, int page, HttpSession session) {
 		MemberBean user = (MemberBean) session.getAttribute("user");
 		int memberId = user.getMemberId(); //取課程資料
-		int rows_perPage = 4;
+		int rows_perPage = 6;
 		JSONArray _Course = courseMemberService.showMyCourseInPage(memberId);
 
 		model.addAttribute("myCourse" ,courseMemberService.ShowCourceByPage(page,rows_perPage,_Course)); //本頁顯示課程

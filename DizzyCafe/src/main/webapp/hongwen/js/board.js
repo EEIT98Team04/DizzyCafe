@@ -3,7 +3,7 @@ $(document).ready(function() {
 			$('#test').DataTable({
 				ajax : {
 					url : '/DizzyCafe/Board.hongwen',
-					type : 'POST',
+					type : 'GET',
 					dataSrc : function(json) {
 						this.temp = json;
 						return json;

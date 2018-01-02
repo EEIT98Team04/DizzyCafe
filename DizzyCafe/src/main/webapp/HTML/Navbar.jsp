@@ -35,6 +35,12 @@
 	margin-left:15px;
 	margin-top:10px;
 }
+.fa-5{
+	margin-right:50px;
+}
+.collapse{
+	font-weight:bold;
+}
 </style>
 <!-- </head> -->
 <!-- <body> -->
@@ -102,7 +108,7 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top"
-	style="border-bottom: 1px solid #DDDDDD; background-color: white;">
+	style="background-color: white;">
 	<a class="navbar-brand"
 		href="${pageContext.request.contextPath}/index.jsp"> <img
 		src="${pageContext.request.contextPath}/image/index_icon.png"
@@ -139,8 +145,9 @@
 			<li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
 			<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
 			</li>
-			<li><i style="margin-left:900px;" class="fa fa-shopping-cart fa-5" aria-hidden="true" onclick="selectNav()"></i></li>
+			
 		</ul>
+		<div><i class="fa fa-shopping-cart fa-5" aria-hidden="true" onclick="selectNav()"></i></div>
 		<c:choose>
 			<c:when test="${empty user}">
 				<button class="btn asd"
@@ -246,7 +253,7 @@
 	</div>
 <script>
 function insertNav() {
-
+		
 	    document.getElementById("mySidenav").style.width = "300px";
 		var buyCount = $('#select').val();
 		var merchandiseId = '${bean.merchandiseId}';

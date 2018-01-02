@@ -145,6 +145,7 @@
 			
 		</ul>
 		<div><i class="fa fa-shopping-cart fa-5" aria-hidden="true" onclick="selectNav()"></i></div>
+		<div><a href="${pageContext.request.contextPath}/event/dailyevent.jsp"><i class="fa fa-calendar fa-5" aria-hidden="true"></i></a></div>
 		<c:choose>
 			<c:when test="${empty user}">
 				<button class="btn asd"

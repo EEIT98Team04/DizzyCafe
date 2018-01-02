@@ -13,7 +13,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Service
-@Transactional
+//@Transactional
 public class ActivityListService {
 
 	@Autowired
@@ -86,7 +86,25 @@ public class ActivityListService {
 		result = activityListDAO.selectList();
 		String temp = new Gson().toJson(result);
 		JSONArray json = JSONArray.fromObject(temp);
-		System.out.println("json:"+json);
+		return json;
+	}
+	public JSONArray showActivityInBackstagePlus(){
+		List<Object[]> result = null;
+		result = activityListDAO.selectJoin();
+		JSONArray json = new JSONArray();
+		for(Object[] temp : result) {
+			JSONObject oo = new JSONObject();
+			oo.put("activityNo", temp[0]);
+			oo.put("activityName", temp[1]);
+			oo.put("activityStart", temp[2].toString());
+			oo.put("activityEnd", temp[3].toString());
+			oo.put("activityContent", temp[4]);
+			oo.put("activityPicture", temp[5]);
+			oo.put("ADnumber", temp[6]);
+			oo.put("merchandiseTag", temp[7]);
+			oo.put("activityDiscount", temp[8]);
+			json.add(oo);
+		}
 		return json;
 	}
 	

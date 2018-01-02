@@ -10,11 +10,12 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import applehead.model.ActivityDetailsBean;
+import applehead.model.ActivityDetailsService;
 import applehead.model.ActivityListBean;
 import applehead.model.ActivityListService;
 
@@ -24,13 +25,15 @@ public class UpdateActivityController {
 	ServletContext context;
 	@Autowired
 	ActivityListService activityListService;
+	@Autowired
+	ActivityDetailsService activityDetailsService;
 	@RequestMapping(
 				path="/updateEvent.controller",
 				method= {RequestMethod.POST}
 			)
 	public String updateActivity(String activityNo,String activityName,String activityStart,
 			String activityEnd,String activityContent,
-			MultipartFile activityPicture) {
+			MultipartFile activityPicture, String merchandiseTag,String activityDiscount,String ADnumber) {
 		java.sql.Date startDate = null;
 		java.sql.Date endDate = null;
 		try {
@@ -41,12 +44,18 @@ public class UpdateActivityController {
 			return "createActivity.success";
 		}
 		ActivityListBean bean = activityListService.getBean(Integer.valueOf(activityNo));
+		ActivityDetailsBean bean2 = activityDetailsService.selectById(Integer.valueOf(ADnumber));
 		
 		bean.setActivityName(activityName);
 		bean.setActivityStart(startDate);
 		bean.setActivityEnd(endDate);
 		bean.setActivityContent(activityContent);
-
+		
+		bean2.setActivityDiscount(Double.parseDouble(activityDiscount)/10);
+		bean2.setActivityNo(Integer.valueOf(activityNo));
+		bean2.setMerchandiseTag(merchandiseTag);
+		
+		activityDetailsService.updateActivity(bean2);
 		if (!activityPicture.isEmpty()) {
 			try {
 				byte[] bytes = activityPicture.getBytes();

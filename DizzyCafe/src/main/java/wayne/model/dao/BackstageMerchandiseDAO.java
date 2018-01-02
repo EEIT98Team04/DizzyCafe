@@ -34,14 +34,20 @@ public class BackstageMerchandiseDAO {
 	
 	public MerchandiseBean update(MerchandiseBean bean) {
 		MerchandiseBean update = null;
-		update = this.getsession().get(MerchandiseBean.class, bean.getMerchandiseId());
-		update.setMerchandiseName(bean.getMerchandiseName());
-		update.setMerchandisePicture(bean.getMerchandisePicture());
-		update.setMerchandisePrice(bean.getMerchandisePrice());
-		update.setMerchandiseQuantity(bean.getMerchandiseQuantity());
-		update.setMerchandiseStatus(bean.getMerchandiseStatus());
-		update.setMerchandiseTag(bean.getMerchandiseTag());
-		update.setMerchandiseContent(bean.getMerchandiseContent());
+		
+		try {
+			update = this.getsession().get(MerchandiseBean.class, bean.getMerchandiseId());
+			update.setMerchandiseName(bean.getMerchandiseName());
+			update.setMerchandisePicture(bean.getMerchandisePicture());
+			update.setMerchandisePrice(bean.getMerchandisePrice());
+			update.setMerchandiseQuantity(bean.getMerchandiseQuantity());
+			update.setMerchandiseStatus(bean.getMerchandiseStatus());
+			update.setMerchandiseTag(bean.getMerchandiseTag());
+			update.setMerchandiseContent(bean.getMerchandiseContent());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return update;
+		}
 		return update;
 	}
 }

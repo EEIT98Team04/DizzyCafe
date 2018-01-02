@@ -130,15 +130,15 @@ body{
 		$.getJSON('/DizzyCafe/getItem.controller',function(showItems){
 			$('#firstImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[0].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ roundDecimal(showItems[0].discount*10,1) + '折</span>'
+					+ (showItems[0].discount*100).toString().split('0')[0] + '折</span>'
 					+ '<input type="hidden" value="' + showItems[0].merchandiseId+'"/>');
 			$('#thirdImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[1].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ roundDecimal(showItems[1].discount*10,1) + '折</span>'
+					+ (showItems[1].discount*100).toString().split('0')[0] + '折</span>'
 					+ '<input type="hidden" value="' + showItems[1].merchandiseId+'"/>');
 			$('#fifthImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[2].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ roundDecimal(showItems[2].discount*10,1) + '折</span>'
+					+ (showItems[2].discount*100).toString().split('0')[0] + '折</span>'
 					+ '<input type="hidden" value="' + showItems[2].merchandiseId+'"/>');
 		});		
 		
@@ -185,7 +185,7 @@ body{
 // 				res = prize+'&'+dis;
 				res = {};
 				res.prize = $("#here input").val();
-				res.discount = $("#here span:last").html().split('折')[0]/10;
+				res.discount = $("#here span:last").html().split('折')[0]/100;
 		    	$.post('/DizzyCafe/dailyEvent.controller',res);
 				
 			},

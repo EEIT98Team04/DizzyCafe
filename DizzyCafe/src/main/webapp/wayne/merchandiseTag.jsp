@@ -19,12 +19,12 @@
 			<li><a
 				href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=bean">咖啡豆
 					Whole Beans</a></li>
-			<li><a href="">濾掛式咖啡 Drip Coffee</a></li>
+			<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=drip coffee">濾掛式咖啡 Drip Coffee</a></li>
 		</ul>
 		<h3 class="asideTitle">Merchandise</h3>
 		<ul>
-			<li><a href="">手沖濾杯 Drip Coffee Set</a></li>
-			<li><a href="">咖啡沖煮相關器具 Accessories</a></li>
+			<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=drip coffee set">手沖濾杯 Drip Coffee Set</a></li>
+			<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=accessories">咖啡沖煮相關器具 Accessories</a></li>
 			<li><a
 				href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=bottle">咖啡杯瓶及保溫罐
 					Bottle</a></li>
@@ -32,8 +32,16 @@
 
 		</aside>
 		<c:choose>
-			<c:when test="${param.tag == 'bean' }"><div class="title"><h1>咖啡豆 Whole Beans</h1></div></c:when>
-			<c:otherwise><div class="title"><h1>咖啡杯瓶及保溫罐 Bottle</h1></div></c:otherwise>
+			<c:when test="${param.tag == 'bean' }"><div class="title"><h1>咖啡豆 Whole Beans</h1></div>
+			</c:when>
+			<c:when test="${param.tag == 'drip coffee' }"><div class="title"><h1>濾掛式咖啡 Drip Coffee</h1></div>
+			</c:when>
+			<c:when test="${param.tag == 'drip coffee set' }"><div class="title"><h1>手沖濾杯 Drip Coffee Set</h1></div>
+			</c:when>
+			<c:when test="${param.tag == 'accessories' }"><div class="title"><h1>咖啡沖煮相關器具 Accessories</h1></div>
+			</c:when>
+			<c:when test="${param.tag == 'bottle' }"><div class="title"><h1>咖啡杯瓶及保溫罐 Bottle</h1></div>
+			</c:when>
 		</c:choose>
 		<c:if test="${not empty beansTag}">
 			<c:forEach var="beanTag" items="${beansTag}" varStatus="b">

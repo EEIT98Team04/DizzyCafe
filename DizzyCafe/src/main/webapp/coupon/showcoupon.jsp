@@ -34,17 +34,30 @@
 // 					dataSrc : ''
 					dataSrc : 
 						function ( json ) {
-	      					for ( var i=0, ien=json.length ; i<ien ; i++ ) {
-	        					if(json[i].couponStatus == 0){
-	        						json[i].couponStatus = '未使用';
-	        					}else if(json[i].couponStatus == 1){
-	        						json[i].couponStatus = '已使用';
-	        					}else if(json[i].couponStatus == 2){
-	        						json[i].couponStatus = '已過期';
+							$.each(json,function(key,value){
+								if(value.couponStatus == 0){
+									value.couponStatus = '未使用';
+	        					}else if(value.couponStatus == 1){
+	        						value.couponStatus = '已使用';
+	        					}else if(value.couponStatus == 2){
+	        						value.couponStatus = '已過期';
 	        					}
-	        					json[i].eventDiscount = json[i].eventDiscount*10+'折';
-	      					}
-	      					console.log(json);
+	        					var how = (value.eventDiscount*100).toString().split('0')[0];
+	        					value.eventDiscount = how+'折';
+							});
+// 	      					for ( var i=0, ien=json.length ; i<ien ; i++ ) {
+// 	        					if(json[i].couponStatus == 0){
+// 	        						json[i].couponStatus = '未使用';
+// 	        					}else if(json[i].couponStatus == 1){
+// 	        						json[i].couponStatus = '已使用';
+// 	        					}else if(json[i].couponStatus == 2){
+// 	        						json[i].couponStatus = '已過期';
+// 	        					}
+// 	        					var how = (json[i].eventDiscount*100);
+// 	        					console.log(json);
+// 	        					json[i].eventDiscount = how+'折';
+// 	      					}
+// 	      					console.log(json);
 	      				return json;
 	    				}
 				},

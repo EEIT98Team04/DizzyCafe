@@ -141,7 +141,7 @@
 			$('#alertHead').text("退出 "+$(this).parent().find('h4').text() +" 課程");
 			$('#alertBody').text("你確定要退出 "+$(this).parent().find('h4').text()+" 課程嗎QAQ");
 			//把this button 的 courseId 和 memberId(Session) 的資料放進 alert div 的 hidden input裡
-			$('#courseIdinAlert').val($(this).parent().find('input').val());
+			$('#courseIdinAlert').val($(this).parent().find('input:eq(1)').val());
 			$('#memberIdinAlert').val(${user.memberId});
 		});
 
@@ -172,7 +172,7 @@
 			},
 			eventSources : [
 				{
-					url:'/DizzyCafe//courseCalendarByMemberId.controller',
+					url:'/DizzyCafe/courseCalendarByMemberId.controller',
 					data:{memberId:memberId},
 					error: function() {
 		                alert('there was an error while fetching events!');

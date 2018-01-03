@@ -34,10 +34,10 @@ public class ShoppingCartController {
 		
 		List<ShoppingBean> result = shoppingService.select(memberId);
 		model.addAttribute("result", result);
-//		System.out.println(result);
+//		//System.out.println(result);
 		
 		model.addAttribute("count", result.size()-1);
-//		System.out.println(result.size());
+//		//System.out.println(result.size());
 		
 		List<Integer> merchandiseId = new ArrayList<>();
 		List<String> merchandiseName = new ArrayList<>();
@@ -52,21 +52,21 @@ public class ShoppingCartController {
 				MerchandiseBean select = merchandiseService.select(bean.getMerchandiseId());
 				// 商品名稱
 				merchandiseName.add(select.getMerchandiseName());
-//				 System.out.println(merchandiseName);
+//				 //System.out.println(merchandiseName);
 				 ordersDetail.add(0, select.getMerchandiseName());
 				 
 				// 商品單價
 				merchandisePrice.add(select.getMerchandisePrice());
-				// System.out.println(merchandisePrice);
+				// //System.out.println(merchandisePrice);
 				ordersDetail.add(1, select.getMerchandisePrice());
 
 				//購買數量
 				buyCount.add(bean.getBuyCount());
-				// System.out.println(buyCount);
+				// //System.out.println(buyCount);
 				ordersDetail.add(2, bean.getBuyCount());
 				
 				subtotal.add(select.getMerchandisePrice() * bean.getBuyCount());
-//				System.out.println(select.getMerchandisePrice() * bean.getBuyCount());
+//				//System.out.println(select.getMerchandisePrice() * bean.getBuyCount());
 				
 			}
 			model.addAttribute("merchandiseId", merchandiseId);

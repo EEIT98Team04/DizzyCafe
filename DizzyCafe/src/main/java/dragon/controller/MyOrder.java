@@ -27,7 +27,7 @@ public class MyOrder {
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		int memberId = bean.getMemberId();
 		JSONArray json = ordersService.selectMemberToJson(memberId);
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 	

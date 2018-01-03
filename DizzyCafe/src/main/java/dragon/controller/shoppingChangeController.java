@@ -45,7 +45,7 @@ public class shoppingChangeController {
 	@RequestMapping(path = "/merchandiseDelete.controller", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody JSONArray merchandiseDelete(HttpSession session, String MerchandiseId) {
 		/*要使用@ResponseBody，因為只是要回傳值並不是回傳view，只是要回傳一部分不需要全部回傳，所以要使用@ResponseBody註解*/
-		// System.out.println(MerchandiseId);
+		// //System.out.println(MerchandiseId);
 		/* 抓取當前會員Id */
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		/* 轉成正確型態 */
@@ -61,20 +61,20 @@ public class shoppingChangeController {
 		/*利用Service使用DAO方法拿取JSON型態的回傳值，包覆著商品名稱、商品價格和購買數量*/
 		JSONArray json = shoppingService.selectMerchandiseList(memberId);
 		/*測試是否有拿到*/
-//		System.out.println(json);	
+//		//System.out.println(json);	
 		return json;
 
 	}
 
 	@RequestMapping(path = "/amountChange.controller", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody void amountChange(HttpSession session, String MerchandiseId, String Amount) {
-		// System.out.println("1");
+		// //System.out.println("1");
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		int memberId = bean.getMemberId();
 		int merchandiseId = Integer.parseInt(MerchandiseId);
 		int amount = Integer.parseInt(Amount);
 		ShoppingBean selectmerchandise = shoppingService.selectMerchandise(memberId, merchandiseId);
 		shoppingService.changeCount(selectmerchandise, amount);
-		// System.out.println("end");
+		// //System.out.println("end");
 	}
 }

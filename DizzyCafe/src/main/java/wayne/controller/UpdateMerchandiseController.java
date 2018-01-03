@@ -34,7 +34,7 @@ public class UpdateMerchandiseController {
 			MultipartFile merchandisePicture) {
 		
 		MerchandiseBean bean = merchandisebackstageService.updateMerchandiseInBackstageById(merchandiseId);
-		System.out.println(merchandiseId);
+		//System.out.println(merchandiseId);
 		
 		bean.setMerchandiseName(merchandiseName);
 		bean.setMerchandisePrice(merchandisePrice);
@@ -62,7 +62,7 @@ public class UpdateMerchandiseController {
 				merchandisebackstageService.updateMerchandiseInBackstage(bean);
 				return "merchandisemanage";
 			} catch (IOException e) {
-				System.out.println(e.getMessage());
+				//System.out.println(e.getMessage());
 				return "merchandisemanage";
 			}
 		}else {

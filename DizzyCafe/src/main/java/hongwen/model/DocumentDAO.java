@@ -38,7 +38,12 @@ public class DocumentDAO {
 	public DocumentBean get(int id) {
 		DocumentBean get = null;
 		try {
-			get = this.getSession().get(DocumentBean.class, id);
+			String search = "from DocumentBean where documentId = '" + id + "' and Dstatus = '1'";
+			Query<DocumentBean> query = this.getSession().createQuery(search, DocumentBean.class);
+			List<DocumentBean> result = query.getResultList();
+			get = result.get(0);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

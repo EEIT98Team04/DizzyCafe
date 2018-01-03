@@ -35,7 +35,9 @@
 					<div class="tab-pane container" id="menu1">
 						<table id="reply"></table>
 					</div>
-					<div class="tab-pane container" id="menu2">...</div>
+<!-- 					<div class="tab-pane container" id="menu2">					 -->
+<!-- 						<table id="reported"></table> -->
+<!-- 					</div> -->
 				</div>
 			</div>
 		</div>
@@ -92,6 +94,7 @@
 	<script src="/DizzyCafe/hongwen/js/post.js"></script>
 	<script src="/DizzyCafe/hongwen/js/privatedocument.js"></script>
 	<script src="/DizzyCafe/hongwen/js/privatereply.js"></script>
+	<script src="/DizzyCafe/hongwen/js/privatereported.js"></script>
 	<script>
 		$(function() {
 			var modify = "false";//文章狀態(修改or發文)

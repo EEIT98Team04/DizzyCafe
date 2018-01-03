@@ -19,12 +19,12 @@
 			<li><a
 				href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=bean">咖啡豆
 					Whole Beans</a></li>
-			<li><a href="">濾掛式咖啡 Drip Coffee</a></li>
+			<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=drip coffee">濾掛式咖啡 Drip Coffee</a></li>
 		</ul>
 		<h3 class="asideTitle">Merchandise</h3>
 		<ul>
-			<li><a href="">手沖濾杯 Drip Coffee Set</a></li>
-			<li><a href="">咖啡沖煮相關器具 Accessories</a></li>
+			<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=drip coffee set">手沖濾杯 Drip Coffee Set</a></li>
+			<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=accessories">咖啡沖煮相關器具 Accessories</a></li>
 			<li><a
 				href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=bottle">咖啡杯瓶及保溫罐
 					Bottle</a></li>
@@ -87,24 +87,32 @@
 			url : '/DizzyCafe/checkactivitydiscount.controller',
 			type : 'GET',
 			success : function(data){
-				var temp = 1;
+				var temp = [1,1];
 				$.each(data,function(key,value){
-// 					if(value.tag=='tools'){
-						
-// 					}
-					if(temp > value.discount){
-						temp = value.discount;
+					if(value.tag=='bean'){
+						if(temp[0] > value.discount){
+							temp[0] = value.discount;
+						}	
+					}else if(value.tag=='bottle'){
+						if(temp[1] > value.discount){
+							temp[1] = value.discount;
+						}
 					}
+					
 				});
 				$.each($('.tag'),function(key,value){
-					if($(value).val()==data[0].tag){
+// 					if($(value).val()==data[0].tag){
 						var old = $(this).parent().find('p').html().split('<br>');
 						var oo = old[1].split('元');
-						oo[0] = oo[0]*temp;
-						$(this).parent().find('p').html(old[0]+'<br>特價中 : '+oo[0]+'元<br>')
+						if($(value).val()=='bean'){
+							oo[0] = parseInt(oo[0]*temp[0]);
+							$(this).parent().find('p').html(old[0]+'<br>特價中 : '+oo[0]+'元<br>');	
+						}else if($(value).val()=='bottle'){
+							oo[0] = parseInt(oo[0]*temp[1]);
+							$(this).parent().find('p').html(old[0]+'<br>特價中 : '+oo[0]+'元<br>');	
+						}
 // 						$(this).parent('p').html();
-						
-					};
+// 					};
 				});
 			}
 		});

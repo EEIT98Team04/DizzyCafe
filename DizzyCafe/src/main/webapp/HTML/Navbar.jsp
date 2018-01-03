@@ -69,9 +69,6 @@
     version    : 'v2.8' // use graph api version 2.8
   });
 
-//   FB.getLoginStatus(function(response) {
-//     statusChangeCallback(response);
-//   });
   
   };
 
@@ -128,7 +125,7 @@
 				href="${pageContext.request.contextPath}/index.jsp">HOME </a></li>
 			<li class="nav-item"><a class="nav-link" href="#">COFFEE</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="${pageContext.request.contextPath}/merchandise.controller?page=1">商品</a></li>
+				href="${pageContext.request.contextPath}/merchandise.controller?page=1">PRODUCT</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="${pageContext.request.contextPath}/hongwen/board.jsp">FORUM</a></li>
 			<li class="nav-item dropdown"><a
@@ -140,15 +137,13 @@
 						href="${pageContext.request.contextPath}/activity.controller?nowPage=0">活動專區</a>
 					<a class="dropdown-item"
 						href="${pageContext.request.contextPath}/course/course.controller?page=1">課程</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Something else here</a>
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-			<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
 			</li>
 			
 		</ul>
 		<div><i class="fa fa-shopping-cart fa-5" aria-hidden="true" onclick="selectNav()"></i></div>
+		<div><a href="${pageContext.request.contextPath}/event/dailyevent.jsp"><i class="fa fa-calendar fa-5" aria-hidden="true"></i></a></div>
 		<c:choose>
 			<c:when test="${empty user}">
 				<button class="btn asd"

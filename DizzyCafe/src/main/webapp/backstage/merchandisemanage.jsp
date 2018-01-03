@@ -70,10 +70,21 @@
 						type="textarea" class="forText" required /><br> <label><b>商品價格</b></label><input
 						name="merchandisePrice" type="textarea" class="forText" required /><br>
 					<label><b>商品數量</b></label><input name="merchandiseQuantity"
-						type="textarea" class="forText" required /><br> <label><b>商品狀態</b></label><input
+						type="textarea" class="forText" required /><br> 
+						<label><b>商品狀態</b></label><input
 						name="merchandiseStatus" type="textarea" class="forText" required /><br>
-					<label><b>商品類別</b></label><input name="merchandiseTag"
-						type="textarea" class="forText" required /><br> <label><b>商品敘述</b></label><input
+					<label><b>商品類別</b>
+					</label><input name="merchandiseTag"
+						type="radio" class="forText" value="bean" required />咖啡豆
+						<input name="merchandiseTag"
+						type="radio" class="forText" value="drip coffee" required />濾掛式咖啡
+						<input name="merchandiseTag"
+						type="radio" class="forText" value="drip coffee set" required />手沖濾杯
+						<input name="merchandiseTag"
+						type="radio" class="forText" value="accessories" required />咖啡沖煮相關器具
+						<input name="merchandiseTag"
+						type="radio" class="forText" value="bottle" required />咖啡杯瓶及保溫罐<br> 
+						<label><b>商品敘述</b></label><input
 						name="merchandiseContent" type="textarea" class="forText" required
 						id="editor1" /><br> <label><b>商品圖片</b></label><input
 						name="merchandisePicture" type="file" multiple class="forText"
@@ -131,15 +142,24 @@
 					<label><b>商品狀態</b></label>
 					<input name="merchandiseStatus" type="textarea" class="forText" required /><br>
 					<label><b>商品類別</b></label>
-					<input name="merchandiseTag" type="textarea" class="forText" required /><br> 
+					<input name="merchandiseTag"
+						type="radio" class="forText" value="bean" required />咖啡豆
+						<input name="merchandiseTag" 
+						type="radio" class="forText" value="drip coffee" required />濾掛式咖啡
+						<input name="merchandiseTag" 
+						type="radio" class="forText" value="drip coffee set" required />手沖濾杯
+						<input name="merchandiseTag" 
+						type="radio" class="forText" value="accessories" required />咖啡沖煮相關器具
+						<input name="merchandiseTag" 
+						type="radio" class="forText" value="bottle" required />咖啡杯瓶及保溫罐<br> 
 					<label><b>商品敘述</b></label>
 					<input name="merchandiseContent" type="textarea" class="forText" required id="editor2" /><br> 
 					<label><b>商品圖片</b></label>
-					<input name="merchandisePicture" type="file" multiple class="forText" accept="image/*" required id="uploadImage2" /><br> 
+					<input name="merchandisePicture" type="file" class="forText" accept="image/*" id="uploadImage2" /><br> 
 					<img width="240px" /> <br>
 					<p style="margin: auto; width: 300px; text-align: center;"
 						class="forText">
-						<button class="btn btn-primary" type="button" id="forSubmit2">update</button>
+						<button class="btn btn-primary" type="button" id="forSubmit2">更改</button>
 					</p>
 				</div>
 			</form>
@@ -184,7 +204,7 @@
 
 	<script>
 		//顯示資料表dataTable
-		var hoho = 0;
+		var number = 0;
 			var count = 0;
 			var table = $('#dataTable').DataTable({
 				ajax : {
@@ -205,20 +225,28 @@
 					} else {
 						var temp = {};
 						for(var i=0;i<row.aoData.length;i++){
+// 						var temp = row.aoData[i]._aData;
 						temp[i] = row.aoData[i]._aData;
-						console.log(temp[i].merchandiseId);
+// 						console.log(temp[i].merchandiseId);
 						var a = '#edit' + i;
 						console.log(a);
 						$(a).unbind();
-						$(a).click(function(e) {
+						$(a).on('click',function(e) {
 						var id = $(this).attr('id').split('t')[1];
-						console.log(id);
 						$('#updateMerchandise').css('display','block');
 						$('#updateMerchandise input[name=merchandiseName]').val(temp[id].merchandiseName);
 						$('#updateMerchandise input[name=merchandisePrice]').val(temp[id].merchandisePrice);
 						$('#updateMerchandise input[name=merchandiseQuantity]').val(temp[id].merchandiseQuantity);
 						$('#updateMerchandise input[name=merchandiseStatus]').val(temp[id].merchandiseStatus);
-						$('#updateMerchandise input[name=merchandiseTag]').val(temp[id].merchandiseTag);
+						var tag = temp[id].merchandiseTag;
+
+						$('#updateMerchandise :radio').each(function(){
+							var radio = this;
+								if(radio.value == tag){
+									$(radio).prop('checked',true);
+								}
+						})
+
 						$('#updateMerchandise input[name=merchandiseId]').val(temp[id].merchandiseId);
 						CKEDITOR.instances.editor2.setData(temp[id].merchandiseContent);
 						$('#updateMerchandise img').attr('src','/DizzyCafe/'+ temp[id].merchandisePicture);	
@@ -270,9 +298,8 @@
 					"targets" : 6,
 					"data" : null,
 					"render" : function(data, row) {
-					console.log(hoho);
-					var html = "<a href='#' class='btn btn-success' id='edit"+hoho+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
-					hoho++;
+					var html = "<a href='#' class='btn btn-success' id='edit"+number+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>"
+					number++;
 					return html;
 					}
 				} ],
@@ -373,6 +400,7 @@
 						alert("新增成功");
 						insertMerchandise.style.display = "none";
 						$('#myModal').css('display', 'none');
+						number = 0;
 						table.ajax.reload();
 					}
 				});
@@ -394,6 +422,7 @@
 						alert('更新成功');
 						updateMerchandise.style.display = "none";
 						$('#myModal2').css('display', 'none');
+						number = 0;
 						table.ajax.reload();
 					}
 				})

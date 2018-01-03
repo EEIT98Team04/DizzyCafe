@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
+
 import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ public class UpdateMerchandiseController {
 	@Autowired
 	MerchandiseBackstageService merchandisebackstageService; 
 	
+	@Autowired
+	ServletContext servletContext;
+	
 	@RequestMapping(path="updatemerchandise.controller",
 			method= {RequestMethod.GET,RequestMethod.POST})
 	public String UpdateMerchandise(Model model,int merchandiseId, String merchandiseName, int merchandisePrice,
@@ -38,18 +43,13 @@ public class UpdateMerchandiseController {
 		bean.setMerchandiseTag(merchandiseTag);
 		bean.setMerchandiseContent(merchandiseContent);
 		
-		if(merchandisePicture==null) {
-			bean.setMerchandisePicture(bean.getMerchandisePicture());
-			return "merchandisemanage";
-		}
-		
 		if(!merchandisePicture.isEmpty()) {
 			try {
 				byte[] bytes = merchandisePicture.getBytes();
 				
 				// Create the file on server
 				String[] strs = merchandisePicture.getContentType().split("/");
-				String server_path = "C://DizzyCafe/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DizzyCafe";
+				String server_path = servletContext.getRealPath(".");
 				String path = "/wayne/images/"+ bean.getMerchandiseName() + "." +strs[1];
 				
 				bean.setMerchandisePicture(path);
@@ -60,14 +60,14 @@ public class UpdateMerchandiseController {
 				
 				
 				merchandisebackstageService.updateMerchandiseInBackstage(bean);
+				return "merchandisemanage";
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 				return "merchandisemanage";
 			}
 		}else {
+				merchandisebackstageService.updateMerchandiseInBackstage(bean);
 				return "merchandisemanage";
 			}		
-			
-		return "merchandisemanage";
 	}
 }

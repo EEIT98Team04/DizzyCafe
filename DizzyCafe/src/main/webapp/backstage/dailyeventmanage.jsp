@@ -99,6 +99,7 @@
 		Z-INDEX: 5;
 	} 
   </style>
+  <jsp:include page="/HTML/TitleIcon.jsp" />
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -213,17 +214,17 @@
 			console.log(showItems);
 			$('#firstImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[0].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ '<input type="text" style="width:40px;z-index:6" value="'+ roundDecimal(showItems[0].discount*10,1) 
+					+ '<input type="text" style="width:40px;z-index:6" value="'+ (showItems[0].discount*100).toString().split('0')[0] 
 					+ '"/>' + '折</span>'
 					+ '<input type="hidden" value="' + showItems[0].merchandiseId+'"/>');
 			$('#thirdImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[1].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ '<input type="text" style="width:40px;z-index:6" value="'+ roundDecimal(showItems[1].discount*10,1)
+					+ '<input type="text" style="width:40px;z-index:6" value="'+ (showItems[1].discount*100).toString().split('0')[0]
 					+ '"/>' + '折</span>'
 					+ '<input type="hidden" value="' + showItems[1].merchandiseId+'"/>');
 			$('#fifthImg').html('<img width="45px" src="<c:url value="/event/coffee.png"></c:url>"><span>' 
 					+ showItems[2].merchandiseName + '</span><br><span style="margin-left:45px">' 
-					+ '<input type="text" style="width:40px;z-index:6" value="'+ roundDecimal(showItems[2].discount*10,1) 
+					+ '<input type="text" style="width:40px;z-index:6" value="'+ (showItems[2].discount*100).toString().split('0')[0] 
 					+ '"/>' + '折</span>'
 					+ '<input type="hidden" value="' + showItems[2].merchandiseId+'"/>');
 		});

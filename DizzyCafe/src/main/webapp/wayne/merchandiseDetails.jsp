@@ -9,8 +9,12 @@
 	href="/DizzyCafe/wayne/css/merchandiseDetails.css">
 <link href="/DizzyCafe/wayne/css/lightbox.css" rel="stylesheet">
 <title>${bean.merchandiseName }</title>
+<style>
+
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="<c:url value="wayne/js/lightbox.js"/>"></script>
+<jsp:include page="/HTML/TitleIcon.jsp" />
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
@@ -23,12 +27,12 @@
 					<li><a
 						href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=bean">咖啡豆
 							Whole Beans</a></li>
-					<li><a href="">濾掛式咖啡 Drip Coffee</a></li>
+					<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=drip coffee">濾掛式咖啡 Drip Coffee</a></li>
 				</ul>
 				<h3 class="asideTitle">Merchandise</h3>
 				<ul>
-					<li><a href="">手沖濾杯 Drip Coffee Set</a></li>
-					<li><a href="">咖啡沖煮相關器具 Accessories</a></li>
+					<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=drip coffee set">手沖濾杯 Drip Coffee Set</a></li>
+					<li><a href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=accessories">咖啡沖煮相關器具 Accessories</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/merchandisetag.controller?page=1&tag=bottle">咖啡杯瓶及保溫罐
 							Bottle</a></li>
@@ -44,12 +48,17 @@
 				</div>
 				<div class="col4">
 					<h2>${bean.merchandiseName}</h2>
+					<c:choose>
+					<c:when test="${bean.merchandiseTag}=='bean' ">
 					<ul>
 						<li>獨家配方豆</li>
 						<li>新鮮烘培</li>
 						<li>國際認證</li>
 					</ul>
-					<div class="col5">${bean.merchandisePrice}元
+					</c:when>
+					</c:choose>
+					<div class="col5"><span class="tag">${bean.merchandisePrice}元</span>
+						<input type="hidden" value=${bean.merchandiseTag } id="tag"/>
 						<select class="select" id="select">
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -130,7 +139,40 @@
 //  			xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 // 		}
 //  	}
-	
+	$.ajax({
+			url : '/DizzyCafe/checkactivitydiscount.controller',
+			type : 'GET',
+			success : function(data){
+				var temp = [1,1];
+				$.each(data,function(key,value){
+					if(value.tag=='bean'){
+						if(temp[0] > value.discount){
+							temp[0] = value.discount;
+						}	
+					}else if(value.tag=='bottle'){
+						if(temp[1] > value.discount){
+							temp[1] = value.discount;
+						}
+					}
+					
+				});
+				$.each($('.tag'),function(key,value){
+// 					if($(value).val()==data[0].tag){
+						console.log($(value).html().split('元')[0]);
+// 						var old = $(this).parent().find('p').html().split('<br>');
+						var oo = $(value).html().split('元');
+						if($('#tag').val()=='bean'){
+							oo[0] = parseInt(oo[0]*temp[0]);
+							$(value).html('特價中 : '+oo[0]+'元');	
+						}else if($('#tag').val()=='bottle'){
+							oo[0] = parseInt(oo[0]*temp[1]);
+							$(value).html('特價中 : '+oo[0]+'元');	
+						}
+// 						$(this).parent('p').html();
+// 					};
+				});
+			}
+		});
 	
 </script>
 </body>

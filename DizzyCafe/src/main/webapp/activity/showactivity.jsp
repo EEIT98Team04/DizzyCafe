@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${activityBean.activityName }</title>
+<jsp:include page="/HTML/TitleIcon.jsp" />
 <style>
 .info{
 	width:1000px;

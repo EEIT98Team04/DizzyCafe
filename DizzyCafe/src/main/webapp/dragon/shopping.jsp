@@ -14,8 +14,6 @@
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<article class="article">
 	<!-- 	如果是使用者點選的按鈕，由使用者送出資料的前面都要加 ${pageContext.request.contextPath}-->
-	<form action="<c:url value="/shopping/shoppingCart.controller"/>"
-		method="post">
 		<table id="showLsit">
 			<thead>
 				<tr>
@@ -47,7 +45,6 @@
 				</tbody>
 			</c:if>
 		</table>
-	</form>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 	<script>
@@ -59,12 +56,12 @@
 		$('#showLsit>tbody').on('click', 'tr>td>button', function(){
 <%-- 			var memberId = "<%=session.getAttribute("user")%>"; --%>
 			var merchandiseId = $(this).parents('tr').find('td:nth-child(2)').text();
-			
 			/*找到tbody*/
 			var tb = $('#showLsit>tbody');
 			/*清空tbody底下所有元素(將舊表格刪除)*/
 			tb.empty();
 // 			var merchandiseId = ${merchandiseId};
+			alert(merchandiseId);
 // 			var merchandiseName = $(this).parents('tr').find('td:nth-child(2)').text();
 // 			alert(merchandiseId);
 			$.post('/DizzyCafe/merchandiseDelete.controller', {
@@ -170,7 +167,7 @@
 				var cell4 = $('<td></td>').text(json[index].merchandisePrice);
 				var cell5 = $('<td></td>').append(select.val(json[index].buyCount));						
 				var cell6 = $('<td></td>').text(json[index].merchandisePrice * json[index].buyCount);
-				var cell7 = $('<td></td>').html('<button class="btn btn-danger">刪除 </button>');
+				var cell7 = $('<td></td>').html('<button name="delete" class="btn btn-danger">刪除 </button>');
 				
 				total = total + (json[index].merchandisePrice * json[index].buyCount);
 				
@@ -182,7 +179,7 @@
 				var submit = $('<tr></tr>').append(totalCell);
 				tb.append(submit);
 				
-				var submit_btn = $('<button class="Checkout">下一步</button>').on('click',function(e){
+				var submit_btn = $('<input type="submit" class="Checkout" value="下一步"></input>').on('click',function(e){
 					e.preventDefault();
 					location.replace('/DizzyCafe/dragon/checkout.jsp');
 				});

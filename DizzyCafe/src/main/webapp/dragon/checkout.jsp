@@ -205,7 +205,6 @@
 			var TotalPrice = $('.payPrice').text();
 			
 			if(shipment=='郵寄到府'){
-				alert(1);
 				$.post('/DizzyCafe/insertOrder.controller',{
 					'buyer':buyer,
 					'shipPhone':shipPhone,

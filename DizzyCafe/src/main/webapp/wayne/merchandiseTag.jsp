@@ -61,7 +61,7 @@
 					<div class="colthree">
 						<input type="hidden" class="tag" value="${beanTag.merchandiseTag }"/>
 						<p class="pone">
-							${beanTag.merchandiseName}<br /> ${beanTag.merchandisePrice}元<br />
+							${beanTag.merchandiseName}<br />原價 : ${beanTag.merchandisePrice}元<br />
 						</p>
 						<span class="spanone"><input class="button1" type="button" value="立即購買" 
 						onclick="location.href='${pageContext.request.contextPath}/merchandisedetails.controller?merchandiseId=${beanTag.merchandiseId}'"></span>
@@ -112,13 +112,13 @@
 				$.each($('.tag'),function(key,value){
 // 					if($(value).val()==data[0].tag){
 						var old = $(this).parent().find('p').html().split('<br>');
-						var oo = old[1].split('元');
+						var oo = old[1].split('元')[0].split(' ');
 						if($(value).val()=='bean'){
-							oo[0] = parseInt(oo[0]*temp[0]);
-							$(this).parent().find('p').html(old[0]+'<br>特價中 : '+oo[0]+'元<br>');	
+							oo[2] = parseInt(oo[2]*temp[0]);
+							$(this).parent().find('p').html(old[0]+'<br>特價 : '+oo[2]+'元<br>');	
 						}else if($(value).val()=='bottle'){
-							oo[0] = parseInt(oo[0]*temp[1]);
-							$(this).parent().find('p').html(old[0]+'<br>特價中 : '+oo[0]+'元<br>');	
+							oo[2] = parseInt(oo[2]*temp[1]);
+							$(this).parent().find('p').html(old[0]+'<br>特價 : '+oo[2]+'元<br>');	
 						}
 // 						$(this).parent('p').html();
 // 					};

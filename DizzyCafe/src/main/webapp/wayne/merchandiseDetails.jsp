@@ -57,7 +57,7 @@
 					</ul>
 					</c:when>
 					</c:choose>
-					<div class="col5"><span class="tag">${bean.merchandisePrice}元</span>
+					<div class="col5"><span class="tag">原價 : ${bean.merchandisePrice}元</span>
 						<input type="hidden" value=${bean.merchandiseTag } id="tag"/>
 						<select class="select" id="select">
 							<option value="1">1</option>
@@ -160,13 +160,13 @@
 // 					if($(value).val()==data[0].tag){
 						console.log($(value).html().split('元')[0]);
 // 						var old = $(this).parent().find('p').html().split('<br>');
-						var oo = $(value).html().split('元');
+						var oo = $(value).html().split('元')[0].split(' ');
 						if($('#tag').val()=='bean'){
-							oo[0] = parseInt(oo[0]*temp[0]);
-							$(value).html('特價中 : '+oo[0]+'元');	
+							oo[2] = parseInt(oo[2]*temp[0]);
+							$(value).html('特價 : '+oo[2]+'元');	
 						}else if($('#tag').val()=='bottle'){
-							oo[0] = parseInt(oo[0]*temp[1]);
-							$(value).html('特價中 : '+oo[0]+'元');	
+							oo[2] = parseInt(oo[2]*temp[1]);
+							$(value).html('特價 : '+oo[2]+'元');	
 						}
 // 						$(this).parent('p').html();
 // 					};

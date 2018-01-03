@@ -267,7 +267,7 @@ function insertNav() {
 		$.ajax({
 			url : "/DizzyCafe/insertCart.controller",
 			type : 'POST',
-			data : {'buyCount':buyCount,'merchandiseId':merchandiseId},
+			data : {'buyCount':buyCount,'merchandiseId':merchandiseId,'price':$('.tag').html().split('元')[0].split(' ')[2]},
 			success: function(data){
 //	 			for(var i=0;i<data.length;i++){
 //	 				var merchandiseId = data[i].merchandiseId;
@@ -284,10 +284,10 @@ function insertNav() {
 					var merchandisePicture = $("<img>").attr('src','${pageContext.request.contextPath}'+mer.merchandisePicture);
 					
 					var merchandiseName = $("<div></div>").text(mer.merchandiseName);
-					var merchandisePrice = $("<div></div>").html(mer.merchandisePrice+"元" + "x" + mer.buyCount + "<br>");
+					var merchandisePrice = $("<div></div>").html(mer.price+"元" + "x" + mer.buyCount + "<br>");
 					var merchandiseDelete = '<button id= "button' + index + '" type="button">remove</button>';
 					merchandisePrice.append(merchandiseDelete);
-					var Price = mer.merchandisePrice*mer.buyCount;
+					var Price = mer.price*mer.buyCount;
 					totalPrice = Price + totalPrice;
 					var bigDiv = $("<div></div>").append([merchandisePicture, merchandiseName, merchandisePrice]).attr("class","bigDiv");
 					product.append(bigDiv);
@@ -327,11 +327,11 @@ function selectNav(){
 				
 				var merchandisePicture = $("<img>").attr('src','${pageContext.request.contextPath}'+mer.merchandisePicture);
 				var merchandiseName = $("<div></div>").text(mer.merchandiseName);
-				var merchandisePrice = $("<div></div>").html(mer.merchandisePrice+"元" + "x" + mer.buyCount + "<br>");
+				var merchandisePrice = $("<div></div>").html(mer.price+"元" + "x" + mer.buyCount + "<br>");
 					var merchandiseDelete = '<button id= "button' + index + '" type="button">remove</button>';
 					merchandisePrice.append(merchandiseDelete);
 				
-				var Price = mer.merchandisePrice*mer.buyCount;
+				var Price = mer.price*mer.buyCount;
 				totalPrice = Price + totalPrice;
 				var bigDiv = $("<div></div>").append([merchandisePicture, merchandiseName, merchandisePrice]);
 				product.append(bigDiv);

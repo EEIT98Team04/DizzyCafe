@@ -15,8 +15,19 @@ public class CalendarJSON {
     @SerializedName("title")
     @Expose
     private String title;
+    @SerializedName("color")
+    @Expose
+    private String color;
 
-    public String getStart() {
+    public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getStart() {
         return start;
     }
 

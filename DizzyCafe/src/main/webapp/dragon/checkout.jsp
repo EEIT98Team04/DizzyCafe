@@ -52,7 +52,7 @@
 			<div class="totalPrice" style="width: 300px;margin: auto;text-align: right;">
 				<label>
 						<span>應付總金額: </span>
-						<span></span>
+						<span class="payPrice"></span>
 						<span> 元</span>
 					</label>
 			</div>
@@ -186,8 +186,10 @@
 		playment_div.append([playment_label, playment_select]);
 		var check_button = $('<input>').attr("class", "check")
 		    							.attr("type", "submit")
-		    							.attr("value", "前往結帳");
-
+		    							.attr("value", "確定");
+		
+		loadTotal1();
+		
 		userdata_form.append([buyer_div, phone_div, address_div, playment_div, check_button]);
 		$('.check').on('click', function(e){
 			e.preventDefault();
@@ -200,6 +202,7 @@
 			var shipCost = $('span[name="shipCost"]').text();
 			console.log(shipment);		
 			var playment = $('.playment').val();
+			var TotalPrice = $('.payPrice').text();
 			
 			if(shipment=='郵寄到府'){
 				alert(1);
@@ -211,7 +214,8 @@
 					'storAddress':'無',
 					'shipment':shipment,
 					'ShipCost':shipCost,
-					'playment':playment
+					'playment':playment,
+					'TotalPrice':TotalPrice
 				}, function(e){
 					alert("訂單完成");
 					location.replace('/DizzyCafe/dragon/myorder.jsp');
@@ -283,11 +287,13 @@
 		}
 		var check_button = $('<input><').attr("class", "check")
 		      						    .attr("type", "submit")
-		      						    .attr("value", "前往結帳");
+		      						    .attr("value", "確定");
 		
 
 		userdata_form.append([buyer_div, phone_div, store_div, playment_div, check_button]);
-
+		
+		loadTotal2();
+		
 		$('.selectStore').on('click', function(e){
 			console.log(123);
 			e.preventDefault();
@@ -306,7 +312,7 @@
 			var storAddress = $('input[name="storAddress"]').val();
 			var shipment = $('input[name="optionsRadios"]:checked').val();
 			var shipCost = $('span[name="shipCost"]').text();
-			
+			var TotalPrice = $('.payPrice').text();
 			
 			
 			var playment = $('.playment').val();
@@ -320,7 +326,8 @@
 					'StorAddress':shipAddress,
 					'shipment':shipment,
 					'ShipCost':shipCost,
-					'playment':playment
+					'playment':playment,
+					'TotalPrice':TotalPrice
 				}, function(){
 					alert("訂單完成");
 					location.replace('/DizzyCafe/dragon/myorder.jsp');
@@ -329,10 +336,37 @@
 		});
 		
 	};
+	
+	function loadTotal1(){
+		$.getJSON('/DizzyCafe/selectShopping.controller', function(json){
+			var total = 0;
+			/*function(index, value) 裡面的index, value為固定寫法，不可更改*/
+			$.each(json, function(index, value){			
+				total = total + (json[index].merchandisePrice * json[index].buyCount);	
+			});
+			$('.payPrice').text("");
+			$('.payPrice').text(total+80);
+		});
+	};
+	
+	function loadTotal2(){
+		$.getJSON('/DizzyCafe/selectShopping.controller', function(json){
+			var total = 0;
+			/*function(index, value) 裡面的index, value為固定寫法，不可更改*/
+			$.each(json, function(index, value){			
+				total = total + (json[index].merchandisePrice * json[index].buyCount);	
+			});
+			$('.payPrice').text("");
+			$('.payPrice').text(total+60);
+		});
+	};
+	
 	function childclose(a){
 // 		alert(a);
 		$('.storeName').text(a);
 	}
+	
+	
 	</script>
 </body>
 </html>

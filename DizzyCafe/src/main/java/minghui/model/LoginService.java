@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailParseException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,6 +32,9 @@ public class LoginService {
 	
 	@Autowired
 	private JavaMailSender javaMailSender;
+	
+	@Autowired
+	private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -110,37 +114,39 @@ public class LoginService {
 
 	@Transactional
 	public boolean forgot_password_send_email(String memberEmail) {
-		long start = System.currentTimeMillis();
 		
 		MemberBean bean = memberDAO.select_by_email(memberEmail);
 		if (bean != null) {
-				String subject = "DizzyCafe 會員重設密碼";
+			String subject = "DizzyCafe 會員重設密碼";
+			
+			String random_URL = String.valueOf(System.currentTimeMillis()) + bean.getMemberName();
 				
-				String random_URL = String.valueOf(System.currentTimeMillis()) + bean.getMemberName();
-					
-				String html = "<p>親愛的" + bean.getMemberName() + "您好，請點擊下方連結重新設置密碼</p>"
-				+ "<a href='http://localhost:8080/DizzyCafe/forgotPassword.controller?vc=" + random_URL + "'>重設密碼</a> ";
+			String html = "<p>親愛的" + bean.getMemberName() + "您好，請點擊下方連結重新設置密碼</p>"
+			+ "<a href='http://localhost:8080/DizzyCafe/forgotPassword.controller?vc=" + random_URL + "'>重設密碼</a> ";
+			
+			threadPoolTaskExecutor.execute(new Runnable() {
+				
+				@Override
+				public void run() {					
 
-				MimeMessage message = javaMailSender.createMimeMessage();
-				
-				try {
-					MimeMessageHelper helper = new MimeMessageHelper(message, true);
-					helper.setTo(memberEmail);
-					helper.setSubject(subject);
-					helper.setText(html,true);
-					bean.setMemberTempPassword(random_URL);
+					MimeMessage message = javaMailSender.createMimeMessage();
+					
+					try {
+						MimeMessageHelper helper = new MimeMessageHelper(message, true);
+						helper.setTo(memberEmail);
+						helper.setSubject(subject);
+						helper.setText(html,true);
+					}
+					catch (MessagingException e) {
+						throw new MailParseException(e);
+					}
+			 
+					javaMailSender.send(message);
 				}
-				catch (MessagingException e) {
-					throw new MailParseException(e);
-				}
-		 
-				javaMailSender.send(message);
+			});
 				
-				bean.setMemberTempPassword(random_URL);
-				
-				System.out.println("cost : " + (System.currentTimeMillis() - start) / 1000.0 + "second");
-				
-				return true;
+			bean.setMemberTempPassword(random_URL);
+			return true;					
 			
 		}
 		return false;

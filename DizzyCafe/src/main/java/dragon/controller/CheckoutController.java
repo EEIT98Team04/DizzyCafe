@@ -29,12 +29,12 @@ public class CheckoutController {
 
 	@RequestMapping(path = { "/insertOrder.controller" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody String insertOrder(HttpSession session, String buyer, String shipPhone, String ShipAddress, String StoreName,
-			String shipment, String ShipCost, String playment) {
+			String shipment, String ShipCost, String playment, String TotalPrice) {
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		int memberId = bean.getMemberId();
 		String BuyerEmail = bean.getMemberEmail();
 		int shipCost = Integer.valueOf(ShipCost);
-
+		int totalPrice = Integer.valueOf(TotalPrice);
 		String StorAddress = "無";
 		/* 要用equals */
 		if ("貨到付款".equals(shipment) || "超商取貨".equals(shipment)) {
@@ -59,7 +59,7 @@ public class CheckoutController {
 		order.setStoreAddress(StorAddress);
 		order.setShipStyle(shipment);
 		order.setShipCost(shipCost);
-		order.setTotalPrice(10000);
+		order.setTotalPrice(totalPrice);
 		order.setPaymentStyle(playment);
 		order.setOrdersStatusId("a");
 		ordersService.insertOrders(order);

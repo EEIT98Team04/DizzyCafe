@@ -1,5 +1,6 @@
 package dragon.model.dao;
 
+
 import java.util.List;
 
 import org.hibernate.Session;
@@ -136,4 +137,18 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 		return null;
 	}
 
+	@Override
+	public int deleteAll(int memberId) {
+		List<ShoppingBean> deletes = this.select(memberId);
+		if(deletes != null) {
+			for(ShoppingBean delete : deletes) {
+				
+				this.getSession().delete(delete);
+			}
+			
+		}
+		return 0;
+	}
+	
+	
 }

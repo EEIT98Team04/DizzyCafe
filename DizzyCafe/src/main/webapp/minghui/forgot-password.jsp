@@ -53,7 +53,7 @@
 			}, function(data) {
 				alert(data);
 				if (data == '信件已寄出') {
-					window.close();
+					window.close();					
 				}
 				$('#sent_email').attr('disabled', false);
 			});

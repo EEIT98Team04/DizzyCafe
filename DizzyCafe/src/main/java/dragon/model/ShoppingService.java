@@ -46,6 +46,11 @@ public class ShoppingService {
 	public ShoppingBean deletemerchandise(ShoppingBean bean) {
 			return shoppingDAO.delete(bean);
 	}
+	
+	public int deleteAll(int memberId) {
+		return shoppingDAO.deleteAll(memberId);	
+	}
+	
 	public ShoppingBean updateCart(ShoppingBean bean) {
 		return shoppingDAO.updateCart(bean);
 	}

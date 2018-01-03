@@ -42,7 +42,7 @@
  	<script> 
  	$('#orderTable').DataTable({
 					ajax : {
-						url:'/DizzyCafe/selectAllOrder.controller',
+						url:'/DizzyCafe/selectUnpaidOrder.controller',
 						type:'POST',
 						dataSrc: ''
 					},

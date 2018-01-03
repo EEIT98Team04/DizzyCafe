@@ -36,4 +36,8 @@ public class OrdersDetailsService {
 		}
 		return null;	
 	}
+	public int insertDetails(int memberId){
+		
+		return ordersDetailsDAO.insert(memberId);
+	}
 }

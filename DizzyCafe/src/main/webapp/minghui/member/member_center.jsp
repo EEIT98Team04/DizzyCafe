@@ -20,7 +20,7 @@
 					<a
 						href="${pageContext.request.contextPath}/minghui/member/member_center.jsp"
 						class="list-group-item">首頁</a> <a href="${pageContext.request.contextPath}/course/courseOfMemberController.controller?page=1" class="list-group-item">課程</a>
-					<a href="#" class="list-group-item">訂單</a>
+					<a href="${pageContext.request.contextPath}/dragon/myorder.jsp" class="list-group-item">訂單</a>
 					<a href="${pageContext.request.contextPath }/event/dailyevent.jsp" class="list-group-item">每日活動</a>
 					<a href="${pageContext.request.contextPath}/coupon/showcoupon.jsp" class="list-group-item">折價卷</a>
 					<a href="/DizzyCafe/hongwen/private.jsp" class="list-group-item">論壇</a>

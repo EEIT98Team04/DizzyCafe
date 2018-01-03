@@ -9,8 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%-- 	<jsp:include page="/HTML/Navbar.jsp" /> --%>
-<!-- 	<article class="article">  -->
+	<jsp:include page="/HTML/Navbar.jsp" />
+	<article class="article"> 
 	<table class="myOrderList">
 	
 	</table>

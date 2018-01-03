@@ -12,7 +12,7 @@ public interface OrdersDetailsDAO {
 	
 	List<OrdersDetailsBean> select();
 	
-	OrdersDetailsBean insert(OrdersDetailsBean bean);
+	int insert(int memberId);
 	
 	int updateShoppingOrdersId(int OrdersId, int memberId);
 	

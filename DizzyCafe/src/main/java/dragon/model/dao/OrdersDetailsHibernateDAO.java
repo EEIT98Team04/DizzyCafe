@@ -69,13 +69,22 @@ public class OrdersDetailsHibernateDAO implements OrdersDetailsDAO {
 	}
 
 	@Override
-	public OrdersDetailsBean insert(OrdersDetailsBean bean) {
-		if(bean != null)
-		{
-			Query<ShoppingBean> insert = this.getSession().createNativeQuery("from ShoppingBean where memberId=:memberId", ShoppingBean.class);
-//			insert.setParameter("memberId", memberId);
-		}
-		return null;
+	public int insert(int memberId) {
+		@SuppressWarnings("unchecked")
+		Query select = this.getSession().createNativeQuery("insert into ordersDetails(ordersId, merchandiseName, merchandisePrice, buyCount) "
+				+ " select autoOrderId, merchandiseName, merchandisePrice, buyCount"  
+				+ " from shopping" 
+				+ " Join orders" 
+				+ " On orders.memberId = shopping.memberId" 
+				+ " Join merchandise" 
+				+ " On shopping.merchandiseId = merchandise.merchandiseId" 
+				+ " where autoOrderId = (select Top(1) autoOrderId" 
+				+ " from orders" 
+				+ "	where memberId = " + memberId
+				+ " order by autoOrderId DESC)");
+		System.out.println(select.executeUpdate());
+
+		return 0;
 	}
 
 	@Override

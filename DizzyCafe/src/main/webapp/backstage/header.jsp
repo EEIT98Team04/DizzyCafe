@@ -95,13 +95,13 @@
           </a>
 		  <ul class="sidenav-second-level collapse" id="details">
 			<li><a
-				href="${pageContext.request.contextPath }/backstage/detailsManage.jsp">全部</a>
+				href="${pageContext.request.contextPath }/backstage/detailsManageAll.jsp">全部</a>
 			</li>
 			<li><a
-				href="${pageContext.request.contextPath }/backstage/dailyeventmanage.jsp">尚未付款</a>
+				href="${pageContext.request.contextPath }/backstage/detailsManageUnpaid.jsp">尚未付款</a>
 			</li>
 			<li>
-				<a href="${pageContext.request.contextPath }/backstage/dailyeventmanage.jsp">待出貨</a>
+				<a href="${pageContext.request.contextPath }/backstage/detailsManageWaitshipment.jsp">待出貨</a>
 <!-- 				<ul class="sidenav-second-level collapse" id="Waitshipment"> -->
 <!-- 					<li><a -->
 <%-- 						href="${pageContext.request.contextPath }/backstage/detailsManage.jsp">未處理</a> --%>

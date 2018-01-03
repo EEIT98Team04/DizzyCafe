@@ -22,6 +22,8 @@ public interface ShoppingDAO {
 	
 	ShoppingBean delete(ShoppingBean bean);
 	
+	int deleteAll(int memberId);
+	
 	ShoppingBean updateCart(ShoppingBean bean);
 	
 	List<Object[]> selectBean(int memberId);

@@ -67,11 +67,11 @@
 	<p class="alert alert-warning" style="padding-left:30%;padding-bottom:0px"><strong style="font-size:24px">活動專區</strong></p>
 	<div id="showItems">
 		<c:if test="${not empty items}">
-			<div class="card-group" style="width:800px;margin:50px auto;">
+			<div class="card-group" style="width:1000px;margin:50px auto;">
 			<c:forEach items="${items }" var="showBean" varStatus="sta">
 				<div class="card">
     				<a href="${pageContext.request.contextPath}/activities?No=${showBean.activityNo-1000}">
-						<img class="card-img-top" width="240px" src="${pageContext.request.contextPath}${showBean.activityPicture}"/>
+						<img class="card-img-top" width="320px" src="${pageContext.request.contextPath}${showBean.activityPicture}"/>
 					</a>
     				<div class="card-body">
       					<h4 class="card-title">${showBean.activityName }</h4>

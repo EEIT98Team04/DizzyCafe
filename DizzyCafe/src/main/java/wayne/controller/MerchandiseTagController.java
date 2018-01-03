@@ -21,7 +21,7 @@ public class MerchandiseTagController {
 	
     @RequestMapping(method= {RequestMethod.POST, RequestMethod.GET})
 	public String method(Model model, int page, String tag) {
-    	System.out.println("MerchandiseTagController");
+    	//System.out.println("MerchandiseTagController");
     	int rows_perPage = 6;
     	
     	JSONArray _merchandiseTag = merchandiseService.showMerchandiseInPageTag(tag);

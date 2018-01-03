@@ -22,7 +22,7 @@ public class CheckActivityDiscountController {
 			)
 	public @ResponseBody JSONArray letsgo() {
 		JSONArray result = activityListService.getActivityDiscount();
-		System.out.println(result);
+		//System.out.println(result);
 		return result;
 	}
 }

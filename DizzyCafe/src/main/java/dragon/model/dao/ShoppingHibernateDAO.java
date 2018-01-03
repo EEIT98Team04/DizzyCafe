@@ -1,5 +1,6 @@
 package dragon.model.dao;
 
+
 import java.util.List;
 
 import org.hibernate.Session;
@@ -34,7 +35,7 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 
 
 	}
-	
+	@Override
 	public JSONArray selectMerchandiseList(int memberId) {
 		/*@SuppressWarnings忽略掉警訊(黃線), @SuppressWarnings("unchecked")就是忽略掉 unchecked 的警訊*/
 		@SuppressWarnings("unchecked")
@@ -98,8 +99,6 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 			}else {
 				return 0;
 			}
-			
-			
 	}
 	
 
@@ -140,6 +139,21 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 		}
 		return null;
 	}
+
+	@Override
+	public int deleteAll(int memberId) {
+		List<ShoppingBean> deletes = this.select(memberId);
+		if(deletes != null) {
+			for(ShoppingBean delete : deletes) {
+				
+				this.getSession().delete(delete);
+			}
+			
+		}
+		return 0;
+	}
+	
+
 	@Override
 	public List<Object[]> selectBean (int memberId){
 		Query<Object[]> query = this.getSession().createQuery("From ShoppingBean where memberId = :memberId");

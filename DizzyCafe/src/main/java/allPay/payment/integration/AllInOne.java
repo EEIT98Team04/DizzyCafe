@@ -207,8 +207,8 @@ public class AllInOne extends AllInOneBase{
 			log.info("aioChargeback generate CheckMacValue: " + CheckMacValue);
 			String httpValue = AllPayFunction.genHttpValue(aioChargebackObj, CheckMacValue);
 			log.info("aioChargeback post String: " + httpValue);
-			System.out.println(httpValue);
-			System.out.println(aioChargebackUrl);
+			//System.out.println(httpValue);
+			//System.out.println(aioChargebackUrl);
 			result = AllPayFunction.httpPost(aioChargebackUrl, httpValue, "UTF-8");
 		} catch (AllPayException e2) {
 			e2.ShowExceptionMessage();
@@ -351,8 +351,8 @@ public class AllInOne extends AllInOneBase{
 			log.info("queryTradeInfo generate CheckMacValue: " + CheckMacValue);
 			String httpValue = AllPayFunction.genHttpValue(queryTradeInfoObj, CheckMacValue);
 			log.info("queryTradeInfo post String: " + httpValue);
-			System.out.println(httpValue);
-			System.out.println(queryTradeInfoUrl);
+			//System.out.println(httpValue);
+			//System.out.println(queryTradeInfoUrl);
 			result = AllPayFunction.httpPost(queryTradeInfoUrl, httpValue, "UTF-8");
 		} catch (AllPayException e2) {
 			e2.ShowExceptionMessage();

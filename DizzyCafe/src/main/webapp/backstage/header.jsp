@@ -24,6 +24,8 @@
             <span class="nav-link-text">前台首頁</span>
           </a>
         </li>
+       
+        
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-futbol-o"></i>
@@ -40,15 +42,13 @@
               <a href="${pageContext.request.contextPath }/backstage/adplayManage.jsp">活動輪播牆</a>
             </li>
           </ul>
-        </li>
-        
+        </li>    
          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Merchandises">
           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/merchandisemanage.jsp">
             <i class="fa fa-hand-o-right" aria-hidden="true"></i>
             <span class="nav-link-text">商品管理</span>
           </a>
         </li>
-       
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           	<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#manage" data-parent="#exampleAccordion">
@@ -65,6 +65,7 @@
         	</ul>
         </li>
         
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
 <%--           <a class="nav-link" href="${pageContext.request.contextPath }/backstage/courseManage.jsp"> --%>
 <!--             <i class="fa fa-fw fa-book"></i> -->
@@ -83,7 +84,53 @@
             </li>
             </ul>
         </li>
+        
+<!--         data-parent="#exampleAccordion 代表摺疊面板 -->
+<!-- 		 data-toggle="collapse" 添加到您想要展开或折叠的组件的链接上 -->
+<!-- 		 上面使用直接使用href="#course" 是因為還有兩個子摺疊選單，當點擊時會打開摺疊選單顯示-->
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Orders">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#details" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-columns"></i>
+            <span class="nav-link-text">訂單管理</span>
+          </a>
+		  <ul class="sidenav-second-level collapse" id="details">
+			<li><a
+				href="${pageContext.request.contextPath }/backstage/detailsManageAll.jsp">全部</a>
+			</li>
+			<li><a
+				href="${pageContext.request.contextPath }/backstage/detailsManageUnpaid.jsp">尚未付款</a>
+			</li>
+			<li>
+				<a href="${pageContext.request.contextPath }/backstage/detailsManageWaitshipment.jsp">待出貨</a>
+<!-- 				<ul class="sidenav-second-level collapse" id="Waitshipment"> -->
+<!-- 					<li><a -->
+<%-- 						href="${pageContext.request.contextPath }/backstage/detailsManage.jsp">未處理</a> --%>
+<!-- 					</li> -->
+<!-- 					<li><a -->
+<%-- 						href="${pageContext.request.contextPath }/backstage/detailsManage.jsp">已處理</a> --%>
+<!-- 					</li> -->
+<!-- 				</ul> -->
+			</li>
+			<li><a
+				href="${pageContext.request.contextPath }/backstage/dailyeventmanage.jsp">運送中</a>
+			</li>
+			<li><a
+				href="${pageContext.request.contextPath }/backstage/dailyeventmanage.jsp">完成</a>
+			</li>
+			<li><a
+				href="${pageContext.request.contextPath }/backstage/dailyeventmanage.jsp">已取消</a>
+			</li>
+		  </ul>
+        </li>
+        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+          <a class="nav-link" href="#">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">Link</span>
+          </a>
+        </li>
       </ul>
+      
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
           <a class="nav-link text-center" id="sidenavToggler">

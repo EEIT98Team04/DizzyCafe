@@ -49,7 +49,8 @@
 					</a>
     				<div class="card-body" style="border:1px solid #DDDDDD;border-bottom: 6px solid #fa8b00">
       					<h4 class="card-title">${course.courseName}</h4>
-      					<div class="card-text content"><p>${course.courseIntro}</p></div>
+      					<input type="hidden" id="tempIntro${status.count }" value="${course.courseIntro}"/>
+      					<div class="card-text content"><p id="courseIntro${status.count }"></p></div>
       					<input type="hidden" value="${course.courseId }" />
      					 <p class="card-text"><small class="text-muted"><a class="more" href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">看更多</a></small></p>
    					</div>
@@ -134,6 +135,7 @@
 			}
 		});
 
+		
 	
 		$('img[name="quit"]').click(function(){
 			$('#alertHead').text("退出 "+$(this).parent().find('h4').text() +" 課程");
@@ -157,7 +159,6 @@
 		$(document).ready(function(){
 			var data;
 			$.get("/DizzyCafe/courseCalendar.controller",function(json){
-				console.log(json);
 			});
 		});
 		
@@ -204,7 +205,12 @@
 			 eventStartEditable : false,
 		});
 		
-		
+		//簡介
+		for(var i = 1;i<=${rows};i++){
+			var tempintro = $('#tempIntro'+i).val()
+			var intro = tempintro.substring(0, 30)+"...";
+			$('#courseIntro'+i).html(intro);
+		}
 	</script>
 </body>
 </html>

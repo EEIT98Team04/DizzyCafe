@@ -27,9 +27,13 @@ public class CourseOfMemberController {
 		int memberId = user.getMemberId(); //取課程資料
 		int rows_perPage = 6;
 		JSONArray _Course = courseMemberService.showMyCourseInPage(memberId);
+		JSONArray myCourse = courseMemberService.ShowCourceByPage(page,rows_perPage,_Course);
 
-		model.addAttribute("myCourse" ,courseMemberService.ShowCourceByPage(page,rows_perPage,_Course)); //本頁顯示課程
+		model.addAttribute("myCourse" ,myCourse); //本頁顯示課程
+		model.addAttribute("rows" ,myCourse.size()); //本頁顯示課程	
 		model.addAttribute("TotalPages" ,courseMemberService.countTotalPagesWithId(rows_perPage,_Course)); //計算總頁數
+		model.addAttribute("rows_perPage" ,rows_perPage); //一頁幾筆資料
+		
 		//model.addAttribute("courseNowPeople" ,courseMemberService.countMyNowPeople(memberId, row_numStart, row_numEnd,rows_perPage));
 		
 		return "myCourse";
@@ -41,3 +45,4 @@ public class CourseOfMemberController {
 		return "期待下次看到你喔QAQ";
 	}
 }
+

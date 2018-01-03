@@ -64,9 +64,7 @@
 <body style="font-family: Microsoft JhengHei;">
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height: 80px"></div>
-	<div class="container row">
-      <p style="font-weight:normal;word-spacing:0pt;font-size:32px;text-align:left;line-height:1;padding-left:300px;">課程專區
-    </div>
+      <p class="alert alert-warning" style="padding-left:25%;padding-bottom:0px"><strong style="font-size:36px">課程專區</strong></p>
 	<div style="width:100%;">
 		<article class="container-fluid" style="padding-left:475px">
 			<section class="row container" id="news-list">
@@ -82,12 +80,13 @@
 								<div id="date${status.count }" class="date"></div>
 							</div>
 							<div class="col-md-8">
-								<h3>
+								<h3 style="padding-left:20px;margin-top:5px;">
 									<a href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">
 									${course.courseName}</a>
 								</h3>
-								<p>${course.courseIntro}</p>
-								<a class="more"
+								<input type="hidden" id="tempIntro${status.count }" value="${course.courseIntro}"/>
+								<p id="courseIntro${status.count }" style="padding-left:20px;"></p>
+								<a class="more" style="padding-left:20px;"
 									href="${pageContext.request.contextPath}/course/courseShow.controller?course=${course.courseId}">看更多</a>
 							</div>
 						</div>
@@ -111,7 +110,13 @@
 			temp=$('#tempTime'+i).val().split('-');
 			$('#date'+i).html("<p style='height:11px;'>"+temp[2]+"</p>");
 			$('#date'+i).append(temp[1]+"月");
+			var tempintro = $('#tempIntro'+i).val()
+			console.log(tempintro);
+			var intro = tempintro.substring(0, 30)+"...";
+			console.log(intro);
+			$('#courseIntro'+i).html(intro);
 		}
+		
 	</script>
 </body>
 </html>

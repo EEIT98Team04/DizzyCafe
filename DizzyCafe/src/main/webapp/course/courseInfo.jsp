@@ -72,11 +72,12 @@
 			<div class="content" id="articleContent">
 				<div class="part" data-type="p" style="margin:20px 95px; width:756px;">
 					<p>${course.courseIntro }</p>
+					<br>
 					${course.courseContent }
-					
+					<br><br><br>
 					<p>講師 : ${course.courseTeacher } 老師</p>
-					<p>報名時間 : ${course.courseSignupBegin } ～　${course.courseSignupEnd }</p>
-					<p>課程時間 : ${course.courseBegin } ～　${course.courseEnd }</p>
+					<p>報名時間 : ${course.courseSignupBegin } ～ ${course.courseSignupEnd }</p>
+					<p>課程時間 : ${course.courseBegin } ～ ${course.courseEnd }</p>
 					<p id="week"></p>
 					<p>現在人數 : ${nowPeople } / ${course.courseLimit }</p>
 					<p>人數有限，心動不如馬上行動</p>

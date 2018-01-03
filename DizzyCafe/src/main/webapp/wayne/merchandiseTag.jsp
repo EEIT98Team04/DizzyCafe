@@ -59,6 +59,7 @@
 						</a>
 					</div>
 					<div class="colthree">
+						<input type="hidden" class="tag" value="${beanTag.merchandiseTag }"/>
 						<p class="pone">
 							${beanTag.merchandiseName}<br /> ${beanTag.merchandisePrice}元<br />
 						</p>
@@ -90,5 +91,41 @@
 	</div>
 
 	<footer></footer>
+	<script>
+		$.ajax({
+			url : '/DizzyCafe/checkactivitydiscount.controller',
+			type : 'GET',
+			success : function(data){
+				var temp = [1,1];
+				$.each(data,function(key,value){
+					if(value.tag=='bean'){
+						if(temp[0] > value.discount){
+							temp[0] = value.discount;
+						}	
+					}else if(value.tag=='bottle'){
+						if(temp[1] > value.discount){
+							temp[1] = value.discount;
+						}
+					}
+					
+				});
+				$.each($('.tag'),function(key,value){
+// 					if($(value).val()==data[0].tag){
+						var old = $(this).parent().find('p').html().split('<br>');
+						var oo = old[1].split('元');
+						if($(value).val()=='bean'){
+							oo[0] = parseInt(oo[0]*temp[0]);
+							$(this).parent().find('p').html(old[0]+'<br>特價中 : '+oo[0]+'元<br>');	
+						}else if($(value).val()=='bottle'){
+							oo[0] = parseInt(oo[0]*temp[1]);
+							$(this).parent().find('p').html(old[0]+'<br>特價中 : '+oo[0]+'元<br>');	
+						}
+// 						$(this).parent('p').html();
+// 					};
+				});
+			}
+		});
+	
+	</script>
 </body>
 </html>

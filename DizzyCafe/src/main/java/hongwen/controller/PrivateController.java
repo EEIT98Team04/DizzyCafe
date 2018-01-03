@@ -1,6 +1,7 @@
 package hongwen.controller;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
@@ -89,14 +90,22 @@ public class PrivateController {
 			}
 			jsonString += "]";
 			json = JSONArray.fromObject(jsonString);
+		} catch (FileNotFoundException e) {
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		} finally {
+			
 			try {
 				br.close();
 				fr.close();
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+				return null;
 			} catch (IOException e) {
 				e.printStackTrace();
+				return null;
 			}
 		}
 		return json;

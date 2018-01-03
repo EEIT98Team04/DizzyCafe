@@ -133,7 +133,7 @@
 				method : 'GET',
 				success : function(json) {
 					$('#span').text(json[0].name);
-					$('#pre').text(json[0].content);
+					$('#pre').innerHTML = json[0].content;
 					$('#documentid').text(json[0].documentId);
 					$('#btnreport').trigger('click');
 				}

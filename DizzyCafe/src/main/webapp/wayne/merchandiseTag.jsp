@@ -59,8 +59,9 @@
 						</a>
 					</div>
 					<div class="colthree">
+						<input type="hidden" class="tag" value="${beanTag.merchandiseTag }"/>
 						<p class="pone">
-							${beanTag.merchandiseName}<br /> ${beanTag.merchandisePrice}元<br />
+							${beanTag.merchandiseName}<br />原價 : ${beanTag.merchandisePrice}元<br />
 						</p>
 						<span class="spanone"><input class="button1" type="button" value="立即購買" 
 						onclick="location.href='${pageContext.request.contextPath}/merchandisedetails.controller?merchandiseId=${beanTag.merchandiseId}'"></span>
@@ -90,5 +91,41 @@
 	</div>
 
 	<footer></footer>
+	<script>
+		$.ajax({
+			url : '/DizzyCafe/checkactivitydiscount.controller',
+			type : 'GET',
+			success : function(data){
+				var temp = [1,1];
+				$.each(data,function(key,value){
+					if(value.tag=='bean'){
+						if(temp[0] > value.discount){
+							temp[0] = value.discount;
+						}	
+					}else if(value.tag=='bottle'){
+						if(temp[1] > value.discount){
+							temp[1] = value.discount;
+						}
+					}
+					
+				});
+				$.each($('.tag'),function(key,value){
+// 					if($(value).val()==data[0].tag){
+						var old = $(this).parent().find('p').html().split('<br>');
+						var oo = old[1].split('元')[0].split(' ');
+						if($(value).val()=='bean'){
+							oo[2] = parseInt(oo[2]*temp[0]);
+							$(this).parent().find('p').html(old[0]+'<br>特價 : '+oo[2]+'元<br>');	
+						}else if($(value).val()=='bottle'){
+							oo[2] = parseInt(oo[2]*temp[1]);
+							$(this).parent().find('p').html(old[0]+'<br>特價 : '+oo[2]+'元<br>');	
+						}
+// 						$(this).parent('p').html();
+// 					};
+				});
+			}
+		});
+	
+	</script>
 </body>
 </html>

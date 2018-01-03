@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${activityBean.activityName }</title>
+<jsp:include page="/HTML/TitleIcon.jsp" />
 <style>
 .info{
 	width:1000px;
@@ -31,7 +32,7 @@ h3{
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
 	<div style="height: 100px"></div>
-	<p class="alert alert-warning" style="padding-left:30%;padding-bottom:0px"><strong style="font-size:24px">活動專區</strong></p>
+	<p class="alert alert-warning" style="padding-left:25%;padding-bottom:0px"><strong style="font-size:36px">活動專區</strong></p>
 	<div class="info">
 		<div>
 			<img style="padding-left:150px;" width="800px" src="${pageContext.request.contextPath}${activityBean.activityPicture}">

@@ -1,49 +1,75 @@
 package dragon.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import dragon.model.OrdersBean;
+import dragon.model.OrdersDetailsService;
+import dragon.model.OrdersService;
+import dragon.model.ShoppingService;
+import minghui.model.MemberBean;
 
 @Controller
-@RequestMapping("/Checkout/Checkout.controller")
 public class CheckoutController {
 
-	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST})
-	public String method(OrdersBean orders, BindingResult bindingResult, Model model)
-	{
-		/*bindingResult前面要放要驗證的欄位，才會驗證bean欄位是否正確*/
-		Map<String, String> errors = new HashMap<>();
-		model.addAttribute("errors", errors);
-		if(bindingResult != null && bindingResult.hasErrors())
-		{
-			if(bindingResult.getFieldError("buyer") != null)
-			{
-				errors.put("buyer.error", "姓名欄位格式有誤，請重新檢查!");
-			}
-			if(bindingResult.getFieldError("shipPhone") != null)
-			{
-				errors.put("shipPhone.error", "手機欄位格式有誤，請重新檢查!");
-			}
-			if(bindingResult.getFieldError("email") != null)
-			{
-				errors.put("email.error", "信箱欄位格式有誤，請重新檢查!");
-			}
-			if(bindingResult.getFieldError("shipAddress") != null)
-			{
-				errors.put("shipAddress.error", "運送地址欄位格式有誤，請重新檢查!");
+	@Autowired
+	private OrdersService ordersService;
+	@Autowired
+	private OrdersDetailsService ordersDetailsService;
+	@Autowired
+	private ShoppingService shoppingService;
+
+	@RequestMapping(path = { "/insertOrder.controller" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody String insertOrder(HttpSession session, String buyer, String shipPhone, String ShipAddress, String StoreName,
+			String shipment, String ShipCost, String playment, String TotalPrice) {
+		MemberBean bean = (MemberBean) session.getAttribute("user");
+		int memberId = bean.getMemberId();
+		String BuyerEmail = bean.getMemberEmail();
+		int shipCost = Integer.valueOf(ShipCost);
+		int totalPrice = Integer.valueOf(TotalPrice);
+		String StorAddress = "無";
+		/* 要用equals */
+		if ("貨到付款".equals(shipment) || "超商取貨".equals(shipment)) {
+			if ("德欣門市".equals(StoreName)) {
+				StorAddress = "基隆市中山區復興路328號之6號之7號1樓";
+			} else if ("德復門市".equals(StoreName)) {
+				StorAddress = "基隆市中山區復興路197號";
 			}
 		}
-		if(errors != null && !errors.isEmpty())
-		{
-			return "";
-		}
-		return null;
+		OrdersBean order = new OrdersBean();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String data = simpleDateFormat.format(new Date());
+
+		/* 新增訂單 */
+		order.setMemberId(memberId);
+		order.setOrdersDate(data);
+		order.setBuyerEmail(BuyerEmail);
+		order.setBuyer(buyer);
+		order.setShipPhone(shipPhone);
+		order.setShipAddress(ShipAddress);
+		order.setStoreName(StoreName);
+		order.setStoreAddress(StorAddress);
+		order.setShipStyle(shipment);
+		order.setShipCost(shipCost);
+		order.setTotalPrice(totalPrice);
+		order.setPaymentStyle(playment);
+		order.setOrdersStatusId("a");
+		ordersService.insertOrders(order);
+		//
+		// /* 新增訂單明細 */
+		ordersDetailsService.insertDetails(memberId);
+		//
+		// /* 刪除購物車資料 */
+		shoppingService.deleteAll(memberId);
+		
+		return "success";
 	}
 }

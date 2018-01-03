@@ -1,5 +1,6 @@
 package dragon.model.dao;
 
+
 import java.util.List;
 
 import org.hibernate.Session;
@@ -7,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.google.gson.JsonArray;
 
 import dragon.model.ShoppingBean;
 import dragon.model.ShoppingDAO;
@@ -32,7 +35,7 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 
 
 	}
-	
+	@Override
 	public JSONArray selectMerchandiseList(int memberId) {
 		/*@SuppressWarnings忽略掉警訊(黃線), @SuppressWarnings("unchecked")就是忽略掉 unchecked 的警訊*/
 		@SuppressWarnings("unchecked")
@@ -82,7 +85,7 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 	private static final String insert = "insert into shopping values(?, ?, ?)";
 
 	@Override
-	public int insert(int memberId, int merchandiseId, int buyCount) {
+	public int insert(int memberId, int merchandiseId, int buyCount, int price) {
 			ShoppingBean insert = this.selectMerchandise(memberId, merchandiseId);
 			if(insert == null)
 			{
@@ -90,13 +93,12 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 				bean.setMemberId(memberId);
 				bean.setMerchandiseId(merchandiseId);
 				bean.setBuyCount(buyCount);
+				bean.setPrice(price);
 				this.getSession().save(bean);
 				return 1;
 			}else {
 				return 0;
 			}
-			
-			
 	}
 	
 
@@ -138,4 +140,33 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 		return null;
 	}
 
+	@Override
+	public int deleteAll(int memberId) {
+		List<ShoppingBean> deletes = this.select(memberId);
+		if(deletes != null) {
+			for(ShoppingBean delete : deletes) {
+				
+				this.getSession().delete(delete);
+			}
+			
+		}
+		return 0;
+	}
+	
+
+	@Override
+	public List<Object[]> selectBean (int memberId){
+		Query<Object[]> query = this.getSession().createQuery("From ShoppingBean where memberId = :memberId");
+		query.setParameter("memberId", memberId);
+		return query.getResultList();
+	}
+	
+	@Override
+	public  List<Object[]> selectList(int memberId){
+		Query<Object[]> query = this.getSession().createNativeQuery("select shopping.price,shopping.merchandiseId, merchandise.merchandiseName, merchandise.merchandisePicture, shopping.buyCount" + 
+				" from shopping Join merchandise" +
+				" on shopping.merchandiseId = merchandise.merchandiseId" +
+				" where shopping.memberId = " + memberId);
+		return query.getResultList();
+	}
 }

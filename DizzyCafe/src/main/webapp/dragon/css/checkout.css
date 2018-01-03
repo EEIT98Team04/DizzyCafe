@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+.shipmain{
+	font-family:Microsoft JhengHei;
+	font-size: 12px;
+	margin: auto;
+	margin: 100px;
+	text-align:center;
+}
+.selectShipTitle{
+	font-family:Microsoft JhengHei;
+	margin: auto;
+	margin-bottom:15px;
+	text-align: center;
+	width: 300px;
+}
+.selectShip{
+	margin: auto;
+	text-align: left;
+	width: 300px;
+}
+li{
+	font-family:Microsoft JhengHei;
+	list-style:none;
+	margin: 5px;
+	margin-left: -40px;
+	text-align: center;
+}
+.shipCostCell{
+	text-align: right;
+}
+.userdata{
+	margin:auto;
+	text-align:center;
+	width:500px;
+	margin-top: -70px;
+}
+.userdata div{
+	text-align: left;
+}
+.titledata{
+	text-align:center;
+}
+
+.divstyle{
+	margin: 5px;
+}
+
+#checkbox{
+	margin-left: 10px;
+}

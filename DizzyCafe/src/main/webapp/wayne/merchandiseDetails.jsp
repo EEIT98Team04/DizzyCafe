@@ -14,6 +14,7 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="<c:url value="wayne/js/lightbox.js"/>"></script>
+<jsp:include page="/HTML/TitleIcon.jsp" />
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
@@ -56,7 +57,8 @@
 					</ul>
 					</c:when>
 					</c:choose>
-					<div class="col5">${bean.merchandisePrice}元
+					<div class="col5"><span class="tag">原價 : ${bean.merchandisePrice}元</span>
+						<input type="hidden" value=${bean.merchandiseTag } id="tag"/>
 						<select class="select" id="select">
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -137,7 +139,40 @@
 //  			xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 // 		}
 //  	}
-	
+	$.ajax({
+			url : '/DizzyCafe/checkactivitydiscount.controller',
+			type : 'GET',
+			success : function(data){
+				var temp = [1,1];
+				$.each(data,function(key,value){
+					if(value.tag=='bean'){
+						if(temp[0] > value.discount){
+							temp[0] = value.discount;
+						}	
+					}else if(value.tag=='bottle'){
+						if(temp[1] > value.discount){
+							temp[1] = value.discount;
+						}
+					}
+					
+				});
+				$.each($('.tag'),function(key,value){
+// 					if($(value).val()==data[0].tag){
+						console.log($(value).html().split('元')[0]);
+// 						var old = $(this).parent().find('p').html().split('<br>');
+						var oo = $(value).html().split('元')[0].split(' ');
+						if($('#tag').val()=='bean'){
+							oo[2] = parseInt(oo[2]*temp[0]);
+							$(value).html('特價 : '+oo[2]+'元');	
+						}else if($('#tag').val()=='bottle'){
+							oo[2] = parseInt(oo[2]*temp[1]);
+							$(value).html('特價 : '+oo[2]+'元');	
+						}
+// 						$(this).parent('p').html();
+// 					};
+				});
+			}
+		});
 	
 </script>
 </body>

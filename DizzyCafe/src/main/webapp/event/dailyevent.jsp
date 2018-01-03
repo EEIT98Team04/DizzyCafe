@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>每日活動</title>
+<jsp:include page="/HTML/TitleIcon.jsp" />
 <style type="text/css">
 .BIG{
 	height:auto;

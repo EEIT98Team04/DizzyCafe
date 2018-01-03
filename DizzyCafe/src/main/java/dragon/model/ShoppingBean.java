@@ -6,11 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @Entity
 @Table(name="shopping")
@@ -20,16 +15,27 @@ public class ShoppingBean implements Serializable{
 	@Id
 	private int merchandiseId;
 	private int buyCount;
-
+	private int price;
+	
 	public static void main(String[] args) {
 
 	}
 	
+
 	@Override
 	public String toString() {
 		return "ShoppingBean [memberId=" + memberId + ", merchandiseId=" + merchandiseId + ", buyCount=" + buyCount
-				+ ", ordersId=]";
+				+ ", price=" + price + "]";
 	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 
 	public int getMemberId() {
 		return memberId;

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dragon.model.dao.ShoppingHibernateDAO;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Service
 @Transactional
@@ -35,8 +36,8 @@ public class ShoppingService {
 		return shoppingDAO.selectMerchandise(memberId, merchandiseId);
 	}
 
-	public int insert(int memberId, int merchandiseId, int buyCount) {
-		return shoppingDAO.insert(memberId, merchandiseId, buyCount);
+	public int insert(int memberId, int merchandiseId, int buyCount ,int price) {
+		return shoppingDAO.insert(memberId, merchandiseId, buyCount, price);
 	}
 
 	public ShoppingBean changeCount(ShoppingBean bean, int amount) {
@@ -46,7 +47,27 @@ public class ShoppingService {
 	public ShoppingBean deletemerchandise(ShoppingBean bean) {
 			return shoppingDAO.delete(bean);
 	}
+	
+	public int deleteAll(int memberId) {
+		return shoppingDAO.deleteAll(memberId);	
+	}
+	
 	public ShoppingBean updateCart(ShoppingBean bean) {
 		return shoppingDAO.updateCart(bean);
+	}
+	public JSONArray selectBean(int memberId) {
+		List<Object[]> selectList = shoppingDAO.selectList(memberId);
+		JSONArray json = new JSONArray();
+		for(Object[] temp : selectList) {
+			JSONObject xxx = new JSONObject();
+			xxx.put("price", temp[0]);
+			xxx.put("merchandiseId", temp[1]);
+			xxx.put("memberName", temp[2]);
+			xxx.put("merchandisePicture", temp[3]);
+			xxx.put("buyCount", temp[4]);
+			json.add(xxx);
+		}
+		
+		return json;
 	}
 }

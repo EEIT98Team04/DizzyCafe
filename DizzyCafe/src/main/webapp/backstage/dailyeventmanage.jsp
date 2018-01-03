@@ -99,6 +99,7 @@
 		Z-INDEX: 5;
 	} 
   </style>
+  <jsp:include page="/HTML/TitleIcon.jsp" />
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">

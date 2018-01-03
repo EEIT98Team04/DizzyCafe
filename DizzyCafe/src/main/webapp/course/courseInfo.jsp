@@ -72,14 +72,15 @@
 			<div class="content" id="articleContent">
 				<div class="part" data-type="p" style="margin:20px 95px; width:756px;">
 					<p>${course.courseIntro }</p>
+					<br>
 					${course.courseContent }
-					
+					<br><br><br>
 					<p>講師 : ${course.courseTeacher } 老師</p>
-					<p>報名時間 : ${course.courseSignupBegin } ～　${course.courseSignupEnd }</p>
-					<p>課程時間 : ${course.courseBegin } ～　${course.courseEnd }</p>
+					<p>報名時間 : ${course.courseSignupBegin } ～ ${course.courseSignupEnd }</p>
+					<p>課程時間 : ${course.courseBegin } ～ ${course.courseEnd }</p>
 					<p id="week"></p>
-					<p>現在人數 : ${nowPeople } / ${course.courseLimit }</p>
-					<p>人數有限，心動不如馬上行動</p>
+					<p id="nowpeople">現在人數 : ${nowPeople } / ${course.courseLimit }</p>
+					<p id="plimit">人數有限，心動不如馬上行動</p>
 					<br>
 					<p>※本課程將酌收費用 ${course.courseCost } 元</p>
 					<br><br>
@@ -192,6 +193,7 @@
 		$('#signupsuccess').css('display','none');
 		$('#signup').css('display','none');
 	});
+
 	
 	//日期從數字轉成中文
 	var week = '${course.courseWeek}';
@@ -251,6 +253,7 @@
 						if (data == "TimeError") { //非報名時間
 							$('#iwannasignup').text("不是報名時間").prop("disabled",true).attr("class","btn btn-default");
 						} else if (data == "limited") { //人數到達上限
+							$('#plimit').text("人數已滿");
 							$('#iwannasignup').text("人數已達上限").prop("disabled",true).attr("class","btn btn-default");
 						}
 					});
@@ -356,6 +359,7 @@
 				 	week: '週',  
 				 	day: '日',   
 				 },
+				 eventStartEditable : false,
 			});
 		
 	</script>

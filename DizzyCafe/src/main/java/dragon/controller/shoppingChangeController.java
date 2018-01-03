@@ -48,7 +48,9 @@ public class shoppingChangeController {
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		/* 轉成正確型態 */
 		int memberId = bean.getMemberId();
+		System.out.println("MerchandiseId:"+MerchandiseId);
 		int merchandiseId = Integer.valueOf(MerchandiseId);
+		
 		/* 搜尋此會員點選自己購物車的此項商品 */
 		ShoppingBean selectmerchandise = shoppingService.selectMerchandise(memberId, merchandiseId);
 		/* 將此商品從資料庫刪掉 */

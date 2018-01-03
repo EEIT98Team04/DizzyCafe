@@ -20,7 +20,7 @@ public class AddCartController {
 	ShoppingService shoppingService;
 	
 	@RequestMapping(path="/insertCart.controller",method= {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody JSONArray insertCart(HttpSession session, String buyCount, String merchandiseId) {
+	public @ResponseBody JSONArray insertCart(HttpSession session, String buyCount, String merchandiseId ,String price) {
 		
 //		//System.out.println(buyCount);
 //		//System.out.println(merchandiseId);
@@ -29,25 +29,28 @@ public class AddCartController {
 		int memberId = bean.getMemberId();
 //		//System.out.println(memberId);
 		
-		int count = shoppingService.insert(memberId, Integer.valueOf(merchandiseId), Integer.valueOf(buyCount));
+		int count = shoppingService.insert(memberId, Integer.valueOf(merchandiseId), Integer.valueOf(buyCount), Integer.valueOf(price));
 		
 		if(count == 0) {
 			ShoppingBean shoppingbean = shoppingService.selectMerchandise(memberId, Integer.valueOf(merchandiseId));
 			shoppingbean.setBuyCount(shoppingbean.getBuyCount()+ Integer.valueOf(buyCount));
 			shoppingService.updateCart(shoppingbean);
 		}
+		
 		JSONArray Json = shoppingService.selectMerchandiseList(memberId);
 		//System.out.println(Json);
+
 		return Json;
 	}
 	
 	@RequestMapping(path="/selectCart.controller",method= {RequestMethod.POST,RequestMethod.GET})
-	public @ResponseBody JSONArray selectCart(HttpSession session) {
+	public @ResponseBody JSONArray selectCart(HttpSession session, String merchandisePrice) {
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		int memberId = bean.getMemberId();
 		
 		JSONArray Json = shoppingService.selectMerchandiseList(memberId);
 //		//System.out.println(Json);
+
 		return Json;
 		
 	}
@@ -61,7 +64,7 @@ public class AddCartController {
 		int merchandiseid = Integer.valueOf(merchandiseId);
 		ShoppingBean selectMerchandise = shoppingService.selectMerchandise(memberId, merchandiseid);
 		shoppingService.deletemerchandise(selectMerchandise);
-		JSONArray Json = shoppingService.selectMerchandiseList(memberId);
+		JSONArray Json = shoppingService.selectBean(memberId);
 		return Json;
 	}
 }

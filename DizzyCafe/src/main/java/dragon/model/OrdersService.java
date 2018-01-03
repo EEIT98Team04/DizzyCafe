@@ -59,4 +59,28 @@ public class OrdersService {
 	{
 		return ordersDAO.update(autoOrderId, ordersStatusId);
 	}
+	
+	public JSONArray selectAllOrder() {
+		return ordersDAO.selectAllOrder();
+	}
+	
+	public JSONArray selectUnpaidOrder() {
+		return ordersDAO.selectUnpaidOrder();
+	}
+	
+	public JSONArray selectWaitshipmentOrder() {
+		return ordersDAO.selectWaitshipmentOrder();
+	}
+	
+	public JSONArray selectShipOrder() {
+		return ordersDAO.selectShipOrder();
+	}
+	
+	public JSONArray selectFinishOrder() {
+		return ordersDAO.selectFinishOrder();
+	}
+	
+	public JSONArray selectCancelOrder() {
+		return ordersDAO.selectCancelOrder();
+	}
 }

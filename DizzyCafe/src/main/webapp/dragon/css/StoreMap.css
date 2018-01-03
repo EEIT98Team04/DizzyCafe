@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.selectStoreMap{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 15px;
+	margin: auto;
+	margin: 20px;
+	text-align:center;
+}
+select{
+	font-size: 15px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.map{
+	margin:auto;
+	margin-top:10px;
+	text-align:center;
+}

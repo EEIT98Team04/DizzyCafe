@@ -115,7 +115,11 @@ public class CourseDAO {
 	public JSONArray showCoruseInBackstage() {
 		@SuppressWarnings("unchecked")
 		Query<Object[]> select = this.getSession().createNativeQuery(
-				"SELECT * FROM course");
+				"  SELECT *,(" + 
+				"  SELECT COUNT(*) " + 
+				"  FROM coursememberForm " + 
+				"  WHERE course.courseId = coursememberForm.courseId) as courseNowPeople " + 
+				"  FROM course");
 		List<Object[]> temp = select.getResultList();
 
 		JSONArray result = new JSONArray();
@@ -134,6 +138,7 @@ public class CourseDAO {
 			tt.put("courseSignupBegin", var[9].toString());
 			tt.put("courseSignupEnd", var[10].toString());
 			tt.put("courseLimit", var[11]);
+			tt.put("courseNowPeople", var[15]);
 			result.add(tt);
 		}
 		return result;

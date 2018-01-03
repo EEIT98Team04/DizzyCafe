@@ -80,6 +80,9 @@
 								url : '/DizzyCafe/Privatereport.hongwen',
 								type : 'GET',
 								dataSrc : function(json) {
+									if(json == null){
+										return json;
+									}
 									return json;
 								}
 							},

@@ -4,7 +4,7 @@ table {
 	font-size: 15px;
 	margin: auto;
 	margin-top:150px;
-	width: 720px;
+	width: 800px;
 	text-align: center;
 	border-collapse: collapse;
 	position: relative;
@@ -15,6 +15,7 @@ th {
 	font-family:Microsoft JhengHei;
 	font-size: 18px;
 	font-weight: normal;
+	width:100px;
 	padding: 15px;
 	background: #b9c9fe;
 	border-top: 4px solid #aabcfe;

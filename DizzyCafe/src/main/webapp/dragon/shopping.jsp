@@ -17,13 +17,13 @@
 		<table id="showLsit">
 			<thead>
 				<tr>
-					<th></th>
+					<th>商品圖片</th>
 					<th>商品編號</th>
 					<th>商品名稱</th>
 					<th>單價</th>
 					<th>商品數量</th>
 					<th>商品金額</th>
-					<th>刪除商品</th>
+					<th></th>
 				</tr>
 			</thead>
 			<c:if test="${not empty result}">
@@ -161,15 +161,18 @@
 								   , option11, option12, option13, option14, option15, option16, option17, option18, option19, option20
 								   , option21, option22, option23, option24, option25, option26, option27, option28, option29, option30]);
 			
-				var cell1 = $('<td></td>').text(index+1);
+// 				var cell1 = $('<td></td>').text(index+1);
+				var img = $('<img>').attr("src", '${pageContext.request.contextPath}'+json[index].merchandisePicture)
+									.css("width", "40%");
+				var cell1 = $('<td></td>').append(img);
 				var cell2 = $('<td></td>').text(json[index].merchandiseId);
-				var cell3 = $('<td></td>').text(json[index].merchandiseName);
-				var cell4 = $('<td></td>').text(json[index].merchandisePrice);
+				var cell3 = $('<td></td>').text(json[index].memberName);
+				var cell4 = $('<td></td>').text(json[index].price);
 				var cell5 = $('<td></td>').append(select.val(json[index].buyCount));						
-				var cell6 = $('<td></td>').text(json[index].merchandisePrice * json[index].buyCount);
-				var cell7 = $('<td></td>').html('<button name="delete" class="btn btn-danger">刪除 </button>');
+				var cell6 = $('<td></td>').text(json[index].price * json[index].buyCount);
+				var cell7 = $('<td></td>').html('<button name="delete" class="btn btn-outline-danger">刪除 </button>');
 				
-				total = total + (json[index].merchandisePrice * json[index].buyCount);
+				total = total + (json[index].price * json[index].buyCount);
 				
 				var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7]);
 				tb.append(row);	
@@ -179,7 +182,7 @@
 				var submit = $('<tr></tr>').append(totalCell);
 				tb.append(submit);
 				
-				var submit_btn = $('<input type="submit" class="Checkout" value="下一步"></input>').on('click',function(e){
+				var submit_btn = $('<input type="submit" class="btn btn-primary btn-sm" value="下一步"></input>').on('click',function(e){
 					e.preventDefault();
 					location.replace('/DizzyCafe/dragon/checkout.jsp');
 				});

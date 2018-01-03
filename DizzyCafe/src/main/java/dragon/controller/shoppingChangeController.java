@@ -36,10 +36,12 @@ public class shoppingChangeController {
 	public @ResponseBody JSONArray selectShopping(HttpSession session) {
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		int memberId = bean.getMemberId();
-		JSONArray json = shoppingService.selectMerchandiseList(memberId);
+//		JSONArray json = shoppingService.selectMerchandiseList(memberId);
+		JSONArray json = shoppingService.selectBean(memberId);
 		return json;
 		
 	}
+	
 	@RequestMapping(path = "/merchandiseDelete.controller", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody JSONArray merchandiseDelete(HttpSession session, String MerchandiseId) {
 		/*要使用@ResponseBody，因為只是要回傳值並不是回傳view，只是要回傳一部分不需要全部回傳，所以要使用@ResponseBody註解*/

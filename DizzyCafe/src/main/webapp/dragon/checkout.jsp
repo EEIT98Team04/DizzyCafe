@@ -62,7 +62,7 @@
 		<h4 class="titleName">取件人資料</h4>
 		<div class="selectuserdata">
 			<label>
-				<input id="checkbox" type="checkbox">
+				<input id="checkbox" type="checkbox" >
 				<span>同會員資料</span>
 			</label>
 		</div>
@@ -184,7 +184,7 @@
 													 .text("ATM轉帳");
 		playment_select.append([playment_option1, playment_option2, playment_option3]);
 		playment_div.append([playment_label, playment_select]);
-		var check_button = $('<input>').attr("class", "check")
+		var check_button = $('<input>').attr("class", "check btn btn-primary")
 		    							.attr("type", "submit")
 		    							.attr("value", "確定");
 		
@@ -284,7 +284,7 @@
 			playment_select.append([playment_option1, playment_option2]);
 			playment_div.append([playment_label, playment_select]);
 		}
-		var check_button = $('<input><').attr("class", "check")
+		var check_button = $('<input><').attr("class", "check btn btn-primary")
 		      						    .attr("type", "submit")
 		      						    .attr("value", "確定");
 		
@@ -316,21 +316,23 @@
 			
 			var playment = $('.playment').val();
 			if(shipment=='貨到付款' || shipment=='超商取貨'){
-				
-				$.post('/DizzyCafe/insertOrder.controller',{
-					'buyer':buyer,
-					'shipPhone':shipPhone,
-					'ShipAddress':'無',
-					'StoreName':storeName,
-					'StorAddress':shipAddress,
-					'shipment':shipment,
-					'ShipCost':shipCost,
-					'playment':playment,
-					'TotalPrice':TotalPrice
-				}, function(){
-					alert("訂單完成");
-					location.replace('/DizzyCafe/dragon/myorder.jsp');
-				})
+				$.post('/DizzyCafe/checkoutjiijij.controller',function(str){
+					console.log(str);
+				});
+// 				$.post('/DizzyCafe/insertOrder.controller',{
+// 					'buyer':buyer,
+// 					'shipPhone':shipPhone,
+// 					'ShipAddress':'無',
+// 					'StoreName':storeName,
+// 					'StorAddress':shipAddress,
+// 					'shipment':shipment,
+// 					'ShipCost':shipCost,
+// 					'playment':playment,
+// 					'TotalPrice':TotalPrice
+// 				}, function(){
+// 					alert("訂單完成");
+// 					location.replace('/DizzyCafe/dragon/myorder.jsp');
+// 				});
 			}
 		});
 		
@@ -341,7 +343,9 @@
 			var total = 0;
 			/*function(index, value) 裡面的index, value為固定寫法，不可更改*/
 			$.each(json, function(index, value){			
-				total = total + (json[index].merchandisePrice * json[index].buyCount);	
+				alert(total);
+				total = total + (json[index].price * json[index].buyCount);
+				alert(total);		
 			});
 			$('.payPrice').text("");
 			$('.payPrice').text(total+80);
@@ -353,7 +357,7 @@
 			var total = 0;
 			/*function(index, value) 裡面的index, value為固定寫法，不可更改*/
 			$.each(json, function(index, value){			
-				total = total + (json[index].merchandisePrice * json[index].buyCount);	
+				total = total + (json[index].price * json[index].buyCount);
 			});
 			$('.payPrice').text("");
 			$('.payPrice').text(total+60);

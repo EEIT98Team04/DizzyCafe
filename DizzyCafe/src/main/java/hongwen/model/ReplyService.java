@@ -21,15 +21,20 @@ public class ReplyService {
 	private DocumentDAO documentDAO;
 
 	public JSONArray selectToJSON(int documentId) {
+		String temp = "[{\"status\":\"false\"}]";
 		// 更新人氣
 		documentDAO.popularity(documentId);
 		// 讀取回覆
 		List<ReplyBean> select = replyDAO.select(documentId);
 		DocumentBean d = documentDAO.get(documentId);
+		if(d == null) {
+			JSONArray json = JSONArray.fromObject(temp);
+			return json;
+		}
 		ReplyBean r = new ReplyBean(0, d.getMembername(), d.getMemberId(), d.getDocumentId(), d.getContent(),
 				d.getTimes());
 		select.add(0, r);
-		String temp = new Gson().toJson(select); // 轉JSON檔案
+		temp = new Gson().toJson(select); // 轉JSON檔案
 		JSONArray json = JSONArray.fromObject(temp);
 		return json;
 	}

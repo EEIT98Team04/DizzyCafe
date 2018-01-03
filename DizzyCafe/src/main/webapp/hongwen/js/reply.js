@@ -26,6 +26,10 @@ $(function() {
 		type : 'GET',
 		// data:data,//post use
 		success : function(json) {
+			if(json[0]['status'] == 'false'){
+				alert('該文章已被禁用！');
+				return;
+			}
 			setdata(json);//
 		}
 	});

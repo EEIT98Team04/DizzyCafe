@@ -67,10 +67,10 @@ public class PrivateController {
 	@RequestMapping(path = "/Privatereport.hongwen", method = { RequestMethod.GET })
 	public @ResponseBody JSONArray privatereport(@RequestParam Map<?, ?> param) {
 		JSONArray json = null;
-		
+
 		FileReader fr = null;
 		BufferedReader br = null;
-		String serverPath = servletContext.getRealPath(".");;
+		String serverPath = servletContext.getRealPath(".");
 		String filePath = "/hongwen/resources";
 		String fileName = "/report.txt";
 		String sourcePath = serverPath + filePath;
@@ -81,24 +81,62 @@ public class PrivateController {
 			br = new BufferedReader(fr);
 			String data;
 			String jsonString = "[";
-			while((data = br.readLine()) != null) {
-				if(!"[".equals(jsonString)) {
+			while ((data = br.readLine()) != null) {
+				if (!"[".equals(jsonString)) {
 					jsonString += ",";
 				}
 				jsonString += data;
 			}
 			jsonString += "]";
 			json = JSONArray.fromObject(jsonString);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				br.close();
 				fr.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}		
+		}
+		return json;
+	}
+
+	// 會員中心被檢舉文章
+	@RequestMapping(path = "/Reported.hongwen", method = { RequestMethod.GET })
+	public @ResponseBody JSONArray reported(@RequestParam Map<?, ?> param) {
+		JSONArray json = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		String serverPath = servletContext.getRealPath(".");
+		String filePath = "/hongwen/resources";
+		String fileName = "/report.txt";
+		String sourcePath = serverPath + filePath;
+		String path = sourcePath + fileName;
+
+		try {
+			fr = new FileReader(path);
+			br = new BufferedReader(fr);
+			String data;
+			String jsonString = "[";
+			while ((data = br.readLine()) != null) {
+				if (!"[".equals(jsonString)) {
+					jsonString += ",";
+				}
+				jsonString += data;
+			}
+			jsonString += "]";
+			json = JSONArray.fromObject(jsonString);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				br.close();
+				fr.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		return json;
 	}
 }

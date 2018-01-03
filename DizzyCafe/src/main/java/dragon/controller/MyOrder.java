@@ -25,7 +25,7 @@ public class MyOrder {
 //		int memberId = bean.getMemberId();
 		int memberId = 102;
 		JSONArray json = ordersService.selectMemberToJson(memberId);
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 }

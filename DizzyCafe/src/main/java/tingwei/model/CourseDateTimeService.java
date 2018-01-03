@@ -43,7 +43,7 @@ public class CourseDateTimeService {
 							+time*3600000));
 					courseDateTimeBean.setCourseEndTime(new java.sql.Timestamp(cal1.getTimeInMillis()
 							+(time+courseLength)*3600000));
-					System.out.println("courseDateTimeBean"+courseDateTimeBean);
+					//System.out.println("courseDateTimeBean"+courseDateTimeBean);
 					this.insert(courseDateTimeBean);
 				}
 			}
@@ -51,7 +51,7 @@ public class CourseDateTimeService {
 	}
 	
 	public List<CourseDateTimeBean> select() {
-		System.out.println("CourseDateTimeService beanList:"+courseDateTimeDAO.select());
+		//System.out.println("CourseDateTimeService beanList:"+courseDateTimeDAO.select());
 		return courseDateTimeDAO.select();
 	}
 	

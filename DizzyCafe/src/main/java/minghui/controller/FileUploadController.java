@@ -45,7 +45,7 @@ public class FileUploadController {
 			e.printStackTrace();
 		}
 		
-		System.out.println(memberPhoto);
+		//System.out.println(memberPhoto);
 		if (!memberPhoto.isEmpty()) {
 			try {
 				byte[] bytes = memberPhoto.getBytes();
@@ -65,7 +65,7 @@ public class FileUploadController {
 				loginService.register(bean);
 				return "login.success";
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				//System.out.println(e.getMessage());
 				
 				return "login.success";
 			}

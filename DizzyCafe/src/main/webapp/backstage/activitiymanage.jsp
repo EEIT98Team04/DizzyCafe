@@ -74,7 +74,7 @@
         	
         </div>
       </div>
-		<div style="width:1000px;margin:auto;">
+		<div style="width:1400px;margin:auto;">
 			<table id="test"></table>
 		</div>
         
@@ -325,7 +325,7 @@
 			}, {
 				data : 'activityName',
 				title : '活動名稱',
-				width : '100px'
+				width : '250px'
 			}, {
 				data : 'activityStart',
 				title : '起始日期',

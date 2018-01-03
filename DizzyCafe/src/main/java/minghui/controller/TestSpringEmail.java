@@ -25,7 +25,7 @@ public class TestSpringEmail {
 	public String method(String memberEmail) {
 		long before = System.currentTimeMillis();
 		MemberBean bean = memberDAO.select_by_email(memberEmail);
-		System.out.println(bean);
+		//System.out.println(bean);
 		MimeMessage message = javaMailSender.createMimeMessage();
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -41,7 +41,7 @@ public class TestSpringEmail {
 		}
  
 		javaMailSender.send(message);
-		System.out.println("cost" +(System.currentTimeMillis() - before) / 1000.0 + "seconds");
+		//System.out.println("cost" +(System.currentTimeMillis() - before) / 1000.0 + "seconds");
 		
 		return "index";
 	}

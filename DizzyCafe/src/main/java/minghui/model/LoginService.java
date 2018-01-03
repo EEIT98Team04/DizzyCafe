@@ -174,15 +174,15 @@ public class LoginService {
 	
 	@Transactional
 	public boolean uploadServerFile(MultipartFile memberPhoto, MemberBean bean) {
-//		System.out.println(Joiner.on("/").join(servletContext.getRealPath(".").split("\\")));
-//		System.out.println("\\");
+//		//System.out.println(Joiner.on("/").join(servletContext.getRealPath(".").split("\\")));
+//		//System.out.println("\\");
 		
 		if (!memberPhoto.isEmpty()) {
 			try {
 				
 //				byte[] bytes = memberPhoto.getBytes();
 //				String[] strs = memberPhoto.getContentType().split("/");
-//				System.out.println(strs[1]);
+//				//System.out.println(strs[1]);
 //				String path = "/minghui/res/member_photo/" + bean.getMemberName() + "." + strs[1];
 //				File serverFile = new File(server_path + path);
 //				bean.setMemberPhoto("/DizzyCafe" + path);
@@ -202,7 +202,7 @@ public class LoginService {
 				
 				return true;
 			} catch (Exception e) {
-				System.out.println(e.getMessage());				
+				//System.out.println(e.getMessage());				
 				return false;
 			}
 		}

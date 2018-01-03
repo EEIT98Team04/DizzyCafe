@@ -22,12 +22,12 @@ public class AddCartController {
 	@RequestMapping(path="/insertCart.controller",method= {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody JSONArray insertCart(HttpSession session, String buyCount, String merchandiseId) {
 		
-//		System.out.println(buyCount);
-//		System.out.println(merchandiseId);
+//		//System.out.println(buyCount);
+//		//System.out.println(merchandiseId);
 		
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		int memberId = bean.getMemberId();
-//		System.out.println(memberId);
+//		//System.out.println(memberId);
 		
 		int count = shoppingService.insert(memberId, Integer.valueOf(merchandiseId), Integer.valueOf(buyCount));
 		
@@ -37,7 +37,7 @@ public class AddCartController {
 			shoppingService.updateCart(shoppingbean);
 		}
 		JSONArray Json = shoppingService.selectMerchandiseList(memberId);
-		System.out.println(Json);
+		//System.out.println(Json);
 		return Json;
 	}
 	
@@ -47,15 +47,15 @@ public class AddCartController {
 		int memberId = bean.getMemberId();
 		
 		JSONArray Json = shoppingService.selectMerchandiseList(memberId);
-//		System.out.println(Json);
+//		//System.out.println(Json);
 		return Json;
 		
 	}
 	
 	@RequestMapping(path="/deleteCart.controller",method= {RequestMethod.POST,RequestMethod.GET})
 	public @ResponseBody JSONArray deleteCart(HttpSession session, String merchandiseId) {
-		System.out.println(merchandiseId);
-		System.out.println("1");
+		//System.out.println(merchandiseId);
+		//System.out.println("1");
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		int memberId = bean.getMemberId();
 		int merchandiseid = Integer.valueOf(merchandiseId);

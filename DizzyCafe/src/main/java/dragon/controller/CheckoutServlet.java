@@ -17,10 +17,10 @@ public class CheckoutServlet extends HttpServlet {
 		String shipPhone = request.getParameter("shipPhone");
 		String email = request.getParameter("email");
 		String a = request.getParameter("check");
-		System.out.println("1");
+		//System.out.println("1");
 		if(a== null)
 		{
-			System.out.println("2");
+			//System.out.println("2");
 		}
 		
 		

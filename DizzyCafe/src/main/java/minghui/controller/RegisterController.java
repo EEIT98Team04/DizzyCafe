@@ -39,7 +39,7 @@ public class RegisterController {
 			e.printStackTrace();
 		}
 		
-		System.out.println(memberPhoto);
+		//System.out.println(memberPhoto);
 		if(loginService.register(bean)) {
 			loginService.uploadServerFile(memberPhoto, bean);
 			return "login.success";

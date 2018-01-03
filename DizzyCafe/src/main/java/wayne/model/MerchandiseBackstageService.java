@@ -23,7 +23,7 @@ public class MerchandiseBackstageService {
 		result = backstagemerchandiseDAO.selectAll();
 		String temp = new Gson().toJson(result);
 		JSONArray json = JSONArray.fromObject(temp);
-		System.out.println("json:"+json);
+		//System.out.println("json:"+json);
 		return json;
 	}
 	

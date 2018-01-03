@@ -40,9 +40,9 @@ public class AdplayService {
 	
 	@Transactional
 	public void insert(Collection<String> values) {
-		System.out.println("entry adplayService insert method");
+		//System.out.println("entry adplayService insert method");
 		for(String value : values) {
-			System.out.println("entry adplayService insert method for loop");
+			//System.out.println("entry adplayService insert method for loop");
 			AdplayBean bean = new AdplayBean();
 			bean.setId(Integer.valueOf(value));
 			adplayDAO.insert(bean);

@@ -78,7 +78,7 @@ public class CreateActivity {
 				activityDetailsService.insertActivity(bean2);
 				return "createActivity.success";
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				//System.out.println(e.getMessage());
 				return "createActivity.success";
 			}
 		} else {

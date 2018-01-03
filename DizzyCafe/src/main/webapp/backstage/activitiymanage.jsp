@@ -47,6 +47,7 @@
   		width:100px;
   	}
   </style>
+  <jsp:include page="/HTML/TitleIcon.jsp" />
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">

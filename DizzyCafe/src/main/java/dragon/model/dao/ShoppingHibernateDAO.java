@@ -8,6 +8,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.JsonArray;
+
 import dragon.model.ShoppingBean;
 import dragon.model.ShoppingDAO;
 import net.sf.json.JSONArray;
@@ -82,7 +84,7 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 	private static final String insert = "insert into shopping values(?, ?, ?)";
 
 	@Override
-	public int insert(int memberId, int merchandiseId, int buyCount) {
+	public int insert(int memberId, int merchandiseId, int buyCount, int price) {
 			ShoppingBean insert = this.selectMerchandise(memberId, merchandiseId);
 			if(insert == null)
 			{
@@ -90,6 +92,7 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 				bean.setMemberId(memberId);
 				bean.setMerchandiseId(merchandiseId);
 				bean.setBuyCount(buyCount);
+				bean.setPrice(price);
 				this.getSession().save(bean);
 				return 1;
 			}else {
@@ -137,5 +140,19 @@ public class ShoppingHibernateDAO implements ShoppingDAO {
 		}
 		return null;
 	}
-
+	@Override
+	public List<Object[]> selectBean (int memberId){
+		Query<Object[]> query = this.getSession().createQuery("From ShoppingBean where memberId = :memberId");
+		query.setParameter("memberId", memberId);
+		return query.getResultList();
+	}
+	
+	@Override
+	public  List<Object[]> selectList(int memberId){
+		Query<Object[]> query = this.getSession().createNativeQuery("select shopping.price,shopping.merchandiseId, merchandise.merchandiseName, merchandise.merchandisePicture, shopping.buyCount" + 
+				" from shopping Join merchandise" +
+				" on shopping.merchandiseId = merchandise.merchandiseId" +
+				" where shopping.memberId = " + memberId);
+		return query.getResultList();
+	}
 }

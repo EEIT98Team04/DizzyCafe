@@ -117,10 +117,6 @@
 						data:'courseSignupEnd',
 						title:'報名結束日期',
 						width:'10%',
-					},{
-						data:'courseLimit',
-						title:'人數上限',
-						width:'10%',
 					}],
 					"columnDefs" : [{
 						"targets" : 9,
@@ -128,7 +124,16 @@
 						"render" : function(data,row) {
 							var html = "<a href='${pageContext.request.contextPath}//backstage/courseFillBackUpdate.controller?courseId="+data.courseId+"' class='btn btn-success' id='edit"+data.courseId+"'><i class='fa fa-pencil' aria-hidden='true'></i></a>";
 							return html;
-						}
+						}},{
+							"targets" : 8,
+							"data" : null,
+							title:'人數上限',
+							width:'10%',
+							"render" : function(data,row) {
+								var html = data.courseNowPeople + "/" + data.courseLimit;
+								return html;
+							}
+						
 					}],
 					language : {
 						paginate : {

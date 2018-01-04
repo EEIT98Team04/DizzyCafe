@@ -13,7 +13,7 @@ import allPay.payment.integration.errorMsg.ErrorMessage;
 import allPay.payment.integration.exception.AllPayException;
 
 public class PaymentVerifyBase{
-	protected String confPath = "/AllPay/Payment/Integration/Config/AllpayPayment.xml";
+	protected String confPath = "/allPay/payment/integration/config/AllpayPayment.xml";
 	protected Document doc;
 	public PaymentVerifyBase(){
 		URL fileURL = this.getClass().getResource(confPath);

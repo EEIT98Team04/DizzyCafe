@@ -11,7 +11,7 @@
 </head>
 <body>
 	<jsp:include page="/HTML/Navbar.jsp" />
-	<article class="article">
+	<div class="article" id="test">
 	<br>
 		<div class="shipmain">
 		<h4 class="selectShipTitle">運送方式</h4>
@@ -69,6 +69,7 @@
 		<form action="<c:url value=""/>" method="post">
 
 		</form>
+	</div>
 	</div>
 	
 	
@@ -216,8 +217,12 @@
 					'playment':playment,
 					'TotalPrice':TotalPrice
 				}, function(e){
-					alert("訂單完成");
-					location.replace('/DizzyCafe/dragon/myorder.jsp');
+// 					alert("訂單完成");
+// 					location.replace('/DizzyCafe/dragon/myorder.jsp');
+					$.post('/DizzyCafe/checkoutjiijij.hohoho',function(str){
+//	 					console.log(str);
+						$('#test').html(str);
+					});
 				})
 			}
 		
@@ -316,23 +321,24 @@
 			
 			var playment = $('.playment').val();
 			if(shipment=='貨到付款' || shipment=='超商取貨'){
-				$.post('/DizzyCafe/checkoutjiijij.controller',function(str){
-					console.log(str);
-				});
-// 				$.post('/DizzyCafe/insertOrder.controller',{
-// 					'buyer':buyer,
-// 					'shipPhone':shipPhone,
-// 					'ShipAddress':'無',
-// 					'StoreName':storeName,
-// 					'StorAddress':shipAddress,
-// 					'shipment':shipment,
-// 					'ShipCost':shipCost,
-// 					'playment':playment,
-// 					'TotalPrice':TotalPrice
-// 				}, function(){
+				$.post('/DizzyCafe/insertOrder.controller',{
+					'buyer':buyer,
+					'shipPhone':shipPhone,
+					'ShipAddress':'無',
+					'StoreName':storeName,
+					'StorAddress':shipAddress,
+					'shipment':shipment,
+					'ShipCost':shipCost,
+					'playment':playment,
+					'TotalPrice':TotalPrice
+				}, function(){
 // 					alert("訂單完成");
 // 					location.replace('/DizzyCafe/dragon/myorder.jsp');
-// 				});
+					$.post('/DizzyCafe/checkoutjiijij.hohoho',function(str){
+//	 					console.log(str);
+						$('#test').html(str);
+					});
+				});
 			}
 		});
 		
@@ -343,9 +349,9 @@
 			var total = 0;
 			/*function(index, value) 裡面的index, value為固定寫法，不可更改*/
 			$.each(json, function(index, value){			
-				alert(total);
+// 				alert(total);
 				total = total + (json[index].price * json[index].buyCount);
-				alert(total);		
+// 				alert(total);		
 			});
 			$('.payPrice').text("");
 			$('.payPrice').text(total+80);

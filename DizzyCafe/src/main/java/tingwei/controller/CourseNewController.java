@@ -98,7 +98,7 @@ public class CourseNewController {
 				
 				return "courseManage";
 			} catch (Exception e) {
-				//System.out.println(e.getMessage());				
+				System.out.println(e.getMessage());				
 				return "courseManage";
 			}
 		} else {

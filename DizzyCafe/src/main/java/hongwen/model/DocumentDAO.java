@@ -31,7 +31,7 @@ public class DocumentDAO {
 		String search = "from DocumentBean where membername = '" + membername + "' and Dstatus = '1'";
 		Query<DocumentBean> query = this.getSession().createQuery(search, DocumentBean.class);
 		List<DocumentBean> result = query.getResultList();
-//		//System.out.println(result.size());
+//		System.out.println(result.size());
 		return result;
 	}
 	

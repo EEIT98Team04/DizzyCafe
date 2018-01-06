@@ -32,7 +32,7 @@ public class MerchandiseDAOHibernate {
 //	}
 	//分頁展示商品 merchandise.controller做
 	public JSONArray selectPageNow() {
-		Query<Object[]> select = this.getsession().createNativeQuery("SELECT * FROM merchandise ORDER BY merchandiseId DESC");
+		Query<Object[]> select = this.getsession().createNativeQuery("SELECT * FROM merchandise WHERE merchandiseStatus = 'launch' ORDER BY merchandiseId DESC");
 		List<Object[]> temp = select.getResultList();
 		JSONArray result = new JSONArray();
 		for(Object[] var: temp) {
@@ -55,7 +55,7 @@ public class MerchandiseDAOHibernate {
 		JSONArray result = new JSONArray();
 	
 		Query<Object[]> select = this.getsession().createNativeQuery(
-				"SELECT * FROM merchandise where merchandiseTag = ? ORDER BY merchandiseId DESC" );
+				"SELECT * FROM merchandise where merchandiseTag = ? and merchandiseStatus = 'launch' ORDER BY merchandiseId DESC" );
 		select.setParameter(1, tag);
 		List<Object[]> list = select.getResultList();
 		

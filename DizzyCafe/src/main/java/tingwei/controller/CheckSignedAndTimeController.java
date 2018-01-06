@@ -23,8 +23,8 @@ public class CheckSignedAndTimeController {
 		boolean signUpTime = courseMemberService.checkSignedUpTime(courseId);
 		int limit = courseService.getLimitByCourseId(courseId);
 		int nowPeople = courseMemberService.getNowPeopleByCourseId(courseId);
-		//System.out.println("limit"+limit);
-		//System.out.println("nowPeople"+nowPeople);
+		System.out.println("limit"+limit);
+		System.out.println("nowPeople"+nowPeople);
 		if(!signUpTime) {
 			return "TimeError";
 		}else if(nowPeople>=limit){
@@ -37,7 +37,7 @@ public class CheckSignedAndTimeController {
 			method= {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody String checkSigned(int memberId, int courseId) {
 		boolean signedUp = courseMemberService.checkSignedUp(memberId, courseId);
-		//System.out.println("signedUp:"+signedUp);
+		System.out.println("signedUp:"+signedUp);
 		if(signedUp) {
 			return "alreadySignedUp";
 		}else

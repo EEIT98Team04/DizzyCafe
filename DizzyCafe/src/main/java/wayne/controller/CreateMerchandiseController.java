@@ -56,7 +56,7 @@ public class CreateMerchandiseController {
 				merchandiseService.insert(bean);
 				return "merchandisemanage";
 			} catch (Exception e) {
-				//System.out.println(e.getMessage());
+				System.out.println(e.getMessage());
 				return "merchandisemanage";
 			}
 		} else {

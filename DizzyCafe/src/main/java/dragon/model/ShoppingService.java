@@ -62,7 +62,7 @@ public class ShoppingService {
 			JSONObject xxx = new JSONObject();
 			xxx.put("price", temp[0]);
 			xxx.put("merchandiseId", temp[1]);
-			xxx.put("memberName", temp[2]);
+			xxx.put("merchandiseName", temp[2]);
 			xxx.put("merchandisePicture", temp[3]);
 			xxx.put("buyCount", temp[4]);
 			json.add(xxx);

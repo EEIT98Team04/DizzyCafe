@@ -22,7 +22,7 @@ public class MerchandiseController{
 	
 	@RequestMapping(method= {RequestMethod.POST,RequestMethod.GET})
 	public String method(MerchandiseBean bean, Model model, BindingResult bindingresult ,int page, String tag) {
-		//System.out.println("MerchandiseController");
+		System.out.println("MerchandiseController");
 		int rows_perPage = 6;
 		JSONArray _merchnadise = merchandiseService.showMerchandiseInPage();
 		

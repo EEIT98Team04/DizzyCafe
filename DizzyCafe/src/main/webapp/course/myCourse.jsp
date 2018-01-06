@@ -91,7 +91,7 @@
 						<div class="modal-header">
 							<h4 id="alertHead" class="modal-title"></h4>
 								<input id="courseIdinAlert" type="hidden" value=""/>
-								<input id="memberIdinAlert" type="hidden" value=""/>
+								<input id="memberIdinAlert" type="hidden" value="${user.memberId }"/>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
 
@@ -142,11 +142,11 @@
 			$('#alertBody').text("你確定要退出 "+$(this).parent().find('h4').text()+" 課程嗎QAQ");
 			//把this button 的 courseId 和 memberId(Session) 的資料放進 alert div 的 hidden input裡
 			$('#courseIdinAlert').val($(this).parent().find('input:eq(1)').val());
-			$('#memberIdinAlert').val(${user.memberId});
 		});
 
 		$('#reallyQuit').click(function(){
 			alert("期待下次看到你喔QAQ");
+			console.log($('#courseIdinAlert').val());
 			$.post(
 				"/DizzyCafe/course/quitCourse.controller",
 				{"courseId":$('#courseIdinAlert').val(),

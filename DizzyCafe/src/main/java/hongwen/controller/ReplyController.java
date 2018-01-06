@@ -35,14 +35,18 @@ public class ReplyController {
 	public @ResponseBody JSONArray postmethod(HttpSession session, @RequestParam Map<?, ?> param) {
 		String[] key = { "title", "textarea","modify","replyid"};
 		JSONArray json = null;
+		Integer num = 0;
 		MemberBean bean = (MemberBean) session.getAttribute("user");
 		if (bean == null || "".equals(String.valueOf(bean.getMemberId())) || "".equals(bean.getMemberName())) {
 			String temp = "[{\"status\":\"false\"}]";// 回傳一個json陣列物件，內容為status:false，與下面insert回傳值的key相同
 			json = JSONArray.fromObject(temp);
 			return json;
 		}
+		if((String)param.get(key[3]) != null) {
+			num = Integer.parseInt((String)param.get(key[3]));
+		}
 //		int replyId, String membername, int memberId, int documentId, String content, Date times
-		ReplyBean replybean = new ReplyBean(Integer.parseInt((String)param.get(key[3])),
+		ReplyBean replybean = new ReplyBean(num,
 				bean.getMemberName(),bean.getMemberId(), 
 				Integer.parseInt((String) param.get(key[0])),
 				(String) param.get(key[1]), new java.util.Date());

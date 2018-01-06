@@ -28,7 +28,7 @@ public class CourseSignUpController {
 		bean.setCourseId(courseId);
 		bean.setMemberPhone(phone);
 		bean.setMemberEmail(email);
-		//System.out.println(bean);
+		System.out.println(bean);
 		courseMemberService.insert(bean);
 		return "courseList.return";
 	}

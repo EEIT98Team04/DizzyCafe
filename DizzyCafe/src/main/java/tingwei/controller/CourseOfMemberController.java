@@ -39,7 +39,10 @@ public class CourseOfMemberController {
 	
 	@RequestMapping(path="/course/quitCourse.controller", method= {RequestMethod.GET,RequestMethod.POST}, produces="text/html; charset=utf-8")
 	public @ResponseBody String quitCourse(int memberId, int courseId){
-			courseMemberService.quitCourse(memberId,courseId);		
+		System.out.println(memberId);
+		System.out.println(courseId);
+		courseMemberService.quitCourse(memberId,courseId);
+			
 		return "期待下次看到你喔QAQ";
 	}
 }

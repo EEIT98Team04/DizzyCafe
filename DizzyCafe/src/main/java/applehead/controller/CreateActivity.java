@@ -31,7 +31,7 @@ public class CreateActivity {
 
 	@RequestMapping(path = "/createEvent.controller", method = { RequestMethod.GET, RequestMethod.POST })
 	public String createEvent(String activityName, String activityStart, String activityEnd, String activityContent,
-			MultipartFile activityPicture, Model model,String merchandiseTag,String activityDiscount) {
+			MultipartFile activityPicture, Model model,String[] merchandiseTag,String[] activityDiscount) {
 		java.sql.Date startDate = null;
 		java.sql.Date endDate = null;
 		try {
@@ -64,21 +64,21 @@ public class CreateActivity {
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();
-				if("".equals(merchandiseTag)) {
+				if("".equals(merchandiseTag[0])) {
 					bean2.setActivityDiscount(0.0);
 				}else {
-					bean2.setActivityDiscount(Double.parseDouble(activityDiscount)/10);
+					bean2.setActivityDiscount(Double.parseDouble(activityDiscount[0])/10);
 				}
-				if("".equals(activityDiscount)) {
+				if("".equals(activityDiscount[0])) {
 					activityDiscount = null;
 				}
 				bean2.setActivityNo(temp.getActivityNo());
-				bean2.setMerchandiseTag(merchandiseTag);
+				bean2.setMerchandiseTag(merchandiseTag[0]);
 				activityListService.updateActivity(temp);
 				activityDetailsService.insertActivity(bean2);
 				return "createActivity.success";
 			} catch (Exception e) {
-				//System.out.println(e.getMessage());
+				System.out.println(e.getMessage());
 				return "createActivity.success";
 			}
 		} else {

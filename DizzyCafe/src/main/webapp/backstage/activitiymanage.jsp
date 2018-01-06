@@ -74,7 +74,7 @@
         	
         </div>
       </div>
-		<div style="width:1400px;margin:auto;">
+		<div style="width:1000px;margin:auto;">
 			<table id="test"></table>
 		</div>
         
@@ -97,11 +97,11 @@
 				<label><b>活動名稱</b></label><input type="text" name="activityName" required class="forText"> <br> 
 				<label for="from"><b>活動開始時間</b></label><input type="text" id="from" name="activityStart" class="forText" required readonly> <br> 
 				<label for="to"><b>活動結束時間</b></label><input type="text" id="to" name="activityEnd" class="forText" required readonly> <br>
-				<label><b>折價商品</b></label><select name="merchandiseTag">
+				<label><b>折價商品</b></label><span id="help"><select name="merchandiseTag">
 					<option value="" selected>請選擇</option>
 					<option value="bean">咖啡豆</option>
 					<option value="bottle">保溫瓶</option>								
-				</select><span style="margin-left:30px"><label><b>折扣</b></label><input type="text" name="activityDiscount" class="forText" style="width:50px;">折</span> <br>  
+				</select><span style="margin-left:30px"><label><b>折扣</b></label><input type="text" name="activityDiscount" class="forText" style="width:50px;">折</span><br></span>  
 				<label><b>活動內容</b></label><input type="text" name="activityContent" class="forText" required id="editor1"> <br>
 				<label><b>活動圖片</b></label><input type="file" name="activityPicture" class="forText" accept="image/*" required id="uploadImage">
 				<img id="showImg" width="240px"/>
@@ -325,7 +325,7 @@
 			}, {
 				data : 'activityName',
 				title : '活動名稱',
-				width : '250px'
+				width : '350px'
 			}, {
 				data : 'activityStart',
 				title : '起始日期',
@@ -418,6 +418,11 @@
     			data = CKEDITOR.instances.editor2.getData();
     			$('#updateEvent input[name=activityContent]').val(data);
     		});
+    		
+    		$('#insertEvent select[name="merchandiseTag"]').on('change',function(){
+    		       $('#help').append('<span style="padding-left:150px"><select name="merchandiseTag"><option value="" selected>請選擇</option><option value="bean">咖啡豆</option><option value="bottle">保溫瓶</option></select><span style="margin-left:30px"><label><b>折扣</b></label><input type="text" name="activityDiscount" class="forText" style="width:50px;">折</span><br/></span>');
+    		});
+    		
     		
     		$('#gogo').on('click',(function(e){
     			e.preventDefault();

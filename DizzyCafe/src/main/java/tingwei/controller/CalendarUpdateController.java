@@ -21,7 +21,7 @@ public class CalendarUpdateController {
 	@RequestMapping(path="/backstage/CalendarUpdate.controller",
 					method= {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody void CalendarUpdate(@RequestBody List<CalendarJSON> moment) {
-		//System.out.println("moment"+moment.get(0).getColor());
+		System.out.println("moment"+moment.get(0).getColor());
 
 		courseDateTimeService.deleteAll();
 		courseDateTimeService.insertAll(moment);

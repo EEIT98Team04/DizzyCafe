@@ -25,7 +25,7 @@ public class ActivityController {
 			return "showActivity.failed";
 		}
 		List<ActivityListBean> result = activityListService.showPageItems(Integer.valueOf(page)-1);
-		//System.out.println(result);
+		System.out.println(result);
 		model.addAttribute("items", result);
 		model.addAttribute("totalPage", activityListService.calculateTotalPage());
 

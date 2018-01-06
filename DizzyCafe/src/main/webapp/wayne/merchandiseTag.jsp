@@ -102,11 +102,12 @@
 						if(temp[0] > value.discount){
 							temp[0] = value.discount;
 						}	
-					}else if(value.tag=='bottle'){
-						if(temp[1] > value.discount){
-							temp[1] = value.discount;
-						}
 					}
+// 					else if(value.tag=='bottle'){
+// 						if(temp[1] > value.discount){
+// 							temp[1] = value.discount;
+// 						}
+// 					}
 					
 				});
 				$.each($('.tag'),function(key,value){
@@ -116,10 +117,11 @@
 						if($(value).val()=='bean'){
 							oo[2] = parseInt(oo[2]*temp[0]);
 							$(this).parent().find('p').html(old[0]+'<br>特價 : '+oo[2]+'元<br>');	
-						}else if($(value).val()=='bottle'){
-							oo[2] = parseInt(oo[2]*temp[1]);
-							$(this).parent().find('p').html(old[0]+'<br>特價 : '+oo[2]+'元<br>');	
 						}
+// 						else if($(value).val()=='bottle'){
+// 							oo[2] = parseInt(oo[2]*temp[1]);
+// 							$(this).parent().find('p').html(old[0]+'<br>特價 : '+oo[2]+'元<br>');	
+// 						}
 // 						$(this).parent('p').html();
 // 					};
 				});

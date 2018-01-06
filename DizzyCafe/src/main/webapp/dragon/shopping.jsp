@@ -61,7 +61,7 @@
 			/*清空tbody底下所有元素(將舊表格刪除)*/
 			tb.empty();
 // 			var merchandiseId = ${merchandiseId};
-			alert(merchandiseId);
+// 			alert(merchandiseId);
 // 			var merchandiseName = $(this).parents('tr').find('td:nth-child(2)').text();
 // 			alert(merchandiseId);
 			$.post('/DizzyCafe/merchandiseDelete.controller', {
@@ -163,10 +163,10 @@
 			
 // 				var cell1 = $('<td></td>').text(index+1);
 				var img = $('<img>').attr("src", '${pageContext.request.contextPath}'+json[index].merchandisePicture)
-									.css("width", "40%");
+									.css("width", "100%");
 				var cell1 = $('<td></td>').append(img);
 				var cell2 = $('<td></td>').text(json[index].merchandiseId);
-				var cell3 = $('<td></td>').text(json[index].memberName);
+				var cell3 = $('<td></td>').text(json[index].merchandiseName);
 				var cell4 = $('<td></td>').text(json[index].price);
 				var cell5 = $('<td></td>').append(select.val(json[index].buyCount));						
 				var cell6 = $('<td></td>').text(json[index].price * json[index].buyCount);

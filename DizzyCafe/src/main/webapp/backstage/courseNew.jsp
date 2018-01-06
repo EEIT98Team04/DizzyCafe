@@ -62,7 +62,7 @@
 									<tr>
 									<th></th>
 									<td>
-										<span id="showImg" style="color:#DDDDDD;">預覽</span>
+										<span id="showImg" style="color:#6C6C6C;">預覽</span>
 										<br/>
 										<img id="photo" style="display:none;max-width:800px;" class="img-responsive img photo" src="${pageContext.request.contextPath}${CourseBean.courseImg}">
 									</td>

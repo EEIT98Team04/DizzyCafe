@@ -57,7 +57,7 @@ public class DocumentController {
 				}
 				data += read+"\n";
 			}
-//			//System.out.println(data);
+//			System.out.println(data);
 			bw = new BufferedWriter(new FileWriter(sourcePath + filename,false));//true 接續寫下去//false 複寫
 			bw.write(data);
 			documentService.delete(Integer.valueOf((String)param.get("id")));
@@ -127,14 +127,14 @@ public class DocumentController {
 		// Object o;
 		// while(e.hasMoreElements()) {
 		// tmp = (String)e.nextElement();
-		// //System.out.println("Value is: "+tmp);
+		// System.out.println("Value is: "+tmp);
 		// o = session.getAttribute(tmp);
-		// //System.out.println(tmp+":"+o);
+		// System.out.println(tmp+":"+o);
 		// }
 
 		// 不知道Key，取得全部的值
 		// for (Object key : param.keySet()) {
-		// //System.out.println(key + " : " + param.get(key));
+		// System.out.println(key + " : " + param.get(key));
 		// }
 		String[] key = { "title", "grid", "textarea", "modify", "documentid" };
 		JSONArray json = null;

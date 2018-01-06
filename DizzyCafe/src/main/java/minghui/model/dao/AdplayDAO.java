@@ -36,7 +36,7 @@ public class AdplayDAO {
 	
 	public void delete_all() {
 		Query query = this.getSession().createQuery("delete from AdplayBean");
-		//System.out.println(query.executeUpdate());
+		System.out.println(query.executeUpdate());
 		
 	}
 	

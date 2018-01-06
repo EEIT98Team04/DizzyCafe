@@ -31,7 +31,7 @@ public class UpdateDailyEventController {
 			DailyEventBean bean = new DailyEventBean();
 			bean.setEventId(i);
 			bean.setMerchandiseId(Integer.valueOf(merchandiseId[i-1]));
-			bean.setDiscount(Double.valueOf(discount[i-1])/10);
+			bean.setDiscount(Double.valueOf(discount[i-1])/100);
 			list.add(bean);
 		}
 		dailyEventService.updateAll(list);

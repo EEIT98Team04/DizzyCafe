@@ -52,7 +52,7 @@
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           	<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#manage" data-parent="#exampleAccordion">
-          		<i class="fa fa-fw fa-book"></i>
+          		<i class="fa fa-bars" aria-hidden="true"></i>
             	<span class="nav-link-text">論壇管理</span>
           	</a>
           	<ul class="sidenav-second-level collapse" id="manage">

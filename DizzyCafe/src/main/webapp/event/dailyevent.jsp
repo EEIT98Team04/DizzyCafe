@@ -73,7 +73,7 @@ body{
   text-decoration: none;
 }
 .hoho{
-	width:100px;
+	width:200px;
 	margin-left:60%;
 	Z-INDEX: 5;
 }
@@ -93,28 +93,31 @@ body{
 		<span id="fifthImg" class="imm"><img width="45px" src='<c:url value="/event/coffee.png"></c:url>'>fifthImg</span>
 		<span id="sixthImg" class="imm"><input type="hidden" value="87"/>銘謝惠顧</span>
 	</div>
-	<div style="padding-bottom:10px">
+	<div style="padding-bottom:10px;width:500px;margin-left:800px">
 			<%@ page import="java.util.Date"%>
 			<jsp:useBean id="now" class="java.util.Date" />
 			<fmt:formatDate value="${user.memberPlay }" var="temp"/>
 			<fmt:parseDate value="${temp}" pattern="yyyy/MM/dd" var="submitDate"/>
 			<c:choose>
 				<c:when test="${empty user}">
-					<span id="here" style="line-height:80px;margin-left: 64%;font-size: 32px;font-weight: bold;"><input type="hidden" id="hide" value="notLogin">&nbsp;</span>
+					<span id="here" style="line-height:50px;height:300px;font-size: 24px;font-weight: bold;"><input type="hidden" id="hide" value="notLogin">&nbsp;<br/>&nbsp;</span>
 					<p class="hoho">
 						<input type="button" value="抽獎" class="btn btn-lg" id="pressOne" disabled="disabled">
+						<br/>※折價卷使用期限為1個月
 					</p>
 				</c:when>
 				<c:when test="${submitDate lt now}">
-					<span id="here" style="line-height:80px;margin-left: 64%;font-size: 32px;font-weight: bold;">&nbsp;</span>
+					<span id="here" style="line-height:50px;height:300px;font-size: 24px;font-weight: bold;">&nbsp;<br/>&nbsp;</span>
 					<p class="hoho">
 						<input type="button" value="抽獎" class="btn btn-lg" id="pressOne">
+						<br/>※折價卷使用期限為1個月
 					</p>
 				</c:when>
 				<c:otherwise>
-					<span id="here" style="line-height:80px;margin-left: 64%;font-size: 32px;font-weight: bold;"><input type="hidden" id="hide" value="played">&nbsp;</span>
+					<span id="here" style="line-height:50px;height:300px;font-size: 24px;font-weight: bold;"><input type="hidden" id="hide" value="played">&nbsp;<br/>&nbsp;</span>
 					<p class="hoho">
 						<input type="button" value="抽獎" class="btn btn-lg" id="pressOne" disabled="disabled">
+						<br/>※折價卷使用期限為1個月
 					</p>
 				</c:otherwise>
 			</c:choose>					
@@ -186,12 +189,17 @@ body{
 // 				res = prize+'&'+dis;
 				res = {};
 				res.prize = $("#here input").val();
-				res.discount = $("#here span:last").html().split('折')[0]/100;
+				console.log(res.prize);
+				if(res.prize == '87'){
+					res.discount = '';	
+				}else{
+					res.discount = $("#here span:last").html().split('折')[0]/100;					
+				}
 		    	$.post('/DizzyCafe/dailyEvent.controller',res);
-				
 			},
 // 			parseInt(Math.random()*2000+3000));
-			parseInt(3260));
+// 			parseInt(3390));
+			parseInt(3360));
 		});	
 
 	</script>

@@ -20,7 +20,7 @@ public class ChangeAdplayController {
 	@RequestMapping(path= {"/changeAdplayController.controller"})
 	public @ResponseBody boolean method(@RequestBody MultiValueMap<String,String> map) {
 		adplayService.delete();
-		//System.out.println(map.toSingleValueMap());
+		System.out.println(map.toSingleValueMap());
 		Map<String,String> javaMap = map.toSingleValueMap();
 		Collection<String> values = javaMap.values();
 		adplayService.insert(values);

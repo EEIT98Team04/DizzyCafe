@@ -53,7 +53,7 @@ $(function() {
 					lengthMenu : '一頁顯示 _MENU_ 筆資料'
 				},
 				info : false,
-				order : [ 1, 'desc' ]
+				order : [ 1, 'asc' ]
 			});
 	$('#post').on('submit', function() {
 		var t = tinyMCE.activeEditor.getBody().innerHTML;// 取出tinymve內容

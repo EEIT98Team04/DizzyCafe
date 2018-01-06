@@ -33,8 +33,8 @@ public class opay {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 		aio.setMerchantTradeDate(sdf.format(date));
 		//從廠商DB撈出的商品資訊
-		aio.setItemName("義大利摩卡#火山甜莓#經典風味");
-		aio.setTotalAmount("120000");
+		aio.setItemName("雪花繽紛隨行杯#宏都拉斯咖啡豆");
+		aio.setTotalAmount("6110");
 		aio.setTradeDesc("item desc");
 		//廠商可自行決定是否延遲撥款
 		aio.setHoldTradeAMT("0");

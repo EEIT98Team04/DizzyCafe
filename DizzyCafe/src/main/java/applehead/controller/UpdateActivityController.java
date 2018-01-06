@@ -74,7 +74,7 @@ public class UpdateActivityController {
 				activityListService.updateActivity(bean);
 				return "createActivity.success";
 			} catch (Exception e) {
-				//System.out.println(e.getMessage());				
+				System.out.println(e.getMessage());				
 				return "createActivity.success";
 			}
 		} else {

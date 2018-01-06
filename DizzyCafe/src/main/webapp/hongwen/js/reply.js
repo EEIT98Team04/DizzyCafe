@@ -28,6 +28,7 @@ $(function() {
 		success : function(json) {
 			if(json[0]['status'] == 'false'){
 				alert('該文章已被禁用！');
+				window.location.replace('/DizzyCafe/hongwen/board.jsp');// 取得現在的URL，並自動導向
 				return;
 			}
 			setdata(json);//
@@ -195,7 +196,7 @@ var setdata = function(json) {
 		var content = prompt("請輸入檢舉內容 : ");
 		var data = {};
 		var dt = new Date();
-		var time = dt.getFullYear() + "/" + dt.getMonth() + "/" + dt.getDate() +
+		var time = dt.getFullYear() + "/" + (dt.getMonth()+1) + "/" + dt.getDate() +
 				" " + dt.getHours() + ":" + dt.getMinutes();
 		if (content == null) {
 			return false;

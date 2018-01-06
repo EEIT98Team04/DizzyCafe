@@ -78,7 +78,7 @@ public class MemberDAO {
 		String search = "select user.memberName ,user.memberPhoto from MemberBean as user";
 		@SuppressWarnings("rawtypes")
 		Query query = this.getSession().createQuery(search);
-		//System.out.println("1");
+		System.out.println("1");
 		@SuppressWarnings("unchecked")
 		List<TmpBean> result = (List<TmpBean>) query.getResultList();
 		return result;

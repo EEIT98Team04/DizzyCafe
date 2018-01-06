@@ -21,7 +21,7 @@ public class MerchandiseDetailsController {
 	
 	@RequestMapping(method= {RequestMethod.GET,RequestMethod.POST})
 	public String method(Model model, int merchandiseId) {
-//		//System.out.println(merchandiseId);
+//		System.out.println(merchandiseId);
 		
 		model.addAttribute("bean", merchandiseService.select(merchandiseId));
 		

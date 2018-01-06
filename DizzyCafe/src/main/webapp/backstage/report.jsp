@@ -52,7 +52,7 @@
 						</div>
 						<p>文章內容 : </p>
 						<div style="border:1px solid red;padding:10px;border-radius:25px;box-shadow:2px 2px 10px 0px">
-							<pre id="pre">xxxxxxx</pre>
+							<div id="pre">xxxxxxx</div>
 						</div>
 					</div>
 					<!-- Modal footer -->
@@ -80,9 +80,6 @@
 								url : '/DizzyCafe/Privatereport.hongwen',
 								type : 'GET',
 								dataSrc : function(json) {
-									if(json == null){
-										return json;
-									}
 									return json;
 								}
 							},
@@ -135,8 +132,11 @@
 				url : "/DizzyCafe/Privatemodify.hongwen" + data,
 				method : 'GET',
 				success : function(json) {
+					var x = json[0].content;
+					console.log(x);
 					$('#span').text(json[0].name);
-					$('#pre').innerHTML = json[0].content;
+// 					$('#pre').text(x);
+					$('#pre').html(x);
 					$('#documentid').text(json[0].documentId);
 					$('#btnreport').trigger('click');
 				}

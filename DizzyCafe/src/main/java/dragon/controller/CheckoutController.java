@@ -61,7 +61,7 @@ public class CheckoutController {
 		order.setShipCost(shipCost);
 		order.setTotalPrice(totalPrice);
 		order.setPaymentStyle(playment);
-		order.setOrdersStatusId("a");
+		order.setOrdersStatusId("b");
 		ordersService.insertOrders(order);
 		//
 		// /* 新增訂單明細 */
